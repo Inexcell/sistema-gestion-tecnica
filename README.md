@@ -1,6 +1,3 @@
-ACT - Sistema de Gestion Tecnica - Inexcell
-=======================
-
 # Sistemas de Gestion Tecnica para Tecnicos Compañias Telefonicas
 
 
