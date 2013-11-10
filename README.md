@@ -1,8 +1,7 @@
-ACT - Sistema de Gestion Tecnica
-Inexcell
+ACT - Sistema de Gestion Tecnica - Inexcell
 =======================
 
-Sistemas de Gestion Tecnica para Tecnicos Compañias Telefonicas
+# Sistemas de Gestion Tecnica para Tecnicos Compañias Telefonicas
 
 
 Links de interés para Transicion de Vistas
@@ -11,7 +10,7 @@ Links de interés para Transicion de Vistas
 * http://www.ignacionario.com/2011/03/android-iv-diseno-de-layouts-o.html
 * http://www.androidcurso.com/index.php/tutoriales-android/32-unidad-2-diseno-de-la-interfaz-de-usuario-vistas-y-layouts/119-uso-practico-de-vistas-y-layouts 
 
-Comandos GIT
+# Comandos GIT
 
 ## Agregar todos los archivos a peticion de Git
 git add --all
