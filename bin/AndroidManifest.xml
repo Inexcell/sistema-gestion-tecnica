@@ -23,6 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="Instalacion"></activity>
+        <activity android:name="Notificar_Averias"></activity>
     </application>
 
 </manifest>

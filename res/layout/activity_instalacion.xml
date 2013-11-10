@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_vertical"
     tools:context=".Principal" >
 
     <TextView
@@ -21,7 +22,7 @@
         android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="84dp"
-        android:onClick="cerrar"
+        android:onClick="volver"
         android:text="@string/hello_world" />
 
 </RelativeLayout>

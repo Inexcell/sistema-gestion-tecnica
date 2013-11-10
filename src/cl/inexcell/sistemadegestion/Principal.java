@@ -21,9 +21,14 @@ public class Principal extends Activity {
 		return true;
 	}
 	
-	public void lanzar(View view) {
+	public void show_instalacion(View view) {
         Intent i = new Intent(this, Instalacion.class );
         startActivity(i);
-	}    
+	}
+	
+	public void show_notificar_averias(View view) {
+        Intent i = new Intent(this, Notificar_Averias.class );
+        startActivity(i);
+  }  
 
 }
