@@ -1,7 +1,15 @@
 # Sistemas de Gestion Tecnica para Tecnicos Compañias Telefonicas
 
+## Sitio web de Vistas para aplicacion
 
-Links de interés para Transicion de Vistas
+http://inexcell.servehttp.com:200/index.htm
+
+## Especificaciones
+
+* IDE: Eclipse Indigo
+* SO: Android 4.0.1 (Icecream Sandwich)
+
+## Links de interés para Transicion de Vistas
 
 * http://www.javaya.com.ar/androidya/detalleconcepto.php?codigo=140&inicio=0
 * http://www.ignacionario.com/2011/03/android-iv-diseno-de-layouts-o.html
@@ -17,3 +25,6 @@ git commit -m --all
 
 ## Subir archivos con marca "master" a Git
 git push -u origin master
+
+## Actualizar repositorio
+git pull
