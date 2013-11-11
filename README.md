@@ -23,6 +23,7 @@ http://inexcell.servehttp.com:200/index.htm
 
 ## Conectividad 3G y Wifi b/g/n
 
+* http://androidexample.com/Scan_wifi_connections_or_Get_number_of_available_wifi_connections/index.php?view=article_discription&aid=90&aaid=114
 * http://docencia.etsit.urjc.es/moodle/pluginfile.php/28275/mod_resource/content/1/Conectividad.pdf
 
 # Comandos GIT
