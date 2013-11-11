@@ -10,5 +10,13 @@
     <string name="notificar_averia">Notificar Averia</string>
     <string name="num_cliente">Ingrese número del Cliente:</string>
     <string name="hint_phone">Ej: 032 2233441</string>
+    <string name="app_principal">Principal - Sistema de Gestión Técnica</string>
+    <string name="app_instalacion">Instalación - Sistema de Gestión Técnica</string>
+    <string name="app_averias">Notificar Averias - Sistema de Gestión Técnica</string>
+    <string name="app_plantas_externas">Plantas Externas - Sistema de Gestión Técnica</string>
+    <string name="app_reparacion">Reparación - Sistema de Gestión Técnica</string>
+    <string name="buscar_info">Buscar Información</string>
+    <string name="certificar">Certificar</string>
+    <string name="volver">Volver</string>
 
 </resources>

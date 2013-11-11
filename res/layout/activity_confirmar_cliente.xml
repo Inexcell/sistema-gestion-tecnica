@@ -55,13 +55,13 @@
 	            android:id="@+id/button1"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Buscar Información" />
+	            android:text="@string/buscar_info" />
 
 	        <Button
 	            android:id="@+id/button2"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="Certificar" />
+	            android:text="@string/certificar" />
 
 	    </LinearLayout>
     

@@ -13,7 +13,8 @@ http://inexcell.servehttp.com:200/index.htm
 
 * http://www.javaya.com.ar/androidya/detalleconcepto.php?codigo=140&inicio=0
 * http://www.ignacionario.com/2011/03/android-iv-diseno-de-layouts-o.html
-* http://www.androidcurso.com/index.php/tutoriales-android/32-unidad-2-diseno-de-la-interfaz-de-usuario-vistas-y-layouts/119-uso-practico-de-vistas-y-layouts 
+* http://www.androidcurso.com/index.php/tutoriales-android/32-unidad-2-diseno-de-la-interfaz-de-usuario-vistas-y-layouts/119-uso-practico-de-vistas-y-layouts
+* http://www.elandroidelibre.com/2010/06/aprendiendo-android-ii.html 
 
 # Comandos GIT
 

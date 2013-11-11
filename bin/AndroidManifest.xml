@@ -7,23 +7,38 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="14" />
+    
+    <uses-permission android:name="android.permission.VIBRATE">
+        
+    </uses-permission>
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme" android:permission="android.permission.VIBRATE">
         <activity
             android:name="cl.inexcell.sistemadegestion.Principal"
-            android:label="@string/app_name" >
+            android:screenOrientation="portrait"
+            android:label="@string/app_principal" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="Instalacion"></activity>
-        <activity android:name="Notificar_Averias"></activity>
+        
+        <activity android:name="Instalacion"
+        android:screenOrientation="portrait"
+        android:label="@string/app_instalacion" >
+            
+        </activity>
+        
+        <activity android:name="Notificar_Averias"
+        android:screenOrientation="portrait"
+        android:label="@string/app_averias" >
+            
+        </activity>
     </application>
 
 </manifest>

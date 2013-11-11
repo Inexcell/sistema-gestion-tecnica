@@ -1,7 +1,9 @@
 package cl.inexcell.sistemadegestion;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.View;
 
 public class Instalacion extends Activity {
@@ -15,6 +17,10 @@ public class Instalacion extends Activity {
 	
 	public void volver(View view) {
     	finish();
+    	
+    	// Vibrar al hacer click        
+        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(50);
     } 
 
 }
