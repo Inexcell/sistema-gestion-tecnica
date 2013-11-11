@@ -51,23 +51,23 @@
 
     
     <LinearLayout
-        android:id="@+id/linearLayout1"
+        android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center"
         >
 
         <TableLayout
-            android:layout_width="fill_parent" 
-			android:layout_height="fill_parent" 
+            android:layout_width="fill_parent"
+        	android:layout_height="wrap_content" 
     		android:gravity="center"
-            android:layout_marginTop="65dp"
+            android:layout_marginTop="185dp"
             >
 
             <TableRow
                 android:id="@+id/tableRow1"
-                android:layout_width="fill_parent" 
-    			android:layout_height="fill_parent"
+                android:layout_width="fill_parent"
+        		android:layout_height="wrap_content"
     			android:gravity="center" >
                 
                 <FrameLayout android:paddingRight="20dp">
