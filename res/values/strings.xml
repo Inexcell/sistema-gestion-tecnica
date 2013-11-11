@@ -27,5 +27,9 @@
         <item >Equipo 3</item>
         <item >Equipo 4</item>
     </string-array>
+        <string name="notificar_averia1">NOTIFICAR AVERÍA DE EQUIPO</string>
+        <string name="tipo">Tipo:</string>
+        <string name="observaciones">OBSERVACIONES</string>
+        <string name="notificar_averia3">Notificar Avería</string>
 
 </resources>

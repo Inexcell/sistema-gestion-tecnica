@@ -21,6 +21,10 @@ http://inexcell.servehttp.com:200/index.htm
 * http://www.javaya.com.ar/androidya/detalleconcepto.php?codigo=134&inicio=0
 * http://www.sgoliver.net/blog/?p=3496
 
+## Conectividad 3G y Wifi b/g/n
+
+* http://docencia.etsit.urjc.es/moodle/pluginfile.php/28275/mod_resource/content/1/Conectividad.pdf
+
 # Comandos GIT
 
 ## Agregar todos los archivos a peticion de Git

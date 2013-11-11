@@ -64,7 +64,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="NOTIFICAR AVERÍA DE EQUIPO"
+            android:text="@string/notificar_averia1"
             android:textColor="#FFFFFF"
             android:textSize="18sp" />
 
@@ -82,12 +82,12 @@
                 android:id="@+id/textView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tipo:"
+                android:text="@string/tipo"
                 android:textSize="15sp" />
 
             <Spinner
                 android:id="@+id/spinner1"
-                android:layout_width="match_parent"
+                android:layout_width="0dip"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:entries="@array/equipos" />
@@ -103,7 +103,7 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="OBSERVACIONES"
+            android:text="@string/observaciones"
             android:textSize="15sp" />
 
         <EditText
@@ -141,18 +141,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="15dp"
-                android:text="Notificar Avería" />
+                android:text="@string/notificar_averia3" />
         </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/button3"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
+        android:contentDescription="@string/volver"
         android:onClick="volver"
-        android:text="@string/volver" />
+        android:src="@android:drawable/ic_media_rew" />
 
 </RelativeLayout>

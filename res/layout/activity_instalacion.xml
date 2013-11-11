@@ -67,16 +67,16 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/button3"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout1"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="14dp"
+        android:layout_alignParentLeft="true"
+        android:contentDescription="@string/volver"
         android:onClick="volver"
-        android:text="@string/volver" />
+        android:src="@android:drawable/ic_media_rew" />
 
     <TextView
         android:id="@+id/ins_resultado"
