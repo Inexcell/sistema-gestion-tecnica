@@ -18,5 +18,8 @@
     <string name="buscar_info">Buscar Información</string>
     <string name="certificar">Certificar</string>
     <string name="volver">Volver</string>
+    <string name="certificar_3g">Certificar señal 3G</string>
+    <string name="titulo">SISTEMA DE GESTIÓN TÉCNICA</string>
+    <string name="lorem">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices metus ligula, et cursus elit aliquam sit amet. Nulla vel purus nunc. Vestibulum et magna nec nibh condimentum blandit a sed sapien "</string>
 
 </resources>

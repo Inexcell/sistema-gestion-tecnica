@@ -38,7 +38,9 @@
         android:screenOrientation="portrait"
         android:label="@string/app_averias" >
             
-        </activity>
+        </activity><activity android:name="Reparacion" android:label="@string/app_reparacion"></activity>
+        
+        <activity android:name="Plantas_Externas" android:label="@string/app_plantas_externas"></activity>
     </application>
 
 </manifest>
