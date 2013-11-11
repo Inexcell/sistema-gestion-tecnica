@@ -42,135 +42,134 @@
             <Button
                 android:id="@+id/button2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"                
                 android:text="@string/certificar_3g" />
+            
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="@string/certificar_wifi" />
 
         </LinearLayout>
     </LinearLayout>
 
-    
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_gravity="center"
-        >
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
 
         <TableLayout
             android:layout_width="fill_parent"
-        	android:layout_height="wrap_content" 
-    		android:gravity="center"
+            android:layout_height="wrap_content"
             android:layout_marginTop="185dp"
-            >
+            android:gravity="center" >
 
             <TableRow
                 android:id="@+id/tableRow1"
                 android:layout_width="fill_parent"
-        		android:layout_height="wrap_content"
-    			android:gravity="center" >
-                
-                <FrameLayout android:paddingRight="20dp">
+                android:layout_height="wrap_content"
+                android:gravity="center" >
 
-	                <TextView
-				        android:id="@+id/textView1"
-				        android:layout_width="fill_parent" 
-    					android:layout_height="fill_parent" 
-    					android:gravity="center"
-				        android:text="@string/instalacion"
-				        android:textAppearance="?android:attr/textAppearanceSmall" />
-	                                
-	                <ImageButton
-	                    android:id="@+id/imageButton1"
-	                    android:layout_width="100dp"
-	                    android:layout_height="100dp"
-	                    android:adjustViewBounds="false"
-	                    android:background="@drawable/tabla"
-	                    android:contentDescription="@string/instalacion"
-	                    android:onClick="show_instalacion"
-	                    android:scaleType="fitCenter"
-	                    android:paddingTop="20dp"
-	                    android:src="@drawable/ic_instalar" />
-				</FrameLayout>    
-				
-                <FrameLayout android:paddingLeft="20dp">
+                <FrameLayout android:paddingRight="20dp" >
+
                     <TextView
-				        android:id="@+id/textView2"
-				        android:layout_width="fill_parent" 
-    					android:layout_height="fill_parent" 
-    					android:gravity="center"
-				        android:text="@string/reparacion"
-				        android:textAppearance="?android:attr/textAppearanceSmall" />
-                    
-	                    <ImageButton
-		                    android:id="@+id/imageButton2"
-		                    android:layout_width="100dp"
-		                    android:layout_height="100dp"
-		                    android:background="@drawable/tabla"
-		                    android:contentDescription="@string/reparacion"
-		                    android:scaleType="fitCenter"
-		                    android:paddingTop="20dp"
-		                    android:onClick="show_reparacion"
-		                    android:src="@drawable/ic_reparar" />
+                        android:id="@+id/textView1"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@string/instalacion"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton1"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:adjustViewBounds="false"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/instalacion"
+                        android:onClick="show_instalacion"
+                        android:paddingTop="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_instalar" />
                 </FrameLayout>
-                
-                
+
+                <FrameLayout android:paddingLeft="20dp" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@string/reparacion"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/reparacion"
+                        android:onClick="show_reparacion"
+                        android:paddingTop="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_reparar" />
+                </FrameLayout>
             </TableRow>
 
             <TableRow
                 android:id="@+id/tableRow2"
-                android:layout_width="fill_parent" 
-				android:layout_height="fill_parent" 
-				android:gravity="center" >
-				
-                <FrameLayout android:paddingRight="20dp">
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center" >
+
+                <FrameLayout android:paddingRight="20dp" >
+
                     <TextView
-				        android:id="@+id/textView3"
-				        android:layout_width="fill_parent" 
-    					android:layout_height="fill_parent" 
-    					android:gravity="center"
-				        android:text="@string/plantas_externas"
-				        android:textAppearance="?android:attr/textAppearanceSmall" />
-                    
+                        android:id="@+id/textView3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@string/plantas_externas"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
                     <ImageButton
-	                    android:id="@+id/imageButton3"
-	                    android:layout_width="100dp"
-	                    android:layout_height="100dp"
-	                    android:background="@drawable/tabla"
-	                    android:contentDescription="@string/plantas_externas"
-	                    android:scaleType="fitCenter"
-	                    android:paddingTop="20dp"
-	                    android:onClick="show_plantas_externas"
-	                    android:src="@drawable/ic_plantas_externas" />
-                    
-                    
+                        android:id="@+id/imageButton3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/plantas_externas"
+                        android:onClick="show_plantas_externas"
+                        android:paddingTop="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_plantas_externas" />
                 </FrameLayout>
-                
-                <FrameLayout android:paddingLeft="20dp">
+
+                <FrameLayout android:paddingLeft="20dp" >
+
                     <TextView
-				        android:id="@+id/textView4"
-				        android:layout_width="match_parent" 
-    					android:layout_height="match_parent" 
-    					android:gravity="center"
-				        android:text="@string/notificar_averia"
-				        android:textAppearance="?android:attr/textAppearanceSmall" />
-                    
-	                <ImageButton
-	                    android:id="@+id/imageButton4"
-	                    android:layout_width="100dp"
-	                    android:layout_height="100dp"
-	                    android:background="@drawable/tabla"
-	                    android:contentDescription="@string/notificar_averia"
-	                    android:onClick="show_notificar_averias"
-	                    android:scaleType="fitCenter"
-	                    android:paddingTop="20dp"
-	                    android:src="@drawable/ic_notificar_averia" />    
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/notificar_averia"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/notificar_averia"
+                        android:onClick="show_notificar_averias"
+                        android:paddingTop="20dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_notificar_averia" />
                 </FrameLayout>
-                
             </TableRow>
         </TableLayout>
     </LinearLayout>
-
-    
 
 </RelativeLayout>

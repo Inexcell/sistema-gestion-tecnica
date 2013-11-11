@@ -89,6 +89,7 @@ public final class R {
         public static final int buscar_info=0x7f04000e;
         public static final int certificar=0x7f04000f;
         public static final int certificar_3g=0x7f040011;
+        public static final int certificar_wifi=0x7f040018;
         public static final int hello_world=0x7f040001;
         public static final int hint_phone=0x7f040008;
         public static final int instalacion=0x7f040003;
