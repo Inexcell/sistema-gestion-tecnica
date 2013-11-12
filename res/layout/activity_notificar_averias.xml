@@ -1,16 +1,16 @@
-<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@style/AppTheme"
-    android:gravity="center"
-    tools:context=".Principal" >
+    android:layout_height="fill_parent" >
     
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="2dp"
         android:background="@drawable/fondo1"
         android:orientation="vertical" >
 
@@ -31,7 +31,7 @@
             android:gravity="left"
             android:text="@string/lorem"
             android:textColor="#FFFFFF"
-            android:textSize="10sp" 
+            android:textSize="12sp" 
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <LinearLayout
@@ -44,18 +44,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
+                style="@style/btnStyleCustom"
                 android:text="@string/certificar_3g" />
 
         </LinearLayout>
     </LinearLayout>
-
+    
     <LinearLayout
         android:id="@+id/LinearLayout01"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/linearLayout1"
-        android:layout_margin="8dp"
+        android:layout_margin="2dp"
         android:background="@drawable/fondo1"
         android:orientation="vertical" >
 
@@ -88,9 +90,10 @@
             <Spinner
                 android:id="@+id/spinner1"
                 android:layout_width="0dip"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/equipos" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -114,9 +117,10 @@
             android:background="#FFFFFF"
             android:ems="10"
             android:inputType="textMultiLine"
+            android:gravity="top|left"
             android:lines="3" >
 
-            <requestFocus />
+            
         </EditText>
 
         <LinearLayout
@@ -128,19 +132,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
+            android:layout_marginTop="15dp"
+            android:gravity="right" >
 
             <ImageButton
                 android:id="@+id/imageButton1"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:contentDescription="@string/notificar_averia3"
                 android:src="@android:drawable/ic_menu_camera" />
 
             <Button
                 android:id="@+id/Button01"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                style="@style/btnStyleCustom"
                 android:text="@string/notificar_averia3" />
         </LinearLayout>
     </LinearLayout>

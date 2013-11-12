@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ public class Reparacion extends Activity {
 	private LinearLayout ll;
 	private TextView categoria, nombre, modelo;
 	private ImageButton next, prev;
+	private Button edit, save;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -27,9 +29,15 @@ public class Reparacion extends Activity {
 		modelo = (TextView) findViewById(R.id.model);
 		next = (ImageButton) findViewById(R.id.next);
 		prev = (ImageButton) findViewById(R.id.prev);
+		edit = (Button) findViewById(R.id.edit);
+		save = (Button) findViewById(R.id.save);
 		
-		prev.setEnabled(false);
-		ll.setVisibility(View.INVISIBLE);		
+		prev.setVisibility(View.INVISIBLE);
+		next.setVisibility(View.INVISIBLE);
+		edit.setVisibility(View.INVISIBLE);
+		save.setVisibility(View.INVISIBLE);
+		ll.setVisibility(View.INVISIBLE);	
+		
 		
 				
 	}
@@ -54,6 +62,11 @@ public class Reparacion extends Activity {
     }
 	
 	public void buscar_info(View view) {
+		prev.setEnabled(false);
+		prev.setVisibility(View.VISIBLE);
+		next.setVisibility(View.VISIBLE);
+		edit.setVisibility(View.VISIBLE);
+		save.setVisibility(View.VISIBLE);
 		ll.setVisibility(View.VISIBLE);
 		Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(50);
