@@ -70,11 +70,12 @@ public final class R {
         public static final int txtSugerencia=0x7f080003;
     }
     public static final class layout {
-        public static final int activity_instalacion=0x7f030000;
-        public static final int activity_notificar_averias=0x7f030001;
-        public static final int activity_plantas_externas=0x7f030002;
-        public static final int activity_principal=0x7f030003;
-        public static final int activity_reparacion=0x7f030004;
+        public static final int activity_certificar_wifi=0x7f030000;
+        public static final int activity_instalacion=0x7f030001;
+        public static final int activity_notificar_averias=0x7f030002;
+        public static final int activity_plantas_externas=0x7f030003;
+        public static final int activity_principal=0x7f030004;
+        public static final int activity_reparacion=0x7f030005;
     }
     public static final class menu {
         public static final int activity_principal=0x7f070000;
@@ -90,6 +91,7 @@ public final class R {
         public static final int certificar=0x7f04000f;
         public static final int certificar_3g=0x7f040011;
         public static final int certificar_wifi=0x7f040018;
+        public static final int certificar_wifi1=0x7f040019;
         public static final int hello_world=0x7f040001;
         public static final int hint_phone=0x7f040008;
         public static final int instalacion=0x7f040003;

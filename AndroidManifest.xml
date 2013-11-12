@@ -45,6 +45,7 @@
         </activity><activity android:name="Reparacion" android:label="@string/app_reparacion"></activity>
         
         <activity android:name="Plantas_Externas" android:label="@string/app_plantas_externas"></activity>
+        <activity android:name="Certificar_Wifi" android:label="@string/certificar_wifi1"></activity>
     </application>
 
 </manifest>

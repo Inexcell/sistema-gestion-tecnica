@@ -26,6 +26,13 @@ http://inexcell.servehttp.com:200/index.htm
 * http://androidexample.com/Scan_wifi_connections_or_Get_number_of_available_wifi_connections/index.php?view=article_discription&aid=90&aaid=114
 * http://docencia.etsit.urjc.es/moodle/pluginfile.php/28275/mod_resource/content/1/Conectividad.pdf
 
+* http://www.facebook.com/l.php?u=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F12674216%2Fandroid-3g-signal-strength&h=NAQH2a1Wl
+* http://www.facebook.com/l.php?u=http%3A%2F%2Fstackoverflow.com%2Fquestions%2F6995123%2Fandroid-how-to-get-wifi-signal-strength-and-connection-subtype&h=NAQH2a1Wl
+
+## Implementar Demonios
+
+* http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.nosinmiubuntu.com%2F2012%2F07%2Fservicios-o-daemons-en-android.html&h=NAQH2a1Wl
+
 # Comandos GIT
 
 ## Agregar todos los archivos a peticion de Git

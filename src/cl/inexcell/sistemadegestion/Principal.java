@@ -65,6 +65,13 @@ public class Principal extends Activity {
         vibrator.vibrate(50);
 	}
 	
-		
+	public void show_certificar_wifi(View view) {
+        Intent i = new Intent(this, Certificar_Wifi.class );
+        startActivity(i);
+        
+        // Vibrar al hacer click        
+        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        vibrator.vibrate(50);
+	}
 
 }
