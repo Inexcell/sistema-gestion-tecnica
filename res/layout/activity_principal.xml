@@ -1,43 +1,155 @@
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ffffff"
-    android:gravity="center"
+    android:background="#c8e2ea"
     tools:context=".Principal" xmlns:android="http://schemas.android.com/apk/res/android">
     
     
     <LinearLayout
         android:id="@+id/linearLayout1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/fondo1"
         android:orientation="vertical" >
-
+        
+        <ImageView
+            android:layout_width="125dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/titulo"
+            android:src="@drawable/logo" />
+        
         <TextView
-            android:id="@+id/txBienvenida"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/titulo"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/txtSugerencia"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
+            android:id="@+id/textView1"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
             android:gravity="left"
-            android:text="@string/lorem"
-            android:textColor="#FFFFFF"
-            android:textSize="10sp" 
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="-40dp"
+            android:text="@string/certificacion_tecnica" />
+        
+	</LinearLayout>
+	
+    <TableLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
+        	android:layout_marginTop="100dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp"
+	        android:gravity="center"
+	        android:background="@drawable/fondo1"
+			>
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                >
+
+                <FrameLayout android:layout_marginRight="5dp">
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@string/instalacion"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton1"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/instalacion"
+                        android:onClick="show_instalacion"
+                        android:src="@drawable/instalar" />
+                </FrameLayout>
+
+                <FrameLayout>
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@string/reparacion"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton2"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/reparacion"
+                        android:onClick="show_reparacion"
+                        android:src="@drawable/reparar" />
+                </FrameLayout>
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center" >
+
+                <FrameLayout android:layout_marginRight="5dp">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:gravity="center"
+                        android:text="@string/plantas_externas"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton3"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/plantas_externas"
+                        android:onClick="show_plantas_externas"
+                        android:src="@drawable/buscar" />
+                </FrameLayout>
+
+                <FrameLayout>
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/notificar_averia"
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    <ImageButton
+                        android:id="@+id/imageButton4"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:background="@drawable/tabla"
+                        android:contentDescription="@string/notificar_averia"
+                        android:onClick="show_notificar_averias"
+                        android:src="@drawable/notificar" />
+                </FrameLayout>
+            </TableRow>
+        </TableLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="550dp"
+            android:layout_marginLeft="10dp"
+        	android:layout_marginRight="10dp"
+        	android:background="@drawable/fondo1"
+        	android:gravity="center"
+            >
 
             <Button
                 android:id="@+id/button2"
@@ -47,130 +159,11 @@
             
             <Button
                 android:id="@+id/button3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick="show_certificar_wifi"
                 android:text="@string/certificar_wifi" />
 
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
-
-        <TableLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="185dp"
-            android:gravity="center" >
-
-            <TableRow
-                android:id="@+id/tableRow1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center" >
-
-                <FrameLayout android:paddingRight="20dp" >
-
-                    <TextView
-                        android:id="@+id/textView1"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="center"
-                        android:text="@string/instalacion"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton1"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:adjustViewBounds="false"
-                        android:background="@drawable/tabla"
-                        android:contentDescription="@string/instalacion"
-                        android:onClick="show_instalacion"
-                        android:paddingTop="20dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_instalar" />
-                </FrameLayout>
-
-                <FrameLayout android:paddingLeft="20dp" >
-
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="center"
-                        android:text="@string/reparacion"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="@drawable/tabla"
-                        android:contentDescription="@string/reparacion"
-                        android:onClick="show_reparacion"
-                        android:paddingTop="20dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_reparar" />
-                </FrameLayout>
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/tableRow2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="center" >
-
-                <FrameLayout android:paddingRight="20dp" >
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:gravity="center"
-                        android:text="@string/plantas_externas"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton3"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="@drawable/tabla"
-                        android:contentDescription="@string/plantas_externas"
-                        android:onClick="show_plantas_externas"
-                        android:paddingTop="20dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_plantas_externas" />
-                </FrameLayout>
-
-                <FrameLayout android:paddingLeft="20dp" >
-
-                    <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="@string/notificar_averia"
-                        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    <ImageButton
-                        android:id="@+id/imageButton4"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="@drawable/tabla"
-                        android:contentDescription="@string/notificar_averia"
-                        android:onClick="show_notificar_averias"
-                        android:paddingTop="20dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_notificar_averia" />
-                </FrameLayout>
-            </TableRow>
-        </TableLayout>
-    </LinearLayout>
-
+		</LinearLayout>
+    
 </RelativeLayout>

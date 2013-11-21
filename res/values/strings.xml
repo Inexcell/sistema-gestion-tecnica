@@ -33,5 +33,6 @@
         <string name="notificar_averia3">Notificar Avería</string>
         <string name="certificar_wifi">Test Señal Wifi</string>
         <string name="certificar_wifi1">Certificar Wifi - Sistema de Gestión Técnica</string>
+        <string name="certificacion_tecnica">CERTIFICACIÓN TÉCNICA</string>
 
 </resources>
