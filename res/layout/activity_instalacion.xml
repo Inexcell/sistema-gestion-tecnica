@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
+	android:id="@+id/root_layout" 
+	android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="#c8e2ea"
-    android:orientation="vertical" >
-    
+	android:layout_weight="1" 
+	android:orientation="vertical">
+	
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -31,96 +34,276 @@
             android:text="@string/certificacion_tecnica" />
         
 	</LinearLayout>
-
-    <LinearLayout
+	
+     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_marginTop="100dp"
-        android:layout_marginLeft="10dp"
-	    android:layout_marginRight="10dp"
-	    android:gravity="center"
-        android:background="@drawable/fondo1"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/txBienvenida"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="@string/num_cliente"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/ins_telefono"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/fondo1"
-            android:ems="11"
-            android:inputType="phone"
-            android:textSize="30sp" >
-
-        </EditText>
-
-        <TextView
-            android:id="@+id/txtSugerencia"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:gravity="left"
-            android:text="@string/hint_phone"
-            android:textColor="#FFFFFF"
-            android:textSize="15sp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp" >
-
-            <Button
-                android:id="@+id/button1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="desplegar_resultados"
-                android:text="@string/buscar_info" />
-
-            <Button
-                android:id="@+id/ins_certificar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:onClick="desplegar_certificar"
-                android:text="@string/certificar" />
-
-        </LinearLayout>
-    </LinearLayout>
-    
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="300dp"
         android:layout_marginBottom="48dp"
         android:layout_marginLeft="10dp"
-	    android:layout_marginRight="10dp"
-	    android:gravity="center"
+        android:layout_marginRight="10dp"
         android:background="@drawable/fondo1"
         android:orientation="vertical" >
-
-	    <TextView
-	        android:id="@+id/ins_resultado"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	         />
-	    
+	
+		<Button
+		    android:id="@+id/btnBusquedaCliente"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/busqueda_cliente"
+		    android:background="@drawable/boton_style1"
+		    android:textColor="#555555" 
+		    />
+		
+		<LinearLayout
+		    android:id="@+id/panelBusquedaCliente"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="#FFFFFFFF"
+		    android:orientation="vertical" >
+			
+			<LinearLayout
+			    android:id="@+id/panelBusquedaCliente1"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:background="#FFFFFFFF"
+			    android:orientation="horizontal" >
+				
+				<TextView 
+				    android:id="@+id/strName" 
+				    android:layout_width="wrap_content"
+					android:layout_height="wrap_content" 
+					android:text="Name" />
+				
+				<EditText 
+				    android:id="@+id/txtName" 
+				    android:layout_width="fill_parent"
+					android:layout_height="wrap_content" />
+				
+			</LinearLayout>
+			
+			<LinearLayout
+			    android:id="@+id/panelBusquedaCliente2"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:background="#FFFFFFFF"
+			    android:orientation="horizontal" >
+				
+				<TextView 
+				    android:id="@+id/strSurname" 
+				    android:layout_width="wrap_content"
+					android:layout_height="wrap_content" 
+					android:text="Surname" />
+				
+				<EditText 
+				    android:id="@+id/txtSurname" 
+				    android:layout_width="fill_parent"
+					android:layout_height="wrap_content" />
+			</LinearLayout>
+			
+		</LinearLayout>
+		
+		<Button
+		    android:id="@+id/btnPlantaExterna"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/planta_externa"
+		    android:background="@drawable/boton_style1"
+		    android:textColor="#555555" />
+		
+		<LinearLayout
+		    android:id="@+id/panelPlantaExterna"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="#FFFFFFFF"
+		    android:orientation="vertical" >
+			
+			<LinearLayout
+			    android:id="@+id/panelPlantaExterna1"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:background="#FFFFFFFF"
+			    android:orientation="horizontal" >
+				
+				<TextView 
+				    android:id="@+id/strMail" 
+				    android:layout_width="wrap_content"
+					android:layout_height="wrap_content" 
+					android:text="e-mail" />
+				
+				<EditText 
+				    android:id="@+id/txtMail" 
+				    android:layout_width="fill_parent"
+					android:layout_height="wrap_content" />
+				
+			</LinearLayout>
+			
+			<LinearLayout
+			    android:id="@+id/panelPlantaExterna2"
+			    android:layout_width="fill_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_weight="1"
+			    android:background="#FFFFFFFF"
+			    android:orientation="horizontal" >
+				
+				<TextView 
+				    android:id="@+id/strPhone" 
+				    android:layout_width="wrap_content"
+					android:layout_height="wrap_content" 
+					android:text="Phone" />
+				
+				<EditText 
+				    android:id="@+id/txtPhone" 
+				    android:layout_width="fill_parent"
+					android:layout_height="wrap_content" />
+				
+			</LinearLayout>
+			
+		</LinearLayout>
+		
+		<Button
+		    android:id="@+id/btnTVSatelital"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/television_satelital"
+		    android:background="@drawable/boton_style1"
+		    android:textColor="#555555" />
+		
+		<LinearLayout
+		    android:id="@+id/panelTVSatelital"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="#FFFFFFFF"
+		    android:orientation="vertical" >
+			
+			<CheckBox 
+			    android:id="@+id/checkFacebook"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" android:text="Facebook" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			<CheckBox 
+			    android:id="@+id/checkLinkedIn"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" 
+				android:text="LinkedIn" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			<CheckBox 
+			    android:id="@+id/checkTwitter"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" 
+				android:text="Twitter" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			
+			
+		</LinearLayout>
+		
+		<Button
+		    android:id="@+id/btnBandaAncha"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/banda_ancha"
+		    android:background="@drawable/boton_style1"
+		    android:textColor="#555555" />
+		
+		<LinearLayout
+		    android:id="@+id/panelBandaAncha"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="#FFFFFFFF"
+		    android:orientation="vertical" >
+			
+			<CheckBox 
+			    android:id="@+id/checkFacebook1"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" android:text="Facebook" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			<CheckBox 
+			    android:id="@+id/checkLinkedIn1"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" 
+				android:text="LinkedIn" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			<CheckBox 
+			    android:id="@+id/checkTwitter1"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" 
+				android:text="Twitter" 
+				android:textColor="#ff355689">
+			</CheckBox>
+		</LinearLayout>
+		
+		<Button
+		    android:id="@+id/btnCertificacion"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/certificacion"
+		    android:background="@drawable/boton_style1"
+		    android:textColor="#555555" />
+		
+		<LinearLayout
+		    android:id="@+id/panelCertificacion"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:background="#FFFFFFFF"
+		    android:orientation="vertical" >
+			
+			<CheckBox 
+			    android:id="@+id/checkFacebook2"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" android:text="Facebook" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			<CheckBox 
+			    android:id="@+id/checkLinkedIn2"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" 
+				android:text="LinkedIn" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			<CheckBox 
+			    android:id="@+id/checkTwitter2"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:layout_weight="1" 
+				android:text="Twitter" 
+				android:textColor="#ff355689">
+			</CheckBox>
+			
+			
+			
+		</LinearLayout>
+	
 	</LinearLayout>
-    
-    
-    
-    <RelativeLayout
+	
+     <RelativeLayout
         android:id="@+id/linearLayout3"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -141,5 +324,6 @@
         
         
     </RelativeLayout>
-
+	
+     
 </RelativeLayout>

@@ -34,5 +34,10 @@
         <string name="certificar_wifi">Test Señal Wifi</string>
         <string name="certificar_wifi1">Certificar Wifi - Sistema de Gestión Técnica</string>
         <string name="certificacion_tecnica">CERTIFICACIÓN TÉCNICA</string>
+        <string name="busqueda_cliente">BÚSQUEDA DEL CLIENTE</string>
+        <string name="planta_externa">PLANTA EXTERNA</string>
+        <string name="television_satelital">TELEVISIÓN SATELITAL</string>
+        <string name="banda_ancha">BANDA ANCHA FIJA</string>
+        <string name="certificacion">CERTIFICACIÓN</string>
 
 </resources>
