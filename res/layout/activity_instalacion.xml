@@ -59,11 +59,11 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:background="#FFFFFF"
-            android:ems="18"
-            android:inputType="phone" >
+            android:background="@drawable/fondo1"
+            android:ems="11"
+            android:inputType="phone"
+            android:textSize="30sp" >
 
-            <requestFocus />
         </EditText>
 
         <TextView
@@ -97,8 +97,37 @@
 
         </LinearLayout>
     </LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="10dp"
+	    android:layout_marginRight="10dp"
+	    android:gravity="center"
+        android:background="@drawable/fondo1"
+        android:orientation="vertical" >
 
-    <ImageButton
+	    <TextView
+	        android:id="@+id/ins_resultado"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	         />
+	    
+	</LinearLayout>
+    
+    
+    
+    <RelativeLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center"
+        >
+        
+         <ImageButton
         android:id="@+id/button3"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
@@ -109,11 +138,8 @@
         android:onClick="volver"
         android:src="@android:drawable/ic_media_rew" />
 
-    <TextView
-        android:id="@+id/ins_resultado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/linearLayout1"
-        android:layout_below="@+id/linearLayout1" />
+        
+        
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -1,16 +1,47 @@
 <RelativeLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+    android:layout_height="fill_parent"
+    android:background="#c8e2ea"
+    android:orientation="vertical" >
     
     <LinearLayout
         android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/fondo1"
+        android:orientation="vertical" >
+        
+        <ImageView
+            android:layout_width="125dp"
+            android:layout_height="55dp"
+            android:contentDescription="@string/titulo"
+            android:src="@drawable/logo" />
+        
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:gravity="left"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="-40dp"
+            android:text="@string/certificacion_tecnica" />
+        
+	</LinearLayout>
+    
+    <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="2dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/fondo1"
         android:orientation="vertical" >
 
@@ -57,7 +88,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/linearLayout1"
-        android:layout_margin="2dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="48dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/fondo1"
         android:orientation="vertical" >
 
@@ -114,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:background="#FFFFFF"
+            android:background="@drawable/fondo1"
             android:ems="10"
             android:inputType="textMultiLine"
             android:gravity="top|left"
