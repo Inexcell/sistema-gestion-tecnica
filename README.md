@@ -33,6 +33,19 @@ http://inexcell.servehttp.com:200/index.htm
 
 * http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.nosinmiubuntu.com%2F2012%2F07%2Fservicios-o-daemons-en-android.html&h=NAQH2a1Wl
 
+## Menu Acordeon
+
+* http://ilinakareva.wordpress.com/2011/06/17/accordion-like-widget-for-android/
+
+## Metodos para leer archivos XML
+
+* http://ideapps.mx/2012/07/27/leer-xml-en-android-parte-i/
+
+## Descargar archivos para test de Wifi y Test de Ancho de Banda
+
+* http://www.insdout.com/snippets/descargar-archivos-desde-una-url-en-nuestra-aplicacion-android.htm
+* http://blog.sakrow.com/2013/08/17/prueba-de-ancho-de-banda-desde-terminal-debian/
+
 # Comandos GIT
 
 ## Agregar todos los archivos a peticion de Git
