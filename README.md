@@ -1,4 +1,4 @@
-# Sistemas de Gestion Tecnica para Tecnicos Compañias Telefonicas
+# Sistemas de Gestion Tecnica - Inexcell
 
 ## Sitio web de Vistas para aplicacion
 
