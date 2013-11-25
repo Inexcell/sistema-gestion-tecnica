@@ -7,7 +7,12 @@ http://inexcell.servehttp.com:200/index.htm
 ## Especificaciones
 
 * IDE: Eclipse Indigo
+* Plugins: Web Services SOAP
 * SO: Android 4.0.1 (Icecream Sandwich)
+
+## Instalacion Plugin Web Services en Eclipse
+
+* http://www.soapui.org/IDE-Plugins/eclipse-plugin.html
 
 ## Links de interés para Transicion de Vistas
 

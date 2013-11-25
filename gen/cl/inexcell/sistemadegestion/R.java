@@ -65,9 +65,9 @@ public final class R {
         public static final int edit=0x7f080049;
         public static final int editText1=0x7f08002f;
         public static final int imageButton1=0x7f080030;
-        public static final int imageButton2=0x7f080035;
-        public static final int imageButton3=0x7f080038;
-        public static final int imageButton4=0x7f08003a;
+        public static final int imageButton2=0x7f080034;
+        public static final int imageButton3=0x7f080037;
+        public static final int imageButton4=0x7f080039;
         public static final int info_view=0x7f08003f;
         public static final int inventarioTitulo=0x7f080040;
         public static final int linearLayout1=0x7f080000;
@@ -104,9 +104,9 @@ public final class R {
         public static final int textView1=0x7f080001;
         public static final int textView10=0x7f080033;
         public static final int textView2=0x7f080002;
-        public static final int textView3=0x7f080034;
-        public static final int textView4=0x7f080037;
-        public static final int textView5=0x7f080039;
+        public static final int textView3=0x7f080035;
+        public static final int textView4=0x7f080038;
+        public static final int textView5=0x7f08003a;
         public static final int txBienvenida=0x7f080029;
         public static final int txtMail=0x7f080015;
         public static final int txtName=0x7f08000d;

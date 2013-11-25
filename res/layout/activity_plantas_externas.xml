@@ -53,8 +53,8 @@
 	    android:gravity="center"
         android:background="@drawable/fondo1"
         android:orientation="vertical" >
-    
         
+    
     </LinearLayout>
 	
     <RelativeLayout
@@ -75,8 +75,6 @@
         android:onClick="volver"
         android:src="@android:drawable/ic_media_rew" />
 
-        
-        
     </RelativeLayout>
     
 
