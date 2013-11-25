@@ -39,5 +39,6 @@
         <string name="television_satelital">TELEVISIÓN SATELITAL</string>
         <string name="banda_ancha">BANDA ANCHA FIJA</string>
         <string name="certificacion">CERTIFICACIÓN</string>
+        <string name="menu_principal">Menú Principal</string>
 
 </resources>

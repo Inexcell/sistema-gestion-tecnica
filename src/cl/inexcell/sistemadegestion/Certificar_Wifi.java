@@ -14,6 +14,7 @@ import android.os.Vibrator;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
  
@@ -29,7 +30,10 @@ public class Certificar_Wifi extends Activity {
     public void onCreate(Bundle savedInstanceState) {
          
        super.onCreate(savedInstanceState);
-        
+       
+       // Activity sin parte superior
+       requestWindowFeature(Window.FEATURE_NO_TITLE);
+       
        setContentView(R.layout.activity_certificar_wifi);
        mainText = (TextView) findViewById(R.id.mainText);
         

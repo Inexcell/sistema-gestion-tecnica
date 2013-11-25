@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.Window;
 
 public class Plantas_Externas extends Activity {
 
@@ -12,6 +13,9 @@ public class Plantas_Externas extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		// Activity sin parte superior
+		requestWindowFeature(Window.FEATURE_NO_TITLE);		
+		
 		setContentView(R.layout.activity_plantas_externas);
 	}
 	
