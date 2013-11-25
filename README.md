@@ -13,6 +13,7 @@ http://inexcell.servehttp.com:200/index.htm
 ## Instalacion Plugin Web Services en Eclipse
 
 * http://www.soapui.org/IDE-Plugins/eclipse-plugin.html
+* http://www.elblogdeselo.com/creacion-de-un-cliente-de-webservice-en-java-con-eclipse-y-axis
 
 ## Links de interés para Transicion de Vistas
 
