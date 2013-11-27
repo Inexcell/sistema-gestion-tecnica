@@ -1,13 +1,17 @@
-# Sistemas de Gestion Tecnica - Inexcell
+# Sistema de Gestion Tecnica - Inexcell
 
 ## Sitio web de Vistas para aplicacion
 
-http://inexcell.servehttp.com:200/index.htm
+* http://inexcell.servehttp.com:200/index.htm
+
+## Documentación Web Service Shark - Telefonica
+
+* http://alumnos.inf.utfsm.cl/~abastias/inexcell/doc/wsdl-report.html
 
 ## Especificaciones
 
-* IDE: Eclipse Indigo
-* Plugins: Web Services SOAP
+* IDE: Eclipse Indigo o Kepler
+* Plugins: Web Services SOAP, ADT Android
 * SO: Android 4.0.1 (Icecream Sandwich)
 
 ## Instalacion Plugin Web Services en Eclipse
@@ -15,7 +19,7 @@ http://inexcell.servehttp.com:200/index.htm
 * http://www.soapui.org/IDE-Plugins/eclipse-plugin.html
 * http://www.elblogdeselo.com/creacion-de-un-cliente-de-webservice-en-java-con-eclipse-y-axis
 
-## Links de interés para Transicion de Vistas
+## Links de interés para Transición de Vistas
 
 * http://www.javaya.com.ar/androidya/detalleconcepto.php?codigo=140&inicio=0
 * http://www.ignacionario.com/2011/03/android-iv-diseno-de-layouts-o.html
