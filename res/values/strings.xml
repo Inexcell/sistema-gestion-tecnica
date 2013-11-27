@@ -22,10 +22,10 @@
     <string name="titulo">SISTEMA DE GESTIÓN TÉCNICA</string>
     <string name="lorem">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ultrices metus ligula, et cursus elit aliquam sit amet. Nulla vel purus nunc. Vestibulum et magna nec nibh condimentum blandit a sed sapien "</string>
     <string-array name="equipos">
-        <item >Equipo 1</item>
-        <item >Equipo 2</item>
-        <item >Equipo 3</item>
-        <item >Equipo 4</item>
+        <item >Cable</item>
+        <item >Armario</item>
+        <item >Caja</item>
+        <item >Tablero</item>
     </string-array>
         <string name="notificar_averia1">NOTIFICAR AVERÍA DE EQUIPO</string>
         <string name="tipo">Tipo:</string>
