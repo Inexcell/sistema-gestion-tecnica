@@ -7,6 +7,7 @@
 ## Documentación Web Service Shark - Telefonica
 
 * http://alumnos.inf.utfsm.cl/~abastias/inexcell/doc/wsdl-report.html
+* http://di002.edv.uniovi.es/~falvarez/WSDL.pdf
 
 ## Especificaciones
 
