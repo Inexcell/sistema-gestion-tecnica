@@ -20,8 +20,8 @@ public class Principal extends Activity {
 		setContentView(R.layout.activity_principal);
 		
 		/** Se inicia el DEMONIO **/
-		Intent service = new Intent(this, Demonio_Certificar_3G.class);
-		startService(service);
+		//Intent service = new Intent(this, Demonio_Certificar_3G.class);
+		//startService(service);
 	}
 
 	@Override
