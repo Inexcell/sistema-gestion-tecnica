@@ -3,7 +3,7 @@ package cl.inexcell.sistemadegestion;
 import java.util.List;
 import java.util.Vector;
 
-import android.app.Activity;
+//import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Vibrator;

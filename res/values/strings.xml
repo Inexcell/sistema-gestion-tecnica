@@ -40,5 +40,10 @@
         <string name="banda_ancha">BANDA ANCHA FIJA</string>
         <string name="certificacion">CERTIFICACIÓN</string>
         <string name="menu_principal">Menú Principal</string>
+        <string name="ingrese_telefono">Ingrese el teléfono del cliente:</string>
+        <string name="ej_telefono">Ej: 32 - 2216633</string>
+        <string name="buscar">Buscar</string>
+        <string name="equipo_actual">EQUIPO ACTUAL CLIENTE</string>
+        <string name="guion">-</string>
 
 </resources>

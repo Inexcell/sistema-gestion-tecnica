@@ -64,6 +64,18 @@
             android:screenOrientation="portrait">
             
         </activity>
+        
+        <activity android:name="planta_ext1" 
+            android:label="@string/certificar_wifi1"
+            android:screenOrientation="portrait">
+            
+        </activity>
+        
+        <activity android:name="planta_ext2" 
+            android:label="@string/certificar_wifi1"
+            android:screenOrientation="portrait">
+            
+        </activity>
     </application>
 
 </manifest>
