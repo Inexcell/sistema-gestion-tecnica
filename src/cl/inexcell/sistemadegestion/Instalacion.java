@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnKeyListener;
 import android.view.Window;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
@@ -19,7 +18,7 @@ import android.widget.Toast;
 
 public class Instalacion extends Activity {
 	
-	private EditText editText,editText1;
+	private EditText editText;
 	private Button b1,b2,b3,b4,b5;
 	//private Button mDoneButton;
     //private TextView txtResultado;

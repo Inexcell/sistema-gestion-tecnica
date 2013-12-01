@@ -1,0 +1,390 @@
+<definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:Demo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:Demo">
+<types>
+<xsd:schema targetNamespace="urn:Demo">
+<xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/"/>
+<xsd:complexType name="RequestCustomer">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceCustomerIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceCustomerIn">
+<xsd:sequence>
+<xsd:element name="Customer" type="tns:CustomerIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CustomerIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:CustomerInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CustomerInData">
+<xsd:sequence>
+<xsd:element name="Area" type="xsd:string"/>
+<xsd:element name="Phone" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseCustomer">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceCustomerOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceCustomerOut">
+<xsd:sequence>
+<xsd:element name="Customer" type="tns:CustomerOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CustomerOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:CustomerOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CustomerOutData">
+<xsd:sequence>
+<xsd:element name="CPE" type="tns:CPE" minOccurs="0"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CPE">
+<xsd:sequence>
+<xsd:element name="CPEType" type="xsd:string"/>
+<xsd:element name="VendorName" type="xsd:string"/>
+<xsd:element name="CPEModel" type="xsd:string" minOccurs="0"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestVendor">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceVendorIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceVendorIn">
+<xsd:sequence>
+<xsd:element name="Vendor" type="tns:VendorIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="VendorIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:VendorInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="VendorInData">
+<xsd:sequence>
+<xsd:element name="CPEType" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseVendor">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceVendorOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceVendorOut">
+<xsd:sequence>
+<xsd:element name="Vendor" type="tns:VendorOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="VendorOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:VendorOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="VendorOutData">
+<xsd:sequence>
+<xsd:element name="Vendor" type="tns:Vendor"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Vendor">
+<xsd:sequence>
+<xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestModel">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceModelIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceModelIn">
+<xsd:sequence>
+<xsd:element name="Model" type="tns:ModelIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ModelIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:ModelInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ModelInData">
+<xsd:sequence>
+<xsd:element name="CPEType" type="xsd:string"/>
+<xsd:element name="VendorName" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseModel">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceModelOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceModelOut">
+<xsd:sequence>
+<xsd:element name="Model" type="tns:ModelOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ModelOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:ModelOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ModelOutData">
+<xsd:sequence>
+<xsd:element name="Model" type="tns:Model"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Model">
+<xsd:sequence>
+<xsd:element name="Name" type="xsd:string" minOccurs="1" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestInventoryUpdate">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceInventoryUpdateIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceInventoryUpdateIn">
+<xsd:sequence>
+<xsd:element name="InventoryUpdate" type="tns:InventoryUpdateIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InventoryUpdateIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:InventoryUpdateInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InventoryUpdateInData">
+<xsd:sequence>
+<xsd:element name="Area" type="xsd:string"/>
+<xsd:element name="Phone" type="xsd:string"/>
+<xsd:element name="CPEType" type="xsd:string"/>
+<xsd:element name="CPEModel" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseInventoryUpdate">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceInventoryUpdateOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceInventoryUpdateOut">
+<xsd:sequence>
+<xsd:element name="InventoryUpdate" type="tns:InventoryUpdateOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InventoryUpdateOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:InventoryUpdateOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="InventoryUpdateOutData">
+<xsd:sequence>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestOutsidePlant">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceOutsidePlantIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceOutsidePlantIn">
+<xsd:sequence>
+<xsd:element name="OutsidePlant" type="tns:OutsidePlantIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:OutsidePlantInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantInData">
+<xsd:sequence>
+<xsd:element name="Area" type="xsd:string"/>
+<xsd:element name="Phone" type="xsd:string"/>
+<xsd:element name="Type" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseOutsidePlant">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceOutsidePlantOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceOutsidePlantOut">
+<xsd:sequence>
+<xsd:element name="OutsidePlant" type="tns:OutsidePlantOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:OutsidePlantOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantOutData">
+<xsd:sequence>
+<xsd:element name="Element" type="tns:ElementType" maxOccurs="unbounded"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OperationType">
+<xsd:sequence>
+<xsd:element name="OperationCode" type="xsd:string"/>
+<xsd:element name="OperationId" type="xsd:string"/>
+<xsd:element name="DateTime" type="xsd:string" minOccurs="0" maxOccurs="1"/>
+<xsd:element name="IdUser" type="xsd:string" minOccurs="0"/>
+<xsd:element name="IMEI" type="xsd:string"/>
+<xsd:element name="IMSI" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ReturnType">
+<xsd:sequence>
+<xsd:element name="Code" type="xsd:string"/>
+<xsd:element name="Description" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ElementType">
+<xsd:sequence>
+<xsd:element name="Id" type="xsd:string"/>
+<xsd:element name="Type" type="xsd:string"/>
+<xsd:element name="Value" type="xsd:string"/>
+<xsd:element name="Gps" type="tns:GPSType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="GPSType">
+<xsd:sequence>
+<xsd:element name="Lat" type="xsd:string"/>
+<xsd:element name="Lng" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+</xsd:schema>
+</types>
+<message name="CustomerRequest">
+<part name="RequestCustomer" type="tns:RequestCustomer"/>
+</message>
+<message name="CustomerResponse">
+<part name="ResponseCustomer" type="tns:ResponseCustomer"/>
+</message>
+<message name="VendorRequest">
+<part name="RequestVendor" type="tns:RequestVendor"/>
+</message>
+<message name="VendorResponse">
+<part name="ResponseVendor" type="tns:ResponseVendor"/>
+</message>
+<message name="ModelRequest">
+<part name="RequestModel" type="tns:RequestModel"/>
+</message>
+<message name="ModelResponse">
+<part name="ResponseModel" type="tns:ResponseModel"/>
+</message>
+<message name="InventoryUpdateRequest">
+<part name="RequestInventoryUpdate" type="tns:RequestInventoryUpdate"/>
+</message>
+<message name="InventoryUpdateResponse">
+<part name="ResponseInventoryUpdate" type="tns:ResponseInventoryUpdate"/>
+</message>
+<message name="OutsidePlantRequest">
+<part name="RequestOutsidePlant" type="tns:RequestOutsidePlant"/>
+</message>
+<message name="OutsidePlantResponse">
+<part name="ResponseOutsidePlant" type="tns:ResponseOutsidePlant"/>
+</message>
+<portType name="PrototypePortType">
+<operation name="Customer">
+<documentation>Test.</documentation>
+<input message="tns:CustomerRequest"/>
+<output message="tns:CustomerResponse"/>
+</operation>
+<operation name="Vendor">
+<documentation>Test.</documentation>
+<input message="tns:VendorRequest"/>
+<output message="tns:VendorResponse"/>
+</operation>
+<operation name="Model">
+<documentation>Test.</documentation>
+<input message="tns:ModelRequest"/>
+<output message="tns:ModelResponse"/>
+</operation>
+<operation name="InventoryUpdate">
+<documentation>Test.</documentation>
+<input message="tns:InventoryUpdateRequest"/>
+<output message="tns:InventoryUpdateResponse"/>
+</operation>
+<operation name="OutsidePlant">
+<documentation>Test.</documentation>
+<input message="tns:OutsidePlantRequest"/>
+<output message="tns:OutsidePlantResponse"/>
+</operation>
+</portType>
+<binding name="PrototypeBinding" type="tns:PrototypePortType">
+<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+<operation name="Customer">
+<soap:operation soapAction="urn:Demo#Customer" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="Vendor">
+<soap:operation soapAction="urn:Demo#Vendor" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="Model">
+<soap:operation soapAction="urn:Demo#Model" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="InventoryUpdate">
+<soap:operation soapAction="urn:Demo#InventoryUpdate" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="OutsidePlant">
+<soap:operation soapAction="urn:Demo#OutsidePlant" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+</binding>
+<service name="Prototype">
+<port name="PrototypePort" binding="tns:PrototypeBinding">
+<soap:address location="http://pcba.telefonicachile.cl/smartphone/ws/shark.php"/>
+</port>
+</service>
+</definitions>

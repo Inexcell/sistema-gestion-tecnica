@@ -13,17 +13,15 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class Reparacion extends Activity {
 	
-	private EditText editText,editText1;
+	private EditText editText;
 	private Button b1,b2,b3,b4,b5;
-	private Button mDoneButton;
+	//private Button mDoneButton;
     //private TextView txtResultado;
     private LinearLayout p1,p2,p3,p4,p5,p6,p7;
     
