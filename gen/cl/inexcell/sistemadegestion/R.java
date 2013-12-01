@@ -8,13 +8,22 @@
 package cl.inexcell.sistemadegestion;
 
 public final class R {
+    public static final class anim {
+        public static final int accelerate=0x7f040000;
+        public static final int accelerate_decelerate=0x7f040001;
+        public static final int anticipate=0x7f040002;
+        public static final int anticipate_overshoot=0x7f040003;
+        public static final int bounce=0x7f040004;
+        public static final int decelerate=0x7f040005;
+        public static final int linear=0x7f040006;
+    }
     public static final class array {
-        public static final int equipos=0x7f060000;
+        public static final int equipos=0x7f070000;
     }
     public static final class attr {
     }
     public static final class dimen {
-        public static final int text_button=0x7f040000;
+        public static final int text_button=0x7f050000;
     }
     public static final class drawable {
         public static final int boton_style1=0x7f020000;
@@ -53,90 +62,90 @@ public final class R {
         public static final int warning=0x7f020021;
     }
     public static final class id {
-        public static final int Armario=0x7f090021;
-        public static final int BotonPlanta=0x7f09001e;
-        public static final int ButtonBuscar=0x7f090015;
-        public static final int CajaTerminal=0x7f090023;
-        public static final int LinearLayout01=0x7f09002f;
-        public static final int ListaEquipo=0x7f09001a;
-        public static final int ParExterno=0x7f090020;
-        public static final int Planta=0x7f09001c;
-        public static final int Spinner02=0x7f090032;
-        public static final int TextView01=0x7f090040;
-        public static final int TextView02=0x7f090030;
-        public static final int TextView03=0x7f09003f;
-        public static final int TextView04=0x7f090043;
-        public static final int TextView05=0x7f090042;
-        public static final int TextView06=0x7f090046;
-        public static final int TextView07=0x7f090045;
-        public static final int TextView08=0x7f090048;
-        public static final int TextView09=0x7f090047;
-        public static final int TextView10=0x7f09004d;
-        public static final int TextView11=0x7f09004c;
-        public static final int TextView12=0x7f09004b;
-        public static final int TextView13=0x7f09004a;
-        public static final int TextView14=0x7f090052;
-        public static final int TextView15=0x7f090051;
-        public static final int TextView16=0x7f090050;
-        public static final int TextView17=0x7f09004f;
-        public static final int TipoPlanta=0x7f09001d;
-        public static final int btnBandaAncha=0x7f090027;
-        public static final int btnBusquedaCliente=0x7f090009;
-        public static final int btnCertificacion=0x7f090029;
-        public static final int btnGuardarInfo=0x7f090036;
-        public static final int btnPlantaExterna=0x7f090017;
-        public static final int btnTVSatelital=0x7f090024;
-        public static final int button2=0x7f09003e;
-        public static final int button3=0x7f090005;
-        public static final int editText1=0x7f090034;
-        public static final int ibtnImagen=0x7f090035;
-        public static final int imageButton1=0x7f09002d;
-        public static final int imageButton2=0x7f090039;
-        public static final int imageButton3=0x7f09003b;
-        public static final int imageButton4=0x7f09003c;
-        public static final int ins_resultado=0x7f090016;
-        public static final int linearLayout1=0x7f090000;
-        public static final int linearLayout2=0x7f090003;
-        public static final int linearLayout3=0x7f090007;
-        public static final int mainText=0x7f090006;
-        public static final int menu_settings=0x7f090053;
-        public static final int panelBandaAncha=0x7f090028;
-        public static final int panelBotonBuscar=0x7f090014;
-        public static final int panelBusquedaCliente=0x7f09000a;
-        public static final int panelBusquedaCliente1=0x7f09000b;
-        public static final int panelCertificacion=0x7f09002a;
-        public static final int panelCertificacion1=0x7f09002b;
-        public static final int panelCertificacion2=0x7f09002c;
-        public static final int panelCertificacion3=0x7f09002e;
-        public static final int panelEjemplo=0x7f090011;
-        public static final int panelLinea=0x7f090013;
-        public static final int panelLinea1=0x7f09001f;
-        public static final int panelPlantaExterna=0x7f090018;
-        public static final int panelPlantaExterna1=0x7f090019;
-        public static final int panelTVDigital1=0x7f090026;
-        public static final int panelTVSatelital=0x7f090025;
-        public static final int panelTelefono=0x7f09000d;
-        public static final int root_layout=0x7f090008;
-        public static final int scrollView1=0x7f090004;
-        public static final int strEjemplo=0x7f090012;
-        public static final int strEnunciadoBusqueda=0x7f09000c;
-        public static final int strGuion=0x7f09000f;
-        public static final int tableRow1=0x7f09001b;
-        public static final int tableRow2=0x7f09003a;
-        public static final int tableRow3=0x7f090041;
-        public static final int tableRow4=0x7f090044;
-        public static final int tableRow5=0x7f090022;
-        public static final int tableRow6=0x7f090049;
-        public static final int tableRow7=0x7f09004e;
-        public static final int textView1=0x7f090001;
-        public static final int textView10=0x7f090038;
-        public static final int textView2=0x7f090002;
-        public static final int textView3=0x7f090033;
-        public static final int textView4=0x7f090031;
-        public static final int textView5=0x7f09003d;
-        public static final int txtTelefonoArea=0x7f09000e;
-        public static final int txtTelefonoNumero=0x7f090010;
-        public static final int viewpager=0x7f090037;
+        public static final int Armario=0x7f0a0021;
+        public static final int BotonPlanta=0x7f0a001e;
+        public static final int Button01=0x7f0a0006;
+        public static final int ButtonBuscar=0x7f0a0015;
+        public static final int CajaTerminal=0x7f0a0023;
+        public static final int LinearLayout01=0x7f0a002f;
+        public static final int ListaEquipo=0x7f0a001a;
+        public static final int ParExterno=0x7f0a0020;
+        public static final int Planta=0x7f0a001c;
+        public static final int Spinner02=0x7f0a0032;
+        public static final int TextView01=0x7f0a0040;
+        public static final int TextView02=0x7f0a0030;
+        public static final int TextView03=0x7f0a003f;
+        public static final int TextView04=0x7f0a0043;
+        public static final int TextView05=0x7f0a0042;
+        public static final int TextView06=0x7f0a0046;
+        public static final int TextView07=0x7f0a0045;
+        public static final int TextView08=0x7f0a0048;
+        public static final int TextView09=0x7f0a0047;
+        public static final int TextView10=0x7f0a004d;
+        public static final int TextView11=0x7f0a004c;
+        public static final int TextView12=0x7f0a004b;
+        public static final int TextView13=0x7f0a004a;
+        public static final int TextView14=0x7f0a0052;
+        public static final int TextView15=0x7f0a0051;
+        public static final int TextView16=0x7f0a0050;
+        public static final int TextView17=0x7f0a004f;
+        public static final int TipoPlanta=0x7f0a001d;
+        public static final int btnBandaAncha=0x7f0a0027;
+        public static final int btnBusquedaCliente=0x7f0a0009;
+        public static final int btnCertificacion=0x7f0a0029;
+        public static final int btnGuardarInfo=0x7f0a0036;
+        public static final int btnPlantaExterna=0x7f0a0017;
+        public static final int btnTVSatelital=0x7f0a0024;
+        public static final int button2=0x7f0a003e;
+        public static final int button3=0x7f0a0005;
+        public static final int editText1=0x7f0a0034;
+        public static final int ibtnImagen=0x7f0a0035;
+        public static final int imageButton1=0x7f0a002d;
+        public static final int imageButton2=0x7f0a0039;
+        public static final int imageButton3=0x7f0a003b;
+        public static final int imageButton4=0x7f0a003c;
+        public static final int ins_resultado=0x7f0a0016;
+        public static final int linearLayout1=0x7f0a0000;
+        public static final int linearLayout2=0x7f0a0003;
+        public static final int linearLayout3=0x7f0a0007;
+        public static final int menu_settings=0x7f0a0053;
+        public static final int panelBandaAncha=0x7f0a0028;
+        public static final int panelBotonBuscar=0x7f0a0014;
+        public static final int panelBusquedaCliente=0x7f0a000a;
+        public static final int panelBusquedaCliente1=0x7f0a000b;
+        public static final int panelCertificacion=0x7f0a002a;
+        public static final int panelCertificacion1=0x7f0a002b;
+        public static final int panelCertificacion2=0x7f0a002c;
+        public static final int panelCertificacion3=0x7f0a002e;
+        public static final int panelEjemplo=0x7f0a0011;
+        public static final int panelLinea=0x7f0a0013;
+        public static final int panelLinea1=0x7f0a001f;
+        public static final int panelPlantaExterna=0x7f0a0018;
+        public static final int panelPlantaExterna1=0x7f0a0019;
+        public static final int panelTVDigital1=0x7f0a0026;
+        public static final int panelTVSatelital=0x7f0a0025;
+        public static final int panelTelefono=0x7f0a000d;
+        public static final int root_layout=0x7f0a0008;
+        public static final int scrollView1=0x7f0a0004;
+        public static final int strEjemplo=0x7f0a0012;
+        public static final int strEnunciadoBusqueda=0x7f0a000c;
+        public static final int strGuion=0x7f0a000f;
+        public static final int tableRow1=0x7f0a001b;
+        public static final int tableRow2=0x7f0a003a;
+        public static final int tableRow3=0x7f0a0041;
+        public static final int tableRow4=0x7f0a0044;
+        public static final int tableRow5=0x7f0a0022;
+        public static final int tableRow6=0x7f0a0049;
+        public static final int tableRow7=0x7f0a004e;
+        public static final int textView1=0x7f0a0001;
+        public static final int textView10=0x7f0a0038;
+        public static final int textView2=0x7f0a0002;
+        public static final int textView3=0x7f0a0033;
+        public static final int textView4=0x7f0a0031;
+        public static final int textView5=0x7f0a003d;
+        public static final int txtTelefonoArea=0x7f0a000e;
+        public static final int txtTelefonoNumero=0x7f0a0010;
+        public static final int viewpager=0x7f0a0037;
     }
     public static final class layout {
         public static final int activity_certificar_wifi=0x7f030000;
@@ -149,47 +158,47 @@ public final class R {
         public static final int planta_ext2_layout=0x7f030007;
     }
     public static final class menu {
-        public static final int activity_principal=0x7f080000;
+        public static final int activity_principal=0x7f090000;
     }
     public static final class string {
-        public static final int app_averias=0x7f05000b;
-        public static final int app_instalacion=0x7f05000a;
-        public static final int app_name=0x7f050000;
-        public static final int app_plantas_externas=0x7f05000c;
-        public static final int app_principal=0x7f050009;
-        public static final int app_reparacion=0x7f05000d;
-        public static final int banda_ancha=0x7f05001e;
-        public static final int buscar=0x7f050023;
-        public static final int buscar_info=0x7f05000e;
-        public static final int busqueda_cliente=0x7f05001b;
-        public static final int certificacion=0x7f05001f;
-        public static final int certificacion_tecnica=0x7f05001a;
-        public static final int certificar=0x7f05000f;
-        public static final int certificar_3g=0x7f050011;
-        public static final int certificar_wifi=0x7f050018;
-        public static final int certificar_wifi1=0x7f050019;
-        public static final int ej_telefono=0x7f050022;
-        public static final int equipo_actual=0x7f050024;
-        public static final int guion=0x7f050025;
-        public static final int hello_world=0x7f050001;
-        public static final int hint_phone=0x7f050008;
-        public static final int ingrese_telefono=0x7f050021;
-        public static final int instalacion=0x7f050003;
-        public static final int lorem=0x7f050013;
-        public static final int menu_principal=0x7f050020;
-        public static final int menu_settings=0x7f050002;
-        public static final int notificar_averia=0x7f050006;
-        public static final int notificar_averia1=0x7f050014;
-        public static final int notificar_averia3=0x7f050017;
-        public static final int num_cliente=0x7f050007;
-        public static final int observaciones=0x7f050016;
-        public static final int planta_externa=0x7f05001c;
-        public static final int plantas_externas=0x7f050004;
-        public static final int reparacion=0x7f050005;
-        public static final int television_satelital=0x7f05001d;
-        public static final int tipo=0x7f050015;
-        public static final int titulo=0x7f050012;
-        public static final int volver=0x7f050010;
+        public static final int app_averias=0x7f06000b;
+        public static final int app_instalacion=0x7f06000a;
+        public static final int app_name=0x7f060000;
+        public static final int app_plantas_externas=0x7f06000c;
+        public static final int app_principal=0x7f060009;
+        public static final int app_reparacion=0x7f06000d;
+        public static final int banda_ancha=0x7f06001e;
+        public static final int buscar=0x7f060023;
+        public static final int buscar_info=0x7f06000e;
+        public static final int busqueda_cliente=0x7f06001b;
+        public static final int certificacion=0x7f06001f;
+        public static final int certificacion_tecnica=0x7f06001a;
+        public static final int certificar=0x7f06000f;
+        public static final int certificar_3g=0x7f060011;
+        public static final int certificar_wifi=0x7f060018;
+        public static final int certificar_wifi1=0x7f060019;
+        public static final int ej_telefono=0x7f060022;
+        public static final int equipo_actual=0x7f060024;
+        public static final int guion=0x7f060025;
+        public static final int hello_world=0x7f060001;
+        public static final int hint_phone=0x7f060008;
+        public static final int ingrese_telefono=0x7f060021;
+        public static final int instalacion=0x7f060003;
+        public static final int lorem=0x7f060013;
+        public static final int menu_principal=0x7f060020;
+        public static final int menu_settings=0x7f060002;
+        public static final int notificar_averia=0x7f060006;
+        public static final int notificar_averia1=0x7f060014;
+        public static final int notificar_averia3=0x7f060017;
+        public static final int num_cliente=0x7f060007;
+        public static final int observaciones=0x7f060016;
+        public static final int planta_externa=0x7f06001c;
+        public static final int plantas_externas=0x7f060004;
+        public static final int reparacion=0x7f060005;
+        public static final int television_satelital=0x7f06001d;
+        public static final int tipo=0x7f060015;
+        public static final int titulo=0x7f060012;
+        public static final int volver=0x7f060010;
     }
     public static final class style {
         /** 
@@ -213,11 +222,11 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f080000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
-        public static final int btnStyleCustom=0x7f070002;
+        public static final int AppTheme=0x7f080001;
+        public static final int btnStyleCustom=0x7f080002;
     }
 }

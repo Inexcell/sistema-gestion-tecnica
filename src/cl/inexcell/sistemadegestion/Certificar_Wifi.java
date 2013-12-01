@@ -1,31 +1,34 @@
 package cl.inexcell.sistemadegestion;
 
-import java.util.List;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.net.URLConnection;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
-import android.widget.TextView;
-import android.widget.Toast;
- 
-@SuppressLint("UseValueOf")
+import android.widget.Button;
+
+
 public class Certificar_Wifi extends Activity {
-     
-    TextView mainText;
-    WifiManager mainWifi;
-    WifiReceiver receiverWifi;
-    List<ScanResult> wifiList;
-    StringBuilder sb = new StringBuilder();
+	
+	String dwnload_file_path = "http://alumnos.inf.utfsm.cl/~abastias/test.jpg";
+    
+	@SuppressLint("SdCardPath")
+	String dest_file_path = "/sdcard/test-download.png";
+    Button b1;
+    ProgressDialog dialog = null;
      
     public void onCreate(Bundle savedInstanceState) {
          
@@ -33,84 +36,57 @@ public class Certificar_Wifi extends Activity {
        
        // Activity sin parte superior
        requestWindowFeature(Window.FEATURE_NO_TITLE);
-       
        setContentView(R.layout.activity_certificar_wifi);
-       mainText = (TextView) findViewById(R.id.mainText);
-        
-       // Initiate wifi service manager
-       mainWifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-        
-       // Check for wifi is disabled
-       if (mainWifi.isWifiEnabled() == false)
-            {   
-                // If wifi disabled then enable it
-                Toast.makeText(getApplicationContext(), "Wifi esta desactivado. Activelo en las opciones de su Smartphone por favor", 
-                Toast.LENGTH_LONG).show();
-                 
-                mainWifi.setWifiEnabled(true);
-            } 
-        
-       // wifi scaned value broadcast receiver 
-       receiverWifi = new WifiReceiver();
-        
-       // Register broadcast receiver 
-       // Broacast receiver will automatically call when number of wifi connections changed
-       registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-       mainWifi.startScan();
-       mainText.setText("Buscando redes inalambricas ...");
-    }
- 
-    public boolean onCreateOptionsMenu(Menu menu) {
-        menu.add(0, 0, 0, "Actualizar");
-        return super.onCreateOptionsMenu(menu);
-    }
- 
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-        mainWifi.startScan();
-        mainText.setText("Buscando Redes Inalambricas");
-        return super.onMenuItemSelected(featureId, item);
-    }
- 
-    protected void onPause() {
-        unregisterReceiver(receiverWifi);
-        super.onPause();
-    }
- 
-    protected void onResume() {
-        registerReceiver(receiverWifi, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        super.onResume();
-    }
      
-    // Broadcast receiver class called its receive method 
-    // when number of wifi connections changed
-     
-    class WifiReceiver extends BroadcastReceiver {
-         
-        // This method call when number of wifi connections changed
-        public void onReceive(Context c, Intent intent) {
-             
-            sb = new StringBuilder();
-            wifiList = mainWifi.getScanResults(); 
-            sb.append("Se han encontrado "+wifiList.size()+" redes inalambricas:\n\n");
-             
-            for(int i = 0; i < wifiList.size(); i++){
-                 
-                sb.append(new Integer(i+1).toString() + ".\n");
-                sb.append((wifiList.get(i)).toString().split(",")[0]+"\n");
-                //sb.append((wifiList.get(i)).toString().split(",")[1]+"\n");
-                //sb.append((wifiList.get(i)).toString().split(",")[2]+"\n");
-                sb.append((wifiList.get(i)).toString().split(",")[3]+" dBm\n");
-                sb.append((wifiList.get(i)).toString().split(",")[4]+" GHz\n");
-                //sb.append((wifiList.get(i)).toString());
-                sb.append("\n");
-            }
-             
-            mainText.setText(sb);  
-        }
-         
+       
+       b1 = (Button)findViewById(R.id.Button01);
+       b1.setOnClickListener(new OnClickListener() {
+           public void onClick(View v) {
+                
+               dialog = ProgressDialog.show(Certificar_Wifi.this, "", "Descargando archivo ...", true);
+                new Thread(new Runnable() {
+                       public void run() {
+                            downloadFile(dwnload_file_path, dest_file_path);
+                       }
+                     }).start();               
+           }
+       });
     }
     
-    public void volver(View view) {
+    public void downloadFile(String url, String dest_file_path) {
+        try {
+            File dest_file = new File(dest_file_path);
+            URL u = new URL(url);
+            URLConnection conn = u.openConnection();
+            int contentLength = conn.getContentLength();
+            DataInputStream stream = new DataInputStream(u.openStream());
+            byte[] buffer = new byte[contentLength];
+            stream.readFully(buffer);
+            stream.close();
+            DataOutputStream fos = new DataOutputStream(new FileOutputStream(dest_file));
+            fos.write(buffer);
+            fos.flush();
+            fos.close();
+            hideProgressIndicator();
+             
+        } catch(FileNotFoundException e) {
+            hideProgressIndicator();
+            return; 
+        } catch (IOException e) {
+            hideProgressIndicator();
+            return; 
+        }
+  }
+   
+  void hideProgressIndicator(){
+      runOnUiThread(new Runnable() {
+          public void run() {
+              dialog.dismiss();
+          }
+      });  
+  }
+
+	public void volver(View view) {
     	finish();
     	
     	// Vibrar al hacer click        
