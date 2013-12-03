@@ -7,7 +7,7 @@
     <string name="instalacion">Instalación</string>
     <string name="plantas_externas">Plantas Externas</string>
     <string name="reparacion">Reparación</string>
-    <string name="notificar_averia">Notificar Averia</string>
+    <string name="notificar_averia">Localizar Avería</string>
     <string name="num_cliente">Ingrese número del Cliente:</string>
     <string name="hint_phone">Ej: 032 2233441</string>
     <string name="app_principal">Principal - Sistema de Gestión Técnica</string>
