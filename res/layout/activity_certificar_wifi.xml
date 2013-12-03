@@ -67,17 +67,28 @@
                  android:layout_height="match_parent"
                  android:orientation="vertical" >
                  
-                 	<TextView 
-					    android:layout_width="fill_parent"
-					    android:layout_height="wrap_content"
-					    android:text="File Download Demo from Coderzheaven \n\nFile to download : http://coderzheaven.com/sample_folder/sample_file.png \n\nSaved Path : sdcard/\n"
-					    />
-					<Button
-					    android:text="Download File"
-					    android:id="@+id/Button01"
-					    android:layout_width="wrap_content"
-					    android:layout_height="wrap_content">
-					</Button>
+                 	<TextView
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content"
+				        android:text="Medir Descarga ...\n\n" />
+				    <Button
+				        android:text="Descargar"
+				        android:id="@+id/startBtn"
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content">
+				    </Button>
+				    
+				    <TextView
+				        android:id="@+id/tdown"
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content"
+				        android:text="" />
+				    
+				    <ImageView 
+				        android:id="@+id/ImageView" 
+				        android:layout_width="wrap_content"
+        				android:layout_height="wrap_content" 
+        				android:layout_centerInParent="true" />
                  
                  
              </LinearLayout>

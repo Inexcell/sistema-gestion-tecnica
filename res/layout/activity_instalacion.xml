@@ -265,7 +265,7 @@
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
 					    android:src="@drawable/ic_edit1"
-					    android:onClick="mostrar_planta"
+					    android:onClick="mostrar_planta2"
 					     />
 					
 				</TableRow>
@@ -310,7 +310,7 @@
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
 					    android:src="@drawable/ic_edit1"
-					    android:onClick="mostrar_planta"
+					    android:onClick="mostrar_parexterno"
 					     />
 					
 				</TableRow>
@@ -350,12 +350,12 @@
 						android:text="XXXXXX" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta"
+					    android:id="@+id/BotonPlanta4"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
 					    android:src="@drawable/ic_edit1"
-					    android:onClick="mostrar_planta"
+					    android:onClick="mostrar_armario1"
 					     />
 					
 				</TableRow>
@@ -400,7 +400,7 @@
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
 					    android:src="@drawable/ic_edit1"
-					    android:onClick="mostrar_planta"
+					    android:onClick="mostrar_cajaterminal"
 					     />
 					
 				</TableRow>
@@ -500,42 +500,7 @@
 						
 					</TableRow>
 					
-			        <!--  Linea Horizontal -->
-				    <LinearLayout
-					    android:id="@+id/panelLinea1"
-					    android:orientation="horizontal"
-			            android:layout_width="fill_parent"
-						android:layout_height="1dp"
-						android:layout_marginLeft="25dp"
-			            android:layout_marginRight="25dp"
-			            android:background="#bdbdbd"
-			            android:layout_marginTop="5dp"
-			            android:layout_marginBottom="5dp" >
-		        	</LinearLayout>
-		        	
-				    <TableRow
-			            android:id="@+id/tableRow1"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            >
-					
-						<TextView 
-						    android:id="@+id/ParExterno" 
-						    android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginLeft="28dp"
-							android:layout_marginTop="5dp"
-							android:text="Nombre:" />
-							
-						<TextView 
-						    android:id="@+id/TipoPlanta" 
-						    android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginLeft="40dp"
-							android:layout_marginTop="5dp"
-							android:text="Equipo DECO" />
-						
-					</TableRow>
+			        
 					
 			        <!--  Linea Horizontal -->
 				    <LinearLayout
@@ -715,42 +680,7 @@
 				            android:layout_marginBottom="5dp" >
 			        	</LinearLayout>
 			        	
-					    <TableRow
-				            android:id="@+id/tableRow1"
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            >
-						
-							<TextView 
-							    android:id="@+id/ParExterno" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="28dp"
-								android:layout_marginTop="5dp"
-								android:text="Nombre:" />
-								
-							<TextView 
-							    android:id="@+id/TipoPlanta" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="40dp"
-								android:layout_marginTop="5dp"
-								android:text="Equipo DECO" />
-							
-						</TableRow>
-						
-				        <!--  Linea Horizontal -->
-					    <LinearLayout
-						    android:id="@+id/panelLinea1"
-						    android:orientation="horizontal"
-				            android:layout_width="fill_parent"
-							android:layout_height="1dp"
-							android:layout_marginLeft="25dp"
-				            android:layout_marginRight="25dp"
-				            android:background="#bdbdbd"
-				            android:layout_marginTop="5dp"
-				            android:layout_marginBottom="5dp" >
-			        	</LinearLayout>
+					    
 			        	
 					    <TableRow
 				            android:id="@+id/tableRow1"

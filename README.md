@@ -11,8 +11,8 @@
 
 ## Especificaciones
 
-* IDE: Eclipse Indigo o Kepler
-* Plugins: Web Services SOAP, ADT Android
+* IDE: Eclipse Kepler, Galileo o cualquier version que tenga WebServices
+* Plugins: Web Services SOAP, ADT Android, JRE7 (Fix WebServices).
 * SO: Android 4.0.1 (Icecream Sandwich)
 
 ## Instalacion Plugin Web Services en Eclipse
@@ -52,19 +52,14 @@
 
 * http://android-er.blogspot.com/2012/02/various-effect-of-interpolator-in.html
 
-## Metodos para leer archivos XML
-
-* http://ideapps.mx/2012/07/27/leer-xml-en-android-parte-i/
-
 ## Descargar archivos para test de Wifi y Test de Ancho de Banda
 
-* http://www.insdout.com/snippets/descargar-archivos-desde-una-url-en-nuestra-aplicacion-android.htm
+* http://thedevelopersinfo.com/2009/10/16/using-progressdialog-in-android-activity/
 * http://blog.sakrow.com/2013/08/17/prueba-de-ancho-de-banda-desde-terminal-debian/
 
-## Subir Archivos a Google Drive desde Aplicacion Android
+## Subir Archivos a Servidor
 
-* http://koklimabc.blogspot.com/2012/12/how-to-programatically-upload-file-from.html
-* http://koklimabc.blogspot.com/2012/12/upload-file-to-specific-folder-in.html
+* http://www.internetria.com/blog/2013/04/12/android-enviar-imagenes-por-webservice/
 
 # Comandos GIT
 

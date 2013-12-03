@@ -29,6 +29,35 @@ public class Reparacion extends Activity {
     		"Fabricante 1", "Fabricante 2", "Fabricante 3", 
             "Fabricante 4", "Fabricante 5", "Fabricante 6"
     };
+    
+    final CharSequence[] plantas_ext = {
+    		"Planta 1", "Planta 2", "Planta 3", 
+            "Planta 4", "Planta 5", "Planta 6"
+    };
+    
+    final CharSequence[] equipos = {
+    		"Equipo 1", "Equipo 2", "Equipo 3", 
+            "Equipo 4", "Equipo 5", "Equipo 6"
+    };
+    
+    final CharSequence[] opc_planta = {
+    		"Georefenciar", "Editar", "Tomar Fotografía" 
+    };
+    
+    final CharSequence[] par_externo = {
+    		"Par Externo 1", "Par Externo 2", "Par Externo 3",
+    		"Par Externo 4", "Par Externo 5", "Par Externo 6"
+    };
+    
+    final CharSequence[] caja_terminal = {
+    		"Caja Terminal 1", "Caja Terminal 2", "Caja Terminal 3",
+    		"Caja Terminal 4", "Caja Terminal 5", "Caja Terminal 6"
+    };
+    
+    final CharSequence[] armario = {
+    		"Armario 1", "Armario 2", "Armario 3",
+    		"Armario 4", "Armario 5", "Armario 6"
+    };
 
 	
 	@Override
@@ -246,30 +275,149 @@ public void buscar_cliente(View view){
 		});
 	}
 	
-	public void certificar1(View view){
-		
-		p6 = (LinearLayout) findViewById(R.id.panelCertificacion2);
-		p7 = (LinearLayout) findViewById(R.id.panelCertificacion1);
-		
-		// Definir visibilidad de objetos Buttons
-		p6.setVisibility(View.VISIBLE);
-		p7.setVisibility(View.INVISIBLE);
-		
-	}
+public void certificar1(View view){
 	
-	public void mostrar_planta(View view){
-		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Seleccione Fabricante");
-        builder.setItems(fabricantes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
-                // Do something with the selection
-                //mDoneButton.setText(fabricantes[item]);
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
-	}
+	p6 = (LinearLayout) findViewById(R.id.panelCertificacion2);
+	p7 = (LinearLayout) findViewById(R.id.panelCertificacion1);
+	
+	// Definir visibilidad de objetos Buttons
+	p6.setVisibility(View.VISIBLE);
+	p7.setVisibility(View.INVISIBLE);
+	
+}
+
+public void mostrar_planta(final View view){
+	
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Fabricante");
+    builder.setIcon(R.drawable.ic_fabricante);
+    builder.setItems(fabricantes, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	Toast.makeText(Reparacion.this, fabricantes[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+        	mostrar_equipos(view);
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
+public void mostrar_equipos(View view){
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Equipo");
+    builder.setIcon(R.drawable.ic_equipo);
+    builder.setItems(equipos, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	Toast.makeText(Reparacion.this, equipos[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
+public void mostrar_armario1(final View view){
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Opción");
+    builder.setIcon(R.drawable.ic_planta);
+    builder.setItems(opc_planta, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	if(opc_planta[item] == "Editar"){
+        		mostrar_armario(view);
+        	}
+        	else{
+        		
+        	}
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
+public void mostrar_planta2(View view){
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Planta Externa");
+    builder.setIcon(R.drawable.ic_planta_ext);
+    builder.setItems(plantas_ext, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	Toast.makeText(Reparacion.this, plantas_ext[item]+" seleccionada", Toast.LENGTH_SHORT).show();
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
+public void mostrar_cajaterminal(final View view){
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Opción");
+    builder.setIcon(R.drawable.ic_planta);
+    builder.setItems(opc_planta, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	if(opc_planta[item] == "Editar"){
+        		mostrar_cajaterminal1(view);
+        	}
+        	else{
+        		
+        	}
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
+public void mostrar_cajaterminal1(View view){
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Caja Terminal");
+    builder.setIcon(R.drawable.ic_cajaterminal);
+    builder.setItems(caja_terminal, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	Toast.makeText(Reparacion.this, caja_terminal[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
+public void mostrar_parexterno(View view){
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Par Externo");
+    builder.setIcon(R.drawable.ic_parexterno);
+    builder.setItems(par_externo, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	Toast.makeText(Reparacion.this, par_externo[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
+public void mostrar_armario(View view){
+	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setTitle("Seleccione Armario");
+    builder.setIcon(R.drawable.ic_armario);
+    builder.setItems(armario, new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int item) {
+            // Do something with the selection
+            //mDoneButton.setText(fabricantes[item]);
+        	Toast.makeText(Reparacion.this, armario[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+        }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+}
+
 	
 	public void fin_certificar(View view){
 		Toast.makeText(this, "Certificación realizada exitosamente", Toast.LENGTH_SHORT).show();
