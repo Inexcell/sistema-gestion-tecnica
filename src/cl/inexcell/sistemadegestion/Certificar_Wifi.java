@@ -133,7 +133,7 @@ public class Certificar_Wifi extends Activity {
             mProgressDialog.setIcon(R.drawable.ic_wifi);
             mProgressDialog.setMessage("Midiendo Descarga ...");
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            mProgressDialog.setCancelable(false);
+            mProgressDialog.setCancelable(true);
             mProgressDialog.show();
             return mProgressDialog;
         default:

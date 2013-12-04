@@ -8,7 +8,12 @@
 package cl.inexcell.sistemadegestion.webservices;
 
 public class CustomerOutData  implements java.io.Serializable {
-    private cl.inexcell.sistemadegestion.webservices.CPE CPE;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -6710377698357115858L;
+
+	private cl.inexcell.sistemadegestion.webservices.CPE CPE;
 
     private cl.inexcell.sistemadegestion.webservices.ReturnType _return;
 
@@ -63,7 +68,8 @@ public class CustomerOutData  implements java.io.Serializable {
     }
 
     private java.lang.Object __equalsCalc = null;
-    public synchronized boolean equals(java.lang.Object obj) {
+    @SuppressWarnings("unused")
+	public synchronized boolean equals(java.lang.Object obj) {
         if (!(obj instanceof CustomerOutData)) return false;
         CustomerOutData other = (CustomerOutData) obj;
         if (obj == null) return false;
@@ -132,7 +138,8 @@ public class CustomerOutData  implements java.io.Serializable {
     /**
      * Get Custom Serializer
      */
-    public static org.apache.axis.encoding.Serializer getSerializer(
+    @SuppressWarnings("rawtypes")
+	public static org.apache.axis.encoding.Serializer getSerializer(
            java.lang.String mechType, 
            java.lang.Class _javaType,  
            javax.xml.namespace.QName _xmlType) {
@@ -144,7 +151,8 @@ public class CustomerOutData  implements java.io.Serializable {
     /**
      * Get Custom Deserializer
      */
-    public static org.apache.axis.encoding.Deserializer getDeserializer(
+    @SuppressWarnings("rawtypes")
+	public static org.apache.axis.encoding.Deserializer getDeserializer(
            java.lang.String mechType, 
            java.lang.Class _javaType,  
            javax.xml.namespace.QName _xmlType) {
