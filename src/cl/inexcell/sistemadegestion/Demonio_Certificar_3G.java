@@ -1,27 +1,46 @@
 package cl.inexcell.sistemadegestion;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
+import android.os.Looper;
+import android.provider.Settings;
+import android.telephony.PhoneStateListener;
+import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 //import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
+import android.widget.Toast;
 
 
 public class Demonio_Certificar_3G extends Service {
 	private String TAG = "Certificar_3G"; 
-	private LocationManager lm;
+	private LocationManager locManager;
+	private LocationListener locListener;
 	private Location loc;
-	private String provider, strength ="unknown";
+	private String operador, strength, latitud = "", longitud="";
 	private Timer mTimer = null; 
-	private TelephonyManager telephonyManager;
+	private TelephonyManager tm;
+	private SignalStrength ST;
+	private MyPhoneStateListener MyListener;
+	private int netType;
+	private File directory;
 	
 	 @Override
 	 public IBinder onBind(Intent arg0) {
@@ -32,6 +51,11 @@ public class Demonio_Certificar_3G extends Service {
 	 public void onCreate(){
 		 Log.i(TAG,"Inicio");
 		 super.onCreate();
+		 
+		 
+		 
+		 //setupGPS();
+		 setup3G();
 		 this.mTimer = new Timer();
 		 this.mTimer.scheduleAtFixedRate(
 				 new TimerTask(){
@@ -40,62 +64,197 @@ public class Demonio_Certificar_3G extends Service {
 						 ejecutarTarea();
 					 }      
 				 }
-				 , 0, 1000 * 60 * 60); //Tiempo en milisegundos son 60 minutos en este caso
+				 , 0, 1000 * 30); //Tiempo en milisegundos son 60 minutos en este caso
 	 	}
 	 
 	 private void ejecutarTarea(){
-	  Thread t = new Thread(new Runnable() {
-	   public void run() {
-		Log.i(TAG, "DEMONIO");
-		
-		
-		/**  UBICACION GPS o NETWORK  **/
-		/** Reconoce solo la ubicacion via network **/
-		/** Tengo problemas para utilizar GPS **/
-		lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		Criteria cri = new Criteria();
-		cri.setAccuracy(Criteria.ACCURACY_FINE);
-		provider = lm.getBestProvider(cri, true);
-		loc = lm.getLastKnownLocation(provider);		
-		Double d1 = loc.getLatitude();
-		Double d2 = loc.getLongitude();
-		String latitude = String.valueOf(Location.convert(d1,Location.FORMAT_DEGREES));
-		String longitude = String.valueOf(Location.convert(d2,Location.FORMAT_DEGREES));
+		 Thread t = new Thread(new Runnable() {
+			 public void run() {
+				File sdCard, file = null;
+				Log.i(TAG, "DENTRO DEL TASK");
+				//loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+				//latitud = Double.toString(loc.getLatitude());
+	        	//longitud = Double.toString(loc.getLongitude());
+	        	String NT = "Desconocido";
+	        	/**Tipo de Network */
+	        	
+	        	if(netType == TelephonyManager.NETWORK_TYPE_1xRTT)NT = "1xRTT";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_CDMA)NT = "CDMA";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_EDGE)NT = "EDGE";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_EHRPD)NT = "eHRPD";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_EVDO_0)NT = "EVDO revision 0";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_EVDO_A)NT = "EVDO revision A";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_EVDO_B)NT = "EVDO revision B";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_GPRS)NT = "GPRS";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_HSDPA)NT = "HSDPA";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_HSPA)NT = "HSPA";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_HSPAP)NT = "HSPA+";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_HSUPA)NT = "HSUPA";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_IDEN)NT = "iDen";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_LTE)NT = "LTE";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_UMTS)NT = "UMTS";
+	        	if(netType == TelephonyManager.NETWORK_TYPE_UNKNOWN)NT = "Desconocido";
+	        	
+	        	
+				//Looper.prepare();
+				//Toast.makeText(getApplicationContext(), "OP="+operador + " S="+strength +"NT="+NT, Toast.LENGTH_LONG).show();
+				//Toast.makeText(getApplicationContext(), "OP="+latitud + " S="+longitud, Toast.LENGTH_LONG).show();
+				//Looper.loop();		
 				
+				
+				/** ESCRIBIR EN ARCHIVO*/
+				
+		       /* String contenido = "LAT: " + latitud +
+		        					"; LON: " + longitud +
+		        					"; PROV: " + operador + 
+		        					"; TIPORED: " + NT +
+		        					"; INTENSIDAD: " + strength;*/
+	        	String contenido ="PROV: " + operador + 
+    					"; TIPORED: " + NT +
+    					"; INTENSIDAD: " + strength +
+    					"\n";
+		        Looper.prepare();
+		        try {
+		        	
+		        	if (Environment.getExternalStorageState().equals("mounted")) {
+		        		sdCard = Environment.getExternalStorageDirectory();
+		        		FileOutputStream fout = null;
+		        		FileWriter fw = null;
+		        		try {
+		        			directory = new File(sdCard.getAbsolutePath()
+		        					+ "/SGT");
+		        			if(!directory.exists())		        					
+		        					directory.mkdirs();
+							
+							
+							file = new File(directory, "3GCERT.txt");
+							
+							
+		        			fw = new FileWriter(file,true);
+		        			BufferedWriter out = new BufferedWriter(fw);
+		        			out.write(contenido);
+		        			out.close();
+							
+	 	 
+						} catch (IOException e) {
+							// TODO: handle exception
+							e.printStackTrace();
+							Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
+						}
+		        	}
+		        }catch (Exception ie) {
+		        	// TODO: handle exception
+		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
+		        }
+		        
+		        Looper.loop(); 
+		        
+			 }
+			      
 		
-		/** DATOS DE 3G y PROVEEDOR **/
-		telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-		
-		/*GsmCellLocation cellLocation = (GsmCellLocation)telephonyManager.getCellLocation();
-		String networkOperator = telephonyManager.getNetworkOperator();
-		String mcc = networkOperator.substring(0, 3);
-		String mnc = networkOperator.substring(3);
-		int cid = cellLocation.getCid();		   
-		int lac = cellLocation.getLac();*/
-			
-		String netOperatorName = telephonyManager.getNetworkOperatorName();
-		
-		/** CREAMOS EL STRING A MOSTRAR **/
-		
-		StringBuilder notificacion = new StringBuilder();		
-		notificacion.append("Ubicacion: " + latitude + ", "+longitude +".");
-		notificacion.append("Strength: "+ strength + ".\n");
-		Log.i(TAG, notificacion.toString());
-		
-		/** MOSTRAR NOTIFICACION ANDROID **/		
-		
-		NotifyManager notify = new NotifyManager();
-	    notify.playNotification(
-	    		getApplicationContext(),
-	    		Principal.class,
-	    		notificacion.toString(),
-	    		netOperatorName, R.drawable.ic_logo_icon);
-	    
-	   }
 	  });  
 	  t.start();
 	  
 	 }	
 	 
-	 
+public void setup3G(){
+	try{	 
+		 /** DATOS DE 3G y PROVEEDOR **/
+		tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+		/* Update the listener, and start it */
+		MyListener   = new MyPhoneStateListener();
+		tm.listen(MyListener ,PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+		netType = tm.getNetworkType();	 
+		operador = String.valueOf(tm.getNetworkOperatorName());
+		
+		/*
+	 	GsmCellLocation cellLocation = (GsmCellLocation)telephonyManager.getCellLocation();
+	 	String networkOperator = telephonyManager.getNetworkOperator();
+	 	String mcc = networkOperator.substring(0, 3);
+	 	String mnc = networkOperator.substring(3);
+	 	int cid = cellLocation.getCid();		   
+	 	int lac = cellLocation.getLac();
+	 	*/
+		
+	 }catch(Exception e){
+	 	Log.i(TAG, e.toString());
+	 	Toast.makeText(getApplicationContext(), "Setup3G Error", Toast.LENGTH_LONG).show();
 	}
+}
+	 
+	 public void setupGPS(){
+		 Log.i(TAG,"SetupGPS");	
+		 /**  UBICACION GPS **/
+		try{
+			locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		    loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		    
+		    if(loc == null)
+		    	longitud = latitud = "No Hay Datos";
+		    
+		    
+		    //Nos registramos para recibir actualizaciones de la posición
+		    locListener = new LocationListener() {
+		        public void onLocationChanged(Location location) {
+		        	// TODO Auto-generated method stub
+		        	latitud = Double.toString(loc.getLatitude());
+		        	longitud = Double.toString(loc.getLongitude());
+		        }
+	
+				@Override
+				public void onProviderDisabled(String arg0) {
+					// TODO Auto-generated method stub
+					
+					
+				}
+	
+				@Override
+				public void onProviderEnabled(String arg0) {
+					// TODO Auto-generated method stub
+					
+				}
+	
+				@Override
+				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+					// TODO Auto-generated method stub
+					
+				}
+
+		    };
+
+		    locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000*60, 0, locListener);
+		}catch(Exception e){
+			Log.i(TAG, e.toString());
+
+		 	Toast.makeText(getApplicationContext(), "SETUP GPS Error", Toast.LENGTH_LONG).show();
+		}
+	 }
+	 	 
+	 private void turnGPSOn(){   
+
+		    String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);   
+		    if(!provider.contains("gps")){      
+		        final Intent poke = new Intent();  
+		        poke.setClassName("com.android.settings","com.android.settings.widget.SettingsAppWidgetProvider");           poke.addCategory(Intent.CATEGORY_ALTERNATIVE);   
+		        poke.setData(Uri.parse("3"));      
+		        sendBroadcast(poke);  
+		   }  
+	 } 
+	 
+	 private class MyPhoneStateListener extends PhoneStateListener
+	    {
+	      /* Get the Signal strength from the provider, each time there is an update */
+	      @Override
+	      public void onSignalStrengthsChanged(SignalStrength signalStrength)
+	      {
+	    	  super.onSignalStrengthsChanged(signalStrength);
+    	 
+    		  int asu = signalStrength.getGsmSignalStrength();
+    		  int signal = -113 + 2*asu;
+    		  strength = String.valueOf(signal);
+	    	 
+	    	  
+	      }
+	    };
+	 
+}
