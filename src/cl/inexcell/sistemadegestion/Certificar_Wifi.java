@@ -8,6 +8,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 
+import cl.inexcell.sistemadegestion.webservices.Prototype;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -16,6 +17,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,13 +25,13 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 public class Certificar_Wifi extends Activity {
 	
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
     private Button startBtn;
     private ProgressDialog mProgressDialog;
     private TextView tdown;
+    private TextView test;
         
     public void onCreate(Bundle savedInstanceState) {
          
@@ -41,6 +43,31 @@ public class Certificar_Wifi extends Activity {
 	   
 	   tdown = (TextView)findViewById(R.id.tdown);
 	   startBtn = (Button)findViewById(R.id.startBtn);
+	   
+	   /*
+	   Weather w = new WeatherLocator();
+	   WeatherSoap ws = new WeatherSoapStub(new URL(w.getWeatherSoapAddress()),w);
+	   String zip = "97867";
+	   WeatherReturn resp = ws.getCityWeatherByZIP(zip);
+	   System.out.println("Ciudad: "+resp.getCity());
+	   System.out.println("Temperatura: "+resp.getTemperature());
+	   */
+	   
+	   // Implementar y aprender Web Services !!!
+	   
+	   //Prototype p = (Prototype) new cl.inexcell.sistemadegestion.webservices.PrototypePortTypeProxy();
+	   
+	   
+	   ///////////////////////////////////////////////////////////////////////////////
+	   
+	   TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+	   
+	   test = (TextView)findViewById(R.id.test);
+	   test.setText("\n\nDatos Telefono:\n\nIMEI: "+telephonyManager.getDeviceId()
+			   +"\nIMSI: "+telephonyManager.getSimSerialNumber());
+	   
+	   
+	   //////////////////////////////////////////////////////////////
 	   
 	   startBtn.setOnClickListener(new OnClickListener(){
 	       	public void onClick(View v) {

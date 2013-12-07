@@ -7,13 +7,9 @@
 
 package cl.inexcell.sistemadegestion.webservices;
 
+@SuppressWarnings("serial")
 public class ElementType  implements java.io.Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = -6276652629559718839L;
-
-	private java.lang.String id;
+    private java.lang.String id;
 
     private java.lang.String type;
 

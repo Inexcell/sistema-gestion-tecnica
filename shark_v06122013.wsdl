@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="urn:Demo" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:Demo">
 <types>
 <xsd:schema targetNamespace="urn:Demo">
@@ -245,6 +246,272 @@
 <xsd:element name="Return" type="tns:ReturnType"/>
 </xsd:sequence>
 </xsd:complexType>
+<xsd:complexType name="RequestOutsidePlantUpgrade">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceOutsidePlantUpgradeIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceOutsidePlantUpgradeIn">
+<xsd:sequence>
+<xsd:element name="OutsidePlantUpgrade" type="tns:OutsidePlantUpgradeIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantUpgradeIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:OutsidePlantUpgradeInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantUpgradeInData">
+<xsd:sequence>
+<xsd:element name="Element" type="tns:ElementPlantUpgradeType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ElementPlantUpgradeType">
+<xsd:sequence>
+<xsd:element name="Id" type="xsd:string"/>
+<xsd:element name="Type" type="xsd:string"/>
+<xsd:element name="Value" type="xsd:string"/>
+<xsd:element name="Gps" type="tns:GPSType"/>
+<xsd:element name="Picture" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseOutsidePlantUpgrade">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceOutsidePlantUpgradeOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceOutsidePlantUpgradeOut">
+<xsd:sequence>
+<xsd:element name="OutsidePlantUpgrade" type="tns:OutsidePlantUpgradeOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantUpgradeOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:OutsidePlantUpgradeOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="OutsidePlantUpgradeOutData">
+<xsd:sequence>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestCertifyDSL">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceCertifyDSLIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceCertifyDSLIn">
+<xsd:sequence>
+<xsd:element name="CertifyDSL" type="tns:CertifyDSLIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CertifyDSLIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:CertifyDSLInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CertifyDSLInData">
+<xsd:sequence>
+<xsd:element name="Area" type="xsd:string"/>
+<xsd:element name="Phone" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseCertifyDSL">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceCertifyDSLOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceCertifyDSLOut">
+<xsd:sequence>
+<xsd:element name="CertifyDSL" type="tns:CertifyDSLOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CertifyDSLOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:CertifyDSLOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CertifyDSLOutData">
+<xsd:sequence>
+<xsd:element name="CertifyParameter" type="tns:CertifyParameterType" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="CertifyParameterType">
+<xsd:sequence>
+<xsd:element name="Name" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="Value" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="Code" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="Description" type="xsd:string" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestNotification3g">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceNotification3gIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceNotification3gIn">
+<xsd:sequence>
+<xsd:element name="Notification3g" type="tns:Notification3gIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Notification3gIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:Notification3gInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Notification3gInData">
+<xsd:sequence>
+<xsd:element name="Gps" type="tns:GPSType"/>
+<xsd:element name="Provider" type="xsd:string"/>
+<xsd:element name="Parameter" type="tns:CertifyParameterType" minOccurs="0" maxOccurs="unbounded"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseNotification3g">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceNotification3gOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceNotification3gOut">
+<xsd:sequence>
+<xsd:element name="Notification3g" type="tns:Notification3gOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Notification3gOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:Notification3gOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="Notification3gOutData">
+<xsd:sequence>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestLocation">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceLocationIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceLocationIn">
+<xsd:sequence>
+<xsd:element name="Location" type="tns:LocationIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LocationIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:LocationInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LocationInData">
+<xsd:sequence>
+<xsd:element name="Type" type="xsd:string"/>
+<xsd:element name="Gps" type="tns:GPSType"/>
+<xsd:element name="Picture" type="xsd:string"/>
+<xsd:element name="Coment" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseLocation">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceLocationOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceLocationOut">
+<xsd:sequence>
+<xsd:element name="Location" type="tns:LocationOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LocationOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:LocationOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="LocationOutData">
+<xsd:sequence>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="RequestNeighborNode">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceNeighborNodeIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceNeighborNodeIn">
+<xsd:sequence>
+<xsd:element name="NeighborNode" type="tns:NeighborNodeIn"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="NeighborNodeIn">
+<xsd:sequence>
+<xsd:element name="Input" type="tns:NeighborNodeInData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="NeighborNodeInData">
+<xsd:sequence>
+<xsd:element name="Gps" type="tns:GPSType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ResponseNeighborNode">
+<xsd:sequence>
+<xsd:element name="Operation" type="tns:OperationType"/>
+<xsd:element name="Service" type="tns:ServiceNeighborNodeOut"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="ServiceNeighborNodeOut">
+<xsd:sequence>
+<xsd:element name="NeighborNode" type="tns:NeighborNodeOut"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="NeighborNodeOut">
+<xsd:sequence>
+<xsd:element name="Output" type="tns:NeighborNodeOutData"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="NeighborNodeOutData">
+<xsd:sequence>
+<xsd:element name="Node" type="tns:NodeType" minOccurs="0" maxOccurs="unbounded"/>
+<xsd:element name="Return" type="tns:ReturnType"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="NodeType">
+<xsd:sequence>
+<xsd:element name="Id" type="xsd:string"/>
+<xsd:element name="Type" type="xsd:string"/>
+<xsd:element name="Gps" type="tns:GPSType"/>
+<xsd:element name="AddressStreet" type="xsd:string"/>
+<xsd:element name="AddressNumber" type="xsd:string"/>
+<xsd:element name="AddressCode" type="xsd:string"/>
+<xsd:element name="Feasibility" type="tns:FeasibilityType"/>
+<xsd:element name="Site" type="xsd:string"/>
+<xsd:element name="Cable" type="xsd:string"/>
+<xsd:element name="Cabinet" type="xsd:string"/>
+<xsd:element name="PairFrom" type="xsd:string"/>
+<xsd:element name="PairUntil" type="xsd:string"/>
+<xsd:element name="PairOccupied" type="xsd:string"/>
+<xsd:element name="PairVacant" type="xsd:string"/>
+<xsd:element name="PairReserved" type="xsd:string"/>
+<xsd:element name="PairBad" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
+<xsd:complexType name="FeasibilityType">
+<xsd:sequence>
+<xsd:element name="Technology" type="xsd:string"/>
+<xsd:element name="Speedy" type="xsd:string"/>
+<xsd:element name="Port" type="xsd:string"/>
+</xsd:sequence>
+</xsd:complexType>
 <xsd:complexType name="OperationType">
 <xsd:sequence>
 <xsd:element name="OperationCode" type="xsd:string"/>
@@ -307,6 +574,36 @@
 <message name="OutsidePlantResponse">
 <part name="ResponseOutsidePlant" type="tns:ResponseOutsidePlant"/>
 </message>
+<message name="OutsidePlantUpgradeRequest">
+<part name="RequestOutsidePlantUpgrade" type="tns:RequestOutsidePlantUpgrade"/>
+</message>
+<message name="OutsidePlantUpgradeResponse">
+<part name="ResponseOutsidePlantUpgrade" type="tns:ResponseOutsidePlantUpgrade"/>
+</message>
+<message name="CertifyDSLRequest">
+<part name="RequestCertifyDSL" type="tns:RequestCertifyDSL"/>
+</message>
+<message name="CertifyDSLResponse">
+<part name="ResponseCertifyDSL" type="tns:ResponseCertifyDSL"/>
+</message>
+<message name="Notification3gRequest">
+<part name="RequestNotification3g" type="tns:RequestNotification3g"/>
+</message>
+<message name="Notification3gResponse">
+<part name="ResponseNotification3g" type="tns:ResponseNotification3g"/>
+</message>
+<message name="LocationRequest">
+<part name="RequestLocation" type="tns:RequestLocation"/>
+</message>
+<message name="LocationResponse">
+<part name="ResponseLocation" type="tns:ResponseLocation"/>
+</message>
+<message name="NeighborNodeRequest">
+<part name="RequestNeighborNode" type="tns:RequestNeighborNode"/>
+</message>
+<message name="NeighborNodeResponse">
+<part name="ResponseNeighborNode" type="tns:ResponseNeighborNode"/>
+</message>
 <portType name="PrototypePortType">
 <operation name="Customer">
 <documentation>Test.</documentation>
@@ -332,6 +629,31 @@
 <documentation>Test.</documentation>
 <input message="tns:OutsidePlantRequest"/>
 <output message="tns:OutsidePlantResponse"/>
+</operation>
+<operation name="OutsidePlantUpgrade">
+<documentation>Test.</documentation>
+<input message="tns:OutsidePlantUpgradeRequest"/>
+<output message="tns:OutsidePlantUpgradeResponse"/>
+</operation>
+<operation name="CertifyDSL">
+<documentation>Test.</documentation>
+<input message="tns:CertifyDSLRequest"/>
+<output message="tns:CertifyDSLResponse"/>
+</operation>
+<operation name="Notification3g">
+<documentation>Test.</documentation>
+<input message="tns:Notification3gRequest"/>
+<output message="tns:Notification3gResponse"/>
+</operation>
+<operation name="Location">
+<documentation>Test.</documentation>
+<input message="tns:LocationRequest"/>
+<output message="tns:LocationResponse"/>
+</operation>
+<operation name="NeighborNode">
+<documentation>Test.</documentation>
+<input message="tns:NeighborNodeRequest"/>
+<output message="tns:NeighborNodeResponse"/>
 </operation>
 </portType>
 <binding name="PrototypeBinding" type="tns:PrototypePortType">
@@ -374,6 +696,51 @@
 </operation>
 <operation name="OutsidePlant">
 <soap:operation soapAction="urn:Demo#OutsidePlant" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="OutsidePlantUpgrade">
+<soap:operation soapAction="urn:Demo#OutsidePlantUpgrade" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="CertifyDSL">
+<soap:operation soapAction="urn:Demo#OutCertifyDSL" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="Notification3g">
+<soap:operation soapAction="urn:Demo#OutLocation" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="Location">
+<soap:operation soapAction="urn:Demo#OutLocation" style="rpc"/>
+<input>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</input>
+<output>
+<soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+</output>
+</operation>
+<operation name="NeighborNode">
+<soap:operation soapAction="urn:Demo#OutNeighborNode" style="rpc"/>
 <input>
 <soap:body use="encoded" namespace="urn:Demo" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
 </input>

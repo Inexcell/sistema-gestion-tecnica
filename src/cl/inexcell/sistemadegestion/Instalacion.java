@@ -57,6 +57,11 @@ public class Instalacion extends Activity {
     		"Armario 1", "Armario 2", "Armario 3",
     		"Armario 4", "Armario 5", "Armario 6"
     };
+    
+    final CharSequence[] par_local = {
+    		"Par Local 1", "Par Local 2", "Par Local 3",
+    		"Par Local 4", "Par Local 5", "Par Local 6"
+    };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -407,6 +412,21 @@ public class Instalacion extends Activity {
                 // Do something with the selection
                 //mDoneButton.setText(fabricantes[item]);
             	Toast.makeText(Instalacion.this, armario[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+	}
+	
+	public void mostrar_parlocal(View view){
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Seleccione Par Local");
+        builder.setIcon(R.drawable.ic_parlocal);
+        builder.setItems(par_local, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                // Do something with the selection
+                //mDoneButton.setText(fabricantes[item]);
+            	Toast.makeText(Instalacion.this, par_local[item]+" seleccionado", Toast.LENGTH_SHORT).show();
             }
         });
         AlertDialog alert = builder.create();

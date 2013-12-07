@@ -7,12 +7,9 @@
 
 package cl.inexcell.sistemadegestion.webservices;
 
+@SuppressWarnings("serial")
 public class CustomerOut  implements java.io.Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 714782731773930347L;
-	private cl.inexcell.sistemadegestion.webservices.CustomerOutData output;
+    private cl.inexcell.sistemadegestion.webservices.CustomerOutData output;
 
     public CustomerOut() {
     }

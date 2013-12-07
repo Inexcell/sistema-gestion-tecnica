@@ -7,14 +7,10 @@
 
 package cl.inexcell.sistemadegestion.webservices;
 
+@SuppressWarnings("serial")
 public class PrototypeLocator extends org.apache.axis.client.Service implements cl.inexcell.sistemadegestion.webservices.Prototype {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	public PrototypeLocator() {
+    public PrototypeLocator() {
     }
 
 

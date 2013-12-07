@@ -7,13 +7,9 @@
 
 package cl.inexcell.sistemadegestion.webservices;
 
+@SuppressWarnings("serial")
 public class CPE  implements java.io.Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	private java.lang.String CPEType;
+    private java.lang.String CPEType;
 
     private java.lang.String vendorName;
 

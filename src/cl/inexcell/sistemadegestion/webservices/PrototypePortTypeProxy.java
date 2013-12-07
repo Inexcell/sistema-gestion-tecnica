@@ -74,5 +74,35 @@ public class PrototypePortTypeProxy implements cl.inexcell.sistemadegestion.webs
     return prototypePortType.outsidePlant(requestOutsidePlant);
   }
   
+  public cl.inexcell.sistemadegestion.webservices.ResponseOutsidePlantUpgrade outsidePlantUpgrade(cl.inexcell.sistemadegestion.webservices.RequestOutsidePlantUpgrade requestOutsidePlantUpgrade) throws java.rmi.RemoteException{
+    if (prototypePortType == null)
+      _initPrototypePortTypeProxy();
+    return prototypePortType.outsidePlantUpgrade(requestOutsidePlantUpgrade);
+  }
+  
+  public cl.inexcell.sistemadegestion.webservices.ResponseCertifyDSL certifyDSL(cl.inexcell.sistemadegestion.webservices.RequestCertifyDSL requestCertifyDSL) throws java.rmi.RemoteException{
+    if (prototypePortType == null)
+      _initPrototypePortTypeProxy();
+    return prototypePortType.certifyDSL(requestCertifyDSL);
+  }
+  
+  public cl.inexcell.sistemadegestion.webservices.ResponseNotification3G notification3G(cl.inexcell.sistemadegestion.webservices.RequestNotification3G requestNotification3G) throws java.rmi.RemoteException{
+    if (prototypePortType == null)
+      _initPrototypePortTypeProxy();
+    return prototypePortType.notification3G(requestNotification3G);
+  }
+  
+  public cl.inexcell.sistemadegestion.webservices.ResponseLocation location(cl.inexcell.sistemadegestion.webservices.RequestLocation requestLocation) throws java.rmi.RemoteException{
+    if (prototypePortType == null)
+      _initPrototypePortTypeProxy();
+    return prototypePortType.location(requestLocation);
+  }
+  
+  public cl.inexcell.sistemadegestion.webservices.ResponseNeighborNode neighborNode(cl.inexcell.sistemadegestion.webservices.RequestNeighborNode requestNeighborNode) throws java.rmi.RemoteException{
+    if (prototypePortType == null)
+      _initPrototypePortTypeProxy();
+    return prototypePortType.neighborNode(requestNeighborNode);
+  }
+  
   
 }

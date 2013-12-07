@@ -7,12 +7,9 @@
 
 package cl.inexcell.sistemadegestion.webservices;
 
+@SuppressWarnings("serial")
 public class CustomerIn  implements java.io.Serializable {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private cl.inexcell.sistemadegestion.webservices.CustomerInData input;
+    private cl.inexcell.sistemadegestion.webservices.CustomerInData input;
 
     public CustomerIn() {
     }

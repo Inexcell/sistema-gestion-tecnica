@@ -224,9 +224,9 @@
 				    android:id="@+id/ListaEquipo"
 				    android:layout_width="wrap_content"
 				    android:layout_height="wrap_content"
-				    android:layout_marginBottom="10dp"
+				    android:layout_marginBottom="5dp"
 				    android:layout_marginLeft="25dp"
-				    android:layout_marginTop="10dp"
+				    android:layout_marginTop="5dp"
 				    android:text="@string/equipo_actual"
 				    android:textColor="#258aaf"
 				    android:textStyle="bold" />
@@ -240,7 +240,7 @@
 			    <TableRow
 		            android:id="@+id/tableRow1"
 		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
+		            android:layout_height="wrap_content"		            
 		            >
 				
 					<TextView 
@@ -286,6 +286,7 @@
 		            android:id="@+id/tableRow1"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
+		            android:layout_marginTop="-5dp"
 		            >
 				
 					<TextView 
@@ -331,6 +332,7 @@
 		            android:id="@+id/tableRow1"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
+		            android:layout_marginTop="-5dp"
 		            >
 				
 					<TextView 
@@ -376,6 +378,7 @@
 		            android:id="@+id/tableRow5"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
+		            android:layout_marginTop="-5dp"
 		            >
 				
 					<TextView 
@@ -401,6 +404,52 @@
 					    android:layout_marginLeft="30dp"
 					    android:src="@drawable/ic_edit1"
 					    android:onClick="mostrar_cajaterminal"
+					     />
+					
+				</TableRow>
+				
+		        <!--  Linea Horizontal -->
+			    <LinearLayout
+				    android:id="@+id/panelLinea1"
+				    android:orientation="horizontal"
+		            android:layout_width="fill_parent"
+					android:layout_height="1dp"
+					android:layout_marginLeft="25dp"
+		            android:layout_marginRight="25dp"
+		            android:background="#bdbdbd"
+		            android:layout_marginBottom="5dp" >
+	        	</LinearLayout>
+	        	
+			    <TableRow
+		            android:id="@+id/tableRow6"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:layout_marginTop="-5dp"
+		            >
+				
+					<TextView 
+					    android:id="@+id/CajaParLocal" 
+					    android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="28dp"
+						android:layout_marginTop="5dp"
+						android:text="Par Local" />
+						
+					<TextView 
+					    android:id="@+id/TipoPlanta" 
+					    android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="40dp"
+						android:layout_marginTop="5dp"
+						android:text="XXXXXX" />
+					
+					<ImageButton
+					    android:id="@+id/BotonPlanta"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:layout_marginLeft="30dp"
+					    android:src="@drawable/ic_edit1"
+					    android:onClick="mostrar_parlocal"
 					     />
 					
 				</TableRow>
