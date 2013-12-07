@@ -25,7 +25,7 @@
         android:icon="@drawable/ic_logo_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-     <!--     <service android:name=".Demonio_Certificar_3G" /> -->
+     <service android:name=".Demonio_Certificar_3G" /> 
         <activity
             android:name="cl.inexcell.sistemadegestion.Principal"
             android:screenOrientation="portrait"

@@ -1,13 +1,17 @@
 package cl.inexcell.sistemadegestion;
 
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+import android.widget.Toast;
 
 public class Principal extends Activity {
 
@@ -20,8 +24,28 @@ public class Principal extends Activity {
 		setContentView(R.layout.activity_principal);
 		
 		/** Se inicia el DEMONIO **/
-		//Intent service = new Intent(this, Demonio_Certificar_3G.class);
-		//startService(service);
+		LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		if(locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+			try{
+				Intent service = new Intent(this, Demonio_Certificar_3G.class);
+				startService(service);
+			}catch(Exception e){
+				//TODO Auto-generated
+				Toast.makeText(getApplicationContext(), "START SERVICE ERROR", Toast.LENGTH_LONG).show();
+			}
+		}else{
+			 new AlertDialog.Builder(this)
+		      .setIcon(android.R.drawable.ic_dialog_alert)
+		      .setTitle("GPS está desactivado!")
+		      .setMessage("Active GPS y vuelva a intentar.")
+		      .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {//un listener que al pulsar, cierre la aplicacion
+		          @Override
+		          public void onClick(DialogInterface dialog, int which){
+		            //Salir
+		          	Principal.this.finish();
+		          }
+		        }).show();
+		}
 	}
 
 	@Override
