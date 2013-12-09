@@ -5,13 +5,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -34,9 +33,11 @@ public class Demonio_Certificar_3G extends Service {
 	private LocationManager locManager;
 	private LocationListener locListener;
 	private Location loc;
+	@SuppressWarnings("unused")
 	private String operador, strength, latitud = "", longitud="";
 	private Timer mTimer = null; 
 	private TelephonyManager tm;
+	@SuppressWarnings("unused")
 	private SignalStrength ST;
 	private MyPhoneStateListener MyListener;
 	private int netType;
@@ -69,7 +70,8 @@ public class Demonio_Certificar_3G extends Service {
 	 
 	 private void ejecutarTarea(){
 		 Thread t = new Thread(new Runnable() {
-			 public void run() {
+			 @SuppressWarnings("unused")
+			public void run() {
 				File sdCard, file = null;
 				Log.i(TAG, "DENTRO DEL TASK");
 				//loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -230,7 +232,8 @@ public void setup3G(){
 		}
 	 }
 	 	 
-	 private void turnGPSOn(){   
+	 @SuppressWarnings("unused")
+	private void turnGPSOn(){   
 
 		    String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);   
 		    if(!provider.contains("gps")){      

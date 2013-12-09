@@ -4,11 +4,18 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 
+import org.apache.axis.AxisFault;
+
+import cl.inexcell.sistemadegestion.webservices.OperationType;
 import cl.inexcell.sistemadegestion.webservices.Prototype;
+import cl.inexcell.sistemadegestion.webservices.PrototypeBindingStub;
+import cl.inexcell.sistemadegestion.webservices.PrototypeLocator;
+import cl.inexcell.sistemadegestion.webservices.PrototypePortType;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -44,6 +51,8 @@ public class Certificar_Wifi extends Activity {
 	   tdown = (TextView)findViewById(R.id.tdown);
 	   startBtn = (Button)findViewById(R.id.startBtn);
 	   
+	   
+	   
 	   /*
 	   Weather w = new WeatherLocator();
 	   WeatherSoap ws = new WeatherSoapStub(new URL(w.getWeatherSoapAddress()),w);
@@ -54,8 +63,20 @@ public class Certificar_Wifi extends Activity {
 	   */
 	   
 	   // Implementar y aprender Web Services !!!
-	   
-	   //Prototype p = (Prototype) new cl.inexcell.sistemadegestion.webservices.PrototypePortTypeProxy();
+	   /*
+	   Prototype p = new PrototypeLocator();
+	   try {
+		   PrototypePortType d = new PrototypeBindingStub(new URL(p.getPrototypePortAddress()),p);
+		   String id ="XML-001";
+		   //OperationType resp = d.customer();
+		} catch (AxisFault e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   */
 	   
 	   
 	   ///////////////////////////////////////////////////////////////////////////////

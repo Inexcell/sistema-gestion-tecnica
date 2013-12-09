@@ -114,7 +114,7 @@
             android:ems="10"
             android:gravity="top|left"
             android:inputType="textMultiLine"
-            android:lines="8" >
+            android:lines="5" >
 
             <requestFocus />
         </EditText>
