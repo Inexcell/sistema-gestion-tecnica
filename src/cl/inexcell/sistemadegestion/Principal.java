@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -15,10 +16,12 @@ import android.widget.Toast;
 
 public class Principal extends Activity {
 
+	private String TAG = "Principal Activity";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+		Log.i(TAG,"INICIANDO APLICACION");
 		// Activity sin parte superior
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_principal);
@@ -27,17 +30,21 @@ public class Principal extends Activity {
 		LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		if(locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 			try{
+				Log.i(TAG,"GPS OK");
 				Intent service = new Intent(this, Demonio_Certificar_3G.class);
 				startService(service);
 			}catch(Exception e){
 				//TODO Auto-generated
+
+				
 				Toast.makeText(getApplicationContext(), "START SERVICE ERROR", Toast.LENGTH_LONG).show();
 			}
 		}else{
+			Log.i(TAG,"GPS OFF");
 			 new AlertDialog.Builder(this)
 		      .setIcon(android.R.drawable.ic_dialog_alert)
 		      .setTitle("GPS está desactivado!")
-		      .setMessage("Active GPS y vuelva a intentar.")
+		      .setMessage("Active GPS e inicie la aplicación.")
 		      .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {//un listener que al pulsar, cierre la aplicacion
 		          @Override
 		          public void onClick(DialogInterface dialog, int which){

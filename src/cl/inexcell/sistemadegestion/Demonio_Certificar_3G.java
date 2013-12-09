@@ -2,24 +2,20 @@ package cl.inexcell.sistemadegestion;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.IBinder;
 import android.os.Looper;
-import android.provider.Settings;
 import android.telephony.PhoneStateListener;
 import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
@@ -28,17 +24,14 @@ import android.util.Log;
 import android.widget.Toast;
 
 
-public class Demonio_Certificar_3G extends Service {
+public class Demonio_Certificar_3G extends Service{
 	private String TAG = "Certificar_3G"; 
 	private LocationManager locManager;
 	private LocationListener locListener;
 	private Location loc;
-	@SuppressWarnings("unused")
-	private String operador, strength, latitud = "", longitud="";
+	private String operador, strength, latitud, longitud, provider;
 	private Timer mTimer = null; 
 	private TelephonyManager tm;
-	@SuppressWarnings("unused")
-	private SignalStrength ST;
 	private MyPhoneStateListener MyListener;
 	private int netType;
 	private File directory;
@@ -55,7 +48,7 @@ public class Demonio_Certificar_3G extends Service {
 		 
 		 
 		 
-		 //setupGPS();
+		 setupGPS();
 		 setup3G();
 		 this.mTimer = new Timer();
 		 this.mTimer.scheduleAtFixedRate(
@@ -65,19 +58,16 @@ public class Demonio_Certificar_3G extends Service {
 						 ejecutarTarea();
 					 }      
 				 }
-				 , 0, 1000 * 30); //Tiempo en milisegundos son 60 minutos en este caso
+				 , 0, 1000 * 60); //Tiempo en milisegundos son 60 minutos en este caso
 	 	}
 	 
 	 private void ejecutarTarea(){
 		 Thread t = new Thread(new Runnable() {
-			 @SuppressWarnings("unused")
-			public void run() {
+			 public void run() {
 				File sdCard, file = null;
 				Log.i(TAG, "DENTRO DEL TASK");
-				//loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-				//latitud = Double.toString(loc.getLatitude());
-	        	//longitud = Double.toString(loc.getLongitude());
 	        	String NT = "Desconocido";
+	        	
 	        	/**Tipo de Network */
 	        	
 	        	if(netType == TelephonyManager.NETWORK_TYPE_1xRTT)NT = "1xRTT";
@@ -98,29 +88,22 @@ public class Demonio_Certificar_3G extends Service {
 	        	if(netType == TelephonyManager.NETWORK_TYPE_UNKNOWN)NT = "Desconocido";
 	        	
 	        	
-				//Looper.prepare();
-				//Toast.makeText(getApplicationContext(), "OP="+operador + " S="+strength +"NT="+NT, Toast.LENGTH_LONG).show();
-				//Toast.makeText(getApplicationContext(), "OP="+latitud + " S="+longitud, Toast.LENGTH_LONG).show();
-				//Looper.loop();		
-				
-				
-				/** ESCRIBIR EN ARCHIVO*/
-				
-		       /* String contenido = "LAT: " + latitud +
+	        		loc = locManager.getLastKnownLocation(provider);
+	        		latitud = String.valueOf(loc.getLatitude());
+	        		longitud = String.valueOf(loc.getLongitude());
+	        	
+								
+				/** ESCRIBIR EN ARCHIVO*/				
+		       String contenido = provider+"\nLAT: " + latitud +
 		        					"; LON: " + longitud +
 		        					"; PROV: " + operador + 
 		        					"; TIPORED: " + NT +
-		        					"; INTENSIDAD: " + strength;*/
-	        	String contenido ="PROV: " + operador + 
-    					"; TIPORED: " + NT +
-    					"; INTENSIDAD: " + strength +
-    					"\n";
+		        					"; INTENSIDAD: " + strength+"\n";
 		        Looper.prepare();
 		        try {
 		        	
 		        	if (Environment.getExternalStorageState().equals("mounted")) {
 		        		sdCard = Environment.getExternalStorageDirectory();
-		        		FileOutputStream fout = null;
 		        		FileWriter fw = null;
 		        		try {
 		        			directory = new File(sdCard.getAbsolutePath()
@@ -136,16 +119,19 @@ public class Demonio_Certificar_3G extends Service {
 		        			BufferedWriter out = new BufferedWriter(fw);
 		        			out.write(contenido);
 		        			out.close();
-							
+							Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
 	 	 
 						} catch (IOException e) {
 							// TODO: handle exception
 							e.printStackTrace();
+							Log.e(TAG,"Error al escribir:"+e);
 							Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
 						}
 		        	}
 		        }catch (Exception ie) {
 		        	// TODO: handle exception
+
+					Log.e(TAG,"Error:"+ie);
 		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
 		        }
 		        
@@ -160,12 +146,14 @@ public class Demonio_Certificar_3G extends Service {
 	 }	
 	 
 public void setup3G(){
+	Log.i(TAG, "setup3G");
 	try{	 
 		 /** DATOS DE 3G y PROVEEDOR **/
 		tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 		/* Update the listener, and start it */
 		MyListener   = new MyPhoneStateListener();
 		tm.listen(MyListener ,PhoneStateListener.LISTEN_SIGNAL_STRENGTHS);
+		
 		netType = tm.getNetworkType();	 
 		operador = String.valueOf(tm.getNetworkOperatorName());
 		
@@ -182,38 +170,39 @@ public void setup3G(){
 	 	Log.i(TAG, e.toString());
 	 	Toast.makeText(getApplicationContext(), "Setup3G Error", Toast.LENGTH_LONG).show();
 	}
+	Log.i(TAG,"operator: "+operador);
 }
 	 
 	 public void setupGPS(){
 		 Log.i(TAG,"SetupGPS");	
 		 /**  UBICACION GPS **/
 		try{
+			provider = LocationManager.GPS_PROVIDER;
 			locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		    loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		    
-		    if(loc == null)
-		    	longitud = latitud = "No Hay Datos";
 		    
 		    
 		    //Nos registramos para recibir actualizaciones de la posición
 		    locListener = new LocationListener() {
 		        public void onLocationChanged(Location location) {
 		        	// TODO Auto-generated method stub
-		        	latitud = Double.toString(loc.getLatitude());
-		        	longitud = Double.toString(loc.getLongitude());
+		        	latitud = Double.toString(location.getLatitude());
+		        	longitud = Double.toString(location.getLongitude());
 		        }
 	
 				@Override
 				public void onProviderDisabled(String arg0) {
 					// TODO Auto-generated method stub
-					
-					
+					Log.i(TAG,"GPS OFF");
+					provider = LocationManager.NETWORK_PROVIDER;
 				}
 	
 				@Override
 				public void onProviderEnabled(String arg0) {
 					// TODO Auto-generated method stub
-					
+					Log.i(TAG,"GPS ON");
+					provider = LocationManager.GPS_PROVIDER;
 				}
 	
 				@Override
@@ -224,26 +213,15 @@ public void setup3G(){
 
 		    };
 
-		    locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000*60, 0, locListener);
+		    locManager.requestLocationUpdates(provider, 1000*60, 1, locListener);
 		}catch(Exception e){
-			Log.i(TAG, e.toString());
+			Log.e(TAG, e.toString());
 
 		 	Toast.makeText(getApplicationContext(), "SETUP GPS Error", Toast.LENGTH_LONG).show();
 		}
 	 }
 	 	 
-	 @SuppressWarnings("unused")
-	private void turnGPSOn(){   
-
-		    String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);   
-		    if(!provider.contains("gps")){      
-		        final Intent poke = new Intent();  
-		        poke.setClassName("com.android.settings","com.android.settings.widget.SettingsAppWidgetProvider");           poke.addCategory(Intent.CATEGORY_ALTERNATIVE);   
-		        poke.setData(Uri.parse("3"));      
-		        sendBroadcast(poke);  
-		   }  
-	 } 
-	 
+	 	 
 	 private class MyPhoneStateListener extends PhoneStateListener
 	    {
 	      /* Get the Signal strength from the provider, each time there is an update */
@@ -251,10 +229,13 @@ public void setup3G(){
 	      public void onSignalStrengthsChanged(SignalStrength signalStrength)
 	      {
 	    	  super.onSignalStrengthsChanged(signalStrength);
-    	 
-    		  int asu = signalStrength.getGsmSignalStrength();
-    		  int signal = -113 + 2*asu;
-    		  strength = String.valueOf(signal);
+	    	  try{
+	    		  int asu = signalStrength.getGsmSignalStrength();
+	    		  int signal = -113 + 2*asu;
+	    		  strength = String.valueOf(signal);
+	    	  }catch(Exception e){
+	    		  Log.e(TAG,"Error:"+e);
+	    	  }
 	    	 
 	    	  
 	      }
