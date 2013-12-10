@@ -4,18 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 
-import org.apache.axis.AxisFault;
-
-import cl.inexcell.sistemadegestion.webservices.OperationType;
-import cl.inexcell.sistemadegestion.webservices.Prototype;
-import cl.inexcell.sistemadegestion.webservices.PrototypeBindingStub;
-import cl.inexcell.sistemadegestion.webservices.PrototypeLocator;
-import cl.inexcell.sistemadegestion.webservices.PrototypePortType;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -54,30 +46,42 @@ public class Certificar_Wifi extends Activity {
 	   
 	   
 	   /*
-	   Weather w = new WeatherLocator();
-	   WeatherSoap ws = new WeatherSoapStub(new URL(w.getWeatherSoapAddress()),w);
-	   String zip = "97867";
-	   WeatherReturn resp = ws.getCityWeatherByZIP(zip);
-	   System.out.println("Ciudad: "+resp.getCity());
-	   System.out.println("Temperatura: "+resp.getTemperature());
+	   		 CountriesWebserviceMobilefishComServiceLocator serviceLocator = null;
+		     CountriesWebserviceMobilefishComPort port = null;
+		     CountryData countryData = null;  
+		  try {
+		        serviceLocator = new CountriesWebserviceMobilefishComServiceLocator();
+		        port = serviceLocator.getCountriesWebserviceMobilefishComPort();
+		        countryData = port.countryInfoByIana("us");
+		        System.out.println("IANACode: " + countryData.getIanacode());
+		        System.out.println("CountryName: " + countryData.getCountryname());
+		        System.out.println("Latitude: " + countryData.getLatitude());
+		        System.out.println("Longitude: " + countryData.getLongitude());
+		  } catch (Exception e) {
+		   e.printStackTrace();
+		  }
+		 }
+
 	   */
 	   
-	   // Implementar y aprender Web Services !!!
 	   /*
-	   Prototype p = new PrototypeLocator();
-	   try {
-		   PrototypePortType d = new PrototypeBindingStub(new URL(p.getPrototypePortAddress()),p);
-		   String id ="XML-001";
-		   //OperationType resp = d.customer();
-		} catch (AxisFault e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	   */
+	   PrototypeLocator serviceLocator = null;
+	   PrototypePortType port = null;
+	   Prototype prototypeData = null;
+	   OperationType op = null;
 	   
+	   
+	   try
+	   {
+		   serviceLocator = new PrototypeLocator();
+		   port = serviceLocator.getPrototypePort();
+		    
+		   
+		   
+	   } catch(Exception e){
+		   // TODO 
+	   }
+	   */
 	   
 	   ///////////////////////////////////////////////////////////////////////////////
 	   
