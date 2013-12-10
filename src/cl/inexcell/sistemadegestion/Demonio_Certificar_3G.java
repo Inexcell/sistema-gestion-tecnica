@@ -6,9 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -35,6 +37,7 @@ public class Demonio_Certificar_3G extends Service{
 	private MyPhoneStateListener MyListener;
 	private int netType;
 	private File directory;
+	private Criteria req;
 	
 	 @Override
 	 public IBinder onBind(Intent arg0) {
@@ -58,7 +61,7 @@ public class Demonio_Certificar_3G extends Service{
 						 ejecutarTarea();
 					 }      
 				 }
-				 , 0, 1000 * 60); //Tiempo en milisegundos son 60 minutos en este caso
+				 , 1000*30, 1000 * 60); //Tiempo en milisegundos son 60 minutos en este caso
 	 	}
 	 
 	 private void ejecutarTarea(){
@@ -88,13 +91,20 @@ public class Demonio_Certificar_3G extends Service{
 	        	if(netType == TelephonyManager.NETWORK_TYPE_UNKNOWN)NT = "Desconocido";
 	        	
 	        	
-	        		loc = locManager.getLastKnownLocation(provider);
-	        		latitud = String.valueOf(loc.getLatitude());
-	        		longitud = String.valueOf(loc.getLongitude());
-	        	
-								
+        		loc = locManager.getLastKnownLocation(provider);
+        		if(loc == null || latitud == null){
+        			if((loc = locManager.getLastKnownLocation(provider))!= null){
+	        			latitud = String.valueOf(loc.getLatitude());
+	        			longitud = String.valueOf(loc.getLongitude());
+        			}
+        		}
+        		else{
+        			latitud = String.valueOf(loc.getLatitude());
+        			longitud = String.valueOf(loc.getLongitude());
+        		}
+				String p = loc.getProvider();
 				/** ESCRIBIR EN ARCHIVO*/				
-		       String contenido = provider+"\nLAT: " + latitud +
+		       String contenido = p+"\nLAT: " + latitud +
 		        					"; LON: " + longitud +
 		        					"; PROV: " + operador + 
 		        					"; TIPORED: " + NT +
@@ -119,7 +129,6 @@ public class Demonio_Certificar_3G extends Service{
 		        			BufferedWriter out = new BufferedWriter(fw);
 		        			out.write(contenido);
 		        			out.close();
-							Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
 	 	 
 						} catch (IOException e) {
 							// TODO: handle exception
@@ -134,7 +143,9 @@ public class Demonio_Certificar_3G extends Service{
 					Log.e(TAG,"Error:"+ie);
 		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
 		        }
-		        
+		        Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
+
+				Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
 		        Looper.loop(); 
 		        
 			 }
@@ -177,43 +188,51 @@ public void setup3G(){
 		 Log.i(TAG,"SetupGPS");	
 		 /**  UBICACION GPS **/
 		try{
-			provider = LocationManager.GPS_PROVIDER;
+			
+			req = new Criteria();
+			req.setAccuracy(Criteria.ACCURACY_FINE);
+			
 			locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		    loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		    
-		    
-		    
+			
+			
+		    provider = locManager.getBestProvider(req, false);
+		    loc = locManager.getLastKnownLocation(provider);
 		    //Nos registramos para recibir actualizaciones de la posición
 		    locListener = new LocationListener() {
 		        public void onLocationChanged(Location location) {
 		        	// TODO Auto-generated method stub
 		        	latitud = Double.toString(location.getLatitude());
 		        	longitud = Double.toString(location.getLongitude());
+		        	loc.setLatitude(location.getLatitude());
+		        	loc.setLongitude(location.getLongitude());
 		        }
 	
 				@Override
 				public void onProviderDisabled(String arg0) {
 					// TODO Auto-generated method stub
 					Log.i(TAG,"GPS OFF");
-					provider = LocationManager.NETWORK_PROVIDER;
+					provider = locManager.getBestProvider(req, true);
 				}
 	
 				@Override
 				public void onProviderEnabled(String arg0) {
 					// TODO Auto-generated method stub
 					Log.i(TAG,"GPS ON");
-					provider = LocationManager.GPS_PROVIDER;
+
+					
+					provider = locManager.getBestProvider(req, true);
 				}
 	
 				@Override
 				public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 					// TODO Auto-generated method stub
+					Log.i(TAG,"STATUSCHANGE: "+arg0);
 					
 				}
 
 		    };
 
-		    locManager.requestLocationUpdates(provider, 1000*60, 1, locListener);
+		    locManager.requestLocationUpdates(provider, 1000*30, 0, locListener);
 		}catch(Exception e){
 			Log.e(TAG, e.toString());
 

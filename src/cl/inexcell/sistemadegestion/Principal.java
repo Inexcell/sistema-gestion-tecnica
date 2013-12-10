@@ -27,8 +27,8 @@ public class Principal extends Activity {
 		setContentView(R.layout.activity_principal);
 		
 		/** Se inicia el DEMONIO **/
-		LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-		if(locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+		//LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		//if(locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 			try{
 				Log.i(TAG,"GPS OK");
 				Intent service = new Intent(this, Demonio_Certificar_3G.class);
@@ -39,7 +39,7 @@ public class Principal extends Activity {
 				
 				Toast.makeText(getApplicationContext(), "START SERVICE ERROR", Toast.LENGTH_LONG).show();
 			}
-		}else{
+		/*}else{
 			Log.i(TAG,"GPS OFF");
 			 new AlertDialog.Builder(this)
 		      .setIcon(android.R.drawable.ic_dialog_alert)
@@ -52,7 +52,7 @@ public class Principal extends Activity {
 		          	Principal.this.finish();
 		          }
 		        }).show();
-		}
+		}*/
 	}
 
 	@Override
