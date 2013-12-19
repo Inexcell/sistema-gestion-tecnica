@@ -1,5 +1,6 @@
 package cl.inexcell.sistemadegestion;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,13 +15,15 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class Reparacion extends Activity {
 	
-	private EditText editText;
-	private Button b1,b2,b3,b4,b5;
+	private EditText editText, Area, Phone;
+	private TextView tipoPlanta, parExterno,tvArmario, tipoTerminal;
+	private Button b1,b2,b3,b4,b5,buscar;
 	//private Button mDoneButton;
     //private TextView txtResultado;
     private LinearLayout p1,p2,p3,p4,p5,p6,p7;
@@ -76,82 +79,105 @@ public class Reparacion extends Activity {
 		setContentView(R.layout.activity_reparacion);
 		
 		// Keyboard Focusable
-		final EditText editText = (EditText) findViewById(R.id.txtTelefonoArea);
-		final EditText editText1 = (EditText) findViewById(R.id.txtTelefonoNumero);
-		
+		Area = (EditText) findViewById(R.id.txtTelefonoArea);
+		Phone = (EditText) findViewById(R.id.txtTelefonoNumero);
+		buscar = (Button) findViewById(R.id.ButtonBuscar);
+		setupInicial();
 		
 				
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
 		
-		editText.setOnKeyListener(new View.OnKeyListener() {
+		Area.setOnKeyListener(new View.OnKeyListener() {
 	        @Override
 	        public boolean onKey(View view, int i, KeyEvent keyEvent) {
 	            if (keyEvent.getAction() == KeyEvent.ACTION_UP) {
-	                if (editText.getText().length() == 2) {
-	                    editText1.requestFocus();
+	                if (Area.getText().length() == 2) {
+	                    Phone.requestFocus();
 	                }
 	            }
 	            return false;
 	        }
 	    });
 		
-		// Seleccionar objetos de Botones en Layout
-		b1 = (Button) findViewById(R.id.btnBusquedaCliente);
-		b2 = (Button) findViewById(R.id.btnPlantaExterna);
-		b3 = (Button) findViewById(R.id.btnTVSatelital);
-		b4 = (Button) findViewById(R.id.btnBandaAncha);
-		b5 = (Button) findViewById(R.id.btnCertificacion);
+		Phone.setOnKeyListener(new View.OnKeyListener()
+		    {
+				public boolean onKey(View v, int keyCode, KeyEvent event)
+		        {
+		 
+		        // Comprobamos que se ha pulsado la tecla enter.
+		        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&(keyCode == KeyEvent.KEYCODE_ENTER))
+		            {
+		 
+		        		Toast.makeText(getApplicationContext(), "OK", Toast.LENGTH_LONG).show();
+		        		buscar.performClick();
+		        		return true;
+		            }// end if.
+		 
+		return false;
+		}// end onKey.
+		});
 		
-		// Seleccionar objetos de LinearLayout
-		p1 = (LinearLayout) findViewById(R.id.panelBusquedaCliente);
-		p2 = (LinearLayout) findViewById(R.id.panelPlantaExterna);
-		p3 = (LinearLayout) findViewById(R.id.panelTVSatelital);
-		p4 = (LinearLayout) findViewById(R.id.panelBandaAncha);
-		p5 = (LinearLayout) findViewById(R.id.panelCertificacion);
 		
-		
-		p6 = (LinearLayout) findViewById(R.id.panelCertificacion2);
-		
-		// Definir visibilidad de objetos Buttons
-		b1.setVisibility(View.VISIBLE);
-		b2.setVisibility(View.INVISIBLE);
-		b3.setVisibility(View.INVISIBLE);
-		b4.setVisibility(View.INVISIBLE);
-		b5.setVisibility(View.INVISIBLE);
-		
-		// Definir visibilidad de objetos LinearLayout
-		p1.setVisibility(View.VISIBLE);
-		p2.setVisibility(View.INVISIBLE);
-		p3.setVisibility(View.INVISIBLE);
-		p4.setVisibility(View.INVISIBLE);
-		p5.setVisibility(View.INVISIBLE);
-		p6.setVisibility(View.INVISIBLE);
 			
 		
 				
 	}
 	
-public void buscar_cliente(View view){
+	public void setupInicial(){
+				// Text Views en los que se muestra informacion
+				//// Seccion PLANTA EXTERNA
+				tipoPlanta = (TextView) findViewById(R.id.TipoPlanta);
+				parExterno = (TextView) findViewById(R.id.TipoParExterno);
+				tvArmario = (TextView) findViewById(R.id.TipoArmario);
+				tipoTerminal = (TextView) findViewById(R.id.TipoTerminal);
+				
+		// Seleccionar objetos de Botones en Layout
+				b1 = (Button) findViewById(R.id.btnBusquedaCliente);
+				b2 = (Button) findViewById(R.id.btnPlantaExterna);
+				b3 = (Button) findViewById(R.id.btnTVSatelital);
+				b4 = (Button) findViewById(R.id.btnBandaAncha);
+				b5 = (Button) findViewById(R.id.btnCertificacion);
+				
+				// Seleccionar objetos de LinearLayout
+				p1 = (LinearLayout) findViewById(R.id.panelBusquedaCliente);
+				p2 = (LinearLayout) findViewById(R.id.panelPlantaExterna);
+				p3 = (LinearLayout) findViewById(R.id.panelTVSatelital);
+				p4 = (LinearLayout) findViewById(R.id.panelBandaAncha);
+				p5 = (LinearLayout) findViewById(R.id.panelCertificacion);
+				
+				
+				p6 = (LinearLayout) findViewById(R.id.panelCertificacion2);
+				
+				// Definir visibilidad de objetos Buttons
+				b1.setVisibility(View.VISIBLE);
+				b2.setVisibility(View.INVISIBLE);
+				b3.setVisibility(View.INVISIBLE);
+				b4.setVisibility(View.INVISIBLE);
+				b5.setVisibility(View.INVISIBLE);
+				
+				// Definir visibilidad de objetos LinearLayout
+				p1.setVisibility(View.VISIBLE);
+				p2.setVisibility(View.INVISIBLE);
+				p3.setVisibility(View.INVISIBLE);
+				p4.setVisibility(View.INVISIBLE);
+				p5.setVisibility(View.INVISIBLE);
+				p6.setVisibility(View.INVISIBLE);
+	}
+	public void buscar_cliente(View view){
 		
 		editText = (EditText) findViewById(R.id.txtTelefonoArea);
 		
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
 		
-		
-		Button btnBusquedaCliente = (Button) findViewById(R.id.btnBusquedaCliente);
-		Button btnPlantaExterna = (Button) findViewById(R.id.btnPlantaExterna);
-		Button btnTVSatelital = (Button) findViewById(R.id.btnTVSatelital);
-		Button btnBandaAncha = (Button) findViewById(R.id.btnBandaAncha);
-		Button btnCertificacion = (Button) findViewById(R.id.btnCertificacion);
-		
+			
 		// Seleccionar objetos de Botones en Layout
-		btnBusquedaCliente.setVisibility(View.VISIBLE);
-		btnPlantaExterna.setVisibility(View.VISIBLE);
-		btnTVSatelital.setVisibility(View.VISIBLE);
-		btnBandaAncha.setVisibility(View.VISIBLE);
-		btnCertificacion.setVisibility(View.VISIBLE);
+		b1.setVisibility(View.VISIBLE);
+		b2.setVisibility(View.VISIBLE);
+		b3.setVisibility(View.VISIBLE);
+		b4.setVisibility(View.VISIBLE);
+		b5.setVisibility(View.VISIBLE);
 
 		View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
 		panelBusquedaCliente.setVisibility(View.VISIBLE);
@@ -169,7 +195,8 @@ public void buscar_cliente(View view){
 		View panelCertificacion = findViewById(R.id.panelCertificacion);
 		panelCertificacion.setVisibility(View.GONE);
 
-		btnBusquedaCliente.setOnClickListener(new OnClickListener() {
+		/** Boton busqueda cliente **/
+		b1.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// DO STUFF
@@ -191,7 +218,8 @@ public void buscar_cliente(View view){
 			}
 		});
 
-		btnPlantaExterna.setOnClickListener(new OnClickListener() {
+		/** Boton planta externa **/
+		b2.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// DO STUFF
@@ -213,7 +241,8 @@ public void buscar_cliente(View view){
 			}
 		});
 
-		btnTVSatelital.setOnClickListener(new OnClickListener() {
+		/** Boton TV satelital **/
+		b3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// DO STUFF
@@ -235,7 +264,8 @@ public void buscar_cliente(View view){
 			}
 		});
 		
-		btnBandaAncha.setOnClickListener(new OnClickListener() {
+		/** Boton banda ancha **/
+		b4.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// DO STUFF
@@ -257,7 +287,8 @@ public void buscar_cliente(View view){
 			}
 		});
 		
-		btnCertificacion.setOnClickListener(new OnClickListener() {
+		/** Boton Certificar **/
+		b5.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				// DO STUFF
@@ -343,6 +374,7 @@ public void buscar_cliente(View view){
 	    alert.show();
 	}
 	
+	/** Boton para cambiar la planta en seccion PLANTA EXTERNA **/
 	public void mostrar_planta2(View view){
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 	    builder.setTitle("Seleccione Planta Externa");
@@ -351,7 +383,8 @@ public void buscar_cliente(View view){
 	        public void onClick(DialogInterface dialog, int item) {
 	            // Do something with the selection
 	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Reparacion.this, plantas_ext[item]+" seleccionada", Toast.LENGTH_SHORT).show();
+	        	Toast.makeText(Reparacion.this, "Planta Actualizada", Toast.LENGTH_SHORT).show();
+	        	tipoPlanta.setText(plantas_ext[item]);
 	        }
 	    });
 	    AlertDialog alert = builder.create();
@@ -386,7 +419,8 @@ public void buscar_cliente(View view){
 	        public void onClick(DialogInterface dialog, int item) {
 	            // Do something with the selection
 	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Reparacion.this, caja_terminal[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+	        	Toast.makeText(Reparacion.this, "Caja Terminal Actualizado", Toast.LENGTH_SHORT).show();
+	        	tipoTerminal.setText(caja_terminal[item].subSequence(5, caja_terminal[item].length()));
 	        }
 	    });
 	    AlertDialog alert = builder.create();
@@ -401,7 +435,8 @@ public void buscar_cliente(View view){
 	        public void onClick(DialogInterface dialog, int item) {
 	            // Do something with the selection
 	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Reparacion.this, par_externo[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+	        	Toast.makeText(Reparacion.this, "Par Externo Actualizado", Toast.LENGTH_SHORT).show();
+	        	parExterno.setText(par_externo[item].subSequence(4, par_externo[item].length()));
 	        }
 	    });
 	    AlertDialog alert = builder.create();
@@ -416,7 +451,8 @@ public void buscar_cliente(View view){
 	        public void onClick(DialogInterface dialog, int item) {
 	            // Do something with the selection
 	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Reparacion.this, armario[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+	        	Toast.makeText(Reparacion.this, "Armario Actualizado", Toast.LENGTH_SHORT).show();
+	        	tvArmario.setText(armario[item]);
 	        }
 	    });
 	    AlertDialog alert = builder.create();

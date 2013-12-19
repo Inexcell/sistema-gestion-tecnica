@@ -129,6 +129,7 @@
 				    android:layout_height="wrap_content"
 				    android:maxLength="7"
 				    android:background="@drawable/fondo1"
+				    android:imeOptions="actionSearch"
 				    android:inputType="phone"
 					 />
 				
@@ -298,7 +299,7 @@
 						android:text="Par Externo" />
 						
 					<TextView 
-					    android:id="@+id/TipoPlanta" 
+					    android:id="@+id/TipoParExterno" 
 					    android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="40dp"
@@ -344,7 +345,7 @@
 						android:text="Armario" />
 						
 					<TextView 
-					    android:id="@+id/TipoPlanta" 
+					    android:id="@+id/TipoArmario" 
 					    android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="40dp"
@@ -390,7 +391,7 @@
 						android:text="Caja Terminal" />
 						
 					<TextView 
-					    android:id="@+id/TipoPlanta" 
+					    android:id="@+id/TipoTerminal" 
 					    android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="40dp"
@@ -436,7 +437,7 @@
 						android:text="Par Local" />
 						
 					<TextView 
-					    android:id="@+id/TipoPlanta" 
+					    android:id="@+id/TipoParLocal" 
 					    android:layout_width="wrap_content"
 						android:layout_height="wrap_content"
 						android:layout_marginLeft="40dp"
