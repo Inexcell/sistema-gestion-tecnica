@@ -736,14 +736,14 @@ public class Reparacion extends Activity {
 	
 	// Clase Asincrona para descargar archivo    
     private void startDownload() {
-        String url = "http://alumnos.inf.utfsm.cl/~abastias/test_android/test.jpg";
+        String url = "http://alumnos.inf.utfsm.cl/~abastias/upload/upload/test.jpg";
         new DownloadFileAsync().execute(url);
     }
     
     // Clase Asincrona para subir archivo
     @SuppressLint("SdCardPath")
 	private void startUpload() {
-    	String archivo_seleccionado = "/sdcard/asd.jpg";
+    	String archivo_seleccionado = "/sdcard/test.jpg";
     	new UploadFileTask(Reparacion.this).execute(archivo_seleccionado);
     }
 
@@ -773,7 +773,7 @@ public class Reparacion extends Activity {
 	        Log.d("ANDRO_ASYNC", "Largo del archivo: " + lenghtOfFile);
 	
 	        InputStream input = new BufferedInputStream(url.openStream());
-	        OutputStream output = new FileOutputStream("/sdcard/test-download1.jpg");
+	        OutputStream output = new FileOutputStream("/sdcard/test.jpg");
 	
 	        byte data[] = new byte[1024];
 	
@@ -959,7 +959,8 @@ public class Reparacion extends Activity {
 	public void muestra_descarga(long tiempo_down) 
 	{
 		//String resultado=String.valueOf(tiempo_down);
-		long size_jpg = 1065297;
+		//long size_jpg = 1065297;
+		long size_jpg = 56237;
 		float bw;
 		bw = (float)(size_jpg*8)/(float) (tiempo_down*1000);
 		DecimalFormat df = new DecimalFormat("0.00");

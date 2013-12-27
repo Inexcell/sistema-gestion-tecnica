@@ -24,6 +24,7 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class Notificar_Averias extends Activity {
 	@SuppressWarnings("unused")
