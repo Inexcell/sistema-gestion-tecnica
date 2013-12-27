@@ -1,9 +1,6 @@
 package cl.inexcell.sistemadegestion;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -15,7 +12,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.IBinder;
 import android.os.Looper;
 import android.telephony.PhoneStateListener;
@@ -23,7 +19,7 @@ import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 //import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
-import android.widget.Toast;
+//import android.widget.Toast;
 
 
 public class Demonio_Certificar_3G extends Service{
@@ -36,6 +32,8 @@ public class Demonio_Certificar_3G extends Service{
 	private TelephonyManager tm;
 	private MyPhoneStateListener MyListener;
 	private int netType;
+	
+	@SuppressWarnings("unused")
 	private File directory;
 	private Criteria req;
 	
@@ -67,6 +65,8 @@ public class Demonio_Certificar_3G extends Service{
 	 private void ejecutarTarea(){
 		 Thread t = new Thread(new Runnable() {
 			 public void run() {
+				
+				@SuppressWarnings("unused")
 				File sdCard, file = null;
 				Log.i(TAG, "DENTRO DEL TASK");
 	        	String NT = "Desconocido";
@@ -110,7 +110,7 @@ public class Demonio_Certificar_3G extends Service{
 		        					"; TIPORED: " + NT +
 		        					"; INTENSIDAD: " + strength+"\n";
 		        Looper.prepare();
-		        try {
+		       /* try {
 		        	
 		        	if (Environment.getExternalStorageState().equals("mounted")) {
 		        		sdCard = Environment.getExternalStorageDirectory();
@@ -142,8 +142,8 @@ public class Demonio_Certificar_3G extends Service{
 
 					Log.e(TAG,"Error:"+ie);
 		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
-		        }
-		        Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
+		        }*/
+		       // Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
 
 				Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
 		        Looper.loop(); 
@@ -179,7 +179,7 @@ public void setup3G(){
 		
 	 }catch(Exception e){
 	 	Log.i(TAG, e.toString());
-	 	Toast.makeText(getApplicationContext(), "Setup3G Error", Toast.LENGTH_LONG).show();
+	 	//Toast.makeText(getApplicationContext(), "Setup3G Error", Toast.LENGTH_LONG).show();
 	}
 	Log.i(TAG,"operator: "+operador);
 }
@@ -236,7 +236,7 @@ public void setup3G(){
 		}catch(Exception e){
 			Log.e(TAG, e.toString());
 
-		 	Toast.makeText(getApplicationContext(), "SETUP GPS Error", Toast.LENGTH_LONG).show();
+		 	//Toast.makeText(getApplicationContext(), "SETUP GPS Error", Toast.LENGTH_LONG).show();
 		}
 	 }
 	 	 

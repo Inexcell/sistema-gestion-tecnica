@@ -19,21 +19,28 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class Notificar_Averias extends Activity {
+	@SuppressWarnings("unused")
 	private String observacion, objeto;
+	
+	@SuppressWarnings("unused")
 	private Bitmap foto;
 	private Spinner s;
 	private EditText et;
+	
+	@SuppressWarnings("unused")
 	private ImageButton ib;
+	
+	@SuppressWarnings("unused")
 	private String TAG = "Localizar Avería";
+	
+	@SuppressWarnings("unused")
 	private Bitmap b = null, bmini = null;
 	private static int TAKE_PICTURE = 1;
 	private static int SELECT_PICTURE = 2;
@@ -46,7 +53,7 @@ public class Notificar_Averias extends Activity {
 	private String name = "";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+
 		super.onCreate(savedInstanceState);
 		
 		// Activity sin parte superior

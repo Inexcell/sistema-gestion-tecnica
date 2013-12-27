@@ -1,13 +1,10 @@
 package cl.inexcell.sistemadegestion;
 
-import android.location.LocationManager;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -34,7 +31,7 @@ public class Principal extends Activity {
 				Intent service = new Intent(this, Demonio_Certificar_3G.class);
 				startService(service);
 			}catch(Exception e){
-				//TODO Auto-generated
+				
 
 				
 				Toast.makeText(getApplicationContext(), "START SERVICE ERROR", Toast.LENGTH_LONG).show();

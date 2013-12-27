@@ -60,6 +60,13 @@
 ## Subir Archivos a Servidor
 
 * http://www.internetria.com/blog/2013/04/12/android-enviar-imagenes-por-webservice/
+* http://monstercoda.wordpress.com/2012/04/15/android-image-upload-tutorial-part-i/
+* http://amatellanes.wordpress.com/2013/10/06/android-notificaciones-en-android-parte-2-dialogs-ii/
+* http://www.sgoliver.net/blog/?p=3099
+
+## Tareas Asincronas
+
+* http://androidsensei.net/aprende-a-subir-archivos-desde-tu-aplicacion-android-a-cualquier-lugar/ 
 
 # Comandos GIT
 

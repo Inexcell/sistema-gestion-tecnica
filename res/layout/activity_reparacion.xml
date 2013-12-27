@@ -149,7 +149,7 @@
 			        android:layout_width="wrap_content"
 			        android:layout_height="wrap_content"
 			        android:text="@string/ej_telefono"
-			        android:textSize="15dp" />
+			        android:textSize="11dp" />
 				
 			</LinearLayout>
 			
@@ -541,7 +541,7 @@
 							android:text="Tipo:" />
 							
 						<TextView 
-						    android:id="@+id/TipoPlanta" 
+						    android:id="@+id/tvSatelitalTipo" 
 						    android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:layout_marginLeft="40dp"
@@ -580,7 +580,7 @@
 							android:text="Modelo:" />
 							
 						<TextView 
-						    android:id="@+id/TipoPlanta" 
+						    android:id="@+id/tvSatelitalModelo" 
 						    android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
 							android:layout_marginLeft="40dp"
@@ -621,7 +621,7 @@
 				        android:drawableLeft="@drawable/ic_edit1"
 				        android:drawablePadding="5dp"
 				        android:textSize="16dp"
-				        android:onClick="mostrar_planta"
+				        android:onClick="mostrar_planta_tvsatelital"
 				        android:text="Editar" />
 					
 				</LinearLayout>
@@ -708,7 +708,7 @@
 								android:text="Tipo:" />
 								
 							<TextView 
-							    android:id="@+id/TipoPlanta" 
+							    android:id="@+id/bandaAnchaTipo" 
 							    android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="40dp"
@@ -747,7 +747,7 @@
 								android:text="Modelo:" />
 								
 							<TextView 
-							    android:id="@+id/TipoPlanta" 
+							    android:id="@+id/bandaAnchaModelo" 
 							    android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="40dp"
@@ -788,7 +788,7 @@
 					        android:drawableLeft="@drawable/ic_edit1"
 					        android:drawablePadding="5dp"
 					        android:textSize="16dp"
-					        android:onClick="mostrar_planta"
+					        android:onClick="mostrar_planta_bandaancha"
 					        android:text="Editar" />
 						
 					</LinearLayout>
@@ -809,6 +809,7 @@
 		    android:gravity="left|center_vertical"
 		    android:textSize="@dimen/text_button" />
 		
+		
 		<LinearLayout
 		    android:id="@+id/panelCertificacion"
 		    android:layout_width="fill_parent"
@@ -816,6 +817,8 @@
 		    android:layout_weight="1"
 		    android:background="#FFFFFFFF"
 		    android:orientation="vertical" >
+				
+		    
 			
 				<LinearLayout
 					    android:id="@+id/panelCertificacion1"
@@ -826,7 +829,7 @@
 					    android:orientation="vertical">
 					
 						<Button
-					        android:id="@+id/ButtonBuscar"
+					        android:id="@+id/ButtonCertificar"
 					        android:layout_width="wrap_content"
 					        android:layout_height="45dp"			        
 					        android:drawableLeft="@drawable/ic_certificar"
@@ -836,6 +839,8 @@
 					        android:text="Certificar" />
 						
 				</LinearLayout>
+				
+				
 					
 				<LinearLayout
 				    android:id="@+id/panelCertificacion2"
@@ -844,13 +849,16 @@
 				    android:gravity="center"
 				    android:layout_marginTop="-60dp"
 				    android:orientation="vertical">
-						
+					
+		
 				    <TableLayout
 				        android:layout_width="match_parent"
 				        android:layout_height="wrap_content" >
 						
+				        
+						
 					    <TableRow
-				            android:id="@+id/tableRow1"
+				            android:id="@+id/Cert0"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            >
@@ -864,119 +872,89 @@
 								android:text="Señal Wifi:" />
 								
 							<TextView 
-							    android:id="@+id/TipoPlanta" 
+							    android:id="@+id/NombreWifi" 
 							    android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="40dp"
 								android:layout_marginTop="5dp"
 								android:text="Nombre Wifi" />
 							
-							<ImageButton
+							<ImageView
 		                        android:id="@+id/imageButton1"
 		                        android:layout_width="match_parent"
 		                        android:layout_height="match_parent"
 		                        android:background="@drawable/tabla"
 		                        android:layout_marginLeft="30dp"
 		                        android:layout_marginTop="3dp"
-		                        android:onClick="show_instalacion"
 		                        android:src="@drawable/ok" />
 							
 						</TableRow>
 						
-				        <!--  Linea Horizontal -->
-					    <LinearLayout
-						    android:id="@+id/panelLinea1"
-						    android:orientation="horizontal"
-				            android:layout_width="fill_parent"
-							android:layout_height="1dp"
-							android:layout_marginLeft="25dp"
-				            android:layout_marginRight="25dp"
-				            android:background="#bdbdbd"
-				            android:layout_marginTop="5dp"
-				            android:layout_marginBottom="5dp" >
-			        	</LinearLayout>
-			        	
-					    <TableRow
-				            android:id="@+id/tableRow1"
+					     <TableRow
+				            android:id="@+id/Cert1"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            >
-						
-							<TextView 
-							    android:id="@+id/ParExterno" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="28dp"
-								android:layout_marginTop="5dp"
-								android:text="Red Fija:" />
-								
-							<TextView 
-							    android:id="@+id/TipoPlanta" 
+							
+					         <TextView 
+							    android:id="@+id/tBajada1" 
 							    android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="40dp"
 								android:layout_marginTop="5dp"
-								android:text="(32) 2212442" />
-							
-							<ImageButton
-		                        android:id="@+id/imageButton1"
+								android:text="Bajada:" />
+					         
+					         <TextView 
+							    android:id="@+id/tBajada" 
+							    android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginLeft="40dp"
+								android:layout_marginTop="5dp"
+								android:text="XX Mbps" />
+					         
+					         <ImageView
+		                        android:id="@+id/imageButton11"
 		                        android:layout_width="match_parent"
 		                        android:layout_height="match_parent"
 		                        android:background="@drawable/tabla"
 		                        android:layout_marginLeft="30dp"
 		                        android:layout_marginTop="3dp"
-		                        android:onClick="show_instalacion"
-		                        android:src="@drawable/error" />
-							
-						</TableRow>
-						
-				        <!--  Linea Horizontal -->
-					    <LinearLayout
-						    android:id="@+id/panelLinea1"
-						    android:orientation="horizontal"
-				            android:layout_width="fill_parent"
-							android:layout_height="1dp"
-							android:layout_marginLeft="25dp"
-				            android:layout_marginRight="25dp"
-				            android:background="#bdbdbd"
-				            android:layout_marginTop="5dp"
-				            android:layout_marginBottom="5dp" >
-			        	</LinearLayout>
-			        	
-					    <TableRow
-				            android:id="@+id/tableRow1"
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            >
-						
-							<TextView 
-							    android:id="@+id/Armario" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="28dp"
-								android:layout_marginTop="5dp"
-								android:text="Señal 3G:" />
-								
-							<TextView 
-							    android:id="@+id/TipoPlanta" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="40dp"
-								android:layout_marginTop="5dp"
-								android:text="Ruido" />
-							
-							<ImageButton
-		                        android:id="@+id/imageButton1"
-		                        android:layout_width="match_parent"
-		                        android:layout_height="match_parent"
-		                        android:background="@drawable/tabla"
-		                        android:layout_marginLeft="30dp"
-		                        android:layout_marginTop="3dp"
-		                        android:onClick="show_instalacion"
 		                        android:src="@drawable/ok" />
+				         </TableRow>
+				         
+					     <TableRow
+				            android:id="@+id/Cert2"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            >
 							
+					         <TextView 
+							    android:id="@+id/tSubida1" 
+							    android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginLeft="40dp"
+								android:layout_marginTop="5dp"
+								android:text="Subida:" />
+					         
+					         <TextView 
+							    android:id="@+id/tSubida" 
+							    android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginLeft="40dp"
+								android:layout_marginTop="5dp"
+								android:text="XX Mbps" />
+					         
+					         <ImageView
+		                        android:id="@+id/imageButton11"
+		                        android:layout_width="match_parent"
+		                        android:layout_height="match_parent"
+		                        android:background="@drawable/tabla"
+		                        android:layout_marginLeft="30dp"
+		                        android:layout_marginTop="3dp"
+		                        android:src="@drawable/ok" />
+					         
 							
-						</TableRow>
+				         </TableRow>
 						
 				        <!--  Linea Horizontal -->
 					    <LinearLayout
@@ -991,41 +969,171 @@
 				            android:layout_marginBottom="5dp" >
 			        	</LinearLayout>
 			        	
-					    <TableRow
-				            android:id="@+id/tableRow1"
+						    <TableRow
+					            android:id="@+id/Cert3_0"
+					            android:layout_width="wrap_content"
+					            android:layout_height="wrap_content"
+					            >
+							
+								<TextView 
+								    android:id="@+id/ParExterno" 
+								    android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="28dp"
+									android:layout_marginTop="5dp"
+									android:text="Red Fija:" />
+									
+								<TextView 
+								    android:id="@+id/NroTelefono" 
+								    android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="40dp"
+									android:layout_marginTop="5dp"
+									android:text="(XX) XXXXXXX" />
+								
+								<ImageView
+			                        android:id="@+id/nro_telefono_ok"
+			                        android:layout_width="match_parent"
+			                        android:layout_height="match_parent"
+			                        android:background="@drawable/tabla"
+			                        android:layout_marginLeft="30dp"
+			                        android:layout_marginTop="3dp"
+			                        android:src="@drawable/error" />
+								
+							</TableRow>
+							
+						    <TableRow
+				            android:id="@+id/Cert3_1"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            >
-						
-							<TextView 
-							    android:id="@+id/Armario" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="28dp"
-								android:layout_marginTop="5dp"
-								android:text="Señal 3G:" />
-								
-							<TextView 
-							    android:id="@+id/TipoPlanta" 
+							
+					         <TextView 
+							    android:id="@+id/tItem1" 
 							    android:layout_width="wrap_content"
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="40dp"
 								android:layout_marginTop="5dp"
-								android:text="Intensidad" />
-							
-							<ImageButton
-		                        android:id="@+id/imageButton1"
+								android:text="Item 1:" />
+					         
+					         <TextView 
+							    android:id="@+id/tValor1" 
+							    android:layout_width="wrap_content"
+								android:layout_height="wrap_content"
+								android:layout_marginLeft="40dp"
+								android:layout_marginTop="5dp"
+								android:text="Valor 1" />
+					         
+					         <ImageView
+		                        android:id="@+id/imageButton11"
 		                        android:layout_width="match_parent"
 		                        android:layout_height="match_parent"
 		                        android:background="@drawable/tabla"
 		                        android:layout_marginLeft="30dp"
 		                        android:layout_marginTop="3dp"
-		                        android:onClick="show_instalacion"
-		                        android:src="@drawable/warning" />
+		                        android:src="@drawable/ok" />
+				         </TableRow>
+				         
+					     
 							
-						</TableRow>
-			        	
-					</TableLayout>
+					        <!--  Linea Horizontal -->
+						    <LinearLayout
+							    android:id="@+id/panelLinea1"
+							    android:orientation="horizontal"
+					            android:layout_width="fill_parent"
+								android:layout_height="1dp"
+								android:layout_marginLeft="25dp"
+					            android:layout_marginRight="25dp"
+					            android:background="#bdbdbd"
+					            android:layout_marginTop="5dp"
+					            android:layout_marginBottom="5dp" >
+				        	</LinearLayout>
+				        	
+						    <TableRow
+					            android:id="@+id/tableRow1"
+					            android:layout_width="wrap_content"
+					            android:layout_height="wrap_content"
+					            >
+							
+								<TextView 
+								    android:id="@+id/Armario" 
+								    android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="28dp"
+									android:layout_marginTop="5dp"
+									android:text="Señal 3G:" />
+									
+								<TextView 
+								    android:id="@+id/TipoPlanta" 
+								    android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="40dp"
+									android:layout_marginTop="5dp"
+									android:text="Ruido" />
+								
+								<ImageButton
+			                        android:id="@+id/imageButton1"
+			                        android:layout_width="match_parent"
+			                        android:layout_height="match_parent"
+			                        android:background="@drawable/tabla"
+			                        android:layout_marginLeft="30dp"
+			                        android:layout_marginTop="3dp"
+			                        android:onClick="show_instalacion"
+			                        android:src="@drawable/ok" />
+								
+								
+							</TableRow>
+							
+					        <!--  Linea Horizontal -->
+						    <LinearLayout
+							    android:id="@+id/panelLinea1"
+							    android:orientation="horizontal"
+					            android:layout_width="fill_parent"
+								android:layout_height="1dp"
+								android:layout_marginLeft="25dp"
+					            android:layout_marginRight="25dp"
+					            android:background="#bdbdbd"
+					            android:layout_marginTop="5dp"
+					            android:layout_marginBottom="5dp" >
+				        	</LinearLayout>
+				        	
+						    <TableRow
+					            android:id="@+id/tableRow1"
+					            android:layout_width="wrap_content"
+					            android:layout_height="wrap_content"
+					            >
+							
+								<TextView 
+								    android:id="@+id/Armario" 
+								    android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="28dp"
+									android:layout_marginTop="5dp"
+									android:text="Señal 3G:" />
+									
+								<TextView 
+								    android:id="@+id/TipoPlanta" 
+								    android:layout_width="wrap_content"
+									android:layout_height="wrap_content"
+									android:layout_marginLeft="40dp"
+									android:layout_marginTop="5dp"
+									android:text="Intensidad" />
+								
+								<ImageButton
+			                        android:id="@+id/imageButton1"
+			                        android:layout_width="match_parent"
+			                        android:layout_height="match_parent"
+			                        android:background="@drawable/tabla"
+			                        android:layout_marginLeft="30dp"
+			                        android:layout_marginTop="3dp"
+			                        android:onClick="show_instalacion"
+			                        android:src="@drawable/warning" />
+								
+							</TableRow>
+				        	
+						</TableLayout>
+					
+				    
 					
 				    <LinearLayout
 					    android:id="@+id/panelCertificacion3"
@@ -1046,15 +1154,12 @@
 					        android:text="Finalizar" />
 						
 					</LinearLayout>
-						
-						
 				</LinearLayout>
-			
+				
 		</LinearLayout>
-         
-         	
-	
 	</LinearLayout>
+	
+		
 	
     <RelativeLayout
         android:id="@+id/linearLayout3"

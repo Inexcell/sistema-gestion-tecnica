@@ -169,6 +169,7 @@
             </TableRow>
         </TableLayout>
         
+    <!-- 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="50dp"
@@ -193,5 +194,6 @@
                 android:text="@string/certificar_wifi" />
 
 		</LinearLayout>
+	-->
     
 </RelativeLayout>

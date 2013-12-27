@@ -85,11 +85,19 @@
 				        android:text="" />
 				    
 				    <TextView
+				        android:id="@+id/tup"
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content"
+				        android:text="" />
+				    
+				    
+				    <TextView
 				        android:id="@+id/test"
 				        android:layout_width="fill_parent"
 				        android:layout_height="wrap_content"
 				        android:text="" />
 				    
+				    				    
 				    
                  
                  
