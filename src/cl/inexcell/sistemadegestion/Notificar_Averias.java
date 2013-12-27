@@ -69,14 +69,25 @@ public class Notificar_Averias extends Activity {
 	
 	/** Boton Guardar Información **/
 	public void guardarInformacion (View view){
+		
+		if(et.getText().toString() == ""){
+			Toast.makeText(getApplicationContext(), "Debe ingresar una observación.", Toast.LENGTH_LONG).show();
+			return;
+		}
+		if(b == null){
+			Toast.makeText(getApplicationContext(), "Debe tomar una fotografía.", Toast.LENGTH_LONG).show();
+			return;
+		}
+		
 		observacion = et.getText().toString();
 		objeto = SpinnerText[s.getSelectedItemPosition()].toString();
 		foto = b;
 		
 		Drawable d = new BitmapDrawable(getResources(), b);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(SpinnerText[s.getSelectedItemPosition()]);
-        builder.setMessage(et.getText());
+        builder.setTitle(SpinnerText[s.getSelectedItemPosition()]+":\n"+et.getText());
+        builder.setMessage("Está todo correcto?");
+        
         builder.setIcon(d);
         
         AlertDialog alert = builder.create();
