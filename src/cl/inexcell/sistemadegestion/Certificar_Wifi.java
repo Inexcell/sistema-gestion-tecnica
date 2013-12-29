@@ -23,6 +23,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import cl.inexcell.sistemadegestion.webservices.SoapRequestMovistar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -49,10 +50,11 @@ public class Certificar_Wifi extends Activity {
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	public static final int DIALOG_DOWNLOAD_PROGRESS1 = 1;
     private ProgressDialog mProgressDialog, mProgressDialog1;
-    private TextView tdown,tup;
+    private TextView tdown,tup,test_wsdl;
     
     private TextView test;
     private Button startBtn;
+	private Button btnWSDL;
         
     
     public void onCreate(Bundle savedInstanceState) {
@@ -70,10 +72,39 @@ public class Certificar_Wifi extends Activity {
 	   
 	   ///////////////////////////////////////////////////////////////////////////////
 	   
+	   test_wsdl = (TextView)findViewById(R.id.test_wsdl);
+	   btnWSDL = (Button)findViewById(R.id.btnWSDL);
+	   
+	   
+	   btnWSDL.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				
+				
+  				try {
+					String respuesta = SoapRequestMovistar.getCustomer("72", "2462223");
+					
+					test_wsdl.setText(respuesta.toString());
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	  				
+				
+//				TareaWSConsulta tarea = new TareaWSConsulta();
+//			    tarea.execute();		
+			}
+		});
+	   
+	   
+	   
+	   ///////////////////////////////////////////////////////////////////////////////
+	   
 	   TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 	   
 	   test = (TextView)findViewById(R.id.test);
-	   test.setText("\n\nDatos Telefono:\n\nIMEI: "+telephonyManager.getDeviceId()
+	   test.setText("\nDatos Telefono:\nIMEI: "+telephonyManager.getDeviceId()
 			   +"\nIMSI: "+telephonyManager.getSimSerialNumber());
 	   
 	   
@@ -102,16 +133,57 @@ public class Certificar_Wifi extends Activity {
        	});
     }
     
+  //Tarea Asíncrona para llamar al WS de consulta en segundo plano
+  	private class TareaWSConsulta extends AsyncTask<String,Integer,Boolean> {
+  		
+  		protected void onPreExecute() {
+            super.onPreExecute();
+        }
+  		 
+  	    protected Boolean doInBackground(String... params) {
+  	    	
+  	    				
+  			@SuppressWarnings("unused")
+			String respuesta = null;
+  			
+  			try {
+  				respuesta = SoapRequestMovistar.getCustomer("72", "2462223");
+  			} catch (Exception e1) {
+  				e1.printStackTrace();
+  			}		
+
+  	        return true;
+  	    }
+  	    
+  	   
+
+  		protected void onPostExecute(Boolean result) {
+  	    	
+  	    	if (result)
+  	    	{
+  	    		try {
+  	    			test_wsdl.setText("Ok!");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+  	    	}
+  	    	else
+  	    	{
+  	    		test_wsdl.setText("Error!");
+  	    	}
+  	    }
+  	}
+    
         
     // Clase Asincrona para descargar archivo    
     private void startDownload() {
-        String url = "http://alumnos.inf.utfsm.cl/~abastias/test_android/test.jpg";
+        String url = "http://alumnos.inf.utfsm.cl/~abastias/upload/upload/test.jpg";
         new DownloadFileAsync().execute(url);
     }
     
     // Clase Asincrona para subir archivo
     private void startUpload() {
-    	String archivo_seleccionado = "/sdcard/asd.jpg";
+    	String archivo_seleccionado = "/sdcard/test.jpg";
     	new UploadFileTask(Certificar_Wifi.this).execute(archivo_seleccionado);
     }
 
@@ -327,12 +399,13 @@ public class Certificar_Wifi extends Activity {
 	public void muestra_descarga(long tiempo_down) 
 	{
 		//String resultado=String.valueOf(tiempo_down);
-		long size_jpg = 1065297;
+		//long size_jpg = 1065297;
+		long size_jpg = 56237;
 		float bw;
 		bw = (float)(size_jpg*8)/(float) (tiempo_down*1000);
 		DecimalFormat df = new DecimalFormat("0.00");
 		String res_bw = df.format(bw);
-        tdown.setText("\nAncho de Banda:\n\nDescarga: "+res_bw+" Mbps");
+        tdown.setText("\nAncho de Banda:\nDescarga: "+res_bw+" Mbps");
 	}
 	
 	public void muestra_carga(long tiempo_down) 

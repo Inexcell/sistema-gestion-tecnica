@@ -9,5 +9,7 @@
 	<classpathentry kind="lib" path="jar/libs/httpclient-4.2.3.jar"/>
 	<classpathentry kind="lib" path="jar/libs/httpcore-4.2.2.jar"/>
 	<classpathentry kind="lib" path="jar/libs/httpmime-4.2.3.jar"/>
+	<classpathentry kind="lib" path="jar/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

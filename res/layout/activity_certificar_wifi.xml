@@ -67,12 +67,8 @@
                  android:layout_height="match_parent"
                  android:orientation="vertical" >
                  
-                 	<TextView
-				        android:layout_width="fill_parent"
-				        android:layout_height="wrap_content"
-				        android:text="Medir Descarga ...\n\n" />
 				    <Button
-				        android:text="Descargar"
+				        android:text="Certificacion Wifi"
 				        android:id="@+id/startBtn"
 				        android:layout_width="fill_parent"
 				        android:layout_height="wrap_content">
@@ -93,6 +89,19 @@
 				    
 				    <TextView
 				        android:id="@+id/test"
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content"
+				        android:text="" />
+				    
+				    <Button
+				        android:text="Consulta WSDL"
+				        android:id="@+id/btnWSDL"
+				        android:layout_width="fill_parent"
+				        android:layout_height="wrap_content">
+				    </Button>
+				    
+				    <TextView
+				        android:id="@+id/test_wsdl"
 				        android:layout_width="fill_parent"
 				        android:layout_height="wrap_content"
 				        android:text="" />

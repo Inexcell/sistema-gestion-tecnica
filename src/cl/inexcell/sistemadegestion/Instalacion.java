@@ -269,10 +269,6 @@ public class Instalacion extends Activity {
 			
 			Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_LONG).show();
 			
-		
-		
-		
-		
 			
 			// Seleccionar objetos de Botones en Layout
 			b1.setVisibility(View.VISIBLE);
