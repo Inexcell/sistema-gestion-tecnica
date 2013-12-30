@@ -1,4 +1,5 @@
-package cl.inexcell.sistemadegestion.webservices;
+package cl.inexcell.sistemadegestion;
+
 
 import java.io.IOException;
 import java.net.Socket;

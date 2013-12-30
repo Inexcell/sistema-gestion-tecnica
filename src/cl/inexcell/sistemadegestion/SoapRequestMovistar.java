@@ -1,4 +1,5 @@
-package cl.inexcell.sistemadegestion.webservices;
+package cl.inexcell.sistemadegestion;
+
 
 import java.security.KeyStore;
 
@@ -23,11 +24,11 @@ import org.apache.http.util.EntityUtils;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 
+
 public class SoapRequestMovistar {
 	
 	private static			
 	final String URL="https://pcba.telefonicachile.cl:443/smartphone/ws/shark.php";	
-	//final String URL="http://cmn81.gratishosting.cl:80/shark_fijo.php";
 	
 	 private static HttpClient getNewHttpClient() {
 	        try {
@@ -66,34 +67,33 @@ public class SoapRequestMovistar {
 	    envelope.dotNet = false;		
 		envelope.implicitTypes = true;
 		
-	    String bodyOut = 
-	    		"<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">" +
-				"<soapenv:Header/>" +
-				"<soapenv:Body>" +
-				 "<urn:Customer soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">" +
-				  	"<RequestCustomer xsi:type=\"urn:RequestCustomer\">" +
-				  	"<Operation xsi:type=\"urn:OperationType\">" +
-				    "<OperationCode xsi:type=\"xsd:string\">XML-001</OperationCode>" +
-				     "<OperationId xsi:type=\"xsd:string\">?</OperationId>" +
-				      "<!--Optional:-->" +
-				       "<DateTime xsi:type=\"xsd:string\">?</DateTime>" +
-				        "<!--Optional:-->" +
-				         "<IdUser xsi:type=\"xsd:string\">?</IdUser>" +
-				          "<IMEI xsi:type=\"xsd:string\">?</IMEI>" +
-				           "<IMSI xsi:type=\"xsd:string\">?</IMSI>" +
-				         "</Operation>" +
-				         "<Service xsi:type=\"urn:ServiceCustomerIn\">" +
-				            "<Customer xsi:type=\"urn:CustomerIn\">" +
-				               "<Input xsi:type=\"urn:CustomerInData\">" +
-				                  "<Area xsi:type=\"xsd:string\">" + area +"</Area>" +
-				                  "<Phone xsi:type=\"xsd:string\">" + phone + "</Phone>" +
-				               "</Input>" +
-				            "</Customer>" +
-				         "</Service>" +
-				      "</RequestCustomer>" +
-				   "</urn:Customer>" +
-				"</soapenv:Body>" +
-				"</soapenv:Envelope>";
+	    String bodyOut = "<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">" +
+"<soapenv:Header/>" +
+"<soapenv:Body>" +
+ "<urn:Customer soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">" +
+  	"<RequestCustomer xsi:type=\"urn:RequestCustomer\">" +
+  	"<Operation xsi:type=\"urn:OperationType\">" +
+    "<OperationCode xsi:type=\"xsd:string\">?</OperationCode>" +
+     "<OperationId xsi:type=\"xsd:string\">?</OperationId>" +
+      "<!--Optional:-->" +
+       "<DateTime xsi:type=\"xsd:string\">?</DateTime>" +
+        "<!--Optional:-->" +
+         "<IdUser xsi:type=\"xsd:string\">?</IdUser>" +
+          "<IMEI xsi:type=\"xsd:string\">?</IMEI>" +
+           "<IMSI xsi:type=\"xsd:string\">?</IMSI>" +
+         "</Operation>" +
+         "<Service xsi:type=\"urn:ServiceCustomerIn\">" +
+            "<Customer xsi:type=\"urn:CustomerIn\">" +
+               "<Input xsi:type=\"urn:CustomerInData\">" +
+                  "<Area xsi:type=\"xsd:string\">" + area +"</Area>" +
+                  "<Phone xsi:type=\"xsd:string\">" + phone + "</Phone>" +
+               "</Input>" +
+            "</Customer>" +
+         "</Service>" +
+      "</RequestCustomer>" +
+   "</urn:Customer>" +
+"</soapenv:Body>" +
+"</soapenv:Envelope>";
 	    xml = bodyOut;
 	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
 	    se.setContentType("text/xml");	    
@@ -107,3 +107,4 @@ public class SoapRequestMovistar {
 	}
 	
 }
+

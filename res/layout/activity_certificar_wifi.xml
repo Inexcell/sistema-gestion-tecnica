@@ -104,7 +104,7 @@
 				        android:id="@+id/test_wsdl"
 				        android:layout_width="fill_parent"
 				        android:layout_height="wrap_content"
-				        android:text="" />
+				        android:text="Response WSDL!" />
 				    
 				    				    
 				    

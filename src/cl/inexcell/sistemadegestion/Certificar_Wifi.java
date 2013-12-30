@@ -23,7 +23,6 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
-import cl.inexcell.sistemadegestion.webservices.SoapRequestMovistar;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -82,18 +81,18 @@ public class Certificar_Wifi extends Activity {
 			public void onClick(View v) {
 				
 				
-  				try {
-					String respuesta = SoapRequestMovistar.getCustomer("72", "2462223");
-					
-					test_wsdl.setText(respuesta.toString());
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//  				try {
+//					String respuesta = SoapRequestMovistar.getCustomer("72", "2462223");
+//					
+//					test_wsdl.setText(respuesta.toString());
+//				} catch (Exception e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 	  				
 				
-//				TareaWSConsulta tarea = new TareaWSConsulta();
-//			    tarea.execute();		
+				TareaWSConsulta tarea = new TareaWSConsulta();
+			    tarea.execute();		
 			}
 		});
 	   
@@ -134,16 +133,14 @@ public class Certificar_Wifi extends Activity {
     }
     
   //Tarea Asíncrona para llamar al WS de consulta en segundo plano
-  	private class TareaWSConsulta extends AsyncTask<String,Integer,Boolean> {
+  	private class TareaWSConsulta extends AsyncTask<String,Integer,String> {
   		
   		protected void onPreExecute() {
             super.onPreExecute();
         }
   		 
-  	    protected Boolean doInBackground(String... params) {
+  	    protected String doInBackground(String... params) {
   	    	
-  	    				
-  			@SuppressWarnings("unused")
 			String respuesta = null;
   			
   			try {
@@ -152,17 +149,17 @@ public class Certificar_Wifi extends Activity {
   				e1.printStackTrace();
   			}		
 
-  	        return true;
+  	        return respuesta;
   	    }
   	    
   	   
 
-  		protected void onPostExecute(Boolean result) {
+  		protected void onPostExecute(String result) {
   	    	
-  	    	if (result)
+  	    	if (result != null)
   	    	{
   	    		try {
-  	    			test_wsdl.setText("Ok!");
+  	    			test_wsdl.setText(result);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
