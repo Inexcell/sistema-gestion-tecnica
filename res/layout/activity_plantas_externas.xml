@@ -31,7 +31,7 @@
             android:text="@string/certificacion_tecnica" />
         
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/peTipo"
             android:layout_width="200dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="124dp"
@@ -42,8 +42,9 @@
         
 	</LinearLayout>
 	
-    <android.support.v4.view.ViewPager
-        android:id="@+id/viewpager"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="cl.inexcell.sistemadegestion.planta_ext1"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginTop="90dp"
@@ -52,10 +53,7 @@
 	    android:layout_marginRight="10dp"
 	    android:gravity="center"
         android:background="@drawable/fondo1"
-        android:orientation="vertical" >       
-    
-    
-    </android.support.v4.view.ViewPager>
+        android:orientation="vertical" />
 	
     <RelativeLayout
         android:id="@+id/linearLayout3"
@@ -74,6 +72,24 @@
         android:contentDescription="@string/volver"
         android:onClick="volver"
         android:src="@android:drawable/ic_media_rew" />
+
+         <Button
+             android:id="@+id/siguiente"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true"
+             android:layout_alignParentRight="true"
+             android:onClick="next"
+             android:text="Siguiente" />
+
+         <Button
+             android:id="@+id/anterior"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentBottom="true"
+             android:layout_toLeftOf="@+id/siguiente"
+             android:onClick="prev"
+             android:text="Anterior" />
 
     </RelativeLayout>
     
