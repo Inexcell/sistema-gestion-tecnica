@@ -66,7 +66,12 @@
 
 ## Tareas Asincronas
 
-* http://androidsensei.net/aprende-a-subir-archivos-desde-tu-aplicacion-android-a-cualquier-lugar/ 
+* http://androidsensei.net/aprende-a-subir-archivos-desde-tu-aplicacion-android-a-cualquier-lugar/
+
+## Parsing XML
+
+* http://www.java2s.com/Code/Java/XML/ParseanXMLstringUsingDOMandaStringReader.htm
+ 
 
 # Comandos GIT
 

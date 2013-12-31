@@ -48,6 +48,7 @@ public class Certificar_Wifi extends Activity {
 	
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	public static final int DIALOG_DOWNLOAD_PROGRESS1 = 1;
+	public static final int DIALOG_DOWNLOAD_PROGRESS2 = 2;
     private ProgressDialog mProgressDialog, mProgressDialog1;
     private TextView tdown,tup,test_wsdl;
     
@@ -79,20 +80,9 @@ public class Certificar_Wifi extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				
-				
-//  				try {
-//					String respuesta = SoapRequestMovistar.getCustomer("72", "2462223");
-//					
-//					test_wsdl.setText(respuesta.toString());
-//				} catch (Exception e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-	  				
-				
+								
 				TareaWSConsulta tarea = new TareaWSConsulta();
-			    tarea.execute();		
+			    tarea.execute();
 			}
 		});
 	   
@@ -132,11 +122,15 @@ public class Certificar_Wifi extends Activity {
        	});
     }
     
-  //Tarea Asíncrona para llamar al WS de consulta en segundo plano
+    // Tarea Asíncrona para llamar al WS de consulta en segundo plano
   	private class TareaWSConsulta extends AsyncTask<String,Integer,String> {
   		
-  		protected void onPreExecute() {
-            super.onPreExecute();
+  		private final ProgressDialog dialog = new ProgressDialog(Certificar_Wifi.this);
+  		
+		protected void onPreExecute() {
+			this.dialog.setMessage("Consultando Servicio ...");
+		    this.dialog.show();
+            //super.onPreExecute();
         }
   		 
   	    protected String doInBackground(String... params) {
@@ -144,22 +138,32 @@ public class Certificar_Wifi extends Activity {
 			String respuesta = null;
   			
   			try {
-  				respuesta = SoapRequestMovistar.getCustomer("72", "2462223");
+  				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+  				String IMEI = telephonyManager.getDeviceId();
+  				String IMSI =  telephonyManager.getSimSerialNumber();
+  				
+  				respuesta = SoapRequestMovistar.getCustomer("72", "2462223",IMEI,IMSI);
   			} catch (Exception e1) {
   				e1.printStackTrace();
-  			}		
+  			}
 
   	        return respuesta;
   	    }
   	    
-  	   
 
-  		protected void onPostExecute(String result) {
-  	    	
+		protected void onPostExecute(String result) {
+			
+			if (this.dialog.isShowing()) {
+		        this.dialog.dismiss();
+		     }
+  			
   	    	if (result != null)
   	    	{
   	    		try {
-  	    			test_wsdl.setText(result);
+
+  	    			test_wsdl.setText(XMLParser.getCustomer(result));
+  	    			
+  	    			
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -386,7 +390,7 @@ public class Certificar_Wifi extends Activity {
 	            mProgressDialog1.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 	            mProgressDialog1.setCancelable(true);
 	            mProgressDialog1.show();
-	            return mProgressDialog1;
+	            return mProgressDialog1;    
 	        default:
 	            return null;
       
@@ -416,6 +420,12 @@ public class Certificar_Wifi extends Activity {
 		String res_bw = df.format(bw);
         tup.setText("Subida: "+res_bw+" Mbps");
 	}
+	
+	/*
+	 * Parser XML
+	 */
+	
+	
 
 	public void volver(View view) {
     	finish();
