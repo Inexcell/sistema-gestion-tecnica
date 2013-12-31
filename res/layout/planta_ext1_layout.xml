@@ -6,6 +6,7 @@
     android:layout_alignParentLeft="true"
     android:layout_alignParentTop="true"
     android:orientation="vertical"
+    android:background="@drawable/fondo1"
     android:paddingLeft="10dp"
     android:paddingRight="10dp" >
 
@@ -47,13 +48,13 @@
                 android:text="Tipo:" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/peTipo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Armario"
                 android:textColor="#258aaf"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp" />
+                android:textStyle="bold" />
 
         </TableRow>
 
@@ -77,13 +78,13 @@
                 android:text="Dirección:" />
 
             <TextView
-                android:id="@+id/TextView01"
+                android:id="@+id/peDireccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Condell 1190, Valparaíso"
                 android:textColor="#258aaf"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp" />
+                android:textStyle="bold" />
 
         </TableRow>
 
@@ -107,13 +108,13 @@
                 android:text="Factibilidad:   " />
 
             <TextView
-                android:id="@+id/TextView04"
+                android:id="@+id/peFactibilidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Valor Factibilidad"
                 android:textColor="#258aaf"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp" />
+                android:textStyle="bold" />
 
         </TableRow>
 
@@ -137,13 +138,13 @@
                 android:text="Cable:" />
 
             <TextView
-                android:id="@+id/TextView06"
+                android:id="@+id/peCable"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Valor Cable"
                 android:textColor="#258aaf"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp" />
+                android:textStyle="bold" />
 
         </TableRow>
 
@@ -166,13 +167,13 @@
                 android:text="Gabinete:" />
 
             <TextView
-                android:id="@+id/TextView08"
+                android:id="@+id/peGabinete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="Valor Gabinete"
                 android:textColor="#258aaf"
-                android:textStyle="bold"
-                android:layout_marginLeft="10dp" />
+                android:textStyle="bold" />
 
         </TableRow>
 
@@ -210,13 +211,13 @@
                 android:text="Ocupados:" />
 
             <TextView
-                android:id="@+id/TextView12"
+                android:id="@+id/peOcupados"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="3"
                 android:textColor="#258aaf"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView11"
@@ -226,7 +227,7 @@
                 android:layout_marginLeft="20dp" />
 
             <TextView
-                android:id="@+id/TextView10"
+                android:id="@+id/peVacantes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1"
@@ -253,13 +254,13 @@
                 android:text="Reservados:" />
 
             <TextView
-                android:id="@+id/TextView16"
+                android:id="@+id/peReservados"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:text="2"
                 android:textColor="#258aaf"
-                android:textStyle="bold"
-                android:layout_marginLeft="20dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextView15"
@@ -269,7 +270,7 @@
                 android:layout_marginLeft="20dp" />
 
             <TextView
-                android:id="@+id/TextView14"
+                android:id="@+id/peMalos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -280,11 +281,11 @@
     </TableLayout>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/peResultados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Resultado 1 de 2 encontrados)" 
-        android:paddingTop="20dp" />
+        android:paddingTop="20dp"
+        android:text="(Resultado 1 de 2 encontrados)" />
 
     <TextView
         android:id="@+id/textView5"
