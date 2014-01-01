@@ -109,6 +109,63 @@ public class SoapRequestMovistar {
 	    return response;
 	}
 	
+	public static String getModel(String CPE, String Vendor, String IMEI, String IMSI) throws Exception {		
+		final String SOAP_ACTION = "urn:Demo#Model";
+	    String response= null;
+	    String xml = null;
+	    
+	    Date fecha = new Date();
+
+	    HttpClient httpClient = getNewHttpClient();
+	    HttpPost httpPost = new HttpPost(URL);
+
+	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+	    envelope.encodingStyle = SoapSerializationEnvelope.ENC;
+	    envelope.dotNet = false;		
+		envelope.implicitTypes = true;
+		
+	    String bodyOut = 
+			"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+		    "<soapenv:Header/>"+
+		    "<soapenv:Body>"+
+		       "<urn:Model soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+		          "<RequestModel xsi:type=\"urn:RequestModel\">"+
+		             "<Operation xsi:type=\"urn:OperationType\">"+
+		                "<OperationCode xsi:type=\"xsd:string\">XML-003</OperationCode>"+
+		                "<OperationId xsi:type=\"xsd:string\">?</OperationId>"+
+		                "<!--Optional:-->"+
+		                "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		                "<!--Optional:-->"+
+		                "<IdUser xsi:type=\"xsd:string\">?</IdUser>"+
+		                "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+		                "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+		             "</Operation>"+
+		             "<Service xsi:type=\"urn:ServiceModelIn\">"+
+		                "<Model xsi:type=\"urn:ModelIn\">"+
+		                   "<Input xsi:type=\"urn:ModelInData\">"+
+		                      "<CPEType xsi:type=\"xsd:string\">"+CPE+"</CPEType>"+
+		                      "<VendorName xsi:type=\"xsd:string\">"+Vendor+"</VendorName>"+
+		                   "</Input>"+
+		                "</Model>"+
+		             "</Service>"+
+		          "</RequestModel>"+
+		       "</urn:Model>"+
+		    "</soapenv:Body>"+
+		 "</soapenv:Envelope>";
+	    		
+	    xml = bodyOut;
+	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
+	    se.setContentType("text/xml");	    
+	    httpPost.addHeader(SOAP_ACTION, URL);		
+	    
+	    httpPost.setEntity(se);
+	    HttpResponse httpResponse = httpClient.execute(httpPost);
+	    HttpEntity resEntity = httpResponse.getEntity();	    
+	    response = EntityUtils.toString(resEntity);
+	    return response;
+	}
+
+	
 	
 	
 	

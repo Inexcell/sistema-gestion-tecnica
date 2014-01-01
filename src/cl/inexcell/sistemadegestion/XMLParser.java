@@ -56,6 +56,35 @@ public class XMLParser {
 		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static String getModel(String xml) throws ParserConfigurationException, 
+	SAXException, IOException
+	{
+		Vector models = new Vector();
+		
+		String xmlRecords = xml;
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getElementsByTagName("Model");
+		
+		for (int i = 0; i < nodes.getLength(); i++) 
+		{
+			Element element = (Element) nodes.item(i);
+			
+			NodeList name = element.getElementsByTagName("Name");
+			Element line1 = (Element) name.item(0);
+			
+			models.addElement(getCharacterDataFromElement(line1));
+
+		}
+
+		return models.toString();
+		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+	}
 
 
 	// Generico para todas las consultas
