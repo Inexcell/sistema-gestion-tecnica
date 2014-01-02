@@ -239,12 +239,18 @@ public class SoapRequestMovistar {
 	    return response;
 	}
 	
+<<<<<<< HEAD
 	/*
 	 * XML-004: Actualiza Inventario (MODEM/DECO)
 	 */
 	
 	public static String setInventoryUpdate(String Area, String Phone, String CPEType, String CPEModel, String IMEI, String IMSI) throws Exception {		
 		final String SOAP_ACTION = "urn:Demo#InventoryUpdate";
+=======
+	/**Esto Agregue, Revisalo porfa**/
+	public static String getNeighborNode(String Lat, String Lng, String IMEI, String IMSI) throws Exception {		
+		final String SOAP_ACTION = "urn:Demo#OutNeighborNode";
+>>>>>>> d2a1bec5c8004a6cc09a93c21381017b56582d2b
 	    String response= null;
 	    String xml = null;
 	    
@@ -259,6 +265,7 @@ public class SoapRequestMovistar {
 		envelope.implicitTypes = true;
 		
 	    String bodyOut = 
+<<<<<<< HEAD
 		"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
 		   "<soapenv:Header/>"+
 		   "<soapenv:Body>"+
@@ -288,6 +295,37 @@ public class SoapRequestMovistar {
 		      "</urn:InventoryUpdate>"+
 		   "</soapenv:Body>"+
 		"</soapenv:Envelope>";
+=======
+			"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+		    "<soapenv:Header/>"+
+		    "<soapenv:Body>"+
+		       "<urn:NeighborNode soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+		          "<RequestNeighborNode xsi:type=\"urn:RequestModel\">"+
+		             "<Operation xsi:type=\"urn:OperationType\">"+
+		                "<OperationCode xsi:type=\"xsd:string\">XML-010</OperationCode>"+
+		                "<OperationId xsi:type=\"xsd:string\">?</OperationId>"+
+		                "<!--Optional:-->"+
+		                "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		                "<!--Optional:-->"+
+		                "<IdUser xsi:type=\"xsd:string\">?</IdUser>"+
+		                "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+		                "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+		             "</Operation>"+
+		             "<Service xsi:type=\"urn:ServiceNeighborNodeIn\">"+
+		                "<NeighborNode xsi:type=\"urn:NeighborNodeIn\">"+
+		                   "<Input xsi:type=\"urn:NeighborNodeInData\">"+
+		                   		"<Gps xsi:type=\"GPSType\">"+
+				                      "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
+				                      "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
+			                    "</Gps>"+
+				           "</Input>"+
+		                "</NeighborNode>"+
+		             "</Service>"+
+		          "</RequestNeighborNode>"+
+		       "</urn:NeighborNode>"+
+		    "</soapenv:Body>"+
+		 "</soapenv:Envelope>";
+>>>>>>> d2a1bec5c8004a6cc09a93c21381017b56582d2b
 	    		
 	    xml = bodyOut;
 	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
@@ -301,6 +339,7 @@ public class SoapRequestMovistar {
 	    return response;
 	}
 	
+<<<<<<< HEAD
 	/*
 	 * XML-005: Listar elementos de Planta Externa 
 	 */
@@ -371,10 +410,16 @@ public class SoapRequestMovistar {
 			String Pict, String IMEI, String IMSI) throws Exception {
 		
 		final String SOAP_ACTION = "urn:Demo#OutsidePlantUpgrade";
+=======
+	
+	public static String getNotification3g(String Lat, String Lng, String IMEI, String IMSI) throws Exception {		
+		final String SOAP_ACTION = "urn:Demo#OutLocation";
+>>>>>>> d2a1bec5c8004a6cc09a93c21381017b56582d2b
 	    String response= null;
 	    String xml = null;
 	    
 	    Date fecha = new Date();
+<<<<<<< HEAD
 
 	    HttpClient httpClient = getNewHttpClient();
 	    HttpPost httpPost = new HttpPost(URL);
@@ -447,12 +492,19 @@ public class SoapRequestMovistar {
 	    HttpClient httpClient = getNewHttpClient();
 	    HttpPost httpPost = new HttpPost(URL);
 
+=======
+
+	    HttpClient httpClient = getNewHttpClient();
+	    HttpPost httpPost = new HttpPost(URL);
+
+>>>>>>> d2a1bec5c8004a6cc09a93c21381017b56582d2b
 	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 	    envelope.encodingStyle = SoapSerializationEnvelope.ENC;
 	    envelope.dotNet = false;		
 		envelope.implicitTypes = true;
 		
 	    String bodyOut = 
+<<<<<<< HEAD
 		"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
 		   "<soapenv:Header/>"+
 		   "<soapenv:Body>"+
@@ -480,6 +532,44 @@ public class SoapRequestMovistar {
 		      "</urn:CertifyDSL>"+
 		   "</soapenv:Body>"+
 		"</soapenv:Envelope>";
+=======
+			"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+		    "<soapenv:Header/>"+
+		    "<soapenv:Body>"+
+		       "<urn:Notification3g soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+		          "<RequestNotification3g xsi:type=\"urn:RequestModel\">"+
+		             "<Operation xsi:type=\"urn:OperationType\">"+
+		                "<OperationCode xsi:type=\"xsd:string\">XML-008</OperationCode>"+
+		                "<OperationId xsi:type=\"xsd:string\">?</OperationId>"+
+		                "<!--Optional:-->"+
+		                "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		                "<!--Optional:-->"+
+		                "<IdUser xsi:type=\"xsd:string\">?</IdUser>"+
+		                "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+		                "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+		             "</Operation>"+
+		             "<Service xsi:type=\"urn:ServiceNotification3gIn\">"+
+		                "<Notification3g xsi:type=\"urn:Notification3gIn\">"+
+		                   "<Input xsi:type=\"urn:Notification3gInData\">"+
+		                   		"<Gps xsi:type=\"GPSType\">"+
+				                      "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
+				                      "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
+			                    "</Gps>"+
+				                "<Provider>"+""+"</Provider>"+
+			                    "<Parameter xsi:type=\"CertifyParameterType\">"+
+			                    	"<Name xsi:type=\"xsd:string\">"+"?"+"</Name>"+
+			                    	"<Value xsi:type=\"xsd:string\">"+"?"+"</Value>"+
+			                    	"<Code xsi:type=\"xsd:string\">"+"?"+"</Code>"+
+			                    	"<Description xsi:type=\"xsd:string\">"+"?"+"</Description>"+
+				                "</Parameter>"+                   
+				           "</Input>"+
+		                "</NeighborNode>"+
+		             "</Service>"+
+		          "</RequestNeighborNode>"+
+		       "</urn:NeighborNode>"+
+		    "</soapenv:Body>"+
+		 "</soapenv:Envelope>";
+>>>>>>> d2a1bec5c8004a6cc09a93c21381017b56582d2b
 	    		
 	    xml = bodyOut;
 	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
