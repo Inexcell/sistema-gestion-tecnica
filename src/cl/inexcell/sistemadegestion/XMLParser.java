@@ -2,6 +2,7 @@ package cl.inexcell.sistemadegestion;
 
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,11 +19,15 @@ import org.xml.sax.SAXException;
 
 public class XMLParser {
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
+	/*
+	 * XML-001: Parser consultar Cliente
+	 */
+	
 	public static String getCustomer(String xml) throws ParserConfigurationException, 
 														SAXException, IOException
 	{
-		Vector cpe = new Vector();
+		Vector<String> cpe = new Vector<String>();
 		
 		String xmlRecords = xml;
 
@@ -56,11 +61,49 @@ public class XMLParser {
 		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	
+	/*
+	 * XML-002: Obtener Fabricante de Equipo
+	 */
+	
+	public static String getVendor(String xml) throws ParserConfigurationException, 
+	SAXException, IOException
+	{
+		ArrayList<String> models = new ArrayList<String>();
+		
+		String xmlRecords = xml;
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getElementsByTagName("Vendor");
+		
+		for (int i = 0; i < nodes.getLength(); i++) 
+		{
+			Element element = (Element) nodes.item(i);
+			
+			NodeList name = element.getElementsByTagName("Name");
+			Element line1 = (Element) name.item(i);
+			
+			models.add(getCharacterDataFromElement(line1));
+
+		}
+
+		return models.toString();
+		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+	}
+
+	
+	/*
+	 * XML-003: Obtener Fabricante y Modelo (DECO/MODEM)
+	 */
+	
 	public static String getModel(String xml) throws ParserConfigurationException, 
 	SAXException, IOException
 	{
-		Vector models = new Vector();
+		Vector<String> models = new Vector<String>();
 		
 		String xmlRecords = xml;
 		
@@ -87,7 +130,10 @@ public class XMLParser {
 	}
 
 
-	// Generico para todas las consultas
+	/*
+	 * Generico para todas las consultas
+	 */
+	
 	public static String getCharacterDataFromElement(Element e) {
 	    Node child = e.getFirstChild();
 	    if (child instanceof CharacterData) {

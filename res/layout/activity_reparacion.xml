@@ -546,7 +546,7 @@
 							android:layout_height="wrap_content"
 							android:layout_marginLeft="40dp"
 							android:layout_marginTop="5dp"
-							android:text="Equipo DECO" />
+							android:text="--" />
 						
 					</TableRow>
 					
@@ -585,7 +585,7 @@
 							android:layout_height="wrap_content"
 							android:layout_marginLeft="40dp"
 							android:layout_marginTop="5dp"
-							android:text="Modelo 001 XTGPP" />
+							android:text="--" />
 						
 						
 						
@@ -713,7 +713,7 @@
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="40dp"
 								android:layout_marginTop="5dp"
-								android:text="Equipo DECO" />
+								android:text="--" />
 							
 						</TableRow>
 						
@@ -752,7 +752,7 @@
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="40dp"
 								android:layout_marginTop="5dp"
-								android:text="Modelo 001 XTGPP" />
+								android:text="--" />
 							
 							
 							

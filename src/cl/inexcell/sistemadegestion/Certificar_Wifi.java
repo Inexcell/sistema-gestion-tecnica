@@ -143,7 +143,7 @@ public class Certificar_Wifi extends Activity {
   				String IMSI =  telephonyManager.getSimSerialNumber();
   				
 //  			respuesta = SoapRequestMovistar.getCustomer("72", "2462223",IMEI,IMSI);
-  				respuesta = SoapRequestMovistar.getModel("DECO", "Kathrein",IMEI,IMSI);
+  				respuesta = SoapRequestMovistar.getVendor("DECO",IMEI,IMSI);
   				
   			} catch (Exception e1) {
   				e1.printStackTrace();
@@ -164,7 +164,7 @@ public class Certificar_Wifi extends Activity {
   	    		try {
 
   	    			//test_wsdl.setText(XMLParser.getCustomer(result));
-  	    			test_wsdl.setText(XMLParser.getModel(result));
+  	    			test_wsdl.setText(XMLParser.getVendor(result));
   	    			
   	    			
 				} catch (Exception e) {

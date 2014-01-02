@@ -10,6 +10,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,6 +39,7 @@ import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -168,13 +171,13 @@ public class Reparacion extends Activity {
 		        // Comprobamos que se ha pulsado la tecla enter.
 		        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&(keyCode == KeyEvent.KEYCODE_ENTER))
 		        {
-		        		buscar.performClick();
-		        		//Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_LONG).show();
-		        		return true;
-		        }// end if.
+	        		buscar.performClick();
+	        		//Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_LONG).show();
+	        		return true;
+		        }
 		 
-		return false;
-		}// end onKey.
+		        return false;
+			}
 		});
 		
 		
@@ -245,7 +248,8 @@ public class Reparacion extends Activity {
 				
 		Phone = (EditText) findViewById(R.id.txtTelefonoNumero);
 		phone1 = Phone.getText().toString(); 		
-				
+		
+		Consulta_Cliente tarea = new Consulta_Cliente();
 		
 		if(area1.matches("") && phone1.matches(""))
 		{
@@ -262,17 +266,13 @@ public class Reparacion extends Activity {
 		     .show();
 			
 		}
-		else
+		else if(tarea.execute() != null)
 		{
 			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(Area.getWindowToken(), 0);
 			
-			Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_LONG).show();
 			
-		
-		
-		
-		
 			
 			// Seleccionar objetos de Botones en Layout
 			b1.setVisibility(View.VISIBLE);
@@ -529,21 +529,26 @@ public class Reparacion extends Activity {
 	
 	public void mostrar_planta_tvsatelital(final View view){
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Fabricante");
-	    builder.setIcon(R.drawable.ic_fabricante);
-	    builder.setItems(fabricantes, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Reparacion.this, fabricantes[item]+" seleccionado", Toast.LENGTH_SHORT).show();
-	        	tvSatelitalTipo.setText(fabricantes[item]);
-	        	mostrar_equipos_tvsatelital(view);
-	        	
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		Consulta_Modelo_TVSatelital tarea = new Consulta_Modelo_TVSatelital();
+		tarea.execute();
+		
+		
+		
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//	    builder.setTitle("Seleccione Fabricante");
+//	    builder.setIcon(R.drawable.ic_fabricante);
+//	    builder.setItems(fabricantes, new DialogInterface.OnClickListener() {
+//	        public void onClick(DialogInterface dialog, int item) {
+//	            // Do something with the selection
+//	            //mDoneButton.setText(fabricantes[item]);
+//	        	Toast.makeText(Instalacion.this, fabricantes[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+//	        	tvSatelitalTipo.setText(fabricantes[item]);
+//	        	mostrar_equipos_tvsatelital(view);
+//	        	
+//	        }
+//	    });
+//	    AlertDialog alert = builder.create();
+//	    alert.show();
 	}
 	
 	public void mostrar_equipos_tvsatelital(View view){
@@ -979,6 +984,141 @@ public class Reparacion extends Activity {
 		String res_bw = df.format(bw);
         tup.setText(""+res_bw+" Mbps");
 	}
+	
+	// Tarea Asincrona de getCustomer
+  	private class Consulta_Cliente extends AsyncTask<String,Integer,String> {
+  		
+  		private final ProgressDialog dialog = new ProgressDialog(Reparacion.this);
+  		
+		protected void onPreExecute() {
+			this.dialog.setMessage("Consultando Datos del Cliente");
+		    this.dialog.show();
+            //super.onPreExecute();
+        }
+  		 
+  	    protected String doInBackground(String... params) {
+  	    	
+			String respuesta = null;
+  			
+  			try {
+  				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+  				String IMEI = telephonyManager.getDeviceId();
+  				String IMSI =  telephonyManager.getSimSerialNumber();
+  				
+  				//respuesta = SoapRequestMovistar.getCustomer("72", "2462223",IMEI,IMSI);
+  				respuesta = SoapRequestMovistar.getCustomer(Area.getText().toString(), Phone.getText().toString(),IMEI,IMSI);
+  			} catch (Exception e1) {
+  				e1.printStackTrace();
+  			}
+
+  	        return respuesta;
+  	    }
+  	    
+
+		protected void onPostExecute(String result) {
+			
+			if (this.dialog.isShowing()) {
+		        this.dialog.dismiss();
+		     }
+  			
+  	    	if (result != null)
+  	    	{
+  	    		try {
+  	    			String res = XMLParser.getCustomer(result);
+  	    			String res1_1 = res.replace("[", "");
+  	    			String res1_2 = res1_1.replace("]", "");
+  	    			String[] arreglo1 = res1_2.split(",");
+  	    			
+  	    			String[] arreglo2 = arreglo1[1].split(";");
+  	    			String[] arreglo3 = arreglo1[0].split(";");
+  	    			
+  	    			
+  	    			tvSatelitalTipo.setText(arreglo2[0]);
+  	    			tvSatelitalModelo.setText(arreglo2[1]);
+  	    			
+  	    			bandaAnchaTipo.setText(arreglo3[0]);
+  	    			bandaAnchaModelo.setText(arreglo3[1]);
+  	    			
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+  	    	}
+  	    	else
+  	    	{
+  	    		//test_wsdl.setText("Error!");
+  	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+  	    	}
+  	    }
+  	}
+  	
+ // Tarea Asincrona de getCustomer
+   	private class Consulta_Modelo_TVSatelital extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Reparacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Consultando Datos de Fabricante del Equipo");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String respuesta = null;
+   			
+   			try {
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				//respuesta = SoapRequestMovistar.getCustomer("72", "2462223",IMEI,IMSI);
+   				respuesta = SoapRequestMovistar.getModel(tvSatelitalTipo.getText().toString(), tvSatelitalModelo.getText().toString(),IMEI,IMSI);
+   				//respuesta = SoapRequestMovistar.getVendor(tvSatelitalTipo.getText().toString(),IMEI,IMSI);
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}
+
+   	        return respuesta;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }
+   			
+   	    	if (result != null)
+   	    	{
+   	    		try {
+   	    			String res = XMLParser.getModel(result);
+   	    			tvSatelitalModelo.setText(res);
+//   	    			String res1_1 = res.replace("[", "");
+//   	    			String res1_2 = res1_1.replace("]", "");
+//   	    			String[] arreglo1 = res1_2.split(",");
+//   	    			
+//   	    			String[] arreglo2 = arreglo1[1].split(";");
+//   	    			String[] arreglo3 = arreglo1[0].split(";");
+//   	    			
+//					
+//   	    			tvSatelitalTipo.setText(arreglo2[0]);
+//   	    			tvSatelitalModelo.setText(arreglo2[1]);
+//   	    			
+//   	    			bandaAnchaTipo.setText(arreglo3[0]);
+//   	    			bandaAnchaModelo.setText(arreglo3[1]);
+   	    			
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+   	    	}
+   	    	else
+   	    	{
+   	    		//test_wsdl.setText("Error!");
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    	}
+   	    }
+   	}
+
 
 	
 	

@@ -1057,7 +1057,7 @@ public class Instalacion extends Activity {
    		private final ProgressDialog dialog = new ProgressDialog(Instalacion.this);
    		
  		protected void onPreExecute() {
- 			this.dialog.setMessage("Consultando Datos del Equipo");
+ 			this.dialog.setMessage("Consultando Datos de Fabricante del Equipo");
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1073,6 +1073,7 @@ public class Instalacion extends Activity {
    				
    				//respuesta = SoapRequestMovistar.getCustomer("72", "2462223",IMEI,IMSI);
    				respuesta = SoapRequestMovistar.getModel(tvSatelitalTipo.getText().toString(), tvSatelitalModelo.getText().toString(),IMEI,IMSI);
+   				//respuesta = SoapRequestMovistar.getVendor(tvSatelitalTipo.getText().toString(),IMEI,IMSI);
    			} catch (Exception e1) {
    				e1.printStackTrace();
    			}
