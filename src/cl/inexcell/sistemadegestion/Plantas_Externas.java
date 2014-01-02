@@ -1,16 +1,28 @@
 package cl.inexcell.sistemadegestion;
 
+import java.util.Timer;
+import java.util.Vector;
+
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Plantas_Externas extends FragmentActivity implements SwipeInterface{
 
@@ -22,6 +34,9 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 			feasibility, site, cable, cabinet, pairFrom, pairOcup, 
 			pairVacant, pairRes, pairBad;
 	
+	private LocationManager locManager;
+	private Location loc;
+	private Vector resutado;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +46,13 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		requestWindowFeature(Window.FEATURE_NO_TITLE);		
 		
 		setContentView(R.layout.activity_plantas_externas);
-		
+		declararvariables();	
+			
+		locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+	    
+	    
+		Log.i(TAG, loc.toString());
 		buscar_plantas_externas();
 		
 		ActivitySwipeDetector swipe = new ActivitySwipeDetector(this,this);		
@@ -39,13 +60,15 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		FragmentTransaction t = fm.beginTransaction();
 		frag = fm.findFragmentById(R.id.fragment);
 		frag.getView().setOnTouchListener(swipe);
+		cambiar();
 		t.commit();
-		declararvariables();
-		
+			
 		
 	}
 	
+	/**Aqui se hace el request y los resultados son guardados en strings[] para cada variable**/
 	public void buscar_plantas_externas(){
+		
 		cantidad = 4;
 		id = new String[cantidad];
 		type = new String[cantidad];
@@ -62,10 +85,11 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		pairVacant= new String[cantidad];
 		pairRes= new String[cantidad];
 		pairBad= new String[cantidad];
+		
 		String[] tipos = {"Armario","Caja","Tablero"};
 		for(int i = 0;i<cantidad;i++){
 			id[i] = String.valueOf(i);
-			type[i] = "tipo "+i;
+			type[i] = tipos[i%3];
 			gps[i] = "asd "+i;
 			addStreet[i]="calle "+i;
 			addNum[i]="num "+i;
@@ -156,5 +180,6 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
         Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(50);
     }
+
 
 }

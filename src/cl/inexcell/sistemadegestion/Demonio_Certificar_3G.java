@@ -115,46 +115,46 @@ public class Demonio_Certificar_3G extends Service{
 		       Log.i(TAG, contenido);
 		       Looper.loop();
 		       
-		       //crear XML
+		       /**Aqui se deben enviar los datos **/
 		       
-		       /*Looper.prepare();
-		       try {
-		        	
-		        	if (Environment.getExternalStorageState().equals("mounted")) {
-		        		sdCard = Environment.getExternalStorageDirectory();
-		        		FileWriter fw = null;
-		        		try {
-		        			directory = new File(sdCard.getAbsolutePath()
-		        					+ "/SGT");
-		        			if(!directory.exists())		        					
-		        					directory.mkdirs();
-							
-							
-							file = new File(directory, "3GCERT.txt");
-							
-							
-		        			fw = new FileWriter(file,true);
-		        			BufferedWriter out = new BufferedWriter(fw);
-		        			out.write(contenido);
-		        			out.close();
-	 	 
-						} catch (IOException e) {
-							// TODO: handle exception
-							e.printStackTrace();
-							Log.e(TAG,"Error al escribir:"+e);
-							Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
-						}
-		        	}
-		        }catch (Exception ie) {
-		        	// TODO: handle exception
-
-					Log.e(TAG,"Error:"+ie);
-		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
-		        }
-		       Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
-
-				Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
-		        Looper.loop(); */
+//		       Looper.prepare();
+//		       try {
+//		        	
+//		        	if (Environment.getExternalStorageState().equals("mounted")) {
+//		        		sdCard = Environment.getExternalStorageDirectory();
+//		        		FileWriter fw = null;
+//		        		try {
+//		        			directory = new File(sdCard.getAbsolutePath()
+//		        					+ "/SGT");
+//		        			if(!directory.exists())		        					
+//		        					directory.mkdirs();
+//							
+//							
+//							file = new File(directory, "3GCERT.txt");
+//							
+//							
+//		        			fw = new FileWriter(file,true);
+//		        			BufferedWriter out = new BufferedWriter(fw);
+//		        			out.write(contenido);
+//		        			out.close();
+//	 	 
+//						} catch (IOException e) {
+//							// TODO: handle exception
+//							e.printStackTrace();
+//							Log.e(TAG,"Error al escribir:"+e);
+//							Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
+//						}
+//		        	}
+//		        }catch (Exception ie) {
+//		        	// TODO: handle exception
+//
+//					Log.e(TAG,"Error:"+ie);
+//		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
+//		        }
+//		       Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
+//
+//				Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
+//		        Looper.loop();
 		        
 			 }
 			      
