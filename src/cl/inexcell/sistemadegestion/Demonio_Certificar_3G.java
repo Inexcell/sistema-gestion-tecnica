@@ -62,7 +62,7 @@ public class Demonio_Certificar_3G extends Service{
 						 ejecutarTarea();
 					 }      
 				 }
-				 , 1000*10, 1000 * 60 * 5); //Tiempo en milisegundos son 60 minutos en este caso
+				 , 1000*10, 1000 * 60 *5); //Tiempo en milisegundos son 60 minutos en este caso
 	 	}
 	 
 	 private void ejecutarTarea(){
@@ -113,13 +113,13 @@ public class Demonio_Certificar_3G extends Service{
 		        					"; INTENSIDAD: " + strength+"\n";
 		       Looper.prepare();
 		       Log.i(TAG, contenido);
-		       Looper.loop();
+		       
 		       
 		       /**Aqui se deben enviar los datos **/
 		       
-		       Looper.prepare();
+		      
 		       try {
-		        	
+		        	Log.i(TAG, "Comenzando la escritura");
 		        	if (Environment.getExternalStorageState().equals("mounted")) {
 		        		sdCard = Environment.getExternalStorageDirectory();
 		        		FileWriter fw = null;
@@ -151,7 +151,7 @@ public class Demonio_Certificar_3G extends Service{
 					Log.e(TAG,"Error:"+ie);
 		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
 		        }
-		       Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
+		       //Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
 
 				Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
 		        Looper.loop();
