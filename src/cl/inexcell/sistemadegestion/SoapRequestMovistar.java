@@ -164,7 +164,131 @@ public class SoapRequestMovistar {
 	    response = EntityUtils.toString(resEntity);
 	    return response;
 	}
+	
+	/**Esto Agregue, Revisalo porfa**/
+	public static String getNeighborNode(String Lat, String Lng, String IMEI, String IMSI) throws Exception {		
+		final String SOAP_ACTION = "urn:Demo#OutNeighborNode";
+	    String response= null;
+	    String xml = null;
+	    
+	    Date fecha = new Date();
 
+	    HttpClient httpClient = getNewHttpClient();
+	    HttpPost httpPost = new HttpPost(URL);
+
+	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+	    envelope.encodingStyle = SoapSerializationEnvelope.ENC;
+	    envelope.dotNet = false;		
+		envelope.implicitTypes = true;
+		
+	    String bodyOut = 
+			"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+		    "<soapenv:Header/>"+
+		    "<soapenv:Body>"+
+		       "<urn:NeighborNode soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+		          "<RequestNeighborNode xsi:type=\"urn:RequestModel\">"+
+		             "<Operation xsi:type=\"urn:OperationType\">"+
+		                "<OperationCode xsi:type=\"xsd:string\">XML-010</OperationCode>"+
+		                "<OperationId xsi:type=\"xsd:string\">?</OperationId>"+
+		                "<!--Optional:-->"+
+		                "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		                "<!--Optional:-->"+
+		                "<IdUser xsi:type=\"xsd:string\">?</IdUser>"+
+		                "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+		                "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+		             "</Operation>"+
+		             "<Service xsi:type=\"urn:ServiceNeighborNodeIn\">"+
+		                "<NeighborNode xsi:type=\"urn:NeighborNodeIn\">"+
+		                   "<Input xsi:type=\"urn:NeighborNodeInData\">"+
+		                   		"<Gps xsi:type=\"GPSType\">"+
+				                      "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
+				                      "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
+			                    "</Gps>"+
+				           "</Input>"+
+		                "</NeighborNode>"+
+		             "</Service>"+
+		          "</RequestNeighborNode>"+
+		       "</urn:NeighborNode>"+
+		    "</soapenv:Body>"+
+		 "</soapenv:Envelope>";
+	    		
+	    xml = bodyOut;
+	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
+	    se.setContentType("text/xml");	    
+	    httpPost.addHeader(SOAP_ACTION, URL);		
+	    
+	    httpPost.setEntity(se);
+	    HttpResponse httpResponse = httpClient.execute(httpPost);
+	    HttpEntity resEntity = httpResponse.getEntity();	    
+	    response = EntityUtils.toString(resEntity);
+	    return response;
+	}
+	
+	
+	public static String getNotification3g(String Lat, String Lng, String IMEI, String IMSI) throws Exception {		
+		final String SOAP_ACTION = "urn:Demo#OutLocation";
+	    String response= null;
+	    String xml = null;
+	    
+	    Date fecha = new Date();
+
+	    HttpClient httpClient = getNewHttpClient();
+	    HttpPost httpPost = new HttpPost(URL);
+
+	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+	    envelope.encodingStyle = SoapSerializationEnvelope.ENC;
+	    envelope.dotNet = false;		
+		envelope.implicitTypes = true;
+		
+	    String bodyOut = 
+			"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+		    "<soapenv:Header/>"+
+		    "<soapenv:Body>"+
+		       "<urn:Notification3g soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+		          "<RequestNotification3g xsi:type=\"urn:RequestModel\">"+
+		             "<Operation xsi:type=\"urn:OperationType\">"+
+		                "<OperationCode xsi:type=\"xsd:string\">XML-008</OperationCode>"+
+		                "<OperationId xsi:type=\"xsd:string\">?</OperationId>"+
+		                "<!--Optional:-->"+
+		                "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		                "<!--Optional:-->"+
+		                "<IdUser xsi:type=\"xsd:string\">?</IdUser>"+
+		                "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+		                "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+		             "</Operation>"+
+		             "<Service xsi:type=\"urn:ServiceNotification3gIn\">"+
+		                "<Notification3g xsi:type=\"urn:Notification3gIn\">"+
+		                   "<Input xsi:type=\"urn:Notification3gInData\">"+
+		                   		"<Gps xsi:type=\"GPSType\">"+
+				                      "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
+				                      "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
+			                    "</Gps>"+
+				                "<Provider>"+""+"</Provider>"+
+			                    "<Parameter xsi:type=\"CertifyParameterType\">"+
+			                    	"<Name xsi:type=\"xsd:string\">"+"?"+"</Name>"+
+			                    	"<Value xsi:type=\"xsd:string\">"+"?"+"</Value>"+
+			                    	"<Code xsi:type=\"xsd:string\">"+"?"+"</Code>"+
+			                    	"<Description xsi:type=\"xsd:string\">"+"?"+"</Description>"+
+				                "</Parameter>"+                   
+				           "</Input>"+
+		                "</NeighborNode>"+
+		             "</Service>"+
+		          "</RequestNeighborNode>"+
+		       "</urn:NeighborNode>"+
+		    "</soapenv:Body>"+
+		 "</soapenv:Envelope>";
+	    		
+	    xml = bodyOut;
+	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
+	    se.setContentType("text/xml");	    
+	    httpPost.addHeader(SOAP_ACTION, URL);		
+	    
+	    httpPost.setEntity(se);
+	    HttpResponse httpResponse = httpClient.execute(httpPost);
+	    HttpEntity resEntity = httpResponse.getEntity();	    
+	    response = EntityUtils.toString(resEntity);
+	    return response;
+	}
 	
 	
 	

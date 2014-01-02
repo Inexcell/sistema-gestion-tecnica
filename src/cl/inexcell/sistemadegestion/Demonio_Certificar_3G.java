@@ -1,6 +1,9 @@
 package cl.inexcell.sistemadegestion;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -12,6 +15,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.IBinder;
 import android.os.Looper;
 import android.telephony.PhoneStateListener;
@@ -19,7 +23,7 @@ import android.telephony.SignalStrength;
 import android.telephony.TelephonyManager;
 //import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
-//import android.widget.Toast;
+import android.widget.Toast;
 
 
 public class Demonio_Certificar_3G extends Service{
@@ -33,7 +37,6 @@ public class Demonio_Certificar_3G extends Service{
 	private MyPhoneStateListener MyListener;
 	private int netType;
 	
-	@SuppressWarnings("unused")
 	private File directory;
 	private Criteria req;
 	
@@ -59,14 +62,13 @@ public class Demonio_Certificar_3G extends Service{
 						 ejecutarTarea();
 					 }      
 				 }
-				 , 1000*30, 1000 * 60); //Tiempo en milisegundos son 60 minutos en este caso
+				 , 1000*15, 1000 * 60 * 5); //Tiempo en milisegundos son 60 minutos en este caso
 	 	}
 	 
 	 private void ejecutarTarea(){
 		 Thread t = new Thread(new Runnable() {
 			 public void run() {
 				
-				@SuppressWarnings("unused")
 				File sdCard, file = null;
 				Log.i(TAG, "DENTRO DEL TASK");
 	        	String NT = "Desconocido";
@@ -102,15 +104,21 @@ public class Demonio_Certificar_3G extends Service{
         			latitud = String.valueOf(loc.getLatitude());
         			longitud = String.valueOf(loc.getLongitude());
         		}
-				String p = loc.getProvider();
+				//String p = loc.getProvider();
 				/** ESCRIBIR EN ARCHIVO*/				
-		       String contenido = p+"\nLAT: " + latitud +
+		       String contenido = "\nLAT: " + latitud +
 		        					"; LON: " + longitud +
 		        					"; PROV: " + operador + 
 		        					"; TIPORED: " + NT +
 		        					"; INTENSIDAD: " + strength+"\n";
-		        Looper.prepare();
-		       /* try {
+		       Looper.prepare();
+		       Log.i(TAG, contenido);
+		       Looper.loop();
+		       
+		       //crear XML
+		       
+		       /*Looper.prepare();
+		       try {
 		        	
 		        	if (Environment.getExternalStorageState().equals("mounted")) {
 		        		sdCard = Environment.getExternalStorageDirectory();
@@ -142,11 +150,11 @@ public class Demonio_Certificar_3G extends Service{
 
 					Log.e(TAG,"Error:"+ie);
 		        	Toast.makeText(getApplicationContext(), "ERROR AL ESCRIBIR", Toast.LENGTH_LONG).show();
-		        }*/
-		       // Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
+		        }
+		       Toast.makeText(getApplicationContext(), contenido, Toast.LENGTH_LONG).show();
 
 				Log.i(TAG,"Archivo actualizado-> '"+contenido+"'.");
-		        Looper.loop(); 
+		        Looper.loop(); */
 		        
 			 }
 			      
@@ -196,7 +204,7 @@ public void setup3G(){
 			
 			
 		    provider = locManager.getBestProvider(req, false);
-		    loc = locManager.getLastKnownLocation(provider);
+		    loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		    //Nos registramos para recibir actualizaciones de la posición
 		    locListener = new LocationListener() {
 		        public void onLocationChanged(Location location) {
