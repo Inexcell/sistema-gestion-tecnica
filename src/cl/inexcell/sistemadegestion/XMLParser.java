@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.CharacterData;
 import org.w3c.dom.Document;
@@ -19,6 +20,40 @@ import org.xml.sax.SAXException;
 
 public class XMLParser {
 	
+	/*
+	 * Parser Return Code
+	 */
+	
+	public static String getReturnCode(String xml) throws ParserConfigurationException, 
+	SAXException, IOException, XPathExpressionException
+	{
+		ArrayList<String> models = new ArrayList<String>();
+        		
+        String xmlRecords = xml;
+        
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(xmlRecords));
+        
+        Document doc = db.parse(is);
+        NodeList nodes = doc.getElementsByTagName("Return");
+        
+        //for (int i = 0; i < nodes.getLength(); i++) 
+    	for (int i = 0; i < 1; i++)
+        {
+                Element element = (Element) nodes.item(i);
+                NodeList name = element.getElementsByTagName("Code");
+                
+                for(int j=0; j< name.getLength(); j++){
+                	Element line1 = (Element) name.item(j);
+                	models.add(getCharacterDataFromElement(line1));
+                }
+        }
+
+        return models.toString();
+        //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+	}
+
 	
 	/*
 	 * XML-001: Parser consultar Cliente
@@ -66,33 +101,34 @@ public class XMLParser {
 	 * XML-002: Obtener Fabricante de Equipo
 	 */
 	
-	public static String getVendor(String xml) throws ParserConfigurationException, 
-	SAXException, IOException
+	public static ArrayList<String> getVendor(String xml) throws ParserConfigurationException, 
+	SAXException, IOException, XPathExpressionException
 	{
 		ArrayList<String> models = new ArrayList<String>();
-		
-		String xmlRecords = xml;
-		
-		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		InputSource is = new InputSource();
-		is.setCharacterStream(new StringReader(xmlRecords));
-		
-		Document doc = db.parse(is);
-		NodeList nodes = doc.getElementsByTagName("Vendor");
-		
-		for (int i = 0; i < nodes.getLength(); i++) 
-		{
-			Element element = (Element) nodes.item(i);
-			
-			NodeList name = element.getElementsByTagName("Name");
-			Element line1 = (Element) name.item(i);
-			
-			models.add(getCharacterDataFromElement(line1));
+        
+        String xmlRecords = xml;
+        
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(xmlRecords));
+        
+        Document doc = db.parse(is);
+        NodeList nodes = doc.getElementsByTagName("Vendor");
+        
+        //for (int i = 0; i < nodes.getLength(); i++) 
+    	for (int i = 0; i < 1; i++)
+        {
+                Element element = (Element) nodes.item(i);
+                NodeList name = element.getElementsByTagName("Name");
+                
+                for(int j=0; j< name.getLength(); j++){
+                	Element line1 = (Element) name.item(j);
+                	models.add(getCharacterDataFromElement(line1));
+                }
+        }
 
-		}
-
-		return models.toString();
-		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+        return models;
+        //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 
 	
@@ -100,40 +136,42 @@ public class XMLParser {
 	 * XML-003: Obtener Fabricante y Modelo (DECO/MODEM)
 	 */
 	
-	public static String getModel(String xml) throws ParserConfigurationException, 
+	public static ArrayList<String> getModel(String xml) throws ParserConfigurationException, 
 	SAXException, IOException
 	{
-		Vector<String> models = new Vector<String>();
-		
-		String xmlRecords = xml;
-		
-		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		InputSource is = new InputSource();
-		is.setCharacterStream(new StringReader(xmlRecords));
-		
-		Document doc = db.parse(is);
-		NodeList nodes = doc.getElementsByTagName("Model");
-		
-		for (int i = 0; i < nodes.getLength(); i++) 
-		{
-			Element element = (Element) nodes.item(i);
-			
-			NodeList name = element.getElementsByTagName("Name");
-			Element line1 = (Element) name.item(0);
-			
-			models.addElement(getCharacterDataFromElement(line1));
+		ArrayList<String> models = new ArrayList<String>();
+        
+        String xmlRecords = xml;
+        
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(xmlRecords));
+        
+        Document doc = db.parse(is);
+        NodeList nodes = doc.getElementsByTagName("Model");
+        
+        //for (int i = 0; i < nodes.getLength(); i++) 
+    	for (int i = 0; i < 1; i++)
+        {
+                Element element = (Element) nodes.item(i);
+                NodeList name = element.getElementsByTagName("Name");
+                
+                for(int j=0; j< name.getLength(); j++){
+                	Element line1 = (Element) name.item(j);
+                	models.add(getCharacterDataFromElement(line1));
+                }
+        }
 
-		}
-
-		return models.toString();
-		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+        return models;
+        //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+
+	
 	public static String getNeighborNode(String xml) throws ParserConfigurationException, 
 														SAXException, IOException
 	{
-		Vector node = new Vector();
+		Vector<String> node = new Vector<String>();
 		
 		String xmlRecords = xml;
 

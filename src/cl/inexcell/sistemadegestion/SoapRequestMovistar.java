@@ -29,7 +29,7 @@ public class SoapRequestMovistar {
 	
 	private static			
 	final String URL="https://pcba.telefonicachile.cl:443/smartphone/ws/shark.php";	
-	
+	//final String URL="http://cmn81.gratishosting.cl:80/shark_fijo.php?wsdl";
 	/*
 	 * Clase Principal de Conexion SSL a WDSL
 	 */
@@ -439,7 +439,7 @@ public class SoapRequestMovistar {
 	 * XML-007: Certificacion DSL
 	 */
 	
-	public static String getCertifyDSL(String Lat, String Lng, String IMEI, String IMSI) throws Exception {		
+	public static String getCertifyDSL(String Area, String Phone, String IMEI, String IMSI) throws Exception {		
 		final String SOAP_ACTION = "urn:Demo#CertifyDSL";
 	    String response= null;
 	    String xml = null;
@@ -455,43 +455,33 @@ public class SoapRequestMovistar {
 		envelope.implicitTypes = true;
 		
 	    String bodyOut = 
-
-			"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
-		    "<soapenv:Header/>"+
-		    "<soapenv:Body>"+
-		       "<urn:Notification3g soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
-		          "<RequestNotification3g xsi:type=\"urn:RequestModel\">"+
-		             "<Operation xsi:type=\"urn:OperationType\">"+
-		                "<OperationCode xsi:type=\"xsd:string\">XML-008</OperationCode>"+
-		                "<OperationId xsi:type=\"xsd:string\">?</OperationId>"+
-		                "<!--Optional:-->"+
-		                "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
-		                "<!--Optional:-->"+
-		                "<IdUser xsi:type=\"xsd:string\">?</IdUser>"+
-		                "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
-		                "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
-		             "</Operation>"+
-		             "<Service xsi:type=\"urn:ServiceNotification3gIn\">"+
-		                "<Notification3g xsi:type=\"urn:Notification3gIn\">"+
-		                   "<Input xsi:type=\"urn:Notification3gInData\">"+
-		                   		"<Gps xsi:type=\"GPSType\">"+
-				                      "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
-				                      "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
-			                    "</Gps>"+
-				                "<Provider>"+""+"</Provider>"+
-			                    "<Parameter xsi:type=\"CertifyParameterType\">"+
-			                    	"<Name xsi:type=\"xsd:string\">"+"?"+"</Name>"+
-			                    	"<Value xsi:type=\"xsd:string\">"+"?"+"</Value>"+
-			                    	"<Code xsi:type=\"xsd:string\">"+"?"+"</Code>"+
-			                    	"<Description xsi:type=\"xsd:string\">"+"?"+"</Description>"+
-				                "</Parameter>"+                   
-				           "</Input>"+
-		                "</NeighborNode>"+
-		             "</Service>"+
-		          "</RequestNeighborNode>"+
-		       "</urn:NeighborNode>"+
-		    "</soapenv:Body>"+
-		 "</soapenv:Envelope>";
+		"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+		   "<soapenv:Header/>"+
+		   "<soapenv:Body>"+
+		      "<urn:CertifyDSL soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+		         "<RequestCertifyDSL xsi:type=\"urn:RequestCertifyDSL\">"+
+		            "<Operation xsi:type=\"urn:OperationType\">"+
+		               "<OperationCode xsi:type=\"xsd:string\">XML-007</OperationCode>"+
+		               "<OperationId xsi:type=\"xsd:string\">7</OperationId>"+
+		               "<!--Optional:-->"+
+		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		               "<!--Optional:-->"+
+		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
+		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+		               "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+		            "</Operation>"+
+		            "<Service xsi:type=\"urn:ServiceCertifyDSLIn\">"+
+		               "<CertifyDSL xsi:type=\"urn:CertifyDSLIn\">"+
+		                  "<Input xsi:type=\"urn:CertifyDSLInData\">"+
+		                     "<Area xsi:type=\"xsd:string\">"+Area+"</Area>"+
+		                     "<Phone xsi:type=\"xsd:string\">"+Phone+"</Phone>"+
+		                  "</Input>"+
+		               "</CertifyDSL>"+
+		            "</Service>"+
+		         "</RequestCertifyDSL>"+
+		      "</urn:CertifyDSL>"+
+		   "</soapenv:Body>"+
+		"</soapenv:Envelope>";
 	    		
 	    xml = bodyOut;
 	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);

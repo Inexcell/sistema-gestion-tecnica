@@ -1091,8 +1091,8 @@ public class Reparacion extends Activity {
    	    	if (result != null)
    	    	{
    	    		try {
-   	    			String res = XMLParser.getModel(result);
-   	    			tvSatelitalModelo.setText(res);
+   	    			//String res = XMLParser.getVendor(result);
+   	    			//tvSatelitalModelo.setText(res);
 //   	    			String res1_1 = res.replace("[", "");
 //   	    			String res1_2 = res1_1.replace("]", "");
 //   	    			String[] arreglo1 = res1_2.split(",");

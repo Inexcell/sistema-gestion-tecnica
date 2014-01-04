@@ -130,7 +130,6 @@ public class Certificar_Wifi extends Activity {
 		protected void onPreExecute() {
 			this.dialog.setMessage("Consultando Servicio ...");
 		    this.dialog.show();
-            //super.onPreExecute();
         }
   		 
   	    protected String doInBackground(String... params) {
@@ -142,8 +141,7 @@ public class Certificar_Wifi extends Activity {
   				String IMEI = telephonyManager.getDeviceId();
   				String IMSI =  telephonyManager.getSimSerialNumber();
   				
-//  			respuesta = SoapRequestMovistar.getCustomer("72", "2462223",IMEI,IMSI);
-  				respuesta = SoapRequestMovistar.getVendor("DECO",IMEI,IMSI);
+  				respuesta = SoapRequestMovistar.getVendor("MODEM",IMEI,IMSI);
   				
   			} catch (Exception e1) {
   				e1.printStackTrace();
@@ -161,11 +159,13 @@ public class Certificar_Wifi extends Activity {
   			
   	    	if (result != null)
   	    	{
-  	    		try {
-
-  	    			//test_wsdl.setText(XMLParser.getCustomer(result));
-  	    			test_wsdl.setText(XMLParser.getVendor(result));
-  	    			
+  	    		try 
+  	    		{
+  	    			String[] result1 = result.split("<Service xsi:type=\"tns:ServiceVendorOut\">"+
+  	    					"<Vendor xsi:type=\"tns:VendorOut\">"+
+  	    					"<Output xsi:type=\"tns:VendorOutData\">");
+  	    			String[] result2 = result1[1].split("<Return xsi:type=\"tns:ReturnType\">");
+  	    			test_wsdl.setText(XMLParser.getVendor(result2[0]).toString());
   	    			
 				} catch (Exception e) {
 					e.printStackTrace();
