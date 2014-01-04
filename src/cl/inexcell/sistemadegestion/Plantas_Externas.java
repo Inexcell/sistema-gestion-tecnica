@@ -91,13 +91,13 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 			id[i] = String.valueOf(i);
 			type[i] = tipos[i%3];
 			gps[i] = "asd "+i;
-			addStreet[i]="calle "+i;
-			addNum[i]="num "+i;
+			addStreet[i]="calle ";
+			addNum[i]="#"+i;
 			addCode[i]="code "+i;
 			feasibility[i]=""+i;
 			site[i]="site "+i;
-			cable[i]="cable "+i;
-			cabinet[i]="cab "+i;
+			cable[i]="Valor Cable "+i;
+			cabinet[i]="Valor Gabinete "+i;
 			pairFrom[i]=""+i;
 			pairOcup[i]=""+i;
 			pairVacant[i]=""+i;
