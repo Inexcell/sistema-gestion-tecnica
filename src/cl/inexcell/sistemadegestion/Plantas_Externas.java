@@ -1,5 +1,6 @@
 package cl.inexcell.sistemadegestion;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.Vector;
 
@@ -50,6 +51,7 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 			
 		locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		Log.i("LOCALIZACION", loc.getLatitude()+"\n"+loc.getLongitude());
 	    
 	    
 		Log.i(TAG, loc.toString());
@@ -68,7 +70,8 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 	
 	/**Aqui se hace el request y los resultados son guardados en strings[] para cada variable**/
 	public void buscar_plantas_externas(){
-		
+		Consulta_P_Externas cpe = new Consulta_P_Externas();
+		cpe.execute();
 		cantidad = 4;
 		id = new String[cantidad];
 		type = new String[cantidad];
@@ -180,6 +183,65 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
         Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         vibrator.vibrate(50);
     }
+	
+private class Consulta_P_Externas extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Plantas_Externas.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Consultando Plantas Externas Cercanas");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String respuesta = null;
+   			
+   			try 
+   			{
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				respuesta = SoapRequestMovistar.getNeighborNode(String.valueOf(loc.getLatitude()),
+   																String.valueOf(loc.getLongitude()),
+   																IMEI,
+   																IMSI);
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}
+
+   	        return respuesta;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }
+   			
+   	    	if (result != null)
+   	    	{
+   	    		try {
+   	    			//ArrayList<String> res = XMLParser.getVendor(result);
+   	    			Log.i("RESPUESTA", result);
+   	    			//final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
+   	    			//ListarFabricantesBandaAncha(fab);
+   	    			
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+   	    	}
+   	    	else
+   	    	{
+   	    		//test_wsdl.setText("Error!");
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    	}
+   	    }
+   	}
 
 
 }

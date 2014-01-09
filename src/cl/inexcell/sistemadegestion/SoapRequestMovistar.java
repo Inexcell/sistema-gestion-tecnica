@@ -29,7 +29,7 @@ public class SoapRequestMovistar {
 	
 	private static			
 	final String URL="https://pcba.telefonicachile.cl:443/smartphone/ws/shark.php";	
-	//final String URL="http://cmn81.gratishosting.cl:80/shark_fijo.php?wsdl";
+	//final String URL="http://cmn81.gratishosting.cl:80/shark_fijo.php";
 	/*
 	 * Clase Principal de Conexion SSL a WDSL
 	 */
