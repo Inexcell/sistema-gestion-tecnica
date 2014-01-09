@@ -3,6 +3,7 @@ package cl.inexcell.sistemadegestion;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -17,6 +18,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import android.util.Log;
 
 public class XMLParser {
 	
@@ -258,6 +261,69 @@ public class XMLParser {
 		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 	
+	public static ArrayList<String> setLocation(String xml) throws ParserConfigurationException, 
+	SAXException, IOException
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		
+		String xmlRecords = xml;
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(1)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes(); //Llegamos al tag Return
+		
+		
+		for(int i = 0; i< nodes.getLength(); i++){
+			NodeList elemento = nodes.item(i).getChildNodes();
+			res.add(elemento.item(0).getNodeValue());
+		}
+			
+		return res;
+		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+}
+	
+	public static ArrayList<String> setNotificacion3G(String xml) throws ParserConfigurationException, 
+	SAXException, IOException
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		
+		String xmlRecords = xml;
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(1)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes(); //Llegamos al tag Return
+		
+		
+		for(int i = 0; i< nodes.getLength(); i++){
+			NodeList elemento = nodes.item(i).getChildNodes();
+			res.add(elemento.item(0).getNodeValue());
+		}
+			
+		return res;
+		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+}
 	
 
 

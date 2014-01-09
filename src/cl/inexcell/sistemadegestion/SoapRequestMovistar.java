@@ -581,7 +581,7 @@ public class SoapRequestMovistar {
 	 * XML-009: Localizacion de Averia
 	 */
 	
-	public static String setLocation(String Type, String Lat, String Lng, 
+	public static String setLocation(String Pict, String Type, String Lat, String Lng, 
 			String Comment, String IMEI, String IMSI) throws Exception {		
 		final String SOAP_ACTION = "urn:Demo#Location";
 	    String response= null;
@@ -621,7 +621,7 @@ public class SoapRequestMovistar {
 		                        "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
 		                        "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
 		                     "</Gps>"+
-		                     "<Picture xsi:type=\"xsd:string\">"+Lng+"</Picture>"+
+		                     "<Picture xsi:type=\"xsd:string\">"+Pict+"</Picture>"+
 		                     "<Coment xsi:type=\"xsd:string\">"+Comment+"</Coment>"+
 		                  "</Input>"+
 		               "</Location>"+
