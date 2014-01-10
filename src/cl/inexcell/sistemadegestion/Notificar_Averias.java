@@ -34,10 +34,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 public class Notificar_Averias extends Activity {
-	@SuppressWarnings("unused")
-	private String observacion, objeto;
 	
-	@SuppressWarnings("unused")
+	private String observacion, objeto;
+	private ArrayList<String> res;
+	
 	private Bitmap foto;
 	private Spinner s;
 	private EditText et;
@@ -90,12 +90,13 @@ public class Notificar_Averias extends Activity {
 	/** Boton Guardar Información **/
 	public void guardarInformacion (View view){
 		
-		if(et.getText().toString() == ""){
+		if(et.getText().toString().compareTo("") == 0){
 			Toast.makeText(getApplicationContext(), "Debe ingresar una observación.", Toast.LENGTH_LONG).show();
 			return;
 		}
 		if(b == null){
-			Toast.makeText(getApplicationContext(), "Sin Fotografía.", Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), "Debe tomar fotografía.", Toast.LENGTH_LONG).show();
+			return;
 		}
 		
 		observacion = et.getText().toString();
@@ -104,9 +105,9 @@ public class Notificar_Averias extends Activity {
 		
 		//Enviar_Averia ea = new Enviar_Averia();
 		//ea.execute();
-		Drawable d = new BitmapDrawable(getResources(), b);
+		Drawable d = new BitmapDrawable(getResources(), foto);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Está todo correcto?");
+        builder.setTitle(" ");
         builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {//un listener que al pulsar, cierre la aplicacion
 	          @Override
 	          public void onClick(DialogInterface dialog, int which){
@@ -114,7 +115,7 @@ public class Notificar_Averias extends Activity {
 	          	return;
 	          }
 	        });
-        builder.setMessage("Tipo: "+SpinnerText[s.getSelectedItemPosition()]+"\nObservación: "+et.getText());
+        builder.setMessage("Tipo: "+SpinnerText[s.getSelectedItemPosition()]+"\nObservación: "+et.getText()+"\n\n¿Todo Correcto?");
         builder.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {//un listener que al pulsar, cierre la aplicacion
 	          @Override
 	          public void onClick(DialogInterface dialog, int which){
@@ -122,6 +123,7 @@ public class Notificar_Averias extends Activity {
 	          	//Toast.makeText(getApplicationContext(), "BIEN", Toast.LENGTH_LONG).show();
 	          	Enviar_Averia ea = new Enviar_Averia();
 	    		ea.execute();
+	    		
 	          }
 	        });
         
@@ -236,10 +238,10 @@ private class Enviar_Averia extends AsyncTask<String,Integer,String> {
    	    	{
    	    		try {
    	    			//ArrayList<String> res = XMLParser.getVendor(result);
-   	    			ArrayList<String> res = XMLParser.setLocation(result);
+   	    			res = XMLParser.setLocation(result);
    	    			Toast.makeText(getApplicationContext(), res.get(1), Toast.LENGTH_LONG).show();
-   	    			
-   	    			Log.i("RESPUESTA", result);
+   	    			et.setText("");
+   	    			b = foto = null;
    	    			//final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
    	    			//ListarFabricantesBandaAncha(fab);
    	    			
@@ -250,7 +252,7 @@ private class Enviar_Averia extends AsyncTask<String,Integer,String> {
    	    	else
    	    	{
    	    		//test_wsdl.setText("Error!");
-   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		//Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
    	    	}
    	    }
    	}

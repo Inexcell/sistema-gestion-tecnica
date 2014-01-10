@@ -20,6 +20,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import android.util.Log;
+import android.widget.Toast;
 
 public class XMLParser {
 	
@@ -171,10 +172,10 @@ public class XMLParser {
 	
 
 	
-	public static String getNeighborNode(String xml) throws ParserConfigurationException, 
+	public static ArrayList<String> getNeighborNode(String xml) throws ParserConfigurationException, 
 														SAXException, IOException
 	{
-		Vector<String> node = new Vector<String>();
+		ArrayList<String> res = new ArrayList<String>();
 		
 		String xmlRecords = xml;
 
@@ -183,82 +184,61 @@ public class XMLParser {
 	    is.setCharacterStream(new StringReader(xmlRecords));
 
 	    Document doc = db.parse(is);
-	    NodeList nodes = doc.getElementsByTagName("Node");
+	    NodeList nodes = doc.getChildNodes().item(0)
+				.getChildNodes().item(0)
+				.getChildNodes().item(0)
+				.getChildNodes().item(0)
+				.getChildNodes().item(1)
+				.getChildNodes().item(0)
+				.getChildNodes().item(0)
+				.getChildNodes();
 	    
-	    
-	    for (int i = 0; i < nodes.getLength(); i++) 
+	   int tamano = nodes.getLength();
+	   NodeList Return = nodes.item(tamano-1).getChildNodes();
+	   String code = Return.item(0).getChildNodes().item(0).getNodeValue();
+	   String linea = "";
+	   NodeList nodoqliao = nodes.item(0).getChildNodes();
+	   /** GUARDAMOS EL CODE Y DESCRIPTION DEL RESULT **/
+		for (int i = 0; i < nodes.getLength(); i++) 
 	    {
-	    	Element element = (Element) nodes.item(i);
-
-  			NodeList id = element.getElementsByTagName("Id");
-  			Element line1 = (Element) id.item(0);
-  			
-  			NodeList type = element.getElementsByTagName("Type");
-  			Element line2 = (Element) type.item(0);
-  			
-  			NodeList gps = element.getElementsByTagName("Gps");
-  			Element line3 = (Element) gps.item(0);
-  			
-  			NodeList adStr = element.getElementsByTagName("AddressStreet");
-  			Element line4 = (Element) adStr.item(0);
-  			
-  			NodeList adNmb = element.getElementsByTagName("AddressNumber");
-  			Element line5 = (Element) adNmb.item(0);
-  			
-  			NodeList adCde = element.getElementsByTagName("AddressCode");
-  			Element line6 = (Element) adCde.item(0);
-  			
-  			NodeList fbty = element.getElementsByTagName("Feasibility");
-  			Element line7 = (Element) fbty.item(0);
-  			
-  			NodeList ste = element.getElementsByTagName("Site");
-  			Element line8 = (Element) ste.item(0);
-  			
-  			NodeList cbl = element.getElementsByTagName("Cable");
-  			Element line9 = (Element) cbl.item(0);
-  			
-  			NodeList cbt = element.getElementsByTagName("Cabinet");
-  			Element line10 = (Element) cbt.item(0);
-
-  			NodeList pFrm = element.getElementsByTagName("PairForm");
-  			Element line11 = (Element) pFrm.item(0);
-  			
-  			NodeList pUtl = element.getElementsByTagName("PairUntil");
-  			Element line12 = (Element) pUtl.item(0);
-  			
-  			NodeList pOcp = element.getElementsByTagName("PairOccupied");
-  			Element line13 = (Element) pOcp.item(0);
-  			
-  			NodeList pVct = element.getElementsByTagName("PairVacant");
-  			Element line14 = (Element) pVct.item(0);
-  			
-  			NodeList pRsvd = element.getElementsByTagName("PairReserved");
-  			Element line15 = (Element) pRsvd.item(0);
-  			
-  			NodeList pBd = element.getElementsByTagName("PairBad");
-  			Element line16 = (Element) pBd.item(0);
-  
-  			node.addElement(getCharacterDataFromElement(line1)
-  					 +";"+getCharacterDataFromElement(line2)
-  					 +";"+getCharacterDataFromElement(line3)
-  					 +";"+getCharacterDataFromElement(line4)
-  					 +";"+getCharacterDataFromElement(line5)
-  					 +";"+getCharacterDataFromElement(line6)
-  					 +";"+getCharacterDataFromElement(line7)
-  					 +";"+getCharacterDataFromElement(line8)
-  					 +";"+getCharacterDataFromElement(line9)
-  					 +";"+getCharacterDataFromElement(line10)
-  					 +";"+getCharacterDataFromElement(line11)
-  					 +";"+getCharacterDataFromElement(line12)
-  					 +";"+getCharacterDataFromElement(line13)
-  					 +";"+getCharacterDataFromElement(line14)
-  					 +";"+getCharacterDataFromElement(line15)
-  					 +";"+getCharacterDataFromElement(line16));
-  
+			if(i>0)
+				linea+=";";
+	    	linea+=Return.item(i).getChildNodes().item(0).getNodeValue();	
+	    	
+	    }
+		res.add(linea);
+		linea = "";
+	    
+		/** SI CODIGO ES "0" GUARDAMOS EL RESTO DE NODOS.*/
+	    if(Integer.valueOf(code)==0){
+		    for (int i = 0; i < tamano-1; i++) 
+		    {
+		    	NodeList planta = nodes.item(i).getChildNodes();		    	
+		    	for(int j = 0; j < planta.getLength(); i++){
+		    		NodeList dato = planta.item(i).getChildNodes();
+		    		if(j>0)
+						linea+=";";
+		    		if(dato.item(0).getNodeName().compareTo("GPS")==0){
+		    			linea+=dato.item(0).getChildNodes().item(0).getNodeValue();
+		    			linea+=";";
+		    			linea+=dato.item(1).getChildNodes().item(0).getNodeValue();
+		    		}
+		    		else if(dato.item(0).getNodeName().compareTo("Feasibility")==0){
+		    			linea+=dato.item(0).getChildNodes().item(0).getNodeValue();
+		    			linea+=";";
+		    			linea+=dato.item(1).getChildNodes().item(0).getNodeValue();
+		    			linea+=";";
+		    			linea+=dato.item(2).getChildNodes().item(0).getNodeValue();
+		    		}
+		    		else
+		    			linea+=dato.item(0).getNodeValue();
+		    	}
+		    	res.add(linea);
+		    	linea = "";
+		    }
 	    }
 	    
-		return node.toString();
-		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+		return res;
 	}
 	
 	public static ArrayList<String> setLocation(String xml) throws ParserConfigurationException, 
