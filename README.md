@@ -15,6 +15,17 @@
 * Plugins: Web Services SOAP, ADT Android, JRE7 (Fix WebServices).
 * SO: Android 4.0.1 (Icecream Sandwich)
 
+## WSDL
+
+* Original: https://pcba.telefonicachile.cl/smartphone/ws/shark.php?wsdl
+* Dummy: http://cmn81.gratishosting.cl/shark_fijo.php?wsdl
+
+## Clientes de Prueba
+
+* 72 2462255
+* 72 2462223
+* 72 2463232
+
 ## Instalacion Plugin Web Services en Eclipse
 
 * http://www.soapui.org/IDE-Plugins/eclipse-plugin.html
@@ -67,6 +78,7 @@
 ## Tareas Asincronas
 
 * http://androidsensei.net/aprende-a-subir-archivos-desde-tu-aplicacion-android-a-cualquier-lugar/
+* http://developer.android.com/reference/android/os/AsyncTask.html
 
 ## Parsing XML
 
