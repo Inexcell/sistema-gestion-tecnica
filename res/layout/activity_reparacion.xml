@@ -127,7 +127,7 @@
 				    android:textSize="30dp"
 				    android:layout_width="150dp"
 				    android:layout_height="wrap_content"
-				    android:maxLength="7"
+				    android:maxLength="8"
 				    android:background="@drawable/fondo1"
 				    android:imeOptions="actionSearch"
 				    android:inputType="phone"

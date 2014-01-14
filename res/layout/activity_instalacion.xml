@@ -127,7 +127,7 @@
 				    android:textSize="30dp"
 				    android:layout_width="150dp"
 				    android:layout_height="wrap_content"
-				    android:maxLength="7"
+				    android:maxLength="8"
 				    android:background="@drawable/fondo1"
 				    android:imeOptions="actionSearch"
 				    android:inputType="phone"
@@ -549,7 +549,7 @@
 							android:layout_height="wrap_content"
 							android:layout_marginLeft="28dp"
 							android:layout_marginTop="5dp"
-							android:text="Tipo:" />
+							android:text="Fabricante:" />
 							
 						<TextView 
 						    android:id="@+id/tvSatelitalTipo" 
@@ -720,7 +720,7 @@
 								android:layout_height="wrap_content"
 								android:layout_marginLeft="28dp"
 								android:layout_marginTop="5dp"
-								android:text="Tipo:" />
+								android:text="Fabricante:" />
 								
 							<TextView 
 							    android:id="@+id/bandaAnchaTipo" 

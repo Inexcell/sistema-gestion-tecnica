@@ -499,83 +499,100 @@ public class SoapRequestMovistar {
 	 * XML-008: Notificacion de 3G
 	 */
 	
-	public static String setNotification3G(String Lat, String Lng, String Provider, 
-			String Name, String Value, String Code, 
-			String Desc, String IMEI, String IMSI) throws Exception {		
-		final String SOAP_ACTION = "urn:Demo#Notification3g";
-	    String response= null;
-	    String xml = null;
-	    
-	    Date fecha = new Date();
+	 public static String setNotification3G(String Lat, String Lng, String Provider,
+             String Intensidad, String TipoRed, String Fecha, String IMEI, String IMSI) throws Exception {          
+       final String SOAP_ACTION = "urn:Demo#Notification3g";
+     String response= null;
+     String xml = null;
+    
+   
 
-	    HttpClient httpClient = getNewHttpClient();
-	    HttpPost httpPost = new HttpPost(URL);
+     HttpClient httpClient = getNewHttpClient();
+     HttpPost httpPost = new HttpPost(URL);
 
-	    SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-	    envelope.encodingStyle = SoapSerializationEnvelope.ENC;
-	    envelope.dotNet = false;		
-		envelope.implicitTypes = true;
-		
-	    String bodyOut = 
-		"<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
-		   "<soapenv:Header/>"+
-		   "<soapenv:Body>"+
-		      "<urn:Notification3g soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
-		         "<RequestNotification3g xsi:type=\"urn:RequestNotification3g\">"+
-		            "<Operation xsi:type=\"urn:OperationType\">"+
-		               "<OperationCode xsi:type=\"xsd:string\">XML-008</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">8</OperationId>"+
-		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
-		               "<!--Optional:-->"+
-		               "<IdUser xsi:type=\"xsd:string\">"+1+"</IdUser>"+
-		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
-		               "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
-		            "</Operation>"+
-		            "<Service xsi:type=\"urn:ServiceNotification3gIn\">"+
-		               "<Notification3g xsi:type=\"urn:Notification3gIn\">"+
-		                  "<Input xsi:type=\"urn:Notification3gInData\">"+
-		                     "<Gps xsi:type=\"urn:GPSType\">"+
-		                        "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
-		                        "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
-		                     "</Gps>"+
-		                     "<Provider xsi:type=\"xsd:string\">"+Provider+"</Provider>"+
-		                     "<!--Zero or more repetitions:-->"+
-		                     "<Parameter xsi:type=\"urn:CertifyParameterType\">"+
-		                     
-		                        /*
-		                         * TODO: 	Implementar un foreach para parsear el array de
-		                         * 			operaciones de 3G
-		                         */
-		                        
-		                        "<!--Zero or more repetitions:-->"+
-		                        "<Name xsi:type=\"xsd:string\">"+Name+"</Name>"+
-		                        "<!--Zero or more repetitions:-->"+
-		                        "<Value xsi:type=\"xsd:string\">"+Value+"</Value>"+
-		                        "<!--Zero or more repetitions:-->"+
-		                        "<Code xsi:type=\"xsd:string\">"+Code+"</Code>"+
-		                        "<!--Zero or more repetitions:-->"+
-		                        "<Description xsi:type=\"xsd:string\">"+Desc+"</Description>"+
-		                     "</Parameter>"+
-		                  "</Input>"+
-		               "</Notification3g>"+
-		            "</Service>"+
-		         "</RequestNotification3g>"+
-		      "</urn:Notification3g>"+
-		   "</soapenv:Body>"+
-		"</soapenv:Envelope>";
-	    		
-	    xml = bodyOut;
-	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
-	    se.setContentType("text/xml");	    
-	    httpPost.addHeader(SOAP_ACTION, URL);		
-	    
-	    httpPost.setEntity(se);
-	    HttpResponse httpResponse = httpClient.execute(httpPost);
-	    HttpEntity resEntity = httpResponse.getEntity();	    
-	    response = EntityUtils.toString(resEntity);
-	    return response;
-	}
+     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+     envelope.encodingStyle = SoapSerializationEnvelope.ENC;
+     envelope.dotNet = false;      
+       envelope.implicitTypes = true;
+      
+     String bodyOut =
+       "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+          "<soapenv:Header/>"+
+          "<soapenv:Body>"+
+             "<urn:Notification3g soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+                "<RequestNotification3g xsi:type=\"urn:RequestNotification3g\">"+
+                   "<Operation xsi:type=\"urn:OperationType\">"+
+                      "<OperationCode xsi:type=\"xsd:string\">XML-008</OperationCode>"+
+                      "<OperationId xsi:type=\"xsd:string\">8</OperationId>"+
+                      "<!--Optional:-->"+
+                      "<DateTime xsi:type=\"xsd:string\">"+Fecha+"</DateTime>"+
+                      "<!--Optional:-->"+
+                      "<IdUser xsi:type=\"xsd:string\">"+1+"</IdUser>"+
+                      "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+                      "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+                   "</Operation>"+
+                   "<Service xsi:type=\"urn:ServiceNotification3gIn\">"+
+                      "<Notification3g xsi:type=\"urn:Notification3gIn\">"+
+                         "<Input xsi:type=\"urn:Notification3gInData\">"+
+                            "<Gps xsi:type=\"urn:GPSType\">"+
+                               "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
+                               "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
+                            "</Gps>"+
+                            "<Provider xsi:type=\"xsd:string\">"+Provider+"</Provider>"+
+                            "<!--Zero or more repetitions:-->"+
+                            "<Parameter xsi:type=\"urn:CertifyParameterType\">"+
+                           
+                               /*
+                                * TODO:   Implementar un foreach para parsear el array de
+                                *               operaciones de 3G
+                                */
+                               //INTENSIDAD
+                               "<!--Zero or more repetitions:-->"+
+                               "<Name xsi:type=\"xsd:string\">INTENSIDAD</Name>"+
+                               "<!--Zero or more repetitions:-->"+
+                               "<Value xsi:type=\"xsd:string\">"+Intensidad+"</Value>"+
+                               "<!--Zero or more repetitions:-->"+
+                               "<Code xsi:type=\"xsd:string\">INTENSIDAD</Code>"+
+                               "<!--Zero or more repetitions:-->"+
+                               "<Description xsi:type=\"xsd:string\">test</Description>"+
+                            "</Parameter>"+
+                              
+                            
+                               //TIPO RED
+                                   "<Parameter xsi:type=\"urn:CertifyParameterType\">"+
+                               /*
+                                * TODO:   Implementar un foreach para parsear el array de
+                                *               operaciones de 3G
+                                */
+                              
+                               "<!--Zero or more repetitions:-->"+
+                               "<Name xsi:type=\"xsd:string\">TIPO</Name>"+
+                               "<!--Zero or more repetitions:-->"+
+                               "<Value xsi:type=\"xsd:string\">"+TipoRed+"</Value>"+
+                               "<!--Zero or more repetitions:-->"+
+                               "<Code xsi:type=\"xsd:string\">TIPO</Code>"+
+                               "<!--Zero or more repetitions:-->"+
+                               "<Description xsi:type=\"xsd:string\">test</Description>"+
+                            "</Parameter>"+
+                         "</Input>"+
+                      "</Notification3g>"+
+                   "</Service>"+
+                "</RequestNotification3g>"+
+             "</urn:Notification3g>"+
+          "</soapenv:Body>"+
+       "</soapenv:Envelope>";
+            
+     xml = bodyOut;
+     StringEntity se = new StringEntity(xml, HTTP.UTF_8);
+     se.setContentType("text/xml");    
+     httpPost.addHeader(SOAP_ACTION, URL);           
+    
+     httpPost.setEntity(se);
+     HttpResponse httpResponse = httpClient.execute(httpPost);
+     HttpEntity resEntity = httpResponse.getEntity();    
+     response = EntityUtils.toString(resEntity);
+     return response;
+ }
 	
 	/*
 	 * XML-009: Localizacion de Averia

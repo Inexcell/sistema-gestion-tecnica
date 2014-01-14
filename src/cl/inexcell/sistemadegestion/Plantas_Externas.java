@@ -1,24 +1,16 @@
 package cl.inexcell.sistemadegestion;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.Vector;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -29,14 +21,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class Plantas_Externas extends FragmentActivity implements SwipeInterface{
 
 	private ArrayList<String> res;
 	private Fragment frag;
+	@SuppressWarnings("unused")
 	private Button m,n,p;
 	private int cantidad, posicion = 1;
+	@SuppressWarnings("unused")
 	private String TAG = "Plantas_Externas";
 	public String[] id, type, gps, addStreet, addNum, addCode,
 			feasibility, site, cable, cabinet, pairFrom, pairOcup, 

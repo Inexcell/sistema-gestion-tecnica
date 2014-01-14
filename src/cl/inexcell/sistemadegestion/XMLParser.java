@@ -3,7 +3,6 @@ package cl.inexcell.sistemadegestion;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Vector;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -18,9 +17,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-
-import android.util.Log;
-import android.widget.Toast;
 
 public class XMLParser {
 	
@@ -197,6 +193,7 @@ public class XMLParser {
 	   NodeList Return = nodes.item(tamano-1).getChildNodes();
 	   String code = Return.item(0).getChildNodes().item(0).getNodeValue();
 	   String linea = "";
+	   @SuppressWarnings("unused")
 	   NodeList nodoqliao = nodes.item(0).getChildNodes();
 	   /** GUARDAMOS EL CODE Y DESCRIPTION DEL RESULT **/
 		for (int i = 0; i < nodes.getLength(); i++) 
