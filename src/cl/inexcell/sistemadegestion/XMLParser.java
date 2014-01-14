@@ -166,7 +166,106 @@ public class XMLParser {
         //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 	
-
+	/*
+	 * XML-004: Actualizar Inventario
+	 */
+	
+	// TODO
+	
+	
+	/*
+	 * XML-005: Planta Externa
+	 */
+	
+	// TODO
+	
+	/*
+	 * XML-006: Actualizar Planta Externa
+	 */
+	
+	// TODO
+	
+	/*
+	 * XML-007: Certificar Red fija (xDSL)
+	 */
+	
+	// TODO
+	
+	/*
+	 * XML-008: Informar 3G
+	 */
+	
+	public static ArrayList<String> setNotificacion3G(String xml) throws ParserConfigurationException, 
+	SAXException, IOException
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		
+		String xmlRecords = xml;
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(1)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes(); //Llegamos al tag Return
+		
+		
+		for(int i = 0; i< nodes.getLength(); i++){
+			NodeList elemento = nodes.item(i).getChildNodes();
+			res.add(elemento.item(0).getNodeValue());
+		}
+			
+		return res;
+		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+	}
+	
+	/*
+	 * XML-009: Localizacion de Averia
+	 */
+	
+	public static ArrayList<String> setLocation(String xml) throws ParserConfigurationException, 
+	SAXException, IOException
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		
+		String xmlRecords = xml;
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(1)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes().item(0)
+						.getChildNodes(); //Llegamos al tag Return
+		
+		
+		for(int i = 0; i< nodes.getLength(); i++){
+			NodeList elemento = nodes.item(i).getChildNodes();
+			res.add(elemento.item(0).getNodeValue());
+		}
+			
+		return res;
+		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+	}
+	
+	/*
+	 * XML-010: Nodos de planta externa vecinos
+	 */
 	
 	public static ArrayList<String> getNeighborNode(String xml) throws ParserConfigurationException, 
 														SAXException, IOException
@@ -238,71 +337,6 @@ public class XMLParser {
 		return res;
 	}
 	
-	public static ArrayList<String> setLocation(String xml) throws ParserConfigurationException, 
-	SAXException, IOException
-	{
-		ArrayList<String> res = new ArrayList<String>();
-		
-		String xmlRecords = xml;
-		
-		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		InputSource is = new InputSource();
-		is.setCharacterStream(new StringReader(xmlRecords));
-		
-		Document doc = db.parse(is);
-		NodeList nodes = doc.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(1)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes(); //Llegamos al tag Return
-		
-		
-		for(int i = 0; i< nodes.getLength(); i++){
-			NodeList elemento = nodes.item(i).getChildNodes();
-			res.add(elemento.item(0).getNodeValue());
-		}
-			
-		return res;
-		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
-}
-	
-	public static ArrayList<String> setNotificacion3G(String xml) throws ParserConfigurationException, 
-	SAXException, IOException
-	{
-		ArrayList<String> res = new ArrayList<String>();
-		
-		String xmlRecords = xml;
-		
-		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-		InputSource is = new InputSource();
-		is.setCharacterStream(new StringReader(xmlRecords));
-		
-		Document doc = db.parse(is);
-		NodeList nodes = doc.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(1)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes().item(0)
-						.getChildNodes(); //Llegamos al tag Return
-		
-		
-		for(int i = 0; i< nodes.getLength(); i++){
-			NodeList elemento = nodes.item(i).getChildNodes();
-			res.add(elemento.item(0).getNodeValue());
-		}
-			
-		return res;
-		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
-}
-	
-
 
 	/*
 	 * Generico para todas las consultas
