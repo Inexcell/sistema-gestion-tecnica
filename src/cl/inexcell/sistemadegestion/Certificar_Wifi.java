@@ -141,7 +141,7 @@ public class Certificar_Wifi extends Activity {
   				String IMEI = telephonyManager.getDeviceId();
   				String IMSI =  telephonyManager.getSimSerialNumber();
   				
-  				respuesta = SoapRequestMovistar.getVendor("MODEM",IMEI,IMSI);
+  				respuesta = SoapRequestMovistar.getOutsidePlant("2","22872755","CAJA",IMEI,IMSI);
   				
   			} catch (Exception e1) {
   				e1.printStackTrace();
@@ -161,11 +161,9 @@ public class Certificar_Wifi extends Activity {
   	    	{
   	    		try 
   	    		{
-  	    			String[] result1 = result.split("<Service xsi:type=\"tns:ServiceVendorOut\">"+
-  	    					"<Vendor xsi:type=\"tns:VendorOut\">"+
-  	    					"<Output xsi:type=\"tns:VendorOutData\">");
-  	    			String[] result2 = result1[1].split("<Return xsi:type=\"tns:ReturnType\">");
-  	    			test_wsdl.setText(XMLParser.getVendor(result2[0]).toString());
+  	    			
+  	    			test_wsdl.setText(XMLParser.getOutsidePlant(result).toString());
+  	    			
   	    			
 				} catch (Exception e) {
 					e.printStackTrace();

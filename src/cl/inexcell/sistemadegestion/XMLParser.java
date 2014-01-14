@@ -177,7 +177,35 @@ public class XMLParser {
 	 * XML-005: Planta Externa
 	 */
 	
-	// TODO
+	public static String getOutsidePlant(String xml) throws ParserConfigurationException, 
+	SAXException, IOException, XPathExpressionException
+	{
+		ArrayList<String> models = new ArrayList<String>();
+        
+        String xmlRecords = xml;
+        
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        InputSource is = new InputSource();
+        is.setCharacterStream(new StringReader(xmlRecords));
+        
+        Document doc = db.parse(is);
+        NodeList nodes = doc.getElementsByTagName("Element");
+        
+        //for (int i = 0; i < nodes.getLength(); i++) 
+    	for (int i = 0; i < 1; i++)
+        {
+                Element element = (Element) nodes.item(i);
+                NodeList name = element.getElementsByTagName("Value");
+                
+                for(int j=0; j< name.getLength(); j++){
+                	Element line1 = (Element) name.item(j);
+                	models.add(getCharacterDataFromElement(line1));
+                }
+        }
+
+        return models.toString();
+        //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+	}
 	
 	/*
 	 * XML-006: Actualizar Planta Externa

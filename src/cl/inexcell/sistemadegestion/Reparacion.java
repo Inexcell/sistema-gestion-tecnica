@@ -60,7 +60,8 @@ public class Reparacion extends Activity {
 	
 	private TextView tipoPlanta, parExterno,tvArmario, 
 	tipoTerminal, tipoParLocal, tvSatelitalModelo, tvSatelitalTipo,
-	bandaAnchaTipo, bandaAnchaModelo;
+	bandaAnchaTipo, bandaAnchaModelo,PE_TipoPlanta, PE_TipoParExterno,
+	PE_TipoArmario, PE_TipoTerminal, PE_TipoParLocal;
 	
 	// Certificacion
 	private TextView tup,tdown,nom_wifi,num_tel;
@@ -184,6 +185,10 @@ public class Reparacion extends Activity {
 				
 	}
 	
+	/*
+	 * Valores iniciales al iniciar el Activity
+	 */
+	
 	public void setupInicial(){
 				// Text Views en los que se muestra informacion
 				//// Seccion PLANTA EXTERNA
@@ -205,7 +210,7 @@ public class Reparacion extends Activity {
 				
 				
 				
-		// Seleccionar objetos de Botones en Layout
+				// Seleccionar objetos de Botones en Layout
 				b1 = (Button) findViewById(R.id.btnBusquedaCliente);
 				b2 = (Button) findViewById(R.id.btnPlantaExterna);
 				b3 = (Button) findViewById(R.id.btnTVSatelital);
@@ -238,7 +243,11 @@ public class Reparacion extends Activity {
 				p6.setVisibility(View.INVISIBLE);
 	}
 	
-	public void buscar_cliente(final View view)
+	/*
+	 * Funcion de boton buscar cliente
+	 */
+	
+	public void buscar_cliente(final View view) throws Exception
 	{
 		
 		Area = (EditText) findViewById(R.id.txtTelefonoArea);
@@ -249,7 +258,7 @@ public class Reparacion extends Activity {
 		
 		Consulta_Cliente tarea = new Consulta_Cliente();
 		
-		if(area1.matches("") && phone1.matches(""))
+		if((area1.matches("") && phone1.matches("")) || area1.matches("") || phone1.matches(""))
 		{
 			//Toast.makeText(getApplicationContext(), "Ingrese Area y Número de Telefono por favor.", Toast.LENGTH_LONG).show();
 			new AlertDialog.Builder(this)
@@ -264,12 +273,17 @@ public class Reparacion extends Activity {
 		     .show();
 			
 		}
+		//XMLParser.getReturnCode(tarea.get().toString()) == "[1]"
 		else if(tarea.execute() != null)
 		{
+			Consulta_PlantasExternas tarea1 = new Consulta_PlantasExternas();
+			tarea1.execute();
+			
 			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(Area.getWindowToken(), 0);
 			
-			//Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_LONG).show();
+			// TODO: Realizar validacion Cliente 
+			//Toast.makeText(getApplicationContext(), XMLParser.getReturnCode(tarea.get().toString()), Toast.LENGTH_LONG).show();
 			
 			
 			// Seleccionar objetos de Botones en Layout
@@ -527,60 +541,15 @@ public class Reparacion extends Activity {
 	
 	public void mostrar_planta_tvsatelital(final View view){
 		
-		Consulta_Modelo_TVSatelital tarea = new Consulta_Modelo_TVSatelital();
+		Consulta_Fab_TVSatelital tarea = new Consulta_Fab_TVSatelital();
 		tarea.execute();
-		
-		
-		
-//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//	    builder.setTitle("Seleccione Fabricante");
-//	    builder.setIcon(R.drawable.ic_fabricante);
-//	    builder.setItems(fabricantes, new DialogInterface.OnClickListener() {
-//	        public void onClick(DialogInterface dialog, int item) {
-//	            // Do something with the selection
-//	            //mDoneButton.setText(fabricantes[item]);
-//	        	Toast.makeText(Instalacion.this, fabricantes[item]+" seleccionado", Toast.LENGTH_SHORT).show();
-//	        	tvSatelitalTipo.setText(fabricantes[item]);
-//	        	mostrar_equipos_tvsatelital(view);
-//	        	
-//	        }
-//	    });
-//	    AlertDialog alert = builder.create();
-//	    alert.show();
-	}
-	
-	public void mostrar_equipos_tvsatelital(View view){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Equipo");
-	    builder.setIcon(R.drawable.ic_equipo);
-	    builder.setItems(equipos, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	tvSatelitalModelo.setText(equipos[item]);
-	        	Toast.makeText(Reparacion.this, equipos[item]+" seleccionado", Toast.LENGTH_SHORT).show();
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+
 	}
 	
 	public void mostrar_planta_bandaancha(final View view){
 		
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Fabricante");
-	    builder.setIcon(R.drawable.ic_fabricante);
-	    builder.setItems(fabricantes, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	bandaAnchaTipo.setText(fabricantes[item]);
-	        	Toast.makeText(Reparacion.this, fabricantes[item]+" seleccionado", Toast.LENGTH_SHORT).show();
-	        	mostrar_equipos_bandaancha(view);
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		Consulta_Fab_BandaAncha tarea = new Consulta_Fab_BandaAncha();
+		tarea.execute();
 	}
 	
 	public void mostrar_equipos_bandaancha(View view){
@@ -1023,6 +992,7 @@ public class Reparacion extends Activity {
   	    	{
   	    		try {
   	    			String res = XMLParser.getCustomer(result);
+  	    			
   	    			String res1_1 = res.replace("[", "");
   	    			String res1_2 = res1_1.replace("]", "");
   	    			String[] arreglo1 = res1_2.split(",");
@@ -1030,12 +1000,15 @@ public class Reparacion extends Activity {
   	    			String[] arreglo2 = arreglo1[1].split(";");
   	    			String[] arreglo3 = arreglo1[0].split(";");
   	    			
+  	    			Toast.makeText(getApplicationContext(), "'"+XMLParser.getReturnCode(result)+"'", Toast.LENGTH_LONG).show();
   	    			
-  	    			tvSatelitalTipo.setText(arreglo2[0]);
-  	    			tvSatelitalModelo.setText(arreglo2[1]);
+    				// TODO
+    				tvSatelitalTipo.setText(arreglo2[1]);
+  	    			tvSatelitalModelo.setText(arreglo2[2]);
   	    			
-  	    			bandaAnchaTipo.setText(arreglo3[0]);
-  	    			bandaAnchaModelo.setText(arreglo3[1]);
+  	    			bandaAnchaTipo.setText(arreglo3[1]);
+  	    			bandaAnchaModelo.setText(arreglo3[2]);
+  	    			
   	    			
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -1049,8 +1022,11 @@ public class Reparacion extends Activity {
   	    }
   	}
   	
- // Tarea Asincrona de getCustomer
-   	private class Consulta_Modelo_TVSatelital extends AsyncTask<String,Integer,String> {
+  	/*
+  	 * Consulta Asincronica de Lista de Fabricantes de TV Satelital 
+  	 */
+  	
+   	private class Consulta_Fab_TVSatelital extends AsyncTask<String,Integer,String> {
    		
    		private final ProgressDialog dialog = new ProgressDialog(Reparacion.this);
    		
@@ -1069,9 +1045,8 @@ public class Reparacion extends Activity {
    				String IMEI = telephonyManager.getDeviceId();
    				String IMSI =  telephonyManager.getSimSerialNumber();
    				
-   				//respuesta = SoapRequestMovistar.getCustomer("72", "2462223",IMEI,IMSI);
-   				respuesta = SoapRequestMovistar.getModel(tvSatelitalTipo.getText().toString(), tvSatelitalModelo.getText().toString(),IMEI,IMSI);
-   				//respuesta = SoapRequestMovistar.getVendor(tvSatelitalTipo.getText().toString(),IMEI,IMSI);
+   				respuesta = SoapRequestMovistar.getVendor("DECO",IMEI,IMSI);
+   				
    			} catch (Exception e1) {
    				e1.printStackTrace();
    			}
@@ -1089,21 +1064,12 @@ public class Reparacion extends Activity {
    	    	if (result != null)
    	    	{
    	    		try {
-   	    			//String res = XMLParser.getVendor(result);
-   	    			//tvSatelitalModelo.setText(res);
-//   	    			String res1_1 = res.replace("[", "");
-//   	    			String res1_2 = res1_1.replace("]", "");
-//   	    			String[] arreglo1 = res1_2.split(",");
-//   	    			
-//   	    			String[] arreglo2 = arreglo1[1].split(";");
-//   	    			String[] arreglo3 = arreglo1[0].split(";");
-//   	    			
-//					
-//   	    			tvSatelitalTipo.setText(arreglo2[0]);
-//   	    			tvSatelitalModelo.setText(arreglo2[1]);
-//   	    			
-//   	    			bandaAnchaTipo.setText(arreglo3[0]);
-//   	    			bandaAnchaModelo.setText(arreglo3[1]);
+   	    			ArrayList<String> res = XMLParser.getVendor(result);
+   	    			
+   	    			final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
+   	    			ListarFabricantesTVSat(fab);
+   	    			
+   	    			
    	    			
  				} catch (Exception e) {
  					e.printStackTrace();
@@ -1116,9 +1082,369 @@ public class Reparacion extends Activity {
    	    	}
    	    }
    	}
+   	
+   	/*
+   	 * Consulta Asincronica Lista de Modelos DECO
+   	 */
+   	
+   	private class Consulta_Mod_TVSatelital extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Reparacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Consultando Datos de Modelo del Equipo");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String respuesta = null;
+   			
+   			try {
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				respuesta = SoapRequestMovistar.getModel("DECO", tvSatelitalTipo.getText().toString(),  IMEI,IMSI);
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}
 
+   	        return respuesta;
+   	    }
+   	    
 
-	
-	
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }
+   			
+   	    	if (result != null)
+   	    	{
+   	    		try {
+   	    			ArrayList<String> res = XMLParser.getModel(result);
+   	    			
+   	    			final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
+   	    			ListarModelosTVSat(fab);
+   	    			
+   	    			
+   	    			
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+   	    	}
+   	    	else
+   	    	{
+   	    		//test_wsdl.setText("Error!");
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    	}
+   	    }
+   	}
+   	
+   	/*
+   	 * Consulta Asincronica de Lista de Fabricantes MODEM
+   	 */
+   	
+   	private class Consulta_Fab_BandaAncha extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Reparacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Consultando Datos de Fabricante del Equipo");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String respuesta = null;
+   			
+   			try 
+   			{
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				respuesta = SoapRequestMovistar.getVendor("MODEM",IMEI,IMSI);
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}
+
+   	        return respuesta;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }
+   			
+   	    	if (result != null)
+   	    	{
+   	    		try {
+   	    			ArrayList<String> res = XMLParser.getVendor(result);
+   	    			
+   	    			final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
+   	    			ListarFabricantesBandaAncha(fab);
+   	    			
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+   	    	}
+   	    	else
+   	    	{
+   	    		//test_wsdl.setText("Error!");
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    	}
+   	    }
+   	}
+   	
+   	/*
+   	 * Consulta Asincronica Lista de Modelos MODEM
+   	 */
+   	
+   	private class Consulta_Mod_BandaAncha extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Reparacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Consultando Datos de Modelo del Equipo");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String respuesta = null;
+   			
+   			try {
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				respuesta = SoapRequestMovistar.getModel("MODEM", bandaAnchaTipo.getText().toString(),  IMEI,IMSI);
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}
+
+   	        return respuesta;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }
+   			
+   	    	if (result != null)
+   	    	{
+   	    		try {
+   	    			ArrayList<String> res = XMLParser.getModel(result);
+   	    			
+   	    			final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
+   	    			ListarModelosTVSat(fab);
+   	    			
+   	    			
+   	    			
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+   	    	}
+   	    	else
+   	    	{
+   	    		//test_wsdl.setText("Error!");
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    	}
+   	    }
+   	}
+   	
+   	/*
+   	 * Consultar Plantas Externas
+   	 */
+   	
+   	private class Consulta_PlantasExternas extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Reparacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Consultando Datos de Cliente y Planta Externas");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String res_planta = null;
+ 			String res_par_externo = null;
+ 			String res_armario = null;
+ 			String res_par_local = null;
+ 			String res_caja = null;
+   			
+   			try {
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				res_planta = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"PLANTA", IMEI,IMSI);
+   				res_par_externo = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"PAR EXTERNO", IMEI,IMSI);
+   				res_armario = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"ARMARIO", IMEI,IMSI);
+   				res_par_local = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"PAR LOCAL", IMEI,IMSI);
+   				res_caja = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"CAJA", IMEI,IMSI);
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}
+   			
+   			String res_final = res_planta+"¬¬"+res_par_externo+
+   					"¬¬"+res_armario+"¬¬"+res_par_local+"¬¬"+res_caja;
+
+   	        return res_final;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }
+   			
+   	    	if (result != null)
+   	    	{
+   	    		try {
+   	    			String[] resultado = result.split("¬¬");
+   	    			
+   	    			PE_TipoPlanta = (TextView) findViewById(R.id.TipoPlanta);
+   	    			PE_TipoParExterno = (TextView) findViewById(R.id.TipoParExterno);
+   	    			PE_TipoArmario = (TextView) findViewById(R.id.TipoArmario);
+   	    			PE_TipoTerminal = (TextView) findViewById(R.id.TipoTerminal);
+   	    			PE_TipoParLocal = (TextView) findViewById(R.id.TipoParLocal);
+   	    			
+   	    			
+   	    			PE_TipoPlanta.setText(XMLParser.getOutsidePlant(resultado[0]).replace("[", "").replace("]", ""));
+   	    			PE_TipoParExterno.setText(XMLParser.getOutsidePlant(resultado[1]).replace("[", "").replace("]", ""));
+   	    			PE_TipoArmario.setText(XMLParser.getOutsidePlant(resultado[2]).replace("[", "").replace("]", ""));
+   	    			PE_TipoTerminal.setText(XMLParser.getOutsidePlant(resultado[3]).replace("[", "").replace("]", ""));
+   	    			PE_TipoParLocal.setText(XMLParser.getOutsidePlant(resultado[4]).replace("[", "").replace("]", ""));
+   	    			
+   	    			
+   	    			
+   	    			
+   	    			
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+   	    	}
+   	    	else
+   	    	{
+   	    		//test_wsdl.setText("Error!");
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    	}
+   	    }
+   	}
+   	
+   	/*
+   	 * Listar fabricantes de TV Satelital
+   	 */
+   	
+   	public void ListarFabricantesTVSat(final CharSequence[] fab)
+   	{
+   		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+		    builder1.setTitle("Seleccione Fabricante de DECO");
+		    builder1.setIcon(R.drawable.ic_fabricante);
+		    builder1.setItems(fab, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int item) {
+		            // Do something with the selection
+		            //mDoneButton.setText(fabricantes[item]);
+		        	Toast.makeText(Reparacion.this, fab[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+		        	tvSatelitalTipo.setText(fab[item]);
+		        	//mostrar_equipos_tvsatelital(view);
+		        	
+		        	Consulta_Mod_TVSatelital tarea = new Consulta_Mod_TVSatelital();
+		    		tarea.execute();
+		        	
+		        }
+		    });
+		    AlertDialog alert = builder1.create();
+		    alert.show();
+   	}
+   	
+   	/*
+   	 * Listar Modelos de TV Satelital
+   	 */
+   	
+   	public void ListarModelosTVSat(final CharSequence[] fab)
+   	{
+   		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+		    builder1.setTitle("Seleccione Modelo de DECO");
+		    builder1.setIcon(R.drawable.ic_fabricante);
+		    builder1.setItems(fab, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int item) {
+		            // Do something with the selection
+		            //mDoneButton.setText(fabricantes[item]);
+		        	Toast.makeText(Reparacion.this, fab[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+		        	tvSatelitalModelo.setText(fab[item]);
+		        	//mostrar_equipos_tvsatelital(view);
+		        	
+		        }
+		    });
+		    AlertDialog alert = builder1.create();
+		    alert.show();
+   	}
+   	
+   	/*
+   	 * Listar Fabricantes de DECO
+   	 */
+   	
+   	public void ListarFabricantesBandaAncha(final CharSequence[] fab)
+   	{
+   		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+		    builder1.setTitle("Seleccione Fabricante de MODEM");
+		    builder1.setIcon(R.drawable.ic_fabricante);
+		    builder1.setItems(fab, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int item) {
+		            // Do something with the selection
+		            //mDoneButton.setText(fabricantes[item]);
+		        	Toast.makeText(Reparacion.this, ((String) fab[item]).replace("\n","")+" seleccionado", Toast.LENGTH_SHORT).show();
+		        	bandaAnchaTipo.setText(((String) fab[item]).replace("\n",""));
+		        	//mostrar_equipos_tvsatelital(view);
+		        	
+		        	Consulta_Mod_BandaAncha tarea = new Consulta_Mod_BandaAncha();
+		    		tarea.execute();
+		        }
+		    });
+		    AlertDialog alert = builder1.create();
+		    alert.show();
+   	}
+   	
+   	/*
+   	 * Listar Modelos de DECOS
+   	 */
+   	
+   	public void ListarModelosBandaAncha(final CharSequence[] fab)
+   	{
+   		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+		    builder1.setTitle("Seleccione Modelo de MODEM");
+		    builder1.setIcon(R.drawable.ic_fabricante);
+		    builder1.setItems(fab, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int item) {
+		            // Do something with the selection
+		            //mDoneButton.setText(fabricantes[item]);
+		        	Toast.makeText(Reparacion.this, ((String) fab[item]).replace("\n","")+" seleccionado", Toast.LENGTH_SHORT).show();
+		        	bandaAnchaModelo.setText(((String) fab[item]).replace("\n",""));
+		        	//mostrar_equipos_tvsatelital(view);
+		        	
+		        }
+		    });
+		    AlertDialog alert = builder1.create();
+		    alert.show();
+   	}
+   	
 
 }

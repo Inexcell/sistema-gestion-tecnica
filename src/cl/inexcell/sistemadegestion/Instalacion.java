@@ -60,7 +60,8 @@ public class Instalacion extends Activity {
 	
 	private TextView tipoPlanta, parExterno,tvArmario, 
 	tipoTerminal, tipoParLocal, tvSatelitalModelo, tvSatelitalTipo,
-	bandaAnchaTipo, bandaAnchaModelo;
+	bandaAnchaTipo, bandaAnchaModelo,PE_TipoPlanta, PE_TipoParExterno,
+	PE_TipoArmario, PE_TipoTerminal, PE_TipoParLocal;
 	
 	// Certificacion
 	private TextView tup,tdown,nom_wifi,num_tel;
@@ -275,6 +276,9 @@ public class Instalacion extends Activity {
 		//XMLParser.getReturnCode(tarea.get().toString()) == "[1]"
 		else if(tarea.execute() != null)
 		{
+			Consulta_PlantasExternas tarea1 = new Consulta_PlantasExternas();
+			tarea1.execute();
+			
 			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(Area.getWindowToken(), 0);
 			
@@ -1246,6 +1250,90 @@ public class Instalacion extends Activity {
    	    			
    	    			final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
    	    			ListarModelosTVSat(fab);
+   	    			
+   	    			
+   	    			
+ 				} catch (Exception e) {
+ 					e.printStackTrace();
+ 				}
+   	    	}
+   	    	else
+   	    	{
+   	    		//test_wsdl.setText("Error!");
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    	}
+   	    }
+   	}
+   	
+   	/*
+   	 * Consultar Plantas Externas
+   	 */
+   	
+   	private class Consulta_PlantasExternas extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Instalacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Consultando Datos de Cliente y Planta Externas");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String res_planta = null;
+ 			String res_par_externo = null;
+ 			String res_armario = null;
+ 			String res_par_local = null;
+ 			String res_caja = null;
+   			
+   			try {
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				res_planta = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"PLANTA", IMEI,IMSI);
+   				res_par_externo = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"PAR EXTERNO", IMEI,IMSI);
+   				res_armario = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"ARMARIO", IMEI,IMSI);
+   				res_par_local = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"PAR LOCAL", IMEI,IMSI);
+   				res_caja = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),"CAJA", IMEI,IMSI);
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}
+   			
+   			String res_final = res_planta+"¬¬"+res_par_externo+
+   					"¬¬"+res_armario+"¬¬"+res_par_local+"¬¬"+res_caja;
+
+   	        return res_final;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }
+   			
+   	    	if (result != null)
+   	    	{
+   	    		try {
+   	    			String[] resultado = result.split("¬¬");
+   	    			
+   	    			PE_TipoPlanta = (TextView) findViewById(R.id.TipoPlanta);
+   	    			PE_TipoParExterno = (TextView) findViewById(R.id.TipoParExterno);
+   	    			PE_TipoArmario = (TextView) findViewById(R.id.TipoArmario);
+   	    			PE_TipoTerminal = (TextView) findViewById(R.id.TipoTerminal);
+   	    			PE_TipoParLocal = (TextView) findViewById(R.id.TipoParLocal);
+   	    			
+   	    			
+   	    			PE_TipoPlanta.setText(XMLParser.getOutsidePlant(resultado[0]).replace("[", "").replace("]", ""));
+   	    			PE_TipoParExterno.setText(XMLParser.getOutsidePlant(resultado[1]).replace("[", "").replace("]", ""));
+   	    			PE_TipoArmario.setText(XMLParser.getOutsidePlant(resultado[2]).replace("[", "").replace("]", ""));
+   	    			PE_TipoTerminal.setText(XMLParser.getOutsidePlant(resultado[3]).replace("[", "").replace("]", ""));
+   	    			PE_TipoParLocal.setText(XMLParser.getOutsidePlant(resultado[4]).replace("[", "").replace("]", ""));
+   	    			
+   	    			
    	    			
    	    			
    	    			
