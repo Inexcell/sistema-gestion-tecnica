@@ -285,12 +285,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:text="(Resultado -- de -- encontrados)" />
+        android:text="(Resultado -- de -- encontrados)"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Puede mover la pantalla a derecha e izquierda" />
+        android:text="Puede deslizar con el dedo de derecha a izquierda o viceversa." />
 
 </LinearLayout>
