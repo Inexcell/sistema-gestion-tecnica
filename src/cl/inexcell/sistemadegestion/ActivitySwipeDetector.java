@@ -22,7 +22,7 @@ public class ActivitySwipeDetector implements View.OnTouchListener {
         this.activity = activity;
         final ViewConfiguration vc = ViewConfiguration.get(context);
         DisplayMetrics dm = context.getResources().getDisplayMetrics();
-        MIN_DISTANCE = vc.getScaledPagingTouchSlop() * dm.density;
+        MIN_DISTANCE = vc.getScaledPagingTouchSlop() * dm.density*3;
         VELOCITY = vc.getScaledMinimumFlingVelocity();
         MAX_OFF_PATH = MIN_DISTANCE * 2;            
     }
