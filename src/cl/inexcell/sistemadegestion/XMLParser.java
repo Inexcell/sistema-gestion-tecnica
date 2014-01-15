@@ -18,6 +18,8 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import android.util.Log;
+
 public class XMLParser {
 	
 	/*
@@ -166,9 +168,37 @@ public class XMLParser {
         //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 	
-	/*
-	 * XML-004: Actualizar Inventario
-	 */
+	public static ArrayList<String> setUpdateInventory(String xml) throws ParserConfigurationException,
+    SAXException, IOException
+    {
+          ArrayList<String> res = new ArrayList<String>();
+         
+          String xmlRecords = xml;
+         
+          DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+          InputSource is = new InputSource();
+          is.setCharacterStream(new StringReader(xmlRecords));
+         
+          Document doc = db.parse(is);
+          NodeList nodes = doc.getChildNodes().item(0)
+                                 .getChildNodes().item(0)
+                                 .getChildNodes().item(0)
+                                 .getChildNodes().item(0)
+                                 .getChildNodes().item(1)
+                                 .getChildNodes().item(0)
+                                 .getChildNodes().item(0)
+                                 .getChildNodes().item(0)
+                                 .getChildNodes(); //Llegamos al tag Return
+         
+         
+          for(int i = 0; i< nodes.getLength(); i++){
+                NodeList elemento = nodes.item(i).getChildNodes();
+                res.add(elemento.item(0).getNodeValue());
+          }
+               
+          return res;
+          //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+    }
 	
 	// TODO
 	
@@ -320,10 +350,8 @@ public class XMLParser {
 	   NodeList Return = nodes.item(tamano-1).getChildNodes();
 	   String code = Return.item(0).getChildNodes().item(0).getNodeValue();
 	   String linea = "";
-	   @SuppressWarnings("unused")
-	   NodeList nodoqliao = nodes.item(0).getChildNodes();
 	   /** GUARDAMOS EL CODE Y DESCRIPTION DEL RESULT **/
-		for (int i = 0; i < nodes.getLength(); i++) 
+		for (int i = 0; i < Return.getLength(); i++) 
 	    {
 			if(i>0)
 				linea+=";";
@@ -334,28 +362,41 @@ public class XMLParser {
 		linea = "";
 	    
 		/** SI CODIGO ES "0" GUARDAMOS EL RESTO DE NODOS.*/
-	    if(Integer.valueOf(code)==0){
+	    if(Integer.valueOf(code)==0 || Integer.valueOf(code)==48){
 		    for (int i = 0; i < tamano-1; i++) 
 		    {
-		    	NodeList planta = nodes.item(i).getChildNodes();		    	
-		    	for(int j = 0; j < planta.getLength(); i++){
-		    		NodeList dato = planta.item(i).getChildNodes();
+		    	NodeList planta = nodes.item(i).getChildNodes();
+		    	int n_datos = planta.getLength();
+		    	for(int j = 0; j < n_datos; j++){
+		    		NodeList dato = planta.item(j).getChildNodes();
+		    		int not_empty = dato.getLength();
 		    		if(j>0)
 						linea+=";";
-		    		if(dato.item(0).getNodeName().compareTo("GPS")==0){
-		    			linea+=dato.item(0).getChildNodes().item(0).getNodeValue();
-		    			linea+=";";
-		    			linea+=dato.item(1).getChildNodes().item(0).getNodeValue();
+		    		
+		    		if(not_empty == 0){
+		    			linea+= "--";
 		    		}
-		    		else if(dato.item(0).getNodeName().compareTo("Feasibility")==0){
-		    			linea+=dato.item(0).getChildNodes().item(0).getNodeValue();
-		    			linea+=";";
-		    			linea+=dato.item(1).getChildNodes().item(0).getNodeValue();
-		    			linea+=";";
-		    			linea+=dato.item(2).getChildNodes().item(0).getNodeValue();
+		    		else{		    			
+			    		if(j==2){
+			    			linea+=dato.item(0).getChildNodes().item(0).getNodeValue();
+			    			linea+=";";
+			    			linea+=dato.item(1).getChildNodes().item(0).getNodeValue();
+			    		}
+			    		else if(j==6){
+			    			if(dato.item(0).getChildNodes().getLength() == 0){
+				    			linea+= "--;--;--";
+				    		}
+			    			else{
+				    			linea+=dato.item(0).getChildNodes().item(0).getNodeValue();
+				    			linea+=";";
+				    			linea+=dato.item(1).getChildNodes().item(0).getNodeValue();
+				    			linea+=";";
+				    			linea+=dato.item(2).getChildNodes().item(0).getNodeValue();
+			    			}
+			    		}
+			    		else
+			    			linea+=dato.item(0).getNodeValue();
 		    		}
-		    		else
-		    			linea+=dato.item(0).getNodeValue();
 		    	}
 		    	res.add(linea);
 		    	linea = "";

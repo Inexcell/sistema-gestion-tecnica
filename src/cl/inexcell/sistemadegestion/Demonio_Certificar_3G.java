@@ -74,36 +74,20 @@ public class Demonio_Certificar_3G extends Service{
 							      getSystemService(Context.CONNECTIVITY_SERVICE);
 							
 						 State senal3g = conMan.getNetworkInfo(0).getState();
+						 State wifi = conMan.getNetworkInfo(1).getState();
 						 if (senal3g == NetworkInfo.State.CONNECTED )
 						 {
-							 ejecutarTarea();
+							// ejecutarTarea();
+						 }else if (wifi == NetworkInfo.State.CONNECTED )
+						 {
+							 //enviarDatos3G();
 						 };
 					 }      
 				 }
 				 , 1000*10, 1000 * 60 *5); //Tiempo en milisegundos son 60 minutos en este caso
 		 //, 1000*10, 10000); //Tiempo en milisegundos son 60 minutos en este caso
 		 
-		 
-		 this.m2Timer = new Timer();
-		 this.m2Timer.scheduleAtFixedRate(
-				 new TimerTask(){
-					 @Override
-					 public void run() {
-						
-						 ConnectivityManager conMan = (ConnectivityManager) 
-							      getSystemService(Context.CONNECTIVITY_SERVICE);
-							
-						 State wifi = conMan.getNetworkInfo(1).getState();
-						 if (wifi == NetworkInfo.State.CONNECTED )
-						 {
-							 enviarDatos3G();
-						 }
-						 
-						
-					 }      
-				 }
-				 , 1000*10, 1000 * 60 *5); //Tiempo en milisegundos son 60 minutos en este caso
-		// , 1000*10, 60000); //Tiempo en milisegundos son 60 minutos en este caso
+		
 	}
 	 
 	 private void enviarDatos3G(){

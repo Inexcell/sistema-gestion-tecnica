@@ -76,6 +76,11 @@ public class Instalacion extends Activity {
 	
     private LinearLayout p1,p2,p3,p4,p5,p6,p7;
     
+    //TIPO Y MODELO DE INVENTARIO
+    private String tipoInventario = "";
+    private String modeloInventario = "";
+    private Boolean inventarioCorrecto = false;
+    
     final CharSequence[] fabricantes = {
     		"Fabricante 1", "Fabricante 2", "Fabricante 3", 
             "Fabricante 4", "Fabricante 5", "Fabricante 6"
@@ -560,8 +565,14 @@ public class Instalacion extends Activity {
 	        public void onClick(DialogInterface dialog, int item) {
 	            // Do something with the selection
 	            //mDoneButton.setText(fabricantes[item]);
-	        	bandaAnchaModelo.setText(equipos[item]);
+	        	
 	        	Toast.makeText(Instalacion.this, equipos[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+	        	tipoInventario = "MODEM";
+	        	modeloInventario = equipos[item].toString();
+	        	//HACER EL UPDATE
+	        	
+	        	Consulta_Upd_Inventario updateInventory = new Consulta_Upd_Inventario();
+	        	updateInventory.execute();
 	        }
 	    });
 	    AlertDialog alert = builder.create();
@@ -1389,8 +1400,14 @@ public class Instalacion extends Activity {
 		            // Do something with the selection
 		            //mDoneButton.setText(fabricantes[item]);
 		        	Toast.makeText(Instalacion.this, fab[item]+" seleccionado", Toast.LENGTH_SHORT).show();
-		        	tvSatelitalModelo.setText(fab[item]);
+		        	
 		        	//mostrar_equipos_tvsatelital(view);
+		        	
+		        	tipoInventario = "DECO";
+		        	modeloInventario = equipos[item].toString();
+		        	
+		        	Consulta_Upd_Inventario updateInventory = new Consulta_Upd_Inventario();
+		        	updateInventory.execute();
 		        	
 		        }
 		    });
@@ -1444,6 +1461,72 @@ public class Instalacion extends Activity {
 		    });
 		    AlertDialog alert = builder1.create();
 		    alert.show();
+   	}
+   	
+   	/*
+   	 * Consulta Asincronica Actualizar Inventario
+   	 */
+   	
+   	private class Consulta_Upd_Inventario extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Instalacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Actualizando Equipo del Cliente");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String respuesta = null;
+   			
+   			try {
+   				inventarioCorrecto = false;
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				respuesta = SoapRequestMovistar.setInventoryUpdate(Area.getText().toString(), Phone.getText().toString(),tipoInventario, modeloInventario, IMEI, IMSI);
+   				if(Integer.valueOf(XMLParser.setUpdateInventory(respuesta).get(0)) == 0)
+				{	//Actualizó correctamente									
+					inventarioCorrecto = true;
+				}						
+   				else
+   				{
+   					inventarioCorrecto = false;   					
+   				}
+   				
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}   			
+   	        return respuesta;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }   
+ 			if(inventarioCorrecto == true)
+ 			{
+ 				Toast.makeText(getApplicationContext(), "Inventario Actualizado", Toast.LENGTH_LONG).show();
+ 				if(tipoInventario == "DECO")
+ 				{
+ 					tvSatelitalModelo.setText(modeloInventario);
+ 				}
+ 				else if(tipoInventario == "MODEM")
+ 				{
+ 					bandaAnchaModelo.setText(modeloInventario); 					
+ 				}
+ 			}
+ 			else
+ 			{
+ 				Toast.makeText(getApplicationContext(), "Error al Actualizar Inventario", Toast.LENGTH_LONG).show();
+ 			}
+   	    }
    	}
    	
 

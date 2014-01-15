@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Armario"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
 
@@ -82,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Condell 1190, Valparaíso"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
 
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Valor Factibilidad"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
 
@@ -142,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Valor Cable"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
 
@@ -171,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Valor Gabinete"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
 
@@ -215,7 +215,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="3"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
 
@@ -230,7 +230,7 @@
                 android:id="@+id/peVacantes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
         </TableRow>
@@ -258,7 +258,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:text="2"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
 
@@ -273,7 +273,7 @@
                 android:id="@+id/peMalos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="--"
                 android:textColor="#258aaf"
                 android:textStyle="bold" />
         </TableRow>
@@ -285,7 +285,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="20dp"
-        android:text="(Resultado 1 de 2 encontrados)" />
+        android:text="(Resultado -- de -- encontrados)" />
 
     <TextView
         android:id="@+id/textView5"

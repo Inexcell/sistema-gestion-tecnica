@@ -701,8 +701,8 @@ public class SoapRequestMovistar {
 		               "<NeighborNode xsi:type=\"urn:NeighborNodeIn\">"+
 		                  "<Input xsi:type=\"urn:NeighborNodeInData\">"+
 		                     "<Gps xsi:type=\"urn:GPSType\">"+
-		                        "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
-		                        "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
+		                        "<Lat xsi:type=\"xsd:string\">"+"-33.5435"+"</Lat>"+
+		                        "<Lng xsi:type=\"xsd:string\">"+"-70.5737"+"</Lng>"+
 		                     "</Gps>"+
 		                  "</Input>"+
 		               "</NeighborNode>"+

@@ -52,7 +52,11 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		Log.i("LOCALIZACION", loc.getLatitude()+"\n"+loc.getLongitude());
 		Consulta_P_Externas cpe = new Consulta_P_Externas();
-		cpe.execute();
+		cpe.execute();	
+		
+	}
+
+	public void iniciar(){
 		declararvariables();
 		//buscar_plantas_externas();
 		ActivitySwipeDetector swipe = new ActivitySwipeDetector(this,this);		
@@ -60,7 +64,6 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		FragmentTransaction t = fm.beginTransaction();
 		frag = fm.findFragmentById(R.id.fragment);
 		frag.getView().setOnTouchListener(swipe);
-		
 		if(cantidad != 0){
 			
 			cambiar();
@@ -83,49 +86,7 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		}
 		
 		t.commit();
-			
-			
-		
 	}
-	
-//	/**Aqui se hace el request y los resultados son guardados en strings[] para cada variable**/
-//	public void buscar_plantas_externas(){
-//				
-//		id = new String[cantidad];
-//		type = new String[cantidad];
-//		gps = new String[cantidad];
-//		addStreet= new String[cantidad];
-//		addNum= new String[cantidad];
-//		addCode= new String[cantidad];
-//		feasibility= new String[cantidad];
-//		site= new String[cantidad];
-//		cable= new String[cantidad];
-//		cabinet= new String[cantidad];
-//		pairFrom= new String[cantidad];
-//		pairOcup= new String[cantidad];
-//		pairVacant= new String[cantidad];
-//		pairRes= new String[cantidad];
-//		pairBad= new String[cantidad];
-//		
-//		String[] tipos = {"Armario","Caja","Tablero"};
-//		for(int i = 0;i<cantidad;i++){
-//			id[i] = String.valueOf(i);
-//			type[i] = tipos[i%3];
-//			gps[i] = "asd "+i;
-//			addStreet[i]="calle ";
-//			addNum[i]="#"+i;
-//			addCode[i]="code "+i;
-//			feasibility[i]=""+i;
-//			site[i]="site "+i;
-//			cable[i]="Valor Cable "+i;
-//			cabinet[i]="Valor Gabinete "+i;
-//			pairFrom[i]=""+i;
-//			pairOcup[i]=""+i;
-//			pairVacant[i]=""+i;
-//			pairRes[i]=""+i;
-//			pairBad[i]=""+i;
-//		}
-//	}
 	
 	public void cambiar(){
 		String[] datos = res.get(posicion).split(";");
@@ -150,7 +111,7 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		((TextView) frag.getView().findViewById(R.id.peVacantes)).setText("--");
 		((TextView) frag.getView().findViewById(R.id.peReservados)).setText("--");
 		((TextView) frag.getView().findViewById(R.id.peMalos)).setText("--");
-		((TextView) frag.getView().findViewById(R.id.peResultados)).setText("--");
+		((TextView) frag.getView().findViewById(R.id.peResultados)).setText("(Resultado -- de -- encontrados)");
 		p.setEnabled(false);
 		n.setEnabled(false);
 		
@@ -165,6 +126,7 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction t = fm.beginTransaction();
 		frag = fm.findFragmentById(R.id.fragment);
+		t.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		t.hide(frag);
 		cambiar();
 		t.show(frag);
@@ -181,6 +143,7 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 		FragmentManager fm = getSupportFragmentManager();
 		FragmentTransaction t = fm.beginTransaction();
 		frag = fm.findFragmentById(R.id.fragment);
+		t.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 		t.hide(frag);
 		cambiar();
 		t.show(frag);
@@ -228,23 +191,7 @@ private class Consulta_P_Externas extends AsyncTask<String,Integer,String> {
  			this.dialog.setMessage("Consultando Plantas Externas Cercanas");
  		    this.dialog.show();
              //super.onPreExecute();
- 		    	TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				String IMEI = telephonyManager.getDeviceId();
-				String IMSI =  telephonyManager.getSimSerialNumber();
-				
-				String respuesta = null;
-				try {
-					respuesta = SoapRequestMovistar.getNeighborNode(String.valueOf(loc.getLatitude()),
-																	String.valueOf(loc.getLongitude()),
-																	IMEI,
-																	IMSI);
-					res = XMLParser.getNeighborNode(respuesta);
-					//res.add("810768;ARMARIO;-33.5435;-70.5737;AV SANTA AMALIA;null;18355;null;null;null;SINE;3;null;1939;1964;2;15;9;0");
-					cantidad = res.size()-1;
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+ 		    	
 				
          }
    		 
@@ -252,24 +199,22 @@ private class Consulta_P_Externas extends AsyncTask<String,Integer,String> {
    	    	
  			String respuesta = null;
    			
-   			try 
-   			{
-//   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-//   				String IMEI = telephonyManager.getDeviceId();
-//   				String IMSI =  telephonyManager.getSimSerialNumber();
-//   				
-//   				respuesta = SoapRequestMovistar.getNeighborNode(String.valueOf(loc.getLatitude()),
-//   																String.valueOf(loc.getLongitude()),
-//   																IMEI,
-//   																IMSI);
-//   				res = XMLParser.getNeighborNode(respuesta);
-//   				cantidad = res.size()-1;
-   				
-   				
-   			} catch (Exception e1) {
-   				e1.printStackTrace();
-   			}
-
+ 			TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+			String IMEI = telephonyManager.getDeviceId();
+			String IMSI =  telephonyManager.getSimSerialNumber();
+			
+			try {
+				respuesta = SoapRequestMovistar.getNeighborNode(String.valueOf(loc.getLatitude()),
+																String.valueOf(loc.getLongitude()),
+																IMEI,
+																IMSI);
+				res = XMLParser.getNeighborNode(respuesta);
+				//res.add("810768;ARMARIO;-33.5435;-70.5737;AV SANTA AMALIA;null;18355;null;null;null;SINE;3;null;1939;1964;2;15;9;0");
+				cantidad = res.size()-1;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
    	        return respuesta;
    	    }
    	    
@@ -279,6 +224,7 @@ private class Consulta_P_Externas extends AsyncTask<String,Integer,String> {
  			if (this.dialog.isShowing()) {
  		        this.dialog.dismiss();
  		     }
+ 			iniciar();
    	    }
    	}
 
