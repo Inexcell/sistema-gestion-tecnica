@@ -509,148 +509,37 @@
 				    android:id="@+id/panelTVDigital1"
 				    android:layout_width="fill_parent"
 				    android:layout_height="wrap_content"
-				    android:orientation="horizontal" >
+				    android:orientation="vertical" >
 					
 					<TextView
 					    android:id="@+id/ListaEquipo"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
-					    android:layout_marginBottom="10dp"
+					    android:layout_marginBottom="1dp"
 					    android:layout_marginLeft="25dp"
 					    android:layout_marginTop="10dp"
 					    android:text="EQUIPO ACTUAL DEL CLIENTE"
 					    android:textColor="#258aaf"
 					    android:textStyle="bold" />
+					<TextView
+					    android:id="@+id/ListaEquipo"
+					    android:layout_width="wrap_content"
+					    android:layout_height="wrap_content"
+					    android:layout_marginBottom="10dp"
+					    android:layout_marginLeft="20dp"
+					    android:layout_marginTop="2dp"
+					    android:text="Seleccione un item para editarlo"
+					    android:textColor="#000000"
+					    android:textStyle="bold" />
 					
 				</LinearLayout>
 				
-				   <HorizontalScrollView
-		        android:layout_width="wrap_content"
-				android:layout_height="wrap_content" 
-		        >
-				
-				<TableLayout
-			        android:layout_width="match_parent"
-			        android:layout_height="wrap_content" >
-					
-				 
-					
-				    <!--  Linea Horizontal -->
-				    <LinearLayout
-					    android:id="@+id/panelLinea1"
-					    android:orientation="horizontal"
-			            android:layout_width="fill_parent"
-						android:layout_height="1dp"
-						android:layout_marginLeft="25dp"
-			            android:layout_marginRight="25dp"
-			            android:background="#bdbdbd"
-			            android:layout_marginTop="5dp"
-			            android:layout_marginBottom="5dp" >
-		        	</LinearLayout>
-			    	
-				    <TableRow
-			            android:id="@+id/tableRow1"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            >
-					
-						<TextView 
-						    android:id="@+id/Planta" 
-						    android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginLeft="28dp"
-							android:layout_marginTop="5dp"
-							android:text="Fabricante:" />
-							
-						<TextView 
-						    android:id="@+id/tvSatelitalTipo" 
-						    android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginLeft="40dp"
-							android:layout_marginTop="5dp"
-							android:text="--" />
-						
-					</TableRow>
-					
-			        
-					
-			        <!--  Linea Horizontal -->
-				    <LinearLayout
-					    android:id="@+id/panelLinea1"
-					    android:orientation="horizontal"
-			            android:layout_width="fill_parent"
-						android:layout_height="1dp"
-						android:layout_marginLeft="25dp"
-			            android:layout_marginRight="25dp"
-			            android:background="#bdbdbd"
-			            android:layout_marginTop="5dp"
-			            android:layout_marginBottom="5dp" >
-		        	</LinearLayout>
-		        	
-				    <TableRow
-			            android:id="@+id/tableRow1"
-			            android:layout_width="wrap_content"
-			            android:layout_height="wrap_content"
-			            >
-					
-						<TextView 
-						    android:id="@+id/Armario" 
-						    android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginLeft="28dp"
-							android:layout_marginTop="5dp"
-							android:text="Modelo:" />
-							
-						<TextView 
-						    android:id="@+id/tvSatelitalModelo" 
-						    android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:layout_marginLeft="40dp"
-							android:layout_marginTop="5dp"
-							android:text="--" />
-						
-						
-						
-					</TableRow>
-					
-			        <!--  Linea Horizontal -->
-				    <LinearLayout
-					    android:id="@+id/panelLinea1"
-					    android:orientation="horizontal"
-			            android:layout_width="fill_parent"
-						android:layout_height="1dp"
-						android:layout_marginLeft="25dp"
-			            android:layout_marginRight="25dp"
-			            android:background="#bdbdbd"
-			            android:layout_marginTop="5dp"
-			            android:layout_marginBottom="5dp" >
-		        	</LinearLayout>
-		        
-				</TableLayout>
-				
-				</HorizontalScrollView>
-				
-				<LinearLayout
-				    android:id="@+id/panelBotonBuscar"
+				<ListView 
+				    android:id="@+id/listviewTv"
 				    android:layout_width="fill_parent"
-				    android:layout_height="wrap_content"
-				    android:gravity="center"
-				    android:orientation="vertical"
-				     >
+				    android:layout_height="wrap_content" /> 
 				
-					<Button
-				        android:id="@+id/ButtonBuscar"
-				        android:layout_width="wrap_content"
-				        android:layout_height="45dp"			        
-				        android:drawableLeft="@drawable/ic_edit1"
-				        android:drawablePadding="5dp"
-				        android:textSize="16dp"
-				        android:onClick="mostrar_planta_tvsatelital"
-				        android:text="Editar" />
-			
-					
-							
-				</LinearLayout>
+				
 			
 			
 			

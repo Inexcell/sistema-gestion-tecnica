@@ -46,17 +46,23 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class Instalacion extends Activity {
-	
+	private ArrayList<itemList> items;
+	private int decoSelected;
 	private EditText Area, Phone;
+	private String tipoDeco;
 	
 	private TextView tipoPlanta, parExterno,tvArmario, 
 	tipoTerminal, tipoParLocal, tvSatelitalModelo, tvSatelitalTipo,
@@ -119,6 +125,8 @@ public class Instalacion extends Activity {
     		"Par Local 1", "Par Local 2", "Par Local 3",
     		"Par Local 4", "Par Local 5", "Par Local 6"
     };
+    
+    final CharSequence[] option = {"Editar"};
 
     // Consulta Cliente
 	private String area1;
@@ -132,7 +140,7 @@ public class Instalacion extends Activity {
 	private TableRow p9_0;
 
 	private TableRow p9_1;
-
+	private ListView listView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -149,6 +157,7 @@ public class Instalacion extends Activity {
 		
 		setupInicial();
 		
+		//television_Satelital(); 
 				
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
@@ -190,6 +199,32 @@ public class Instalacion extends Activity {
 				
 	}
 	
+	public void television_Satelital(){
+		listView = (ListView) findViewById(R.id.listviewTv);
+		listAdapter adapter = new listAdapter(this, items);
+	    listView.setAdapter(adapter);
+	    listView.setOnItemClickListener(new OnItemClickListener() {
+	    	  @Override
+	    	  public void onItemClick(AdapterView<?> parent, View view,
+	    	    int position, long id) {
+//	    	    Toast.makeText(getApplicationContext(),
+//	    	      "Click ListItem Number " + position, Toast.LENGTH_LONG)
+//	    	      .show();
+	    		  decoSelected = position;
+	    		  mostrar_planta_tvsatelital();
+	    		  
+	    	  }
+	    	});
+	}
+	
+//	private ArrayList<itemList> generateData(){
+//        ArrayList<itemList> items = new ArrayList<itemList>();
+//        for(int i = 1; i <= 7; i++)
+//        	items.add(new itemList(String.valueOf(i),"Modelo "+i));
+//        
+//        return items;
+//    }
+	
 	/*
 	 * Valores iniciales al iniciar el Activity
 	 */
@@ -204,8 +239,8 @@ public class Instalacion extends Activity {
 				tipoParLocal = (TextView) findViewById(R.id.TipoParLocal);
 				
 				// Seccion TV Satelital
-				tvSatelitalTipo = (TextView) findViewById(R.id.tvSatelitalTipo);
-				tvSatelitalModelo = (TextView) findViewById(R.id.tvSatelitalModelo);
+//				tvSatelitalTipo = (TextView) findViewById(R.id.tvSatelitalTipo);
+//				tvSatelitalModelo = (TextView) findViewById(R.id.tvSatelitalModelo);
 				
 				// Seccion Banda Ancha
 				bandaAnchaTipo = (TextView) findViewById(R.id.bandaAnchaTipo);
@@ -544,7 +579,7 @@ public class Instalacion extends Activity {
 		
 	}
 	
-	public void mostrar_planta_tvsatelital(final View view){
+	public void mostrar_planta_tvsatelital(){
 		
 		Consulta_Fab_TVSatelital tarea = new Consulta_Fab_TVSatelital();
 		tarea.execute();
@@ -1014,9 +1049,24 @@ public class Instalacion extends Activity {
   	    			Toast.makeText(getApplicationContext(), "'"+XMLParser.getReturnCode(result)+"'", Toast.LENGTH_LONG).show();
   	    			
     				// TODO
-    				tvSatelitalTipo.setText(arreglo2[1]);
-  	    			tvSatelitalModelo.setText(arreglo2[2]);
-  	    			
+//    				tvSatelitalTipo.setText(arreglo2[1]);
+//  	    		tvSatelitalModelo.setText(arreglo2[2]);
+  	    			items = new ArrayList<itemList>();   			
+  	    	        int cont = 0;
+  	    			for(int i = 0; i < arreglo1.length ;i++){
+  	    				String[] dato = arreglo1[i].split(";");
+  	    				if(dato[0].compareTo(" DECO")==0){
+  	    					//agrego
+  	    					cont++;
+  	    					items.add(new itemList(String.valueOf(cont),dato[2]));
+  	    					
+  	    				}
+  	    			}
+  	    			if(cont == 0){
+  	    				items.add(new itemList("--","No hay datos"));
+  	    			}
+  	    				
+  	    			television_Satelital();
   	    			bandaAnchaTipo.setText(arreglo3[1]);
   	    			bandaAnchaModelo.setText(arreglo3[2]);
   	    			
@@ -1117,7 +1167,7 @@ public class Instalacion extends Activity {
    				String IMEI = telephonyManager.getDeviceId();
    				String IMSI =  telephonyManager.getSimSerialNumber();
    				
-   				respuesta = SoapRequestMovistar.getModel("DECO", tvSatelitalTipo.getText().toString(),  IMEI,IMSI);
+   				respuesta = SoapRequestMovistar.getModel("DECO", tipoDeco,  IMEI,IMSI);
    				
    			} catch (Exception e1) {
    				e1.printStackTrace();
@@ -1374,9 +1424,9 @@ public class Instalacion extends Activity {
 		            // Do something with the selection
 		            //mDoneButton.setText(fabricantes[item]);
 		        	Toast.makeText(Instalacion.this, fab[item]+" seleccionado", Toast.LENGTH_SHORT).show();
-		        	tvSatelitalTipo.setText(fab[item]);
+		        	//tvSatelitalTipo.setText(fab[item]);
 		        	//mostrar_equipos_tvsatelital(view);
-		        	
+		        	tipoDeco = fab[item].toString();
 		        	Consulta_Mod_TVSatelital tarea = new Consulta_Mod_TVSatelital();
 		    		tarea.execute();
 		        	
@@ -1404,7 +1454,7 @@ public class Instalacion extends Activity {
 		        	//mostrar_equipos_tvsatelital(view);
 		        	
 		        	tipoInventario = "DECO";
-		        	modeloInventario = equipos[item].toString();
+		        	modeloInventario = fab[item].toString();
 		        	
 		        	Consulta_Upd_Inventario updateInventory = new Consulta_Upd_Inventario();
 		        	updateInventory.execute();
@@ -1497,7 +1547,6 @@ public class Instalacion extends Activity {
    					inventarioCorrecto = false;   					
    				}
    				
-   				
    			} catch (Exception e1) {
    				e1.printStackTrace();
    			}   			
@@ -1515,7 +1564,8 @@ public class Instalacion extends Activity {
  				Toast.makeText(getApplicationContext(), "Inventario Actualizado", Toast.LENGTH_LONG).show();
  				if(tipoInventario == "DECO")
  				{
- 					tvSatelitalModelo.setText(modeloInventario);
+ 					items.get(decoSelected).setDescription(modeloInventario);
+ 					television_Satelital();
  				}
  				else if(tipoInventario == "MODEM")
  				{
