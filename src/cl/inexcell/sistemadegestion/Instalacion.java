@@ -62,8 +62,8 @@ public class Instalacion extends Activity {
 	private ArrayList<itemList> items;
 	private int decoSelected;
 	private EditText Area, Phone;
-	private String tipoDeco;
-	
+	private String tipoDeco, bandaancha_fab_select,bandaancha_modelo;
+	private CharSequence[] tmp = null;
 	private TextView tipoPlanta, parExterno,tvArmario, 
 	tipoTerminal, tipoParLocal, tvSatelitalModelo, tvSatelitalTipo,
 	bandaAnchaTipo, bandaAnchaModelo,PE_TipoPlanta, PE_TipoParExterno,
@@ -1127,7 +1127,7 @@ public class Instalacion extends Activity {
    	    		try {
    	    			ArrayList<String> res = XMLParser.getVendor(result);
    	    			
-   	    			final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
+   	    			CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
    	    			ListarFabricantesTVSat(fab);
    	    			
    	    			
@@ -1288,7 +1288,7 @@ public class Instalacion extends Activity {
    				String IMEI = telephonyManager.getDeviceId();
    				String IMSI =  telephonyManager.getSimSerialNumber();
    				
-   				respuesta = SoapRequestMovistar.getModel("MODEM", bandaAnchaTipo.getText().toString(),  IMEI,IMSI);
+   				respuesta = SoapRequestMovistar.getModel("MODEM", bandaancha_fab_select,  IMEI,IMSI);
    				
    			} catch (Exception e1) {
    				e1.printStackTrace();
@@ -1310,9 +1310,16 @@ public class Instalacion extends Activity {
    	    			ArrayList<String> res = XMLParser.getModel(result);
    	    			
    	    			final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
-   	    			ListarModelosTVSat(fab);
+   	    			if(fab.length != 0){
+   	    				String asd = fab[0].toString();
+   	    				if(asd.compareTo("")==0){
+   	    					Toast.makeText(getApplicationContext(), "No hay modelos para el fabricante "+bandaancha_fab_select+".", Toast.LENGTH_LONG).show();
+   	    					return;
+   	    				}
+   	    				else
+   	    					ListarModelosBandaAncha(fab);
    	    			
-   	    			
+   	    			}
    	    			
  				} catch (Exception e) {
  					e.printStackTrace();
@@ -1471,6 +1478,7 @@ public class Instalacion extends Activity {
    	
    	public void ListarFabricantesBandaAncha(final CharSequence[] fab)
    	{
+   		
    		AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
 		    builder1.setTitle("Seleccione Fabricante de MODEM");
 		    builder1.setIcon(R.drawable.ic_fabricante);
@@ -1479,8 +1487,9 @@ public class Instalacion extends Activity {
 		            // Do something with the selection
 		            //mDoneButton.setText(fabricantes[item]);
 		        	Toast.makeText(Instalacion.this, ((String) fab[item]).replace("\n","")+" seleccionado", Toast.LENGTH_SHORT).show();
-		        	bandaAnchaTipo.setText(((String) fab[item]).replace("\n",""));
-		        	//mostrar_equipos_tvsatelital(view);
+		        	//bandaAnchaTipo.setText(((String) fab[item]).replace("\n",""));
+		        	//mostrar_equipos_tvsatelital(view);		        	
+		        	bandaancha_fab_select = ((String) fab[item]).replace("\n","");
 		        	
 		        	Consulta_Mod_BandaAncha tarea = new Consulta_Mod_BandaAncha();
 		    		tarea.execute();
@@ -1504,7 +1513,11 @@ public class Instalacion extends Activity {
 		            // Do something with the selection
 		            //mDoneButton.setText(fabricantes[item]);
 		        	Toast.makeText(Instalacion.this, ((String) fab[item]).replace("\n","")+" seleccionado", Toast.LENGTH_SHORT).show();
-		        	bandaAnchaModelo.setText(((String) fab[item]).replace("\n",""));
+		        	modeloInventario = ((String) fab[item]).replace("\n","");
+		        	tipoInventario = "MODEM";
+		        	Consulta_Upd_Inventario cui = new Consulta_Upd_Inventario();
+		        	cui.execute();
+		        	//bandaAnchaModelo.setText(((String) fab[item]).replace("\n",""));
 		        	//mostrar_equipos_tvsatelital(view);
 		        	
 		        }
