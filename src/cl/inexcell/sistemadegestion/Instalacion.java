@@ -23,6 +23,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -50,7 +52,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TableRow;
@@ -78,7 +80,7 @@ public class Instalacion extends Activity {
     
     // Botones Layout
 		
-	private Button b1,b2,b3,b4,b5,buscar;
+	private Button b1,b2,b3,b4,b5,buscar,finalizar,certificar;
 	
     private LinearLayout p1,p2,p3,p4,p5,p6,p7;
     
@@ -86,6 +88,11 @@ public class Instalacion extends Activity {
     private String tipoInventario = "";
     private String modeloInventario = "";
     private Boolean inventarioCorrecto = false;
+    
+  //CERTIFICACIÓN DSL
+    private Boolean certifyDslCorrecto = false;
+    private ImageView ib1;
+    
     
     final CharSequence[] fabricantes = {
     		"Fabricante 1", "Fabricante 2", "Fabricante 3", 
@@ -154,6 +161,9 @@ public class Instalacion extends Activity {
 		Area = (EditText) findViewById(R.id.txtTelefonoArea);
 		Phone = (EditText) findViewById(R.id.txtTelefonoNumero);
 		buscar = (Button) findViewById(R.id.ButtonBuscar);
+		finalizar = (Button) findViewById(R.id.ButtonFinalizar);
+		certificar = (Button) findViewById(R.id.ButtonCertificarAgain);
+		
 		
 		setupInicial();
 		
@@ -281,6 +291,8 @@ public class Instalacion extends Activity {
 				p4.setVisibility(View.INVISIBLE);
 				p5.setVisibility(View.INVISIBLE);
 				p6.setVisibility(View.INVISIBLE);
+				
+				ib1 = (ImageView) findViewById(R.id.nro_telefono_ok);
 	}
 	
 	/*
@@ -517,20 +529,20 @@ public class Instalacion extends Activity {
    			});
    			
    			p9_1.setVisibility(View.GONE);
-   			p9_0.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					
-					if(p9_1.getVisibility()== View.VISIBLE)
-					{
-						p9_1.setVisibility(View.GONE);
-					}
-					else
-					{
-						p9_1.setVisibility(View.VISIBLE);
-					}
-				}
-   			});
+//   			p9_0.setOnClickListener(new OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					
+//					if(p9_1.getVisibility()== View.VISIBLE)
+//					{
+//						p9_1.setVisibility(View.GONE);
+//					}
+//					else
+//					{
+//						p9_1.setVisibility(View.VISIBLE);
+//					}
+//				}
+//   			});
 
 			tdown = (TextView)findViewById(R.id.tBajada);
 			tup = (TextView)findViewById(R.id.tSubida);
@@ -549,11 +561,11 @@ public class Instalacion extends Activity {
 			p6.setVisibility(View.VISIBLE);
 			p7.setVisibility(View.INVISIBLE);
 			
-			startDownload();
-       		muestra_descarga(0);
-       		
-       		startUpload();
-       		muestra_carga(0);
+//			startDownload();
+//       		muestra_descarga(0);
+//       		
+//       		startUpload();
+//       		muestra_carga(0);
 			
 			WifiManager wifiManager = (WifiManager) getSystemService(WIFI_SERVICE);
 			WifiInfo wifiInfo = wifiManager.getConnectionInfo();
@@ -570,6 +582,10 @@ public class Instalacion extends Activity {
 			
 			// Numero Telefono
 			num_tel.setText("("+Area.getText().toString()+") "+Phone.getText().toString());
+			//LLAMAR AL ASINCRÓNICO PARA CERTIFICAcion DSL
+            
+            Consulta_Certify_DSL tarea = new Consulta_Certify_DSL();
+            tarea.execute(); 
 		
    		}
 		catch (Exception ex)
@@ -774,7 +790,7 @@ public class Instalacion extends Activity {
 		@Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showDialog(DIALOG_DOWNLOAD_PROGRESS);
+            //showDialog(DIALOG_DOWNLOAD_PROGRESS);
         }
 
         @Override
@@ -820,14 +836,14 @@ public class Instalacion extends Activity {
         
 
 		protected void onProgressUpdate(String... progress) {
-             Log.d("ANDRO_ASYNC",progress[0]);
-             mProgressDialog.setProgress(Integer.parseInt(progress[0]));
+//             Log.d("ANDRO_ASYNC",progress[0]);
+//             mProgressDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
-        @SuppressWarnings("deprecation")
+        
 		@Override
         protected void onPostExecute(String unused) {
-            dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
+//            dismissDialog(DIALOG_DOWNLOAD_PROGRESS);
         }
     }
     
@@ -844,7 +860,7 @@ public class Instalacion extends Activity {
 		@SuppressWarnings("deprecation")
 		protected void onPreExecute() {
             super.onPreExecute();
-            showDialog(DIALOG_DOWNLOAD_PROGRESS1);
+//            showDialog(DIALOG_DOWNLOAD_PROGRESS1);
         }
 		
 	    protected String doInBackground(String... path) {
@@ -913,15 +929,15 @@ public class Instalacion extends Activity {
 	
 	
 		protected void onProgressUpdate(String... progress) {
-	        Log.d("ANDRO_ASYNC",progress[0]);
-	        mProgressDialog1.setProgress(Integer.parseInt(progress[0]));
+//	        Log.d("ANDRO_ASYNC",progress[0]);
+//	        mProgressDialog1.setProgress(Integer.parseInt(progress[0]));
 	   }
 	    
 	    @SuppressWarnings("deprecation")
 		protected void onPostExecute(String feed) {
-	    	dismissDialog(DIALOG_DOWNLOAD_PROGRESS1);
-	    	//Toast.makeText(activity, feed, Toast.LENGTH_SHORT).show();
-	    	Toast.makeText(activity, "Consulta Exitosa", Toast.LENGTH_SHORT).show();
+//	    	dismissDialog(DIALOG_DOWNLOAD_PROGRESS1);
+//	    	//Toast.makeText(activity, feed, Toast.LENGTH_SHORT).show();
+//	    	Toast.makeText(activity, "Consulta Exitosa", Toast.LENGTH_SHORT).show();
 	    }
 	 }
 	
@@ -1327,7 +1343,6 @@ public class Instalacion extends Activity {
    	    	}
    	    	else
    	    	{
-   	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
    	    	}
    	    }
@@ -1592,5 +1607,76 @@ public class Instalacion extends Activity {
    	    }
    	}
    	
+	
+	/*
+   	 * Consulta Asincronica CERTIFY DSL
+   	 */
+   	
+   	private class Consulta_Certify_DSL extends AsyncTask<String,Integer,String> {
+   		
+   		private final ProgressDialog dialog = new ProgressDialog(Instalacion.this);
+   		
+ 		protected void onPreExecute() {
+ 			this.dialog.setMessage("Midiendo descarga y certificando línea telefónica");
+ 		    this.dialog.show();
+             //super.onPreExecute();
+         }
+   		 
+   	    protected String doInBackground(String... params) {
+   	    	
+ 			String respuesta = null;
+   			
+   			try {   
+   				
+   				startDownload();
+   	       		muestra_descarga(0);
+   	       		
+   	       		startUpload();
+   	       		muestra_carga(0);
+   				
+   				
+   				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
+   				String IMEI = telephonyManager.getDeviceId();
+   				String IMSI =  telephonyManager.getSimSerialNumber();
+   				
+   				respuesta = SoapRequestMovistar.getCertifyDSL(Area.getText().toString(), Phone.getText().toString(),IMEI, IMSI);
+   				if(Integer.valueOf(XMLParser.getCertifyDsl(respuesta).get(0)) == 0)
+				{	//Actualizó correctamente									
+					certifyDslCorrecto = true;
+				}						
+   				else
+   				{
+   					certifyDslCorrecto = false;   					
+   				}
+   				
+   				
+   				
+   			} catch (Exception e1) {
+   				e1.printStackTrace();
+   			}   			
+   	        return respuesta;
+   	    }
+   	    
+
+ 		protected void onPostExecute(String result) {
+ 			
+ 			if (this.dialog.isShowing()) {
+ 		        this.dialog.dismiss();
+ 		     }   
+ 			if(certifyDslCorrecto == true)
+ 			{ 				 
+ 				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ok); 		
+ 				ib1.setImageBitmap(bmp);
+ 			}
+ 			else
+ 			{ 				
+ 				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.error); 				 				 
+ 				ib1.setImageBitmap(bmp);
+ 				certificar.setEnabled(false);
+ 				
+ 			}
+ 			//Toast.makeText(getApplicationContext(), "Certificación Finalizada", Toast.LENGTH_SHORT).show();
+   	    }
+   	}
 
 }

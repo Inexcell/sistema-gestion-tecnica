@@ -244,8 +244,39 @@ public class XMLParser {
 	// TODO
 	
 	/*
-	 * XML-007: Certificar Red fija (xDSL)
-	 */
+     * XML-007: Certificar Red fija (xDSL)
+     */
+     public static ArrayList<String> getCertifyDsl(String xml) throws ParserConfigurationException,
+     SAXException, IOException
+     {
+           ArrayList<String> res = new ArrayList<String>();
+          
+           String xmlRecords = xml;
+          
+           DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+           InputSource is = new InputSource();
+           is.setCharacterStream(new StringReader(xmlRecords));
+          
+           Document doc = db.parse(is);
+           NodeList nodes = doc.getChildNodes().item(0)
+                                  .getChildNodes().item(0)
+                                  .getChildNodes().item(0)
+                                  .getChildNodes().item(0)
+                                  .getChildNodes().item(1)
+                                  .getChildNodes().item(0)
+                                  .getChildNodes().item(0)
+                                  .getChildNodes().item(1)
+                                  .getChildNodes(); //Llegamos al tag Return
+          
+          
+           for(int i = 0; i< nodes.getLength(); i++){
+                 NodeList elemento = nodes.item(i).getChildNodes();
+                 res.add(elemento.item(0).getNodeValue());
+           }
+                
+           return res;
+           //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+     }
 	
 	// TODO
 	

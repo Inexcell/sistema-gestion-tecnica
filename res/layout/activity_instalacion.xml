@@ -731,8 +731,7 @@
 		    android:layout_height="wrap_content"
 		    android:layout_weight="1"
 		    android:background="#FFFFFFFF"
-		    android:orientation="vertical" >
-				
+		    android:orientation="vertical" >		
 		    
 			
 				<LinearLayout
@@ -965,10 +964,20 @@
 					    android:layout_height="wrap_content"
 					    android:gravity="center"
 					    android:layout_marginTop="20dp"
-					    android:orientation="vertical">
+					    android:orientation="horizontal">
 					
+				        <Button
+					        android:id="@+id/ButtonCertificarAgain"
+					        android:layout_width="wrap_content"
+					        android:layout_height="45dp"			        
+					        android:drawableLeft="@drawable/ic_certificar"
+					        android:drawablePadding="5dp"
+					        android:textSize="16dp"
+					        android:onClick="certificar1"
+					        android:text="Certificar Otra Vez" />
+				        
 						<Button
-					        android:id="@+id/ButtonBuscar"
+					        android:id="@+id/ButtonFinalizar"
 					        android:layout_width="wrap_content"
 					        android:layout_height="45dp"			        
 					        android:drawableLeft="@drawable/ic_delete1"
@@ -976,6 +985,8 @@
 					        android:textSize="16dp"
 					        android:onClick="fin_certificar"
 					        android:text="Finalizar" />
+						
+						"
 						
 					</LinearLayout>
 				</LinearLayout>

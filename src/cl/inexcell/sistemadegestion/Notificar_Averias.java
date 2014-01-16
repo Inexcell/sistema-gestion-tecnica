@@ -212,7 +212,7 @@ private class Enviar_Averia extends AsyncTask<String,Integer,String> {
    				String IMEI = telephonyManager.getDeviceId();
    				String IMSI =  telephonyManager.getSimSerialNumber();
    				
-   				respuesta = SoapRequestMovistar.setLocation(String.valueOf(foto),
+   				respuesta = SoapRequestMovistar.setLocation(Funciones.encodeTobase64(foto),
    																objeto,   																
    																Lat,
    																Lng,
