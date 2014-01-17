@@ -25,6 +25,7 @@ import org.apache.http.util.EntityUtils;
 
 
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -61,7 +62,8 @@ import android.widget.Toast;
 
 
 public class Instalacion extends Activity {
-	private ArrayList<itemList> items;
+	private ArrayList<String> res;
+	private ArrayList<itemList> items, items_certify;
 	private int decoSelected;
 	private EditText Area, Phone;
 	private String tipoDeco, bandaancha_fab_select,bandaancha_modelo;
@@ -146,7 +148,7 @@ public class Instalacion extends Activity {
 
 	private TableRow p9_0;
 
-	private TableRow p9_1;
+	private ListView p9_1;
 	private ListView listView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -328,164 +330,170 @@ public class Instalacion extends Activity {
 		//XMLParser.getReturnCode(tarea.get().toString()) == "[1]"
 		else if(tarea.execute() != null)
 		{
-			Consulta_PlantasExternas tarea1 = new Consulta_PlantasExternas();
-			tarea1.execute();
 			
-			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(Area.getWindowToken(), 0);
 			
 			// TODO: Realizar validacion Cliente 
 			//Toast.makeText(getApplicationContext(), XMLParser.getReturnCode(tarea.get().toString()), Toast.LENGTH_LONG).show();
 			
 			
 			// Seleccionar objetos de Botones en Layout
-			b1.setVisibility(View.VISIBLE);
-			b2.setVisibility(View.VISIBLE);
-			b3.setVisibility(View.VISIBLE);
-			b4.setVisibility(View.VISIBLE);
-			b5.setVisibility(View.VISIBLE);
 			
-			// Animacion
-			
-			b2.setAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.accelerate));
-			b3.setAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.accelerate));
-			b4.setAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.accelerate));
-			b5.setAnimation(AnimationUtils.loadAnimation(view.getContext(), R.anim.accelerate));
-			
-			///////////////////////////////////////////////////////////////////////////////////
-	
-			View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
-			panelBusquedaCliente.setVisibility(View.VISIBLE);
-			//panelBusquedaCliente.setVisibility(View.GONE);
-	
-			View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
-			panelPlantaExterna.setVisibility(View.GONE);
-	
-			View panelTVSatelital = findViewById(R.id.panelTVSatelital);
-			panelTVSatelital.setVisibility(View.GONE);
-			
-			View panelBandaAncha = findViewById(R.id.panelBandaAncha);
-			panelBandaAncha.setVisibility(View.GONE);
-			
-			View panelCertificacion = findViewById(R.id.panelCertificacion);
-			panelCertificacion.setVisibility(View.GONE);
-			
-	
-			/** Boton busqueda cliente **/
-			b1.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// DO STUFF
-					View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
-					panelBusquedaCliente.setVisibility(View.VISIBLE);
-	
-					View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
-					panelPlantaExterna.setVisibility(View.GONE);
-	
-					View panelTVSatelital = findViewById(R.id.panelTVSatelital);
-					panelTVSatelital.setVisibility(View.GONE);
-					
-					View panelBandaAncha = findViewById(R.id.panelBandaAncha);
-					panelBandaAncha.setVisibility(View.GONE);
-					
-					View panelCertificacion = findViewById(R.id.panelCertificacion);
-					panelCertificacion.setVisibility(View.GONE);
-	
-				}
-			});
-	
-			/** Boton planta externa **/
-			b2.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// DO STUFF
-					View panelBusquedaCliente= findViewById(R.id.panelBusquedaCliente);
-					panelBusquedaCliente.setVisibility(View.GONE);
-	
-					View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
-					panelPlantaExterna.setVisibility(View.VISIBLE);
-	
-					View panelTVSatelital = findViewById(R.id.panelTVSatelital);
-					panelTVSatelital.setVisibility(View.GONE);
-					
-					View panelBandaAncha = findViewById(R.id.panelBandaAncha);
-					panelBandaAncha.setVisibility(View.GONE);
-					
-					View panelCertificacion = findViewById(R.id.panelCertificacion);
-					panelCertificacion.setVisibility(View.GONE);
-	
-				}
-			});
-	
-			/** Boton TV satelital **/
-			b3.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// DO STUFF
-					View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
-					panelBusquedaCliente.setVisibility(View.GONE);
-	
-					View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
-					panelPlantaExterna.setVisibility(View.GONE);
-	
-					View panelTVSatelital = findViewById(R.id.panelTVSatelital);
-					panelTVSatelital.setVisibility(View.VISIBLE);
-					
-					View panelBandaAncha = findViewById(R.id.panelBandaAncha);
-					panelBandaAncha.setVisibility(View.GONE);
-					
-					View panelCertificacion = findViewById(R.id.panelCertificacion);
-					panelCertificacion.setVisibility(View.GONE);
-	
-				}
-			});
-			
-			/** Boton banda ancha **/
-			b4.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// DO STUFF
-					View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
-					panelBusquedaCliente.setVisibility(View.GONE);
-	
-					View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
-					panelPlantaExterna.setVisibility(View.GONE);
-	
-					View panelTVSatelital = findViewById(R.id.panelTVSatelital);
-					panelTVSatelital.setVisibility(View.GONE);
-					
-					View panelBandaAncha = findViewById(R.id.panelBandaAncha);
-					panelBandaAncha.setVisibility(View.VISIBLE);
-					
-					View panelCertificacion = findViewById(R.id.panelCertificacion);
-					panelCertificacion.setVisibility(View.GONE);
-	
-				}
-			});
-			
-			/** Boton Certificar **/
-			b5.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// DO STUFF
-					View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
-					panelBusquedaCliente.setVisibility(View.GONE);
-	
-					View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
-					panelPlantaExterna.setVisibility(View.GONE);
-	
-					View panelTVSatelital = findViewById(R.id.panelTVSatelital);
-					panelTVSatelital.setVisibility(View.GONE);
-					
-					View panelBandaAncha = findViewById(R.id.panelBandaAncha);
-					panelBandaAncha.setVisibility(View.GONE);
-					
-					View panelCertificacion = findViewById(R.id.panelCertificacion);
-					panelCertificacion.setVisibility(View.VISIBLE);
-	
-				}
-			});
 		}
+	}
+	
+	public void dibujar(){
+		Consulta_PlantasExternas tarea1 = new Consulta_PlantasExternas();
+		tarea1.execute();
+		
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(Area.getWindowToken(), 0);
+		
+		b1.setVisibility(View.VISIBLE);
+		b2.setVisibility(View.VISIBLE);
+		b3.setVisibility(View.VISIBLE);
+		b4.setVisibility(View.VISIBLE);
+		b5.setVisibility(View.VISIBLE);
+		
+		// Animacion
+		
+		b2.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.accelerate));
+		b3.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.accelerate));
+		b4.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.accelerate));
+		b5.setAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.accelerate));
+		
+		///////////////////////////////////////////////////////////////////////////////////
+
+		View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
+		panelBusquedaCliente.setVisibility(View.VISIBLE);
+		//panelBusquedaCliente.setVisibility(View.GONE);
+
+		View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
+		panelPlantaExterna.setVisibility(View.GONE);
+
+		View panelTVSatelital = findViewById(R.id.panelTVSatelital);
+		panelTVSatelital.setVisibility(View.GONE);
+		
+		View panelBandaAncha = findViewById(R.id.panelBandaAncha);
+		panelBandaAncha.setVisibility(View.GONE);
+		
+		View panelCertificacion = findViewById(R.id.panelCertificacion);
+		panelCertificacion.setVisibility(View.GONE);
+		
+
+		/** Boton busqueda cliente **/
+		b1.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// DO STUFF
+				View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
+				panelBusquedaCliente.setVisibility(View.VISIBLE);
+
+				View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
+				panelPlantaExterna.setVisibility(View.GONE);
+
+				View panelTVSatelital = findViewById(R.id.panelTVSatelital);
+				panelTVSatelital.setVisibility(View.GONE);
+				
+				View panelBandaAncha = findViewById(R.id.panelBandaAncha);
+				panelBandaAncha.setVisibility(View.GONE);
+				
+				View panelCertificacion = findViewById(R.id.panelCertificacion);
+				panelCertificacion.setVisibility(View.GONE);
+
+			}
+		});
+
+		/** Boton planta externa **/
+		b2.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// DO STUFF
+				View panelBusquedaCliente= findViewById(R.id.panelBusquedaCliente);
+				panelBusquedaCliente.setVisibility(View.GONE);
+
+				View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
+				panelPlantaExterna.setVisibility(View.VISIBLE);
+
+				View panelTVSatelital = findViewById(R.id.panelTVSatelital);
+				panelTVSatelital.setVisibility(View.GONE);
+				
+				View panelBandaAncha = findViewById(R.id.panelBandaAncha);
+				panelBandaAncha.setVisibility(View.GONE);
+				
+				View panelCertificacion = findViewById(R.id.panelCertificacion);
+				panelCertificacion.setVisibility(View.GONE);
+
+			}
+		});
+
+		/** Boton TV satelital **/
+		b3.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// DO STUFF
+				View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
+				panelBusquedaCliente.setVisibility(View.GONE);
+
+				View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
+				panelPlantaExterna.setVisibility(View.GONE);
+
+				View panelTVSatelital = findViewById(R.id.panelTVSatelital);
+				panelTVSatelital.setVisibility(View.VISIBLE);
+				
+				View panelBandaAncha = findViewById(R.id.panelBandaAncha);
+				panelBandaAncha.setVisibility(View.GONE);
+				
+				View panelCertificacion = findViewById(R.id.panelCertificacion);
+				panelCertificacion.setVisibility(View.GONE);
+
+			}
+		});
+		
+		/** Boton banda ancha **/
+		b4.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// DO STUFF
+				View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
+				panelBusquedaCliente.setVisibility(View.GONE);
+
+				View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
+				panelPlantaExterna.setVisibility(View.GONE);
+
+				View panelTVSatelital = findViewById(R.id.panelTVSatelital);
+				panelTVSatelital.setVisibility(View.GONE);
+				
+				View panelBandaAncha = findViewById(R.id.panelBandaAncha);
+				panelBandaAncha.setVisibility(View.VISIBLE);
+				
+				View panelCertificacion = findViewById(R.id.panelCertificacion);
+				panelCertificacion.setVisibility(View.GONE);
+
+			}
+		});
+		
+		/** Boton Certificar **/
+		b5.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// DO STUFF
+				View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
+				panelBusquedaCliente.setVisibility(View.GONE);
+
+				View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
+				panelPlantaExterna.setVisibility(View.GONE);
+
+				View panelTVSatelital = findViewById(R.id.panelTVSatelital);
+				panelTVSatelital.setVisibility(View.GONE);
+				
+				View panelBandaAncha = findViewById(R.id.panelBandaAncha);
+				panelBandaAncha.setVisibility(View.GONE);
+				
+				View panelCertificacion = findViewById(R.id.panelCertificacion);
+				panelCertificacion.setVisibility(View.VISIBLE);
+
+			}
+		});
 	}
 	
 	
@@ -506,7 +514,7 @@ public class Instalacion extends Activity {
    			p8_2 = (TableRow) findViewById(R.id.Cert2);
    			
    			p9_0 = (TableRow) findViewById(R.id.Cert3_0);
-   			p9_1 = (TableRow) findViewById(R.id.Cert3_1);
+   			p9_1 = (ListView) findViewById(R.id.listviewCertify);
    			
    			p8_1.setVisibility(View.GONE);
 			p8_2.setVisibility(View.GONE);
@@ -529,20 +537,20 @@ public class Instalacion extends Activity {
    			});
    			
    			p9_1.setVisibility(View.GONE);
-//   			p9_0.setOnClickListener(new OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					
-//					if(p9_1.getVisibility()== View.VISIBLE)
-//					{
-//						p9_1.setVisibility(View.GONE);
-//					}
-//					else
-//					{
-//						p9_1.setVisibility(View.VISIBLE);
-//					}
-//				}
-//   			});
+   			p9_0.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					
+					if(p9_1.getVisibility()== View.VISIBLE)
+					{
+						p9_1.setVisibility(View.GONE);
+					}
+					else
+					{
+						p9_1.setVisibility(View.VISIBLE);
+					}
+				}
+   			});
 
 			tdown = (TextView)findViewById(R.id.tBajada);
 			tup = (TextView)findViewById(R.id.tSubida);
@@ -1085,10 +1093,16 @@ public class Instalacion extends Activity {
   	    			television_Satelital();
   	    			bandaAnchaTipo.setText(arreglo3[1]);
   	    			bandaAnchaModelo.setText(arreglo3[2]);
-  	    			
+  	    			dibujar();
   	    			
 				} catch (Exception e) {
+					Toast.makeText(Instalacion.this, "El N° ingresado no pertenece a la compañía.", Toast.LENGTH_SHORT).show();
 					e.printStackTrace();
+					
+					/** TEST
+					 */
+					if(Phone.getText().toString().compareTo("2594995")==0)
+						dibujar();
 				}
   	    	}
   	    	else
@@ -1638,17 +1652,20 @@ public class Instalacion extends Activity {
    				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
    				String IMEI = telephonyManager.getDeviceId();
    				String IMSI =  telephonyManager.getSimSerialNumber();
-   				
+   				certifyDslCorrecto = false;
    				respuesta = SoapRequestMovistar.getCertifyDSL(Area.getText().toString(), Phone.getText().toString(),IMEI, IMSI);
-   				if(Integer.valueOf(XMLParser.getCertifyDsl(respuesta).get(0)) == 0)
-				{	//Actualizó correctamente									
-					certifyDslCorrecto = true;
-				}						
-   				else
-   				{
-   					certifyDslCorrecto = false;   					
+//   				if(Integer.valueOf(XMLParser.getCertifyDsl(respuesta).get(0)) == 0)
+//				{	//Actualizó correctamente									
+//					certifyDslCorrecto = true;
+//				}						
+//   				else
+//   				{
+//   					certifyDslCorrecto = false;   					
+//   				}
+   				res = XMLParser.getCertification(respuesta);
+   				if(res.get(0).split(";")[0].compareTo("0")==0){
+   					certifyDslCorrecto = true;
    				}
-   				
    				
    				
    			} catch (Exception e1) {
@@ -1665,14 +1682,51 @@ public class Instalacion extends Activity {
  		     }   
  			if(certifyDslCorrecto == true)
  			{ 				 
+ 				items_certify = new ArrayList<itemList>();
  				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ok); 		
  				ib1.setImageBitmap(bmp);
+ 				String linea="";
+ 				for(int i = 1; i<res.size();i++){ 						
+ 					if(res.get(i).split(";")[1].compareTo("OK") == 0)
+ 						items_certify.add(new itemList(res.get(i).split(";")[0],"",R.drawable.ok));
+ 					else{
+ 						items_certify.add(new itemList(res.get(i).split(";")[0],"",R.drawable.error));
+ 						certifyDslCorrecto = false;
+ 					}
+ 				}
+ 				
+ 				
+ 				listView = (ListView) findViewById(R.id.listviewCertify);
+ 				listAdapter adapter = new listAdapter(getApplicationContext(), items_certify);
+ 				
+ 			    listView.setAdapter(adapter);
+ 			    listView.setOnItemClickListener(new OnItemClickListener() {
+ 			    	  @Override
+ 			    	  public void onItemClick(AdapterView<?> parent, View view,
+ 			    	    int position, long id) {
+// 			    	    Toast.makeText(getApplicationContext(),
+// 			    	      "Click ListItem Number " + position, Toast.LENGTH_LONG)
+// 			    	      .show();
+ 			    		  decoSelected = position;
+ 			    		  Toast.makeText(getApplicationContext(), res.get(position+1).split(";")[3], Toast.LENGTH_LONG).show();
+ 			    		  
+ 			    	  }
+ 			    	});
+ 			   if(certifyDslCorrecto == false)
+ 	 			{
+ 				   Bitmap bmp2 = BitmapFactory.decodeResource(getResources(), R.drawable.error);
+ 				   ib1.setImageBitmap(bmp2);
+ 				   finalizar.setEnabled(false);
+ 	 			}
+ 				
+ 				Toast.makeText(getApplicationContext(), linea, Toast.LENGTH_LONG).show();
  			}
  			else
  			{ 				
  				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.error); 				 				 
  				ib1.setImageBitmap(bmp);
- 				certificar.setEnabled(false);
+ 				finalizar.setEnabled(false);
+ 				Toast.makeText(getApplicationContext(), "No se pudo realizar la certificacion.", Toast.LENGTH_LONG).show();
  				
  			}
  			//Toast.makeText(getApplicationContext(), "Certificación Finalizada", Toast.LENGTH_SHORT).show();

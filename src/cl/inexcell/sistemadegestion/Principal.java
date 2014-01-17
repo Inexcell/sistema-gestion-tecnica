@@ -3,12 +3,16 @@ package cl.inexcell.sistemadegestion;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.NetworkInfo.State;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class Principal extends Activity {
@@ -22,7 +26,8 @@ public class Principal extends Activity {
 		// Activity sin parte superior
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_principal);
-		
+		Button b = (Button) findViewById(R.id.button3);
+		b.setVisibility(View.GONE);
 		/** Se inicia el DEMONIO **/
 		//LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		//if(locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
@@ -66,39 +71,89 @@ public class Principal extends Activity {
 	 */
 	
 	public void show_instalacion(View view) {
-        Intent i = new Intent(this, Instalacion.class );
-        startActivity(i);
-        
-        // Vibrar al hacer click
-        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(50);
+		 ConnectivityManager conMan = (ConnectivityManager) 
+			      getSystemService(Context.CONNECTIVITY_SERVICE);
+			
+		 State senal3g = conMan.getNetworkInfo(0).getState();
+		 State wifi = conMan.getNetworkInfo(1).getState();
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
+		 {
+	        Intent i = new Intent(this, Instalacion.class );
+	        startActivity(i);
+	        
+	        // Vibrar al hacer click
+	        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+	        vibrator.vibrate(50);
+		 }
+		 else
+		 {
+			 Toast.makeText(getApplicationContext(), "No existe conexión a internet para utilizar el Programa", Toast.LENGTH_LONG).show();			 
+		 }
 	}
 	
 	public void show_notificar_averias(View view) {
-        Intent i = new Intent(this, Notificar_Averias.class );
-        startActivity(i);
+		 ConnectivityManager conMan = (ConnectivityManager) 
+			      getSystemService(Context.CONNECTIVITY_SERVICE);
+			
+		 State senal3g = conMan.getNetworkInfo(0).getState();
+		 State wifi = conMan.getNetworkInfo(1).getState();
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
+		 {
+			 Intent i = new Intent(this, Notificar_Averias.class );
+			 startActivity(i);
         
-        // Vibrar al hacer click        
-        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(50);
+	        // Vibrar al hacer click        
+	        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+	        vibrator.vibrate(50);
+		 }
+		 else
+		 {
+			 Toast.makeText(getApplicationContext(), "No existe conexión a internet para utilizar el Programa", Toast.LENGTH_LONG).show();			 
+		 }
 	}
 	
 	public void show_reparacion(View view) {
-        Intent i = new Intent(this, Reparacion.class );
-        startActivity(i);
-        
-        // Vibrar al hacer click        
-        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(50);
+		
+		 ConnectivityManager conMan = (ConnectivityManager) 
+			      getSystemService(Context.CONNECTIVITY_SERVICE);
+			
+		 State senal3g = conMan.getNetworkInfo(0).getState();
+		 State wifi = conMan.getNetworkInfo(1).getState();
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
+		 {
+	        Intent i = new Intent(this, Reparacion.class );
+	        startActivity(i);
+	        
+	        // Vibrar al hacer click        
+	        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+	        vibrator.vibrate(50);
+		 }
+		 else
+		 {
+			 Toast.makeText(getApplicationContext(), "No existe conexión a internet para utilizar el Programa", Toast.LENGTH_LONG).show();			 
+		 }
 	}
 	
 	public void show_plantas_externas(View view) {
-        Intent i = new Intent(this, Plantas_Externas.class );
-        startActivity(i);
-        
-        // Vibrar al hacer click        
-        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(50);
+		
+		 ConnectivityManager conMan = (ConnectivityManager) 
+			      getSystemService(Context.CONNECTIVITY_SERVICE);
+			
+		 State senal3g = conMan.getNetworkInfo(0).getState();
+		 State wifi = conMan.getNetworkInfo(1).getState();
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
+		 {
+			 Intent i = new Intent(this, Plantas_Externas.class );
+		        startActivity(i);
+		        
+		        // Vibrar al hacer click        
+		        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		        vibrator.vibrate(50);
+		 }
+		 else
+		 {
+			 Toast.makeText(getApplicationContext(), "No existe conexión a internet para utilizar el Programa", Toast.LENGTH_LONG).show();			 
+		 }        
 	}
 	
 	public void show_certificar_wifi(View view) {

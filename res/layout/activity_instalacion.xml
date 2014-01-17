@@ -509,7 +509,8 @@
 				    android:id="@+id/panelTVDigital1"
 				    android:layout_width="fill_parent"
 				    android:layout_height="wrap_content"
-				    android:orientation="vertical" >
+				    android:orientation="vertical" 
+				    android:layout_marginBottom="10dp">
 					
 					<TextView
 					    android:id="@+id/ListaEquipo"
@@ -895,7 +896,8 @@
 									android:layout_height="wrap_content"
 									android:layout_marginLeft="28dp"
 									android:layout_marginTop="5dp"
-									android:text="Red Fija:" />
+									android:paddingBottom="5dp"
+									android:text="DSL:" />
 									
 								<TextView 
 								    android:id="@+id/NroTelefono" 
@@ -916,45 +918,17 @@
 								
 							</TableRow>
 							
-						    <TableRow
-				            android:id="@+id/Cert3_1"
-				            android:layout_width="wrap_content"
-				            android:layout_height="wrap_content"
-				            >
+						   
 							
-					         <TextView 
-							    android:id="@+id/tItem1" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="40dp"
-								android:layout_marginTop="5dp"
-								android:text="Item 1:" />
-					         
-					         <TextView 
-							    android:id="@+id/tValor1" 
-							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="40dp"
-								android:layout_marginTop="5dp"
-								android:text="Valor 1" />
-					         
-					         <ImageView
-		                        android:id="@+id/imageButton11"
-		                        android:layout_width="match_parent"
-		                        android:layout_height="match_parent"
-		                        android:background="@drawable/tabla"
-		                        android:layout_marginLeft="30dp"
-		                        android:layout_marginTop="3dp"
-		                        android:src="@drawable/ok" />
-				         </TableRow>
+					         <ListView 
+							    android:id="@+id/listviewCertify"
+							    android:layout_width="fill_parent"
+							    android:layout_height="wrap_content"
+							    android:paddingLeft="30dp"
+							    android:paddingRight="30dp" /> 
 				         
-					     
-							
-					        
-							
-					        
-				        	
-						</TableLayout>
+				         
+				         </TableLayout>
 					
 				    
 					

@@ -3,11 +3,19 @@ package cl.inexcell.sistemadegestion;
 public class itemList {
 	 private String title;
 	 private String description;
+	 private int mensaje = -1;
 	 
 	public itemList(String title, String description) {
 	    super();
 	    this.setTitle(title);
 	    this.setDescription(description);
+	}
+	
+	public itemList(String title, String description, int mensaje) {
+	    super();
+	    this.setTitle(title);
+	    this.setDescription(description);
+	    this.setMensaje(mensaje);
 	}
 
 	public String getTitle() {
@@ -24,5 +32,13 @@ public class itemList {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getMensaje() {
+		return mensaje;
+	}
+
+	public void setMensaje(int mensaje) {
+		this.mensaje = mensaje;
 	}
 }

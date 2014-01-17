@@ -178,7 +178,9 @@ public class Notificar_Averias extends Activity {
 	    	    
 	    	} catch (FileNotFoundException e) {}
 	    }
+	    try{
 	    bmini = Bitmap.createScaledBitmap(b, 64, 64, true);
+	    }catch(Exception ex){}
 	    
 	    
 	}
@@ -237,6 +239,8 @@ private class Enviar_Averia extends AsyncTask<String,Integer,String> {
    	    	if (result != null)
    	    	{
    	    		try {
+   	    			
+   	    			
    	    			//ArrayList<String> res = XMLParser.getVendor(result);
    	    			res = XMLParser.setLocation(result);
    	    			Toast.makeText(getApplicationContext(), res.get(1), Toast.LENGTH_LONG).show();
@@ -244,6 +248,11 @@ private class Enviar_Averia extends AsyncTask<String,Integer,String> {
    	    			b = foto = null;
    	    			//final CharSequence[] fab = res.toArray(new CharSequence[res.size()]);
    	    			//ListarFabricantesBandaAncha(fab);
+   	    			finish();
+   	    	    	
+   	    	    	// Vibrar al hacer click        
+   	    	        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+   	    	        vibrator.vibrate(50);
    	    			
  				} catch (Exception e) {
  					e.printStackTrace();

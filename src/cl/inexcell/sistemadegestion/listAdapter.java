@@ -2,6 +2,7 @@ package cl.inexcell.sistemadegestion;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ public class listAdapter extends ArrayAdapter<itemList> {
  
         private final Context context;
         private final ArrayList<itemList> itemsArrayList;
+        public ImageView iv;
  
         public listAdapter(Context context, ArrayList<itemList> itemsArrayList) {
  
@@ -35,12 +37,17 @@ public class listAdapter extends ArrayAdapter<itemList> {
             // 3. Get the two text view from the rowView
             TextView labelView = (TextView) rowView.findViewById(R.id.numero);
             TextView valueView = (TextView) rowView.findViewById(R.id.modelo);
-            ImageView iv = (ImageView) rowView.findViewById(R.id.imageView1);
+            iv = (ImageView) rowView.findViewById(R.id.imageView1);
  
             // 4. Set the text for textView 
             labelView.setText(itemsArrayList.get(position).getTitle());
+            labelView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
             valueView.setText(itemsArrayList.get(position).getDescription());
-            iv.setImageResource(android.R.drawable.arrow_down_float);
+            
+            if(itemsArrayList.get(position).getMensaje() == -1)
+            	iv.setImageResource(android.R.drawable.arrow_down_float);
+            else
+            	iv.setImageResource(itemsArrayList.get(position).getMensaje());
  
             // 5. retrn rowView
             return rowView;

@@ -437,6 +437,69 @@ public class XMLParser {
 		return res;
 	}
 	
+	public static ArrayList<String> getCertification(String xml) throws ParserConfigurationException, 
+	SAXException, IOException
+	{
+		ArrayList<String> res = new ArrayList<String>();
+		
+		String xmlRecords = xml;
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getChildNodes().item(0)
+							.getChildNodes().item(0)
+							.getChildNodes().item(0)
+							.getChildNodes().item(0)
+							.getChildNodes().item(1)
+							.getChildNodes().item(0)
+							.getChildNodes().item(0)
+							.getChildNodes();
+		
+		int tamano = nodes.getLength();
+		NodeList Return = nodes.item(tamano-1).getChildNodes();
+		String code = Return.item(0).getChildNodes().item(0).getNodeValue();
+		String linea = "";
+		/** GUARDAMOS EL CODE Y DESCRIPTION DEL RESULT **/
+		for (int i = 0; i < Return.getLength(); i++) 
+		{
+			if(i>0)
+				linea+=";";
+			linea+=Return.item(i).getChildNodes().item(0).getNodeValue();	
+		
+		}
+		res.add(linea);
+		linea = "";
+		
+		/** SI CODIGO ES "0" GUARDAMOS EL RESTO DE NODOS.*/
+		if(Integer.valueOf(code)==0 || Integer.valueOf(code)==48){
+			for (int i = 0; i < tamano-1; i++) 
+			{
+				NodeList planta = nodes.item(i).getChildNodes();
+				int n_datos = planta.getLength();
+				for(int j = 0; j < n_datos; j++){
+					NodeList dato = planta.item(j).getChildNodes();
+					int not_empty = dato.getLength();
+					if(j>0)
+						linea+=";";
+					
+					if(not_empty == 0){
+						linea+= "--";
+					}
+					else{		    			
+						linea+=dato.item(0).getNodeValue();
+					}
+			}
+			res.add(linea);
+			linea = "";
+		}
+	}
+
+	return res;
+}
+	
 
 	/*
 	 * Generico para todas las consultas
