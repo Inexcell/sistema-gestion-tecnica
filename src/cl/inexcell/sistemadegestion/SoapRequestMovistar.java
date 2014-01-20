@@ -1,9 +1,11 @@
 package cl.inexcell.sistemadegestion;
 
 
+import android.annotation.SuppressLint;
 import java.security.KeyStore;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpVersion;
@@ -25,6 +27,7 @@ import org.apache.http.util.EntityUtils;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 
+@SuppressLint("SimpleDateFormat")
 public class SoapRequestMovistar {
 	
 	private static			
@@ -66,7 +69,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#Customer";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -85,9 +88,9 @@ public class SoapRequestMovistar {
 				  	"<RequestCustomer xsi:type=\"urn:RequestCustomer\">" +
 				  	"<Operation xsi:type=\"urn:OperationType\">" +
 				    "<OperationCode xsi:type=\"xsd:string\">XML-001</OperationCode>" +
-				     "<OperationId xsi:type=\"xsd:string\">1</OperationId>" +
+				     "<OperationId xsi:type=\"xsd:string\">"+ formatter.format(fecha).toString() +"</OperationId>" +
 				      "<!--Optional:-->" +
-				       "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>" +
+				       "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>" +
 				        "<!--Optional:-->" +
 				         "<IdUser xsi:type=\"xsd:string\">1</IdUser>" +
 				          "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>" +
@@ -126,7 +129,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#Vendor";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -145,9 +148,9 @@ public class SoapRequestMovistar {
 		         "<RequestVendor xsi:type=\"urn:RequestVendor\">"+
 		            "<Operation xsi:type=\"urn:OperationType\">"+
 		               "<OperationCode xsi:type=\"xsd:string\">XML-002</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">2</OperationId>"+
+		               "<OperationId xsi:type=\"xsd:string\">"+ formatter.format(fecha).toString() +"</OperationId>"+
 		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
 		               "<!--Optional:-->"+
 		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
 		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
@@ -187,7 +190,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#Model";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -206,9 +209,9 @@ public class SoapRequestMovistar {
 		          "<RequestModel xsi:type=\"urn:RequestModel\">"+
 		             "<Operation xsi:type=\"urn:OperationType\">"+
 		                "<OperationCode xsi:type=\"xsd:string\">XML-003</OperationCode>"+
-		                "<OperationId xsi:type=\"xsd:string\">?</OperationId>"+
+		                "<OperationId xsi:type=\"xsd:string\">"+ formatter.format(fecha).toString() +"</OperationId>"+
 		                "<!--Optional:-->"+
-		                "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		                "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
 		                "<!--Optional:-->"+
 		                "<IdUser xsi:type=\"xsd:string\">?</IdUser>"+
 		                "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
@@ -248,7 +251,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#InventoryUpdate";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -267,9 +270,9 @@ public class SoapRequestMovistar {
 		         "<RequestInventoryUpdate xsi:type=\"urn:RequestInventoryUpdate\">"+
 		            "<Operation xsi:type=\"urn:OperationType\">"+
 		               "<OperationCode xsi:type=\"xsd:string\">XML-004</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">4</OperationId>"+
+		               "<OperationId xsi:type=\"xsd:string\">"+ formatter.format(fecha).toString() +"</OperationId>"+
 		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
 		               "<!--Optional:-->"+
 		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
 		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
@@ -310,7 +313,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#OutsidePlant";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -329,9 +332,9 @@ public class SoapRequestMovistar {
 		         "<RequestOutsidePlant xsi:type=\"urn:RequestOutsidePlant\">"+
 		            "<Operation xsi:type=\"urn:OperationType\">"+
 		               "<OperationCode xsi:type=\"xsd:string\">XML-005</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">5</OperationId>"+
+		               "<OperationId xsi:type=\"xsd:string\">"+ formatter.format(fecha).toString() +"</OperationId>"+
 		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
 		               "<!--Optional:-->"+
 		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
 		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
@@ -374,7 +377,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#OutsidePlantUpgrade";
 		String response= null;
 	    String xml = null;
-    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 
@@ -394,9 +397,9 @@ public class SoapRequestMovistar {
 		         "<RequestOutsidePlantUpgrade xsi:type=\"urn:RequestOutsidePlantUpgrade\">"+
 		            "<Operation xsi:type=\"urn:OperationType\">"+
 		               "<OperationCode xsi:type=\"xsd:string\">XML-006</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">6</OperationId>"+
+		               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
 		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
 		               "<!--Optional:-->"+
 		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
 		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
@@ -443,7 +446,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#CertifyDSL";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -462,9 +465,9 @@ public class SoapRequestMovistar {
 		         "<RequestCertifyDSL xsi:type=\"urn:RequestCertifyDSL\">"+
 		            "<Operation xsi:type=\"urn:OperationType\">"+
 		               "<OperationCode xsi:type=\"xsd:string\">XML-007</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">7</OperationId>"+
+		               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
 		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
 		               "<!--Optional:-->"+
 		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
 		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
@@ -505,7 +508,7 @@ public class SoapRequestMovistar {
      String response= null;
      String xml = null;
     
-   
+     
 
      HttpClient httpClient = getNewHttpClient();
      HttpPost httpPost = new HttpPost(URL);
@@ -523,7 +526,7 @@ public class SoapRequestMovistar {
                 "<RequestNotification3g xsi:type=\"urn:RequestNotification3g\">"+
                    "<Operation xsi:type=\"urn:OperationType\">"+
                       "<OperationCode xsi:type=\"xsd:string\">XML-008</OperationCode>"+
-                      "<OperationId xsi:type=\"xsd:string\">8</OperationId>"+
+                      "<OperationId xsi:type=\"xsd:string\">"+ Fecha +"</OperationId>"+
                       "<!--Optional:-->"+
                       "<DateTime xsi:type=\"xsd:string\">"+Fecha+"</DateTime>"+
                       "<!--Optional:-->"+
@@ -603,7 +606,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#Location";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -622,7 +625,7 @@ public class SoapRequestMovistar {
 		         "<RequestLocation xsi:type=\"urn:RequestLocation\">"+
 		            "<Operation xsi:type=\"urn:OperationType\">"+
 		               "<OperationCode xsi:type=\"xsd:string\">XML-009</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">9</OperationId>"+
+		               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
 		               "<!--Optional:-->"+
 		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
 		               "<!--Optional:-->"+
@@ -670,7 +673,7 @@ public class SoapRequestMovistar {
 		final String SOAP_ACTION = "urn:Demo#NeighborNode";
 	    String response= null;
 	    String xml = null;
-	    
+	    DateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
 	    Date fecha = new Date();
 
 	    HttpClient httpClient = getNewHttpClient();
@@ -689,9 +692,9 @@ public class SoapRequestMovistar {
 		         "<RequestNeighborNode xsi:type=\"urn:RequestNeighborNode\">"+
 		            "<Operation xsi:type=\"urn:OperationType\">"+
 		               "<OperationCode xsi:type=\"xsd:string\">XML-010</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">10</OperationId>"+
+		               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
 		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+fecha+"</DateTime>"+
+		               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
 		               "<!--Optional:-->"+
 		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
 		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+

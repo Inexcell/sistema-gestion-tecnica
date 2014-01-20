@@ -61,42 +61,50 @@ public class XMLParser {
 	 * XML-001: Parser consultar Cliente
 	 */
 	
-	public static String getCustomer(String xml) throws ParserConfigurationException, 
-														SAXException, IOException
-	{
+	public static String getCustomer(String xml) throws ParserConfigurationException,
+    SAXException, IOException
+    {
 		Vector<String> cpe = new Vector<String>();
 		
 		String xmlRecords = xml;
-
-	    DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-	    InputSource is = new InputSource();
-	    is.setCharacterStream(new StringReader(xmlRecords));
-
-	    Document doc = db.parse(is);
-	    NodeList nodes = doc.getElementsByTagName("CPE");
-
-	    for (int i = 0; i < nodes.getLength(); i++) 
-	    {
-	    	Element element = (Element) nodes.item(i);
-
-  			NodeList name = element.getElementsByTagName("CPEType");
-  			Element line1 = (Element) name.item(0);
-  
-		  	NodeList title = element.getElementsByTagName("VendorName");
-		  	Element line2 = (Element) title.item(0);
-  
-  			NodeList cpe_model = element.getElementsByTagName("CPEModel");
+		
+		DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+		InputSource is = new InputSource();
+		is.setCharacterStream(new StringReader(xmlRecords));
+		
+		Document doc = db.parse(is);
+		NodeList nodes = doc.getElementsByTagName("CPE");
+		String texto1, texto2, texto3;
+		
+		for (int i = 0; i < nodes.getLength(); i++)
+		{
+			Element element = (Element) nodes.item(i);
+			
+			NodeList name = element.getElementsByTagName("CPEType");
+			Element line1 = (Element) name.item(0);
+			
+			NodeList title = element.getElementsByTagName("VendorName");
+			Element line2 = (Element) title.item(0);
+			
+			NodeList cpe_model = element.getElementsByTagName("CPEModel");
 			Element line3 = (Element) cpe_model.item(0);
-  
-  			cpe.addElement(getCharacterDataFromElement(line1)
-  					 +";"+getCharacterDataFromElement(line2)
-  					 +";"+getCharacterDataFromElement(line3));
-  
-	    }
-	    
+			
+			texto1 = getCharacterDataFromElement(line1);
+			texto2 = getCharacterDataFromElement(line2);
+			texto3 = getCharacterDataFromElement(line3);
+			
+			if(texto1.trim() == "") texto1 = "---";
+			if(texto2.trim() == "") texto2 = "---";
+			if(texto3.trim() == "") texto3 = "---";
+
+			cpe.addElement(texto1
+					+";"+texto2
+					+";"+texto3);
+		}
+
 		return cpe.toString();
-		//return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
-	}
+		//	return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
+    }
 	
 	
 	/*
