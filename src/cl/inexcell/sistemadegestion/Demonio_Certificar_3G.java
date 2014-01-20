@@ -43,6 +43,7 @@ public class Demonio_Certificar_3G extends Service{
 	private Location loc;
 	private String operador, strength, latitud, longitud, provider;
 	private Timer mTimer = null;
+	@SuppressWarnings("unused")
 	private Timer m2Timer = null; 
 	private TelephonyManager tm;
 	private MyPhoneStateListener MyListener;
@@ -90,9 +91,10 @@ public class Demonio_Certificar_3G extends Service{
 		
 	}
 	 
-	 private void enviarDatos3G(){
+	 @SuppressWarnings("unused")
+	private void enviarDatos3G(){
 		 Thread t = new Thread(new Runnable() {
-			 @SuppressWarnings({ "unused", "resource" })
+			 @SuppressWarnings({ "resource" })
 			public void run() {
 				
 				File sdCard, file = null;

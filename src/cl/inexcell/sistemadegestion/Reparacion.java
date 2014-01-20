@@ -47,6 +47,7 @@ import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,17 +56,21 @@ import android.widget.ListView;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
 
 
 public class Reparacion extends Activity {
-	
 	private ArrayList<String> res;
 	private ArrayList<itemList> items, items_certify;
 	private int decoSelected;
 	private EditText Area, Phone;
+	
+	@SuppressWarnings("unused")
 	private String tipoDeco, bandaancha_fab_select,bandaancha_modelo;
+	
+	@SuppressWarnings("unused")
 	private CharSequence[] tmp = null;
+	
+	@SuppressWarnings("unused")
 	private TextView tipoPlanta, parExterno,tvArmario, 
 	tipoTerminal, tipoParLocal, tvSatelitalModelo, tvSatelitalTipo,
 	bandaAnchaTipo, bandaAnchaModelo,PE_TipoPlanta, PE_TipoParExterno,
@@ -80,6 +85,7 @@ public class Reparacion extends Activity {
     
     // Botones Layout
 		
+	@SuppressWarnings("unused")
 	private Button b1,b2,b3,b4,b5,buscar,finalizar,certificar;
 	
     private LinearLayout p1,p2,p3,p4,p5,p6,p7;
@@ -792,7 +798,6 @@ public class Reparacion extends Activity {
 	class DownloadFileAsync extends AsyncTask<String, String, String> 
 	{
 
-        @SuppressWarnings("deprecation")
 		@Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -857,13 +862,14 @@ public class Reparacion extends Activity {
 	//http://stackoverflow.com/questions/2017414/post-multipart-request-with-android-sdk
 	class UploadFileTask extends AsyncTask<String,String,String> {
 	
+		@SuppressWarnings("unused")
 		private Activity activity;
 		
 		public UploadFileTask(Activity activity){
 			this.activity = activity;
 		}
 		
-		@SuppressWarnings("deprecation")
+		
 		protected void onPreExecute() {
             super.onPreExecute();
 //            showDialog(DIALOG_DOWNLOAD_PROGRESS1);
@@ -939,7 +945,7 @@ public class Reparacion extends Activity {
 //	        mProgressDialog1.setProgress(Integer.parseInt(progress[0]));
 	   }
 	    
-	    @SuppressWarnings("deprecation")
+	    
 		protected void onPostExecute(String feed) {
 //	    	dismissDialog(DIALOG_DOWNLOAD_PROGRESS1);
 //	    	//Toast.makeText(activity, feed, Toast.LENGTH_SHORT).show();
@@ -1050,6 +1056,7 @@ public class Reparacion extends Activity {
   	    }
   	    
 
+		@SuppressWarnings("unused")
 		protected void onPostExecute(String result) {
 			
 			if (this.dialog.isShowing()) {
@@ -1067,15 +1074,14 @@ public class Reparacion extends Activity {
   	    			
   	    			String[] arreglo2 = arreglo1[1].split(";");
   	    			String[] arreglo3 = arreglo1[0].split(";");
+  	    			  	    			
+  	    			//Toast.makeText(getApplicationContext(), "'"+XMLParser.getReturnCode(result)+"'", Toast.LENGTH_LONG).show();
+  	    			Toast.makeText(getApplicationContext(), "Cliente Encontrado", Toast.LENGTH_LONG).show();
   	    			
-  	    			Toast.makeText(getApplicationContext(), "'"+XMLParser.getReturnCode(result)+"'", Toast.LENGTH_LONG).show();
-  	    			
-    				// TODO
-//    				tvSatelitalTipo.setText(arreglo2[1]);
-//  	    		tvSatelitalModelo.setText(arreglo2[2]);
   	    			items = new ArrayList<itemList>();   			
   	    	        int cont = 0;
-  	    			for(int i = 0; i < arreglo1.length ;i++){
+  	    			for(int i = 0; i < arreglo1.length ;i++)
+  	    			{
   	    				String[] dato = arreglo1[i].split(";");
   	    				if(dato[0].compareTo(" DECO")==0){
   	    					//agrego
@@ -1099,8 +1105,10 @@ public class Reparacion extends Activity {
 					
 					/** TEST
 					 */
-					if(Phone.getText().toString().compareTo("2594995")==0)
-						dibujar();
+//					if(Phone.getText().toString().compareTo("2594995")==0)
+//						dibujar();
+//					if(Phone.getText().toString().compareTo("25254296")==0)
+//						dibujar();
 				}
   	    	}
   	    	else
@@ -1730,6 +1738,5 @@ public class Reparacion extends Activity {
  			//Toast.makeText(getApplicationContext(), "Certificación Finalizada", Toast.LENGTH_SHORT).show();
    	    }
    	}
-   	
 
 }
