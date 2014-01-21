@@ -105,7 +105,7 @@ public class Notificar_Averias extends Activity {
 		
 		//Enviar_Averia ea = new Enviar_Averia();
 		//ea.execute();
-		Drawable d = new BitmapDrawable(getResources(), foto);
+		Drawable d = new BitmapDrawable(getResources(), bmini);
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(" ");
         builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {//un listener que al pulsar, cierre la aplicacion
@@ -179,6 +179,7 @@ public class Notificar_Averias extends Activity {
 	    	} catch (FileNotFoundException e) {}
 	    }
 	    try{
+	    b = Bitmap.createScaledBitmap(b, 640, 480, true);
 	    bmini = Bitmap.createScaledBitmap(b, 64, 64, true);
 	    }catch(Exception ex){}
 	    
