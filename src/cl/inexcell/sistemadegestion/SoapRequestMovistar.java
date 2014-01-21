@@ -323,8 +323,9 @@ public class SoapRequestMovistar {
 	    envelope.encodingStyle = SoapSerializationEnvelope.ENC;
 	    envelope.dotNet = false;		
 		envelope.implicitTypes = true;
-		
-	    String bodyOut = 
+		String bodyOut = null;
+		if(Type != null){
+	    bodyOut = 
 		"<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
 		   "<soapenv:Header/>"+
 		   "<soapenv:Body>"+
@@ -353,7 +354,38 @@ public class SoapRequestMovistar {
 		      "</urn:OutsidePlant>"+
 		   "</soapenv:Body>"+
 		"</soapenv:Envelope>";
-	    		
+		}
+		else{
+			bodyOut = 
+					"<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+					   "<soapenv:Header/>"+
+					   "<soapenv:Body>"+
+					      "<urn:OutsidePlant soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+					         "<RequestOutsidePlant xsi:type=\"urn:RequestOutsidePlant\">"+
+					            "<Operation xsi:type=\"urn:OperationType\">"+
+					               "<OperationCode xsi:type=\"xsd:string\">XML-005</OperationCode>"+
+					               "<OperationId xsi:type=\"xsd:string\">"+ formatter.format(fecha).toString() +"</OperationId>"+
+					               "<!--Optional:-->"+
+					               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
+					               "<!--Optional:-->"+
+					               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
+					               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+					               "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+					            "</Operation>"+
+					            "<Service xsi:type=\"urn:ServiceOutsidePlantIn\">"+
+					               "<OutsidePlant xsi:type=\"urn:OutsidePlantIn\">"+
+					                  "<Input xsi:type=\"urn:OutsidePlantInData\">"+
+					                     "<Area xsi:type=\"xsd:string\">"+Area+"</Area>"+
+					                     "<Phone xsi:type=\"xsd:string\">"+Phone+"</Phone>"+
+					                  "</Input>"+
+					               "</OutsidePlant>"+
+					            "</Service>"+
+					         "</RequestOutsidePlant>"+
+					      "</urn:OutsidePlant>"+
+					   "</soapenv:Body>"+
+					"</soapenv:Envelope>";			
+		}
+		
 	    xml = bodyOut;
 	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);
 	    se.setContentType("text/xml");	    
