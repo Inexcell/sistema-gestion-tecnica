@@ -330,7 +330,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta"
+					    android:id="@+id/BotonExterno"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
@@ -377,7 +377,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta4"
+					    android:id="@+id/BotonArmario"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
@@ -424,7 +424,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta"
+					    android:id="@+id/BotonCaja"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
@@ -471,7 +471,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta"
+					    android:id="@+id/BotonLocal"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"

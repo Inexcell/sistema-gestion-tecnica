@@ -2,6 +2,8 @@ package cl.inexcell.sistemadegestion;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,6 +12,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -30,13 +33,19 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.telephony.TelephonyManager;
 import android.util.Base64;
 import android.util.Log;
@@ -50,20 +59,31 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class Instalacion extends Activity {
-	private ArrayList<String> res;
+
+	private Bitmap b = null, bmini = null;
+	private String name = "";
+	private LocationManager locManager;
+	private Location loc;
+	private String Lat,Lng;
+	
+	private ArrayList<String> res, plantaExternaActual, mostrando;
 	private ArrayList<itemList> items, items_certify;
 	private int decoSelected;
 	private EditText Area, Phone;
-	private String tipoPlantaExterna = null;
+	private String tipoPlantaExterna = null,seleccionado = null;
+	private int opcion = 0;
+	private String[] updatear = null;
 	
 	@SuppressWarnings("unused")
 	private String tipoDeco, bandaancha_fab_select,bandaancha_modelo;
@@ -651,33 +671,92 @@ public class Instalacion extends Activity {
 	        public void onClick(DialogInterface dialog, int item) {
 	            // Do something with the selection
 	            //mDoneButton.setText(fabricantes[item]);
+	        	tipoPlantaExterna = "ARMARIO";
 	        	if(opc_planta[item] == "Editar"){
+	        		opcion = 0;
 	        		mostrar_armario(view);
 	        	}
-	        	else{
+	        	if(item == 0 ){
+	        		if(tvArmario.getText().toString().compareTo("--") == 0){
+	        			Toast.makeText(getApplicationContext(), "No puede georeferenciar si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			return;
+	        		}
+	        		//Toast.makeText(getApplicationContext(), "Geo", Toast.LENGTH_LONG).show();
+	        		opcion = 1;
+	        		locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+	        		loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+	        		Log.i("LOCALIZACION", loc.getLatitude()+"\n"+loc.getLongitude());
+	        		if(loc != null){
+	        			Lat = String.valueOf(loc.getLatitude());
+	        			Lng = String.valueOf(loc.getLongitude());
+	        		}
+	        		Consulta_UpdatePlantasExternas x = new Consulta_UpdatePlantasExternas();
+		        	x.execute();
 	        		
 	        	}
+	        	if(item == 2){
+	        		if(tvArmario.getText().toString().compareTo("--") == 0){
+	        			Toast.makeText(getApplicationContext(), "No puede enviar fotografía si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			return;
+	        		}
+	        		opcion = 2;
+	        		name = Environment.getExternalStorageDirectory() + "/test.jpg";
+	        		Intent intent =  new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	            	int code = 1;            		
+	            	Uri output = Uri.fromFile(new File(name));
+	            	intent.putExtra(MediaStore.EXTRA_OUTPUT, output);	            	
+	            	startActivityForResult(intent, code);
+	        	}
+	        	
 	        }
 	    });
 	    AlertDialog alert = builder.create();
 	    alert.show();
 	}
 	
+	@Override 
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	    if (requestCode == 1) {
+	    	if (data != null) {
+	    		if (data.hasExtra("data")) {
+	    		    b = (Bitmap) data.getParcelableExtra("data");
+	    		}
+	    	} else {
+	    			b = BitmapFactory.decodeFile(name);
+	    			
+	    		}
+	    } 
+	    try{
+	    b = Bitmap.createScaledBitmap(b, 640, 480, true);
+	    bmini = Bitmap.createScaledBitmap(b, 64, 64, true);
+	    }catch(Exception ex){
+	    	Toast.makeText(getApplicationContext(), "ERROR FOTO", Toast.LENGTH_LONG).show();
+	    }
+	    
+	    Consulta_UpdatePlantasExternas x = new Consulta_UpdatePlantasExternas();
+    	x.execute();
+	    
+	}
+	
 	/** Boton para cambiar la planta en seccion PLANTA EXTERNA **/
 	public void mostrar_planta2(View view){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Planta Externa");
-	    builder.setIcon(R.drawable.ic_planta_ext);
-	    builder.setItems(plantas_ext, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Instalacion.this, "Planta Actualizada", Toast.LENGTH_SHORT).show();
-	        	tipoPlanta.setText(plantas_ext[item]);
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		Consulta_PlantasExternas cpe = new Consulta_PlantasExternas();
+		tipoPlantaExterna = "PLANTA";
+		cpe.execute();
+		
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//	    builder.setTitle("Seleccione Planta Externa");
+//	    builder.setIcon(R.drawable.ic_planta_ext);
+//	    builder.setItems(plantas_ext, new DialogInterface.OnClickListener() {
+//	        public void onClick(DialogInterface dialog, int item) {
+//	            // Do something with the selection
+//	            //mDoneButton.setText(fabricantes[item]);
+//	        	Toast.makeText(Instalacion.this, "Planta Actualizada", Toast.LENGTH_SHORT).show();
+//	        	tipoPlanta.setText(plantas_ext[item]);
+//	        }
+//	    });
+//	    AlertDialog alert = builder.create();
+//	    alert.show();
 	}
 	
 	public void mostrar_cajaterminal(final View view){
@@ -688,12 +767,47 @@ public class Instalacion extends Activity {
 	        public void onClick(DialogInterface dialog, int item) {
 	            // Do something with the selection
 	            //mDoneButton.setText(fabricantes[item]);
+	        	tipoPlantaExterna = "CAJA";
 	        	if(opc_planta[item] == "Editar"){
+	        		opcion = 0;
 	        		mostrar_cajaterminal1(view);
 	        	}
-	        	else{
+	        	if(item == 0){
+	        		if(tipoTerminal.getText().toString().compareTo("--") == 0){
+	        			Toast.makeText(getApplicationContext(), "No puede georeferenciar si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			return;
+	        		}
+	        		opcion = 1;
+	        		locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+	        		loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+	        		Log.i("LOCALIZACION", loc.getLatitude()+"\n"+loc.getLongitude());
+	        		if(loc != null){
+	        			Lat = String.valueOf(loc.getLatitude());
+	        			Lng = String.valueOf(loc.getLongitude());
+	        		}
+	        		else{
+	        			loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+	        			Lat = String.valueOf(loc.getLatitude());
+	        			Lng = String.valueOf(loc.getLongitude());
+	        		}
+	        		Consulta_UpdatePlantasExternas x = new Consulta_UpdatePlantasExternas();
+		        	x.execute();
 	        		
 	        	}
+	        	if(item == 2){
+	        		if(tipoTerminal.getText().toString().compareTo("--") == 0){
+	        			Toast.makeText(getApplicationContext(), "No puede enviar fotografía si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			return;
+	        		}
+	        		opcion = 2;
+	        		name = Environment.getExternalStorageDirectory() + "/test.jpg";
+	        		Intent intent =  new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+	            	int code = 1;            		
+	            	Uri output = Uri.fromFile(new File(name));
+	            	intent.putExtra(MediaStore.EXTRA_OUTPUT, output);	            	
+	            	startActivityForResult(intent, code);
+	        	}
+	        	
 	        }
 	    });
 	    AlertDialog alert = builder.create();
@@ -701,67 +815,79 @@ public class Instalacion extends Activity {
 	}
 	
 	public void mostrar_cajaterminal1(View view){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Caja Terminal");
-	    builder.setIcon(R.drawable.ic_cajaterminal);
-	    builder.setItems(caja_terminal, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Instalacion.this, "Caja Terminal Actualizado", Toast.LENGTH_SHORT).show();
-	        	tipoTerminal.setText(caja_terminal[item].subSequence(5, caja_terminal[item].length()));
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		Consulta_PlantasExternas cpe = new Consulta_PlantasExternas();
+		tipoPlantaExterna = "CAJA";
+		cpe.execute();
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//	    builder.setTitle("Seleccione Caja Terminal");
+//	    builder.setIcon(R.drawable.ic_cajaterminal);
+//	    builder.setItems(caja_terminal, new DialogInterface.OnClickListener() {
+//	        public void onClick(DialogInterface dialog, int item) {
+//	            // Do something with the selection
+//	            //mDoneButton.setText(fabricantes[item]);
+//	        	Toast.makeText(Instalacion.this, "Caja Terminal Actualizado", Toast.LENGTH_SHORT).show();
+//	        	tipoTerminal.setText(caja_terminal[item].subSequence(5, caja_terminal[item].length()));
+//	        }
+//	    });
+//	    AlertDialog alert = builder.create();
+//	    alert.show();
 	}
 	
 	public void mostrar_parexterno(View view){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Par Externo");
-	    builder.setIcon(R.drawable.ic_parexterno);
-	    builder.setItems(par_externo, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Instalacion.this, "Par Externo Actualizado", Toast.LENGTH_SHORT).show();
-	        	parExterno.setText(par_externo[item].subSequence(4, par_externo[item].length()));
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		Consulta_PlantasExternas cpe = new Consulta_PlantasExternas();
+		tipoPlantaExterna = "CABLE"; //"CABLE"
+		cpe.execute();
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//	    builder.setTitle("Seleccione Par Externo");
+//	    builder.setIcon(R.drawable.ic_parexterno);
+//	    builder.setItems(par_externo, new DialogInterface.OnClickListener() {
+//	        public void onClick(DialogInterface dialog, int item) {
+//	            // Do something with the selection
+//	            //mDoneButton.setText(fabricantes[item]);
+//	        	Toast.makeText(Instalacion.this, "Par Externo Actualizado", Toast.LENGTH_SHORT).show();
+//	        	parExterno.setText(par_externo[item].subSequence(4, par_externo[item].length()));
+//	        }
+//	    });
+//	    AlertDialog alert = builder.create();
+//	    alert.show();
 	}
 	
 	public void mostrar_armario(View view){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Armario");
-	    builder.setIcon(R.drawable.ic_armario);
-	    builder.setItems(armario, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Instalacion.this, "Armario Actualizado", Toast.LENGTH_SHORT).show();
-	        	tvArmario.setText(armario[item]);
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		Consulta_PlantasExternas cpe = new Consulta_PlantasExternas();
+		tipoPlantaExterna = "ARMARIO"; //"CABLE"
+		cpe.execute();
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//	    builder.setTitle("Seleccione Armario");
+//	    builder.setIcon(R.drawable.ic_armario);
+//	    builder.setItems(armario, new DialogInterface.OnClickListener() {
+//	        public void onClick(DialogInterface dialog, int item) {
+//	            // Do something with the selection
+//	            //mDoneButton.setText(fabricantes[item]);
+//	        	Toast.makeText(Instalacion.this, "Armario Actualizado", Toast.LENGTH_SHORT).show();
+//	        	tvArmario.setText(armario[item]);
+//	        }
+//	    });
+//	    AlertDialog alert = builder.create();
+//	    alert.show();
 	}
 		
 	public void mostrar_parlocal(View view){
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-	    builder.setTitle("Seleccione Par Local");
-	    builder.setIcon(R.drawable.ic_parlocal);
-	    builder.setItems(par_local, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int item) {
-	            // Do something with the selection
-	            //mDoneButton.setText(fabricantes[item]);
-	        	Toast.makeText(Instalacion.this, par_local[item]+" seleccionado", Toast.LENGTH_SHORT).show();
-	        	tipoParLocal.setText(par_local[item]);
-	        }
-	    });
-	    AlertDialog alert = builder.create();
-	    alert.show();
+		Consulta_PlantasExternas cpe = new Consulta_PlantasExternas();
+		tipoPlantaExterna = "PAR LOCAL"; //"CABLE"
+		cpe.execute();
+//		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//	    builder.setTitle("Seleccione Par Local");
+//	    builder.setIcon(R.drawable.ic_parlocal);
+//	    builder.setItems(par_local, new DialogInterface.OnClickListener() {
+//	        public void onClick(DialogInterface dialog, int item) {
+//	            // Do something with the selection
+//	            //mDoneButton.setText(fabricantes[item]);
+//	        	Toast.makeText(Instalacion.this, par_local[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+//	        	tipoParLocal.setText(par_local[item]);
+//	        }
+//	    });
+//	    AlertDialog alert = builder.create();
+//	    alert.show();
 	}
 		
 	public void fin_certificar(View view){
@@ -1116,7 +1242,7 @@ public class Instalacion extends Activity {
                       
                        /** TEST
                        */
-                       if(Phone.getText().toString().compareTo("2594995")==0)
+                       if(Phone.getText().toString().compareTo("2594995")==0 || Phone.getText().toString().compareTo("22872755")==0)
                              dibujar();
                   }
       }
@@ -1381,7 +1507,7 @@ public class Instalacion extends Activity {
    	 * Consultar Plantas Externas
    	 */
    	
-private class Consulta_PlantasExternas_ extends AsyncTask<String,Integer,String> {
+private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,String> {
    		
    		private final ProgressDialog dialog = new ProgressDialog(Instalacion.this);
    		
@@ -1400,7 +1526,45 @@ private class Consulta_PlantasExternas_ extends AsyncTask<String,Integer,String>
    				String IMEI = telephonyManager.getDeviceId();
    				String IMSI =  telephonyManager.getSimSerialNumber();
    				
-   				res = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), null,"CAJA", IMEI,IMSI);
+   				if(opcion == 0){//Actualizar Aparato
+   					res = SoapRequestMovistar.setOutsidePlantUpgrade(updatear[3], updatear[2], tipoPlantaExterna, null, null, null, IMEI, IMSI);
+   				}
+   				if(opcion == 1){//Georeferenciar
+   					String lat = Lat;
+   					String lng = Lng;
+   					Lat = null;
+   					Lng = null;
+   							
+   					if(lat == null || lng == null)
+   						return null;
+   					
+   					for(int i = 0; i < plantaExternaActual.size(); i++){
+   						if(plantaExternaActual.get(i).split(";")[1].contains(tipoPlantaExterna) && plantaExternaActual.get(i).split(";")[0].compareTo("Element")==0 ){
+   							String Id = plantaExternaActual.get(i).split(";")[3];
+   							String Value = plantaExternaActual.get(i).split(";")[2];
+   							res = SoapRequestMovistar.setOutsidePlantUpgrade(Id, Value, tipoPlantaExterna, lat, lng, null, IMEI, IMSI);
+   							break;
+   						}
+   					}
+   				}
+   				if(opcion == 2){//Enviar Foto
+   					
+   					Bitmap foto = b;
+   					b = null;
+   					ArrayList<String> a = plantaExternaActual;
+   					for(int i = 0; i < a.size(); i++){
+   						if(plantaExternaActual.get(i).split(";")[1].contains(tipoPlantaExterna) && plantaExternaActual.get(i).split(";")[0].compareTo("Element")==0 ){
+   							String Id = plantaExternaActual.get(i).split(";")[3];
+   							String Value = plantaExternaActual.get(i).split(";")[2];
+   							res = SoapRequestMovistar.setOutsidePlantUpgrade(Id, Value, tipoPlantaExterna,
+   																				null, null, 
+   																				Funciones.encodeTobase64(foto), 
+   																				IMEI, IMSI);
+   							break;
+   						}
+   					}
+   				}
+   				
    				
    			} catch (Exception e1) {
    				e1.printStackTrace();
@@ -1419,20 +1583,62 @@ private class Consulta_PlantasExternas_ extends AsyncTask<String,Integer,String>
    	    	if (result != null)
    	    	{
    	    		try {
-   	    			String[] resultado = result.split("¬¬");
+   	    			String returns = XMLParser.getReturnCode(result);
+   	    			returns = returns.replace("[", "").replace("]", "");
    	    			
-   	    			PE_TipoPlanta = (TextView) findViewById(R.id.TipoPlanta);
-   	    			PE_TipoParExterno = (TextView) findViewById(R.id.TipoParExterno);
-   	    			PE_TipoArmario = (TextView) findViewById(R.id.TipoArmario);
-   	    			PE_TipoTerminal = (TextView) findViewById(R.id.TipoTerminal);
-   	    			PE_TipoParLocal = (TextView) findViewById(R.id.TipoParLocal);
-   	    			
-   	    			
-   	    			PE_TipoPlanta.setText(XMLParser.getOutsidePlant(resultado[0]).replace("[", "").replace("]", ""));
-   	    			PE_TipoParExterno.setText(XMLParser.getOutsidePlant(resultado[1]).replace("[", "").replace("]", ""));
-   	    			PE_TipoArmario.setText(XMLParser.getOutsidePlant(resultado[2]).replace("[", "").replace("]", ""));
-   	    			PE_TipoTerminal.setText(XMLParser.getOutsidePlant(resultado[3]).replace("[", "").replace("]", ""));
-   	    			PE_TipoParLocal.setText(XMLParser.getOutsidePlant(resultado[4]).replace("[", "").replace("]", ""));
+   	    			int code = Integer.valueOf(returns);
+   	    			if(code == 0 && opcion == 0){
+   	    					tipoPlantaExterna = null;
+   	    					seleccionado = null;
+   	    					Consulta_PlantasExternas a = new Consulta_PlantasExternas();
+   	    					a.execute();
+//   	    				int encontrado = 0;
+//   	    				for(int i = 0; i < plantaExternaActual.size(); i++){
+//   	   						if(plantaExternaActual.get(i).split(";")[1].contains(tipoPlantaExterna) && plantaExternaActual.get(i).split(";")[0].compareTo("Element")==0 ){
+//   	   							plantaExternaActual.set(i, updatear[0]+";"+updatear[1]+";"+updatear[2]+";"+updatear[3]);
+//   	   							encontrado++;
+//   	   							break;
+//   	   						}
+//   	   					}
+//   	    				
+//   	    				if(encontrado == 0)
+//   	    					plantaExternaActual.add(updatear[0]+";"+updatear[1]+";"+updatear[2]+";"+updatear[3]);
+//   	    				
+//   	    				Toast.makeText(getApplicationContext(), "Se Actualizó Correctamente", Toast.LENGTH_LONG).show();
+//   	    				if(tipoPlantaExterna.compareTo("PLANTA")==0){   	    					
+//   	    					tipoPlantaExterna = null;
+//   	    					
+//   	    					
+//   	    					tipoPlanta.setText(seleccionado);
+//   	    					seleccionado = null;
+//   	    				}
+//   	    				if(tipoPlantaExterna.compareTo("CABLE")==0){
+//   	    					tipoPlantaExterna = null;
+//   	    					parExterno.setText(seleccionado);
+//   	    					seleccionado = null;
+//   	    				}
+//   	    				if(tipoPlantaExterna.compareTo("ARMARIO")==0){
+//   	    					tipoPlantaExterna = null;
+//   	    					tvArmario.setText(seleccionado);
+//   	    					seleccionado = null;
+//   	    				}
+//   	    				if(tipoPlantaExterna.compareTo("PAR LOCAL")==0){
+//   	    					tipoPlantaExterna = null;
+//   	    					tipoParLocal.setText(seleccionado);
+//   	    					seleccionado = null;
+//   	    				}
+//   	    				if(tipoPlantaExterna.compareTo("CAJA")==0){
+//   	    					tipoPlantaExterna = null;
+//   	    					tipoTerminal.setText(seleccionado);
+//   	    					seleccionado = null;
+//   	    				}
+   	    			}else if (code == 0 && opcion != 0){
+   	    				Toast.makeText(getApplicationContext(), "Se Actualizó Correctamente", Toast.LENGTH_LONG).show();
+   	    			}
+   	    			else{
+   	    				Toast.makeText(getApplicationContext(), "No se pudo actualizar." , Toast.LENGTH_LONG).show();
+   	    			}
+   	    
    	    			
    	    			
    	    			
@@ -1468,7 +1674,7 @@ private class Consulta_PlantasExternas_ extends AsyncTask<String,Integer,String>
    				TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
    				String IMEI = telephonyManager.getDeviceId();
    				String IMSI =  telephonyManager.getSimSerialNumber();
-   				tipoPlantaExterna = "CAJA";
+   				
    				res = SoapRequestMovistar.getOutsidePlant(Area.getText().toString(), Phone.getText().toString(),tipoPlantaExterna, IMEI,IMSI);
    				
    			} catch (Exception e1) {
@@ -1488,32 +1694,21 @@ private class Consulta_PlantasExternas_ extends AsyncTask<String,Integer,String>
    	    	if (result != null)
    	    	{
    	    		try {
-//   	    			String[] resultado = result.split("¬¬");
-//   	    			
-//   	    			PE_TipoPlanta = (TextView) findViewById(R.id.TipoPlanta);
-//   	    			PE_TipoParExterno = (TextView) findViewById(R.id.TipoParExterno);
-//   	    			PE_TipoArmario = (TextView) findViewById(R.id.TipoArmario);
-//   	    			PE_TipoTerminal = (TextView) findViewById(R.id.TipoTerminal);
-//   	    			PE_TipoParLocal = (TextView) findViewById(R.id.TipoParLocal);
 //   	    			
 //   	    			
 //   	    			PE_TipoPlanta.setText(XMLParser.getOutsidePlant(resultado[0]).replace("[", "").replace("]", ""));
-//   	    			PE_TipoParExterno.setText(XMLParser.getOutsidePlant(resultado[1]).replace("[", "").replace("]", ""));
-//   	    			PE_TipoArmario.setText(XMLParser.getOutsidePlant(resultado[2]).replace("[", "").replace("]", ""));
-//   	    			PE_TipoTerminal.setText(XMLParser.getOutsidePlant(resultado[3]).replace("[", "").replace("]", ""));
-//   	    			PE_TipoParLocal.setText(XMLParser.getOutsidePlant(resultado[4]).replace("[", "").replace("]", ""));
-   	    			String models = XMLParser.getReturnCode(result);
-   	    			models = models.replace("[", "").replace("]", "");
-   	    			int code = Integer.valueOf(models);
+   	    			String returns = XMLParser.getReturnCode(result);
+   	    			returns = returns.replace("[", "").replace("]", "");
+   	    			
+   	    			int code = Integer.valueOf(returns);
    	    			if(code == 0){
-   	    				/** MOSTRAR LOS VALORES OBTENIDOS EN LOS TEXTVIEWS CORRESPONDIENTES */
-   	    				//res = XMLParser.getOutsidePlant_detail(result);
+   	    				llenarPlantaExterna(tipoPlantaExterna, XMLParser.getOutsidePlant(result));
    	    			}
-   	    			else if(code !=0 && tipoPlantaExterna == null){
-   	    				Toast.makeText(getApplicationContext(), "No hay plantas externas para este número.", Toast.LENGTH_LONG).show();
-   	    			}
-   	    			else if(code != 0 && tipoPlantaExterna != null){
-   	    				Toast.makeText(getApplicationContext(), "No Hay Datos para "+tipoPlantaExterna, Toast.LENGTH_LONG).show();
+   	    			else{
+   	    				if(tipoPlantaExterna == null)
+   	    					Toast.makeText(getApplicationContext(), "No hay plantas externas para este número.", Toast.LENGTH_LONG).show();
+   	    				if(tipoPlantaExterna != null)
+   	    					Toast.makeText(getApplicationContext(), "No Hay Datos para "+tipoPlantaExterna+" para este número." , Toast.LENGTH_LONG).show();
    	    			}
    	    				
    	    			
@@ -1527,6 +1722,173 @@ private class Consulta_PlantasExternas_ extends AsyncTask<String,Integer,String>
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
    	    	}
    	    }
+   	}
+   	
+   	public void llenarPlantaExterna(String tipo, ArrayList<String> r){
+   		plantaExternaActual = r;
+   		if(tipoPlantaExterna == null){   			
+   			for(int i = 0; i < r.size(); i++){
+   				String[] campos = r.get(i).replace("[", "").replace("]", "").split(";");
+   				if(campos[0].compareTo("Element")!= 0)
+   					continue;
+   				
+   				if(campos[1].compareTo("PLANTA")==0){
+   					tipoPlanta.setText(campos[2]);
+   				}
+   				if(campos[1].compareTo("CABLE")==0){
+   					parExterno.setText(campos[2]);
+   				}
+   				if(campos[1].compareTo("ARMARIO")==0){
+   					tvArmario.setText(campos[2]);
+   				}
+   				if(campos[1].compareTo("PAR LOCAL")==0){
+   					tipoParLocal.setText(campos[2]);
+   				}
+   				if(campos[1].compareTo("CAJA")==0){
+   					tipoTerminal.setText(campos[2]);
+   				}
+   				
+   				
+   			}
+		}
+   		else{
+   			List<String> listItems = new ArrayList<String>();
+   			mostrando = new ArrayList<String>();
+			int cont = 0;
+			for(int i = 0; i < r.size(); i++){
+			//final CharSequence[] i = {"planta1","planta2"};//dividir res
+				String[] campos = r.get(i).replace("[", "").replace("]", "").split(";");
+   				if(campos[0].compareTo("Element")== 0)
+   					continue;
+   				listItems.add(campos[2]);   				
+				mostrando.add(r.get(i).replace("[", "").replace("]", ""));
+   				cont++;
+			}
+			
+			if(cont == 0){
+				Toast.makeText(getApplicationContext(), "No hay resultados para "+tipoPlantaExterna, Toast.LENGTH_LONG).show();
+				tipoPlantaExterna = null;
+				return;
+			}
+				
+			final CharSequence[] item = listItems.toArray(new CharSequence[listItems.size()]);
+			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+		    builder1.setTitle("Seleccione una elemento");
+		    builder1.setIcon(R.drawable.ic_fabricante);
+		    builder1.setItems(item, new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int i) {
+		            
+		        	//Toast.makeText(Instalacion.this, item[i]+" seleccionado", Toast.LENGTH_SHORT).show();
+		        	seleccionado = item[i].toString();
+		        	updatear = mostrando.get(i).split(";");
+		        	//Log.i("", "");
+		        	opcion = 0;
+		        	Consulta_UpdatePlantasExternas cupe = new Consulta_UpdatePlantasExternas();
+		        	cupe.execute();
+		        	//Actualizar con el dato seleccionado XML-006
+		        	
+		        	
+		        }
+		    });
+		    AlertDialog alert = builder1.create();
+		    alert.show();
+   		}
+   			
+//		if(tipoPlantaExterna.compareTo("PLANTA") == 0){
+//			List<String> listItems = new ArrayList<String>();
+//			
+//			for(int i = 0; i < r.size(); i++){
+//			//final CharSequence[] i = {"planta1","planta2"};//dividir res
+//				String[] campos = r.get(i).replace("[", "").replace("]", "").split(";");
+//   				if(campos[0].compareTo("Element")== 0)
+//   					continue;
+//   				listItems.add(campos[2]);
+//   				
+//			}
+//			final CharSequence[] item = listItems.toArray(new CharSequence[listItems.size()]);
+//			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+//		    builder1.setTitle("Seleccione Fabricante de DECO");
+//		    builder1.setIcon(R.drawable.ic_fabricante);
+//		    builder1.setItems(item, new DialogInterface.OnClickListener() {
+//		        public void onClick(DialogInterface dialog, int i) {
+//		            
+//		        	Toast.makeText(Instalacion.this, item[i]+" seleccionado", Toast.LENGTH_SHORT).show();
+//		        	
+//		        	//Actualizar con el dato seleccionado XML-006        	
+//		        	
+//		        }
+//		    });
+//		    AlertDialog alert = builder1.create();
+//		    alert.show();
+//		}
+//		if(tipoPlantaExterna.compareTo("CABLE") == 0){
+//			final CharSequence[] i = {"cable1","cable2"};//dividir res
+//			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+//		    builder1.setTitle("Seleccione Fabricante de DECO");
+//		    builder1.setIcon(R.drawable.ic_fabricante);
+//		    builder1.setItems(i, new DialogInterface.OnClickListener() {
+//		        public void onClick(DialogInterface dialog, int item) {
+//		            
+//		        	Toast.makeText(Instalacion.this, i[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+//		        	
+//		        	//Actualizar con el dato seleccionado XML-006        	
+//		        	
+//		        }
+//		    });
+//		    AlertDialog alert = builder1.create();
+//		    alert.show();
+//		}
+//		if(tipoPlantaExterna.compareTo("ARMARIO") == 0){
+//			final CharSequence[] i = {"armario1","armario2"};//dividir res
+//			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+//		    builder1.setTitle("Seleccione Fabricante de DECO");
+//		    builder1.setIcon(R.drawable.ic_fabricante);
+//		    builder1.setItems(i, new DialogInterface.OnClickListener() {
+//		        public void onClick(DialogInterface dialog, int item) {
+//		            
+//		        	Toast.makeText(Instalacion.this, i[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+//		        	
+//		        	//Actualizar con el dato seleccionado XML-006        	
+//		        	
+//		        }
+//		    });
+//		    AlertDialog alert = builder1.create();
+//		    alert.show();
+//		}
+//		if(tipoPlantaExterna.compareTo("PAR LOCAL") == 0){
+//			final CharSequence[] i = {"parlocal1","parlocal2"};//dividir res
+//			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+//		    builder1.setTitle("Seleccione Fabricante de DECO");
+//		    builder1.setIcon(R.drawable.ic_fabricante);
+//		    builder1.setItems(i, new DialogInterface.OnClickListener() {
+//		        public void onClick(DialogInterface dialog, int item) {
+//		            
+//		        	Toast.makeText(Instalacion.this, i[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+//		        	
+//		        	//Actualizar con el dato seleccionado XML-006        	
+//		        	
+//		        }
+//		    });
+//		    AlertDialog alert = builder1.create();
+//		    alert.show();
+//		}
+//		if(tipoPlantaExterna.compareTo("CAJA") == 0){
+//			final CharSequence[] i = {"caja1","caja2"};//dividir res
+//			AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+//		    builder1.setTitle("Seleccione Fabricante de DECO");
+//		    builder1.setIcon(R.drawable.ic_fabricante);
+//		    builder1.setItems(i, new DialogInterface.OnClickListener() {
+//		        public void onClick(DialogInterface dialog, int item) {
+//		            
+//		        	Toast.makeText(Instalacion.this, i[item]+" seleccionado", Toast.LENGTH_SHORT).show();
+//		        	
+//		        	//Actualizar con el dato seleccionado XML-006        	
+//		        	
+//		        }
+//		    });
+//		    AlertDialog alert = builder1.create();
+//		    alert.show();
+//		}
    	}
    	
    	/*

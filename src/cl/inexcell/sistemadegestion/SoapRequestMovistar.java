@@ -420,43 +420,117 @@ public class SoapRequestMovistar {
 	    envelope.encodingStyle = SoapSerializationEnvelope.ENC;
 	    envelope.dotNet = false;		
 		envelope.implicitTypes = true;
-		
-	    String bodyOut = 
-		"<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
-		   "<soapenv:Header/>"+
-		   "<soapenv:Body>"+
-		      "<urn:OutsidePlantUpgrade soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
-		         "<RequestOutsidePlantUpgrade xsi:type=\"urn:RequestOutsidePlantUpgrade\">"+
-		            "<Operation xsi:type=\"urn:OperationType\">"+
-		               "<OperationCode xsi:type=\"xsd:string\">XML-006</OperationCode>"+
-		               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
-		               "<!--Optional:-->"+
-		               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
-		               "<!--Optional:-->"+
-		               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
-		               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
-		               "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
-		            "</Operation>"+
-		            "<Service xsi:type=\"urn:ServiceOutsidePlantUpgradeIn\">"+
-		               "<OutsidePlantUpgrade xsi:type=\"urn:OutsidePlantUpgradeIn\">"+
-		                  "<Input xsi:type=\"urn:OutsidePlantUpgradeInData\">"+
-		                     "<Element xsi:type=\"urn:ElementPlantUpgradeType\">"+
-		                        "<Id xsi:type=\"xsd:string\">"+Id+"</Id>"+
-		                        "<Type xsi:type=\"xsd:string\">"+Type+"</Type>"+
-		                        "<Value xsi:type=\"xsd:string\">"+Value+"</Value>"+
-		                        "<Gps xsi:type=\"urn:GPSType\">"+
-		                           "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
-		                           "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
-		                        "</Gps>"+
-		                        "<Picture xsi:type=\"xsd:string\">"+Pict+"</Picture>"+
-		                     "</Element>"+
-		                  "</Input>"+
-		               "</OutsidePlantUpgrade>"+
-		            "</Service>"+
-		         "</RequestOutsidePlantUpgrade>"+
-		      "</urn:OutsidePlantUpgrade>"+
-		   "</soapenv:Body>"+
-		"</soapenv:Envelope>";
+		String bodyOut = null;
+		if(Lat == null && Lng == null && Pict == null){
+			//Cambio Datos Aparato
+			bodyOut = 
+					"<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+					   "<soapenv:Header/>"+
+					   "<soapenv:Body>"+
+					      "<urn:OutsidePlantUpgrade soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+					         "<RequestOutsidePlantUpgrade xsi:type=\"urn:RequestOutsidePlantUpgrade\">"+
+					            "<Operation xsi:type=\"urn:OperationType\">"+
+					               "<OperationCode xsi:type=\"xsd:string\">XML-006</OperationCode>"+
+					               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
+					               "<!--Optional:-->"+
+					               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
+					               "<!--Optional:-->"+
+					               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
+					               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+					               "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+					            "</Operation>"+
+					            "<Service xsi:type=\"urn:ServiceOutsidePlantUpgradeIn\">"+
+					               "<OutsidePlantUpgrade xsi:type=\"urn:OutsidePlantUpgradeIn\">"+
+					                  "<Input xsi:type=\"urn:OutsidePlantUpgradeInData\">"+
+					                     "<Element xsi:type=\"urn:ElementPlantUpgradeType\">"+
+					                        "<Id xsi:type=\"xsd:string\">"+Id+"</Id>"+
+					                        "<Type xsi:type=\"xsd:string\">"+Type+"</Type>"+
+					                        "<Value xsi:type=\"xsd:string\">"+Value+"</Value>"+
+					                     "</Element>"+
+					                  "</Input>"+
+					               "</OutsidePlantUpgrade>"+
+					            "</Service>"+
+					         "</RequestOutsidePlantUpgrade>"+
+					      "</urn:OutsidePlantUpgrade>"+
+					   "</soapenv:Body>"+
+					"</soapenv:Envelope>";
+		}
+		else if(Lat != null || Lng != null){
+			//Cambio de Georeferencia
+			bodyOut = 
+					"<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+					   "<soapenv:Header/>"+
+					   "<soapenv:Body>"+
+					      "<urn:OutsidePlantUpgrade soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+					         "<RequestOutsidePlantUpgrade xsi:type=\"urn:RequestOutsidePlantUpgrade\">"+
+					            "<Operation xsi:type=\"urn:OperationType\">"+
+					               "<OperationCode xsi:type=\"xsd:string\">XML-006</OperationCode>"+
+					               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
+					               "<!--Optional:-->"+
+					               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
+					               "<!--Optional:-->"+
+					               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
+					               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+					               "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+					            "</Operation>"+
+					            "<Service xsi:type=\"urn:ServiceOutsidePlantUpgradeIn\">"+
+					               "<OutsidePlantUpgrade xsi:type=\"urn:OutsidePlantUpgradeIn\">"+
+					                  "<Input xsi:type=\"urn:OutsidePlantUpgradeInData\">"+
+					                     "<Element xsi:type=\"urn:ElementPlantUpgradeType\">"+
+					                        "<Id xsi:type=\"xsd:string\">"+Id+"</Id>"+
+					                        "<Type xsi:type=\"xsd:string\">"+Type+"</Type>"+
+					                        "<Value xsi:type=\"xsd:string\">"+Value+"</Value>"+
+					                        "<Gps xsi:type=\"urn:GPSType\">"+
+					                           "<Lat xsi:type=\"xsd:string\">"+Lat+"</Lat>"+
+					                           "<Lng xsi:type=\"xsd:string\">"+Lng+"</Lng>"+
+					                        "</Gps>"+
+					                     "</Element>"+
+					                  "</Input>"+
+					               "</OutsidePlantUpgrade>"+
+					            "</Service>"+
+					         "</RequestOutsidePlantUpgrade>"+
+					      "</urn:OutsidePlantUpgrade>"+
+					   "</soapenv:Body>"+
+					"</soapenv:Envelope>";
+			
+		}
+		else if(Pict != null){
+			//Envio una imagen
+			bodyOut = 
+					"<?xml version=\"1.0\" encoding=\"utf-8\"?><soapenv:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:Demo\">"+
+					   "<soapenv:Header/>"+
+					   "<soapenv:Body>"+
+					      "<urn:OutsidePlantUpgrade soapenv:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">"+
+					         "<RequestOutsidePlantUpgrade xsi:type=\"urn:RequestOutsidePlantUpgrade\">"+
+					            "<Operation xsi:type=\"urn:OperationType\">"+
+					               "<OperationCode xsi:type=\"xsd:string\">XML-006</OperationCode>"+
+					               "<OperationId xsi:type=\"xsd:string\">" + formatter.format(fecha).toString() + "</OperationId>"+
+					               "<!--Optional:-->"+
+					               "<DateTime xsi:type=\"xsd:string\">"+formatter.format(fecha).toString()+"</DateTime>"+
+					               "<!--Optional:-->"+
+					               "<IdUser xsi:type=\"xsd:string\">1</IdUser>"+
+					               "<IMEI xsi:type=\"xsd:string\">"+IMEI+"</IMEI>"+
+					               "<IMSI xsi:type=\"xsd:string\">"+IMSI+"</IMSI>"+
+					            "</Operation>"+
+					            "<Service xsi:type=\"urn:ServiceOutsidePlantUpgradeIn\">"+
+					               "<OutsidePlantUpgrade xsi:type=\"urn:OutsidePlantUpgradeIn\">"+
+					                  "<Input xsi:type=\"urn:OutsidePlantUpgradeInData\">"+
+					                     "<Element xsi:type=\"urn:ElementPlantUpgradeType\">"+
+					                        "<Id xsi:type=\"xsd:string\">"+Id+"</Id>"+
+					                        "<Type xsi:type=\"xsd:string\">"+Type+"</Type>"+
+					                        "<Value xsi:type=\"xsd:string\">"+Value+"</Value>"+
+					                        "<Picture xsi:type=\"xsd:string\">"+Pict+"</Picture>"+
+					                     "</Element>"+
+					                  "</Input>"+
+					               "</OutsidePlantUpgrade>"+
+					            "</Service>"+
+					         "</RequestOutsidePlantUpgrade>"+
+					      "</urn:OutsidePlantUpgrade>"+
+					   "</soapenv:Body>"+
+					"</soapenv:Envelope>";
+		}
+			
+	    
 	    		
 	    xml = bodyOut;
 	    StringEntity se = new StringEntity(xml, HTTP.UTF_8);

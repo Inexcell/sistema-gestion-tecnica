@@ -213,7 +213,7 @@ public class XMLParser {
 	 * XML-005: Planta Externa
 	 */
 	
-	public static String getOutsidePlant(String xml) throws ParserConfigurationException, 
+	public static ArrayList<String> getOutsidePlant(String xml) throws ParserConfigurationException, 
 	SAXException, IOException, XPathExpressionException
 	{
 		ArrayList<String> models = new ArrayList<String>();
@@ -225,21 +225,40 @@ public class XMLParser {
         is.setCharacterStream(new StringReader(xmlRecords));
         
         Document doc = db.parse(is);
-        NodeList nodes = doc.getElementsByTagName("Element");
+        //NodeList nodes = doc.getElementsByTagName("Element");
+        NodeList nodes = doc.getElementsByTagName("Output").item(0).getChildNodes();
         
-        //for (int i = 0; i < nodes.getLength(); i++) 
-    	for (int i = 0; i < 1; i++)
-        {
-                Element element = (Element) nodes.item(i);
-                NodeList name = element.getElementsByTagName("Value");
-                
-                for(int j=0; j< name.getLength(); j++){
-                	Element line1 = (Element) name.item(j);
-                	models.add(getCharacterDataFromElement(line1));
-                }
+        for (int i = 0; i < nodes.getLength()-1; i++) {
+        	
+			Element element = (Element) nodes.item(i);
+			
+			if(element.getChildNodes().getLength() == 0)
+				continue;
+			
+			NodeList name = element.getElementsByTagName("Value");
+			NodeList aidi = element.getElementsByTagName("Id");
+			NodeList tipo = element.getElementsByTagName("Type");
+			  
+			Element value = (Element) name.item(0);
+			Element id = (Element) aidi.item(0);
+			Element type = (Element) tipo.item(0);
+			models.add(element.getNodeName()+";"+getCharacterDataFromElement(type)+";"+getCharacterDataFromElement(value)+";"+getCharacterDataFromElement(id));
         }
+//    	for (int i = 0; i < 1; i++)
+//        {
+//                Element element = (Element) nodes.item(i);
+//                NodeList name = element.getElementsByTagName("Value");
+//                NodeList aidi = element.getElementsByTagName("Id");
+//                NodeList tipo = element.getElementsByTagName("Type");
+//                
+//                Element value = (Element) name.item(0);
+//                Element id = (Element) aidi.item(0);
+//                Element type = (Element) tipo.item(0);
+//                models.add(getCharacterDataFromElement(type)+";"+getCharacterDataFromElement(value)+";"+getCharacterDataFromElement(id));
+//                
+//        }
 
-        return models.toString();
+        return models;
         //return cpe.elementAt(1).toString(); // Mostrar elemento 1 del Vector
 	}
 	
