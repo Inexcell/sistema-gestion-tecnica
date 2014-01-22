@@ -76,12 +76,12 @@ public class Demonio_Certificar_3G extends Service{
 							
 						 State senal3g = conMan.getNetworkInfo(0).getState();
 						 State wifi = conMan.getNetworkInfo(1).getState();
-						 if (senal3g == NetworkInfo.State.CONNECTED )
+						 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
 						 {
-							// ejecutarTarea();
+							ejecutarTarea();
 						 }else if (wifi == NetworkInfo.State.CONNECTED )
 						 {
-							 //enviarDatos3G();
+							 enviarDatos3G();
 						 };
 					 }      
 				 }
@@ -235,9 +235,9 @@ public class Demonio_Certificar_3G extends Service{
 	        	Date fecha = Calendar.getInstance().getTime();
 	        	
 	        	
-        		loc = locManager.getLastKnownLocation(provider);
+        		loc = locManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         		if(loc == null || latitud == null){
-        			if((loc = locManager.getLastKnownLocation(provider))!= null){
+        			if((loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER))!= null){
 	        			latitud = String.valueOf(loc.getLatitude());
 	        			longitud = String.valueOf(loc.getLongitude());
         			}
@@ -260,7 +260,7 @@ public class Demonio_Certificar_3G extends Service{
 		       
 		       /**Aqui se deben enviar los datos **/
 		      
-		      
+		       
 		       try {
 		        	Log.i(TAG, "Comenzando la escritura");
 		        	if (Environment.getExternalStorageState().equals("mounted")) {
