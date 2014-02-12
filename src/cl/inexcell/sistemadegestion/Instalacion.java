@@ -303,7 +303,7 @@ public class Instalacion extends Activity {
 				
 				
 				p6 = (LinearLayout) findViewById(R.id.panelCertificacion2);
-				
+				p7 = (LinearLayout) findViewById(R.id.panelCertificacion1);
 				// Definir visibilidad de objetos Buttons
 				b1.setVisibility(View.VISIBLE);
 				b2.setVisibility(View.INVISIBLE);
@@ -318,6 +318,7 @@ public class Instalacion extends Activity {
 				p4.setVisibility(View.INVISIBLE);
 				p5.setVisibility(View.INVISIBLE);
 				p6.setVisibility(View.INVISIBLE);
+				p7.setVisibility(View.VISIBLE);
 				
 				ib1 = (ImageView) findViewById(R.id.nro_telefono_ok);
 	}
@@ -328,7 +329,7 @@ public class Instalacion extends Activity {
 	
 	public void buscar_cliente(final View view) throws Exception
 	{
-		
+		setupInicial();
 		Area = (EditText) findViewById(R.id.txtTelefonoArea);
 		area1 = Area.getText().toString();
 				
@@ -891,7 +892,10 @@ public class Instalacion extends Activity {
 	}
 		
 	public void fin_certificar(View view){
-		Toast.makeText(this, "Certificación realizada exitosamente", Toast.LENGTH_SHORT).show();
+		if(certifyDslCorrecto == true)
+			Toast.makeText(this, "Certificación realizada exitosamente", Toast.LENGTH_SHORT).show();
+		else if(certifyDslCorrecto==false)
+			Toast.makeText(this, "Certificación realizada con reparos", Toast.LENGTH_SHORT).show();
 		finish();
 	}
 	
@@ -1159,7 +1163,7 @@ public class Instalacion extends Activity {
   		private final ProgressDialog dialog = new ProgressDialog(Instalacion.this);
   		
 		protected void onPreExecute() {
-			this.dialog.setMessage("Consultando Datos del Cliente");
+			this.dialog.setMessage("Buscando...");
 		    this.dialog.show();
             //super.onPreExecute();
         }
@@ -2130,7 +2134,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  				items_certify = new ArrayList<itemList>();
  				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.ok); 		
  				ib1.setImageBitmap(bmp);
- 				String linea="";
+ 				//String linea="";
  				for(int i = 1; i<res.size();i++){ 						
  					if(res.get(i).split(";")[1].compareTo("OK") == 0)
  						items_certify.add(new itemList(res.get(i).split(";")[0],"",R.drawable.ok));
@@ -2153,7 +2157,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 // 			    	      "Click ListItem Number " + position, Toast.LENGTH_LONG)
 // 			    	      .show();
  			    		  decoSelected = position;
- 			    		  Toast.makeText(getApplicationContext(), res.get(position+1).split(";")[3], Toast.LENGTH_LONG).show();
+ 			    		  Toast.makeText(getApplicationContext(), res.get(position+1).split(";")[0]+":\n"+res.get(position+1).split(";")[3], Toast.LENGTH_LONG).show();
  			    		  
  			    	  }
  			    	});
@@ -2161,10 +2165,11 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  	 			{
  				   Bitmap bmp2 = BitmapFactory.decodeResource(getResources(), R.drawable.error);
  				   ib1.setImageBitmap(bmp2);
- 				   finalizar.setEnabled(false);
+ 				   //finalizar.setEnabled(false);
+ 				   //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
  	 			}
  				
- 				Toast.makeText(getApplicationContext(), linea, Toast.LENGTH_LONG).show();
+ 				//Toast.makeText(getApplicationContext(), "asd1"+linea, Toast.LENGTH_LONG).show();
  			}
  			else
  			{ 				

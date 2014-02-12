@@ -56,7 +56,7 @@
             android:layout_marginLeft="-200dp"
             android:layout_marginTop="32dp"
             android:gravity="left"
-            android:text="@string/reparacion"
+            android:text="@string/instalacion"
             android:textColor="#258aaf" />
         
 	</LinearLayout>
@@ -330,7 +330,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta"
+					    android:id="@+id/BotonExterno"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
@@ -377,7 +377,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta4"
+					    android:id="@+id/BotonArmario"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
@@ -424,7 +424,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta"
+					    android:id="@+id/BotonCaja"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
@@ -471,7 +471,7 @@
 						android:text="--" />
 					
 					<ImageButton
-					    android:id="@+id/BotonPlanta"
+					    android:id="@+id/BotonLocal"
 					    android:layout_width="wrap_content"
 					    android:layout_height="wrap_content"
 					    android:layout_marginLeft="30dp"
@@ -780,7 +780,27 @@
 				    android:gravity="center"
 				    android:layout_marginTop="-60dp"
 				    android:orientation="vertical">
-					
+						
+				    <TextView
+				        android:id="@+id/cert_hint"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:layout_marginTop="5dp"
+				        android:text="Presione un item para ver sus detalles."
+				        android:textStyle="italic" />
+
+					<!--  Linea Horizontal -->
+					    <LinearLayout
+						    android:id="@+id/panelLinea1"
+						    android:orientation="horizontal"
+				            android:layout_width="fill_parent"
+							android:layout_height="1dp"
+							android:layout_marginLeft="25dp"
+				            android:layout_marginRight="25dp"
+				            android:background="#bdbdbd"
+				            android:layout_marginTop="5dp"
+				            android:layout_marginBottom="5dp" >
+			        	</LinearLayout>
 		
 				    <TableLayout
 				        android:layout_width="match_parent"
@@ -794,21 +814,23 @@
 				            android:layout_height="wrap_content"
 				            >
 						
-							<TextView 
-							    android:id="@+id/Planta" 
+							<TextView
+							    android:id="@+id/Planta"
 							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="28dp"
-								android:layout_marginTop="5dp"
-								android:text="Señal Wifi:" />
+							    android:layout_height="wrap_content"
+							    android:layout_marginLeft="28dp"
+							    android:layout_marginTop="5dp"
+							    android:text="Señal Wifi:"
+							    android:textStyle="bold" />
 								
-							<TextView 
-							    android:id="@+id/NombreWifi" 
+							<TextView
+							    android:id="@+id/NombreWifi"
 							    android:layout_width="wrap_content"
-								android:layout_height="wrap_content"
-								android:layout_marginLeft="40dp"
-								android:layout_marginTop="5dp"
-								android:text="Nombre Wifi" />
+							    android:layout_height="wrap_content"
+							    android:layout_marginLeft="40dp"
+							    android:layout_marginTop="5dp"
+							    android:text="Nombre Wifi"
+							    android:textStyle="bold" />
 							
 							<ImageView
 		                        android:id="@+id/imageButton1"
@@ -906,22 +928,24 @@
 					            android:layout_height="wrap_content"
 					            >
 							
-								<TextView 
-								    android:id="@+id/ParExterno" 
+								<TextView
+								    android:id="@+id/ParExterno"
 								    android:layout_width="wrap_content"
-									android:layout_height="wrap_content"
-									android:layout_marginLeft="28dp"
-									android:layout_marginTop="5dp"
-									android:paddingBottom="5dp"
-									android:text="DSL:" />
+								    android:layout_height="wrap_content"
+								    android:layout_marginLeft="28dp"
+								    android:layout_marginTop="5dp"
+								    android:paddingBottom="5dp"
+								    android:text="DSL:"
+								    android:textStyle="bold" />
 									
-								<TextView 
-								    android:id="@+id/NroTelefono" 
+								<TextView
+								    android:id="@+id/NroTelefono"
 								    android:layout_width="wrap_content"
-									android:layout_height="wrap_content"
-									android:layout_marginLeft="40dp"
-									android:layout_marginTop="5dp"
-									android:text="(XX) XXXXXXX" />
+								    android:layout_height="wrap_content"
+								    android:layout_marginLeft="40dp"
+								    android:layout_marginTop="5dp"
+								    android:text="(XX) XXXXXXX"
+								    android:textStyle="bold" />
 								
 								<ImageView
 			                        android:id="@+id/nro_telefono_ok"
@@ -976,7 +1000,7 @@
 					        android:onClick="fin_certificar"
 					        android:text="Finalizar" />
 						
-						"
+						
 						
 					</LinearLayout>
 				</LinearLayout>
