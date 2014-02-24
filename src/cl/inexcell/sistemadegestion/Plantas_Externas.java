@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Plantas_Externas extends FragmentActivity implements SwipeInterface{
 
@@ -57,6 +58,7 @@ public class Plantas_Externas extends FragmentActivity implements SwipeInterface
 	}
 
 	public void iniciar(){
+		Log.i(TAG,"Funcion Iniciar()");
 		declararvariables();
 		//buscar_plantas_externas();
 		ActivitySwipeDetector swipe = new ActivitySwipeDetector(this,this);		
@@ -189,6 +191,17 @@ private class Consulta_P_Externas extends AsyncTask<String,Integer,String> {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Plantas Externas Cercanas");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Plantas_Externas.this.finish();
+					
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
  		    	
@@ -223,8 +236,15 @@ private class Consulta_P_Externas extends AsyncTask<String,Integer,String> {
  			
  			if (this.dialog.isShowing()) {
  		        this.dialog.dismiss();
+ 		        
  		     }
- 			iniciar();
+ 			if(result == null)
+ 			{
+ 				Toast.makeText(getApplicationContext(), "No hubo respuesta. Compruebe su conexión a internet y vuelva a intentarlo.", Toast.LENGTH_LONG).show();
+ 				Plantas_Externas.this.finish();
+ 			}
+ 			else
+ 				iniciar();
    	    }
    	}
 

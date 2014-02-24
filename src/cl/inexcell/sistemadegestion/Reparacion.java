@@ -319,6 +319,7 @@ public class Reparacion extends Activity {
 				p5.setVisibility(View.INVISIBLE);
 				p6.setVisibility(View.INVISIBLE);
 				p7.setVisibility(View.VISIBLE);
+				
 				ib1 = (ImageView) findViewById(R.id.nro_telefono_ok);
 	}
 	
@@ -1163,6 +1164,16 @@ public class Reparacion extends Activity {
   		
 		protected void onPreExecute() {
 			this.dialog.setMessage("Buscando...");
+			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
 		    this.dialog.show();
             //super.onPreExecute();
         }
@@ -1267,6 +1278,16 @@ public class Reparacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Fabricante del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1314,6 +1335,7 @@ public class Reparacion extends Activity {
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Reparacion.this.finish();
    	    	}
    	    }
    	}
@@ -1328,6 +1350,16 @@ public class Reparacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Modelo del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1375,6 +1407,7 @@ public class Reparacion extends Activity {
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Reparacion.this.finish();
    	    	}
    	    }
    	}
@@ -1389,6 +1422,16 @@ public class Reparacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Fabricante del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1435,6 +1478,7 @@ public class Reparacion extends Activity {
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Reparacion.this.finish();
    	    	}
    	    }
    	}
@@ -1449,6 +1493,16 @@ public class Reparacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Modelo del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1502,6 +1556,7 @@ public class Reparacion extends Activity {
    	    	else
    	    	{
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Reparacion.this.finish();
    	    	}
    	    }
    	}
@@ -1516,6 +1571,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Cliente y Planta Externas");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1655,6 +1720,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Reparacion.this.finish();
    	    	}
    	    }
    	}
@@ -1665,6 +1731,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Cliente y Planta Externas");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1723,6 +1799,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Reparacion.this.finish();
    	    	}
    	    }
    	}
@@ -2013,6 +2090,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Actualizando Equipo del Cliente");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -2065,6 +2152,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  			else
  			{
  				Toast.makeText(getApplicationContext(), "Error al Actualizar Inventario", Toast.LENGTH_LONG).show();
+ 				
  			}
    	    }
    	}
@@ -2080,6 +2168,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Midiendo descarga y certificando línea telefónica");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Reparacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }

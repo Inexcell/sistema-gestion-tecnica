@@ -1164,6 +1164,16 @@ public class Instalacion extends Activity {
   		
 		protected void onPreExecute() {
 			this.dialog.setMessage("Buscando...");
+			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
 		    this.dialog.show();
             //super.onPreExecute();
         }
@@ -1268,6 +1278,16 @@ public class Instalacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Fabricante del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1315,6 +1335,7 @@ public class Instalacion extends Activity {
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Instalacion.this.finish();
    	    	}
    	    }
    	}
@@ -1329,6 +1350,16 @@ public class Instalacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Modelo del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1376,6 +1407,7 @@ public class Instalacion extends Activity {
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Instalacion.this.finish();
    	    	}
    	    }
    	}
@@ -1390,6 +1422,16 @@ public class Instalacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Fabricante del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1436,6 +1478,7 @@ public class Instalacion extends Activity {
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Instalacion.this.finish();
    	    	}
    	    }
    	}
@@ -1450,6 +1493,16 @@ public class Instalacion extends Activity {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Modelo del Equipo");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1503,6 +1556,7 @@ public class Instalacion extends Activity {
    	    	else
    	    	{
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Instalacion.this.finish();
    	    	}
    	    }
    	}
@@ -1517,6 +1571,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Cliente y Planta Externas");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1656,6 +1720,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Instalacion.this.finish();
    	    	}
    	    }
    	}
@@ -1666,6 +1731,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Consultando Datos de Cliente y Planta Externas");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -1724,6 +1799,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    	    	{
    	    		//test_wsdl.setText("Error!");
    	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Instalacion.this.finish();
    	    	}
    	    }
    	}
@@ -2014,6 +2090,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Actualizando Equipo del Cliente");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -2066,6 +2152,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  			else
  			{
  				Toast.makeText(getApplicationContext(), "Error al Actualizar Inventario", Toast.LENGTH_LONG).show();
+ 				
  			}
    	    }
    	}
@@ -2081,6 +2168,16 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Midiendo descarga y certificando línea telefónica");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Instalacion.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }

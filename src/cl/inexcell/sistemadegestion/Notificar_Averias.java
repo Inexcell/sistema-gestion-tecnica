@@ -201,6 +201,16 @@ private class Enviar_Averia extends AsyncTask<String,Integer,String> {
    		
  		protected void onPreExecute() {
  			this.dialog.setMessage("Enviando Avería Localizada...");
+ 			this.dialog.setCanceledOnTouchOutside(false);
+ 			this.dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+				
+				@Override
+				public void onCancel(DialogInterface dialog) {
+					// TODO Auto-generated method stub
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Notificar_Averias.this.finish();
+				}
+			});
  		    this.dialog.show();
              //super.onPreExecute();
          }
@@ -261,8 +271,7 @@ private class Enviar_Averia extends AsyncTask<String,Integer,String> {
    	    	}
    	    	else
    	    	{
-   	    		//test_wsdl.setText("Error!");
-   	    		//Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
    	    	}
    	    }
    	}

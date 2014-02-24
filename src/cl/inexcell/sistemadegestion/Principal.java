@@ -6,11 +6,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -81,47 +78,20 @@ public class Principal extends Activity {
 		 State senal3g = conMan.getNetworkInfo(0).getState();
 		 State wifi = conMan.getNetworkInfo(1).getState();
 		 
-		 if (wifi == NetworkInfo.State.CONNECTED)
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
 		 {
-			 WifiManager wMan = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-			 WifiInfo wInfo = wMan.getConnectionInfo();
-			 
-			 if(wInfo.getSSID().contains("MOVISTAR") || wInfo.getSSID().contains("Movistar") || wInfo.getSSID().contains("movistar")){
-				 Intent i = new Intent(this, Instalacion.class );
-			     startActivity(i);
-			        
-			        // Vibrar al hacer click
-			     Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-			     vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 				 
-		 }
-		 else if(senal3g == NetworkInfo.State.CONNECTED)
-		 {
-			 TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				/* Update the listener, and start it */
-				
-					 
-			 String operador = String.valueOf(tm.getNetworkOperatorName());
-			 if(operador.contains("MOVISTAR") || operador.contains("Movistar") || operador.contains("movistar"))
-			 {
-				Intent i = new Intent(this, Instalacion.class );
-		        startActivity(i);
+			 Intent i = new Intent(this, Instalacion.class );
+		     startActivity(i);
 		        
 		        // Vibrar al hacer click
-		        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		        vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 	
+		     Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		     vibrator.vibrate(50);
+			 			 
 		 }
 		 else
 		 {
 			 Toast.makeText(getApplicationContext(), "No existe conexión a internet para utilizar el Programa", Toast.LENGTH_LONG).show();			 
-		 }
+		 }  
 	}
 	
 	public void show_notificar_averias(View view) {
@@ -132,47 +102,20 @@ public class Principal extends Activity {
 		 State senal3g = conMan.getNetworkInfo(0).getState();
 		 State wifi = conMan.getNetworkInfo(1).getState();
 		 
-		 if (wifi == NetworkInfo.State.CONNECTED)
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
 		 {
-			 WifiManager wMan = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-			 WifiInfo wInfo = wMan.getConnectionInfo();
-			 
-			 if(wInfo.getSSID().contains("MOVISTAR") || wInfo.getSSID().contains("Movistar") || wInfo.getSSID().contains("movistar")){
-				 Intent i = new Intent(this, Notificar_Averias.class );
-				 startActivity(i);
-	        
-		        // Vibrar al hacer click        
-		        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		        vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 				 
-		 }
-		 else if(senal3g == NetworkInfo.State.CONNECTED)
-		 {
-			 TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				/* Update the listener, and start it */
-				
-					 
-			 String operador = String.valueOf(tm.getNetworkOperatorName());
-			 if(operador.contains("MOVISTAR") || operador.contains("Movistar") || operador.contains("movistar"))
-			 {
-				 Intent i = new Intent(this, Notificar_Averias.class );
-				 startActivity(i);
-	        
-		        // Vibrar al hacer click        
-		        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		        vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 	
+			 Intent i = new Intent(this, Notificar_Averias.class );
+		     startActivity(i);
+		        
+		        // Vibrar al hacer click
+		     Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		     vibrator.vibrate(50);
+			 			 
 		 }
 		 else
 		 {
 			 Toast.makeText(getApplicationContext(), "No existe conexión a internet para utilizar el Programa", Toast.LENGTH_LONG).show();			 
-		 }
+		 }  
 	}
 	
 	public void show_reparacion(View view) {
@@ -183,47 +126,20 @@ public class Principal extends Activity {
 		 State senal3g = conMan.getNetworkInfo(0).getState();
 		 State wifi = conMan.getNetworkInfo(1).getState();
 		 
-		 if (wifi == NetworkInfo.State.CONNECTED)
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
 		 {
-			 WifiManager wMan = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-			 WifiInfo wInfo = wMan.getConnectionInfo();
-			 
-			 if(wInfo.getSSID().contains("MOVISTAR") || wInfo.getSSID().contains("Movistar") || wInfo.getSSID().contains("movistar")){
-				 Intent i = new Intent(this, Reparacion.class );
-			     startActivity(i);
-			        
-			        // Vibrar al hacer click
-			     Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-			     vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 				 
-		 }
-		 else if(senal3g == NetworkInfo.State.CONNECTED)
-		 {
-			 TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				/* Update the listener, and start it */
-				
-					 
-			 String operador = String.valueOf(tm.getNetworkOperatorName());
-			 if(operador.contains("MOVISTAR") || operador.contains("Movistar") || operador.contains("movistar"))
-			 {
-				Intent i = new Intent(this, Reparacion.class );
-		        startActivity(i);
+			 Intent i = new Intent(this, Reparacion.class );
+		     startActivity(i);
 		        
 		        // Vibrar al hacer click
-		        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		        vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 	
+		     Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		     vibrator.vibrate(50);
+			 			 
 		 }
 		 else
 		 {
 			 Toast.makeText(getApplicationContext(), "No existe conexión a internet para utilizar el Programa", Toast.LENGTH_LONG).show();			 
-		 }
+		 }  
 	}
 	
 	public void show_plantas_externas(View view) {
@@ -234,42 +150,15 @@ public class Principal extends Activity {
 		 State senal3g = conMan.getNetworkInfo(0).getState();
 		 State wifi = conMan.getNetworkInfo(1).getState();
 		 
-		 if (wifi == NetworkInfo.State.CONNECTED)
+		 if (senal3g == NetworkInfo.State.CONNECTED || wifi == NetworkInfo.State.CONNECTED)
 		 {
-			 WifiManager wMan = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-			 WifiInfo wInfo = wMan.getConnectionInfo();
-			 
-			 if(wInfo.getSSID().contains("MOVISTAR") || wInfo.getSSID().contains("Movistar") || wInfo.getSSID().contains("movistar")){
-				 Intent i = new Intent(this, Plantas_Externas.class );
-			     startActivity(i);
-			        
-			        // Vibrar al hacer click
-			     Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-			     vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 				 
-		 }
-		 else if(senal3g == NetworkInfo.State.CONNECTED)
-		 {
-			 TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-				/* Update the listener, and start it */
-				
-					 
-			 String operador = String.valueOf(tm.getNetworkOperatorName());
-			 if(operador.contains("MOVISTAR") || operador.contains("Movistar") || operador.contains("movistar"))
-			 {
-				Intent i = new Intent(this, Plantas_Externas.class );
-		        startActivity(i);
+			 Intent i = new Intent(this, Plantas_Externas.class );
+		     startActivity(i);
 		        
 		        // Vibrar al hacer click
-		        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-		        vibrator.vibrate(50);
-			 }
-			 else
-				 Toast.makeText(getApplicationContext(), "Debe estar conectado a una red Movistar para continuar.", Toast.LENGTH_LONG).show();			 
-			 	
+		     Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		     vibrator.vibrate(50);
+			 			 
 		 }
 		 else
 		 {
