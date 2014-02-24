@@ -26,8 +26,6 @@ public class Principal extends Activity {
 		// Activity sin parte superior
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_principal);
-		Button b = (Button) findViewById(R.id.button3);
-		b.setVisibility(View.GONE);
 		/** Se inicia el DEMONIO **/
 		//LocationManager locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		//if(locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
@@ -166,13 +164,13 @@ public class Principal extends Activity {
 		 }        
 	}
 	
-	public void show_certificar_wifi(View view) {
-        Intent i = new Intent(this, Certificar_Wifi.class );
-        startActivity(i);
-        
-        // Vibrar al hacer click        
-        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(50);
-	}
+//	public void show_certificar_wifi(View view) {
+//        Intent i = new Intent(this, Certificar_Wifi.class );
+//        startActivity(i);
+//        
+//        // Vibrar al hacer click        
+//        Vibrator vibrator =(Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+//        vibrator.vibrate(50);
+//	}
 
 }
