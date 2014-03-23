@@ -93,7 +93,7 @@
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Elemento Afectado"
+                android:text="Seleccione Elemento Afectado"
                 android:textSize="15sp" />
 
             <Spinner
@@ -132,7 +132,6 @@
             android:inputType="textMultiLine"
             android:lines="5" >
 
-            <requestFocus />
         </EditText>
 
         <LinearLayout

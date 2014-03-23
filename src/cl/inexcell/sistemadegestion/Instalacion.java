@@ -109,7 +109,7 @@ public class Instalacion extends Activity {
 	@SuppressWarnings("unused")
 	private Button b1,b2,b3,b4,b5,buscar,finalizar,certificar;
 	
-    private LinearLayout p1,p2,p3,p4,p5,p6,p7;
+    private LinearLayout p1,p11,p2,p3,p4,p5,p6,p7;
     
     //TIPO Y MODELO DE INVENTARIO
     private String tipoInventario = "";
@@ -222,7 +222,7 @@ public class Instalacion extends Activity {
 		        if ((event.getAction() == KeyEvent.ACTION_DOWN) &&(keyCode == KeyEvent.KEYCODE_ENTER))
 		        {
 	        		buscar.performClick();
-	        		//Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_LONG).show();
+	        		//Toast.makeText(getApplicationContext(), "Consulta exitosa", Toast.LENGTH_SHORT).show();
 	        		return true;
 		        }
 		 
@@ -245,7 +245,7 @@ public class Instalacion extends Activity {
 	    	  public void onItemClick(AdapterView<?> parent, View view,
 	    	    int position, long id) {
 //	    	    Toast.makeText(getApplicationContext(),
-//	    	      "Click ListItem Number " + position, Toast.LENGTH_LONG)
+//	    	      "Click ListItem Number " + position, Toast.LENGTH_SHORT)
 //	    	      .show();
 	    		  decoSelected = position;
 	    		  mostrar_planta_tvsatelital();
@@ -296,6 +296,7 @@ public class Instalacion extends Activity {
 				
 				// Seleccionar objetos de LinearLayout
 				p1 = (LinearLayout) findViewById(R.id.panelBusquedaCliente);
+				
 				p2 = (LinearLayout) findViewById(R.id.panelPlantaExterna);
 				p3 = (LinearLayout) findViewById(R.id.panelTVSatelital);
 				p4 = (LinearLayout) findViewById(R.id.panelBandaAncha);
@@ -306,20 +307,20 @@ public class Instalacion extends Activity {
 				p7 = (LinearLayout) findViewById(R.id.panelCertificacion1);
 				// Definir visibilidad de objetos Buttons
 				b1.setVisibility(View.VISIBLE);
-				b2.setVisibility(View.INVISIBLE);
-				b3.setVisibility(View.INVISIBLE);
-				b4.setVisibility(View.INVISIBLE);
-				b5.setVisibility(View.INVISIBLE);
+				b2.setVisibility(View.INVISIBLE); 
+				b3.setVisibility(View.INVISIBLE); 
+				b4.setVisibility(View.INVISIBLE); 
+				b5.setVisibility(View.INVISIBLE); 
 				
 				// Definir visibilidad de objetos LinearLayout
 				p1.setVisibility(View.VISIBLE);
-				p2.setVisibility(View.INVISIBLE);
-				p3.setVisibility(View.INVISIBLE);
-				p4.setVisibility(View.INVISIBLE);
-				p5.setVisibility(View.INVISIBLE);
-				p6.setVisibility(View.INVISIBLE);
-				p7.setVisibility(View.VISIBLE);
-				
+				p2.setVisibility(View.INVISIBLE); 
+				p3.setVisibility(View.INVISIBLE); 
+				p4.setVisibility(View.INVISIBLE); 
+				p5.setVisibility(View.INVISIBLE); 
+				p6.setVisibility(View.INVISIBLE); 
+				p7.setVisibility(View.INVISIBLE);
+				//dibujar();//
 				ib1 = (ImageView) findViewById(R.id.nro_telefono_ok);
 	}
 	
@@ -340,7 +341,7 @@ public class Instalacion extends Activity {
 		
 		if((area1.matches("") && phone1.matches("")) || area1.matches("") || phone1.matches(""))
 		{
-			//Toast.makeText(getApplicationContext(), "Ingrese Area y Número de Telefono por favor.", Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(), "Ingrese Area y Número de Telefono por favor.", Toast.LENGTH_SHORT).show();
 			new AlertDialog.Builder(this)
 		    .setTitle("Error Consulta Cliente")
 		    .setIcon(R.drawable.ic_warning1)
@@ -359,7 +360,7 @@ public class Instalacion extends Activity {
 			
 			
 			// TODO: Realizar validacion Cliente 
-			//Toast.makeText(getApplicationContext(), XMLParser.getReturnCode(tarea.get().toString()), Toast.LENGTH_LONG).show();
+			//Toast.makeText(getApplicationContext(), XMLParser.getReturnCode(tarea.get().toString()), Toast.LENGTH_SHORT).show();
 			
 			
 			// Seleccionar objetos de Botones en Layout
@@ -374,7 +375,11 @@ public class Instalacion extends Activity {
 		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.hideSoftInputFromWindow(Area.getWindowToken(), 0);
 		
-		b1.setVisibility(View.VISIBLE);
+		b1.setVisibility(View.GONE);
+		p1.setVisibility(View.GONE);
+		//b1.setVisibility(View.GONE);//
+		//p1.setVisibility(View.GONE);//
+		//p11.setVisibility(View.GONE);//
 		b2.setVisibility(View.VISIBLE);
 		b3.setVisibility(View.VISIBLE);
 		b4.setVisibility(View.VISIBLE);
@@ -389,8 +394,8 @@ public class Instalacion extends Activity {
 		
 		///////////////////////////////////////////////////////////////////////////////////
 
-		View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
-		panelBusquedaCliente.setVisibility(View.VISIBLE);
+//		View panelBusquedaCliente = findViewById(R.id.panelBusquedaCliente);
+//		panelBusquedaCliente.setVisibility(View.VISIBLE);
 		//panelBusquedaCliente.setVisibility(View.GONE);
 
 		View panelPlantaExterna = findViewById(R.id.panelPlantaExterna);
@@ -524,7 +529,9 @@ public class Instalacion extends Activity {
 	
 	
 	public void certificar1(View view){
-		
+		b2.setVisibility(View.GONE);//
+		b3.setVisibility(View.GONE);//
+		b4.setVisibility(View.GONE);//
 		try
    		{
 			p7 = (LinearLayout) findViewById(R.id.panelCertificacion1);
@@ -679,10 +686,10 @@ public class Instalacion extends Activity {
 	        	}
 	        	if(item == 0 ){
 	        		if(tvArmario.getText().toString().compareTo("--") == 0){
-	        			Toast.makeText(getApplicationContext(), "No puede georeferenciar si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			Toast.makeText(getApplicationContext(), "No puede georeferenciar si el número no tiene armario registrado", Toast.LENGTH_SHORT).show();
 	        			return;
 	        		}
-	        		//Toast.makeText(getApplicationContext(), "Geo", Toast.LENGTH_LONG).show();
+	        		//Toast.makeText(getApplicationContext(), "Geo", Toast.LENGTH_SHORT).show();
 	        		opcion = 1;
 	        		locManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
 	        		loc = locManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
@@ -697,7 +704,7 @@ public class Instalacion extends Activity {
 	        	}
 	        	if(item == 2){
 	        		if(tvArmario.getText().toString().compareTo("--") == 0){
-	        			Toast.makeText(getApplicationContext(), "No puede enviar fotografía si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			Toast.makeText(getApplicationContext(), "No puede enviar fotografía si el número no tiene armario registrado", Toast.LENGTH_SHORT).show();
 	        			return;
 	        		}
 	        		opcion = 2;
@@ -731,7 +738,7 @@ public class Instalacion extends Activity {
 	    b = Bitmap.createScaledBitmap(b, 640, 480, true);
 	    bmini = Bitmap.createScaledBitmap(b, 64, 64, true);
 	    }catch(Exception ex){
-	    	Toast.makeText(getApplicationContext(), "ERROR FOTO", Toast.LENGTH_LONG).show();
+	    	Toast.makeText(getApplicationContext(), "ERROR FOTO", Toast.LENGTH_SHORT).show();
 	    }
 	    
 	    Consulta_UpdatePlantasExternas x = new Consulta_UpdatePlantasExternas();
@@ -775,7 +782,7 @@ public class Instalacion extends Activity {
 	        	}
 	        	if(item == 0){
 	        		if(tipoTerminal.getText().toString().compareTo("--") == 0){
-	        			Toast.makeText(getApplicationContext(), "No puede georeferenciar si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			Toast.makeText(getApplicationContext(), "No puede georeferenciar si el número no tiene armario registrado", Toast.LENGTH_SHORT).show();
 	        			return;
 	        		}
 	        		opcion = 1;
@@ -797,7 +804,7 @@ public class Instalacion extends Activity {
 	        	}
 	        	if(item == 2){
 	        		if(tipoTerminal.getText().toString().compareTo("--") == 0){
-	        			Toast.makeText(getApplicationContext(), "No puede enviar fotografía si el número no tiene armario registrado", Toast.LENGTH_LONG).show();
+	        			Toast.makeText(getApplicationContext(), "No puede enviar fotografía si el número no tiene armario registrado", Toast.LENGTH_SHORT).show();
 	        			return;
 	        		}
 	        		opcion = 2;
@@ -1170,7 +1177,7 @@ public class Instalacion extends Activity {
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -1225,8 +1232,8 @@ public class Instalacion extends Activity {
                   }
                  
                  
-                  //Toast.makeText(getApplicationContext(), "'"+XMLParser.getReturnCode(result)+"'", Toast.LENGTH_LONG).show();
-                  Toast.makeText(getApplicationContext(), "Cliente Encontrado", Toast.LENGTH_LONG).show();
+                  //Toast.makeText(getApplicationContext(), "'"+XMLParser.getReturnCode(result)+"'", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(getApplicationContext(), "Cliente Encontrado", Toast.LENGTH_SHORT).show();
                  
                   // TODO
 //                     tvSatelitalTipo.setText(arreglo2[1]);
@@ -1243,7 +1250,7 @@ public class Instalacion extends Activity {
                         }
                   }
                   if(cont == 0){
-                        items.add(new itemList("--","No hay datos"));
+                        items.add(new itemList("--","Servicio no Contratado"));
                   }
                        
                   television_Satelital();
@@ -1263,7 +1270,7 @@ public class Instalacion extends Activity {
       else
       {
             //test_wsdl.setText("Error!");
-            Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_SHORT).show();
       }
     }
   	}
@@ -1284,7 +1291,7 @@ public class Instalacion extends Activity {
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -1334,7 +1341,7 @@ public class Instalacion extends Activity {
    	    	else
    	    	{
    	    		//test_wsdl.setText("Error!");
-   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_SHORT).show();
    	    		Instalacion.this.finish();
    	    	}
    	    }
@@ -1356,7 +1363,7 @@ public class Instalacion extends Activity {
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -1406,7 +1413,7 @@ public class Instalacion extends Activity {
    	    	else
    	    	{
    	    		//test_wsdl.setText("Error!");
-   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_SHORT).show();
    	    		Instalacion.this.finish();
    	    	}
    	    }
@@ -1428,7 +1435,7 @@ public class Instalacion extends Activity {
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -1477,7 +1484,7 @@ public class Instalacion extends Activity {
    	    	else
    	    	{
    	    		//test_wsdl.setText("Error!");
-   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_SHORT).show();
    	    		Instalacion.this.finish();
    	    	}
    	    }
@@ -1499,7 +1506,7 @@ public class Instalacion extends Activity {
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -1541,7 +1548,7 @@ public class Instalacion extends Activity {
    	    			if(fab.length != 0){
    	    				String asd = fab[0].toString();
    	    				if(asd.compareTo("")==0){
-   	    					Toast.makeText(getApplicationContext(), "No hay modelos para el fabricante "+bandaancha_fab_select+".", Toast.LENGTH_LONG).show();
+   	    					Toast.makeText(getApplicationContext(), "No hay modelos para el fabricante "+bandaancha_fab_select+".", Toast.LENGTH_SHORT).show();
    	    					return;
    	    				}
    	    				else
@@ -1555,7 +1562,7 @@ public class Instalacion extends Activity {
    	    	}
    	    	else
    	    	{
-   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_SHORT).show();
    	    		Instalacion.this.finish();
    	    	}
    	    }
@@ -1577,7 +1584,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -1672,7 +1679,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 //   	    				if(encontrado == 0)
 //   	    					plantaExternaActual.add(updatear[0]+";"+updatear[1]+";"+updatear[2]+";"+updatear[3]);
 //   	    				
-//   	    				Toast.makeText(getApplicationContext(), "Se Actualizó Correctamente", Toast.LENGTH_LONG).show();
+//   	    				Toast.makeText(getApplicationContext(), "Se Actualizó Correctamente", Toast.LENGTH_SHORT).show();
 //   	    				if(tipoPlantaExterna.compareTo("PLANTA")==0){   	    					
 //   	    					tipoPlantaExterna = null;
 //   	    					
@@ -1701,10 +1708,10 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 //   	    					seleccionado = null;
 //   	    				}
    	    			}else if (code == 0 && opcion != 0){
-   	    				Toast.makeText(getApplicationContext(), "Se Actualizó Correctamente", Toast.LENGTH_LONG).show();
+   	    				Toast.makeText(getApplicationContext(), "Se Actualizó Correctamente", Toast.LENGTH_SHORT).show();
    	    			}
    	    			else{
-   	    				Toast.makeText(getApplicationContext(), "No se pudo actualizar." , Toast.LENGTH_LONG).show();
+   	    				Toast.makeText(getApplicationContext(), "No se pudo actualizar." , Toast.LENGTH_SHORT).show();
    	    			}
    	    
    	    			
@@ -1719,7 +1726,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    	    	else
    	    	{
    	    		//test_wsdl.setText("Error!");
-   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_SHORT).show();
    	    		Instalacion.this.finish();
    	    	}
    	    }
@@ -1737,7 +1744,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -1785,9 +1792,9 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    	    			}
    	    			else{
    	    				if(tipoPlantaExterna == null)
-   	    					Toast.makeText(getApplicationContext(), "No hay plantas externas para este número.", Toast.LENGTH_LONG).show();
+   	    					Toast.makeText(getApplicationContext(), "No hay plantas externas para este número.", Toast.LENGTH_SHORT).show();
    	    				if(tipoPlantaExterna != null)
-   	    					Toast.makeText(getApplicationContext(), "No Hay Datos para "+tipoPlantaExterna+" para este número." , Toast.LENGTH_LONG).show();
+   	    					Toast.makeText(getApplicationContext(), "Servicio no Contratado." , Toast.LENGTH_SHORT).show();
    	    			}
    	    				
    	    			
@@ -1798,7 +1805,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
    	    	else
    	    	{
    	    		//test_wsdl.setText("Error!");
-   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_LONG).show();
+   	    		Toast.makeText(getApplicationContext(), "Error en la conexión del servicio. Revise su conexión de Internet o 3G.", Toast.LENGTH_SHORT).show();
    	    		Instalacion.this.finish();
    	    	}
    	    }
@@ -1846,7 +1853,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 			}
 			
 			if(cont == 0){
-				Toast.makeText(getApplicationContext(), "No hay resultados para "+tipoPlantaExterna, Toast.LENGTH_LONG).show();
+				Toast.makeText(getApplicationContext(), "No hay resultados para "+tipoPlantaExterna, Toast.LENGTH_SHORT).show();
 				tipoPlantaExterna = null;
 				return;
 			}
@@ -2096,7 +2103,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -2138,7 +2145,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  		     }   
  			if(inventarioCorrecto == true)
  			{
- 				Toast.makeText(getApplicationContext(), "Inventario Actualizado", Toast.LENGTH_LONG).show();
+ 				Toast.makeText(getApplicationContext(), "Inventario Actualizado", Toast.LENGTH_SHORT).show();
  				if(tipoInventario == "DECO")
  				{
  					items.get(decoSelected).setDescription(modeloInventario);
@@ -2151,7 +2158,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  			}
  			else
  			{
- 				Toast.makeText(getApplicationContext(), "Error al Actualizar Inventario", Toast.LENGTH_LONG).show();
+ 				Toast.makeText(getApplicationContext(), "Error al Actualizar Inventario", Toast.LENGTH_SHORT).show();
  				
  			}
    	    }
@@ -2174,7 +2181,7 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
 				@Override
 				public void onCancel(DialogInterface dialog) {
 					// TODO Auto-generated method stub
-					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "Operación Interrumpida.", Toast.LENGTH_SHORT).show();
 					Instalacion.this.finish();
 				}
 			});
@@ -2251,11 +2258,23 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  			    	  public void onItemClick(AdapterView<?> parent, View view,
  			    	    int position, long id) {
 // 			    	    Toast.makeText(getApplicationContext(),
-// 			    	      "Click ListItem Number " + position, Toast.LENGTH_LONG)
+// 			    	      "Click ListItem Number " + position, Toast.LENGTH_SHORT)
 // 			    	      .show();
  			    		  decoSelected = position;
- 			    		  Toast.makeText(getApplicationContext(), res.get(position+1).split(";")[0]+":\n"+res.get(position+1).split(";")[3], Toast.LENGTH_LONG).show();
- 			    		  
+ 			    		  //Toast.makeText(getApplicationContext(), res.get(position+1).split(";")[0]+":\n"+res.get(position+1).split(";")[3], Toast.LENGTH_SHORT).show();
+	 			    	  AlertDialog.Builder dialog = new AlertDialog.Builder(Instalacion.this);
+	 			    	  dialog.setTitle(res.get(position+1).split(";")[0]);
+	 			    	  dialog.setMessage(res.get(position+1).split(";")[3]);
+	 			    	  dialog.setCancelable(false);
+	 			    	  dialog.setNeutralButton("Cerrar", new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								finish();
+								
+							}
+						});
+	 			    	  dialog.show();
  			    	  }
  			    	});
  			   if(certifyDslCorrecto == false)
@@ -2263,17 +2282,17 @@ private class Consulta_UpdatePlantasExternas extends AsyncTask<String,Integer,St
  				   Bitmap bmp2 = BitmapFactory.decodeResource(getResources(), R.drawable.error);
  				   ib1.setImageBitmap(bmp2);
  				   //finalizar.setEnabled(false);
- 				   //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_LONG).show();
+ 				   //Toast.makeText(getApplicationContext(), "", Toast.LENGTH_SHORT).show();
  	 			}
  				
- 				//Toast.makeText(getApplicationContext(), "asd1"+linea, Toast.LENGTH_LONG).show();
+ 				//Toast.makeText(getApplicationContext(), "asd1"+linea, Toast.LENGTH_SHORT).show();
  			}
  			else
  			{ 				
  				Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.error); 				 				 
  				ib1.setImageBitmap(bmp);
  				finalizar.setEnabled(false);
- 				Toast.makeText(getApplicationContext(), "No se pudo realizar la certificacion.", Toast.LENGTH_LONG).show();
+ 				Toast.makeText(getApplicationContext(), "No se pudo realizar la certificacion.", Toast.LENGTH_SHORT).show();
  				
  			}
  			//Toast.makeText(getApplicationContext(), "Certificación Finalizada", Toast.LENGTH_SHORT).show();

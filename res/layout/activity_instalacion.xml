@@ -75,7 +75,7 @@
 <Button
     android:id="@+id/btnBusquedaCliente"
     android:layout_width="fill_parent"
-    android:layout_height="30dp"
+    android:layout_height="40dp"
     android:drawableLeft="@drawable/ic_bottom2"
     android:background="@drawable/boton_style1"
     android:text="@string/busqueda_cliente"
@@ -215,7 +215,7 @@
 		<Button
 		    android:id="@+id/btnPlantaExterna"
 		    android:layout_width="fill_parent"
-		    android:layout_height="30dp"
+		    android:layout_height="40dp"
 		    android:drawableLeft="@drawable/ic_bottom2"
 		    android:background="@drawable/boton_style1"
 		    android:text="@string/planta_externa"
@@ -501,7 +501,7 @@
 		<Button
 		    android:id="@+id/btnTVSatelital"
 		    android:layout_width="fill_parent"
-		    android:layout_height="30dp"
+		    android:layout_height="40dp"
 		    android:drawableLeft="@drawable/ic_bottom2"
 		    android:background="@drawable/boton_style1"
 		    android:text="@string/television_satelital"
@@ -565,7 +565,7 @@
 		<Button
 		    android:id="@+id/btnBandaAncha"
 		    android:layout_width="fill_parent"
-		    android:layout_height="30dp"
+		    android:layout_height="40dp"
 		    android:drawableLeft="@drawable/ic_bottom2"
 		    android:background="@drawable/boton_style1"
 		    android:text="@string/banda_ancha"
@@ -733,7 +733,7 @@
 		<Button
 		    android:id="@+id/btnCertificacion"
 		    android:layout_width="fill_parent"
-		    android:layout_height="30dp"
+		    android:layout_height="40dp"
 		    android:drawableLeft="@drawable/ic_bottom2"
 		    android:background="@drawable/boton_style1"
 		    android:text="@string/certificacion"
@@ -762,7 +762,7 @@
 						<Button
 					        android:id="@+id/ButtonCertificar"
 					        android:layout_width="wrap_content"
-					        android:layout_height="45dp"			        
+					        android:layout_height="64dp"			        
 					        android:drawableLeft="@drawable/ic_certificar"
 					        android:drawablePadding="5dp"
 					        android:textSize="16dp"
@@ -983,7 +983,7 @@
 				        <Button
 					        android:id="@+id/ButtonCertificarAgain"
 					        android:layout_width="wrap_content"
-					        android:layout_height="45dp"			        
+					        android:layout_height="64dp"			        
 					        android:drawableLeft="@drawable/ic_certificar"
 					        android:drawablePadding="5dp"
 					        android:textSize="16dp"
@@ -993,7 +993,7 @@
 						<Button
 					        android:id="@+id/ButtonFinalizar"
 					        android:layout_width="wrap_content"
-					        android:layout_height="45dp"			        
+					        android:layout_height="64dp"			        
 					        android:drawableLeft="@drawable/ic_delete1"
 					        android:drawablePadding="5dp"
 					        android:textSize="16dp"
